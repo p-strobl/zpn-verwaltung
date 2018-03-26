@@ -1,16 +1,7 @@
-<?php
-
-function sqlSelectObject( $pdoConnect, $probenNummer )
-{
-    try{
-        $pdoConnect->beginTransaction();
-
-        $sql =
-        "
-            SELECT 
+  SELECT 
                 tbl_mustereingang.probenNummer, tbl_mustereingang.sollDatum, DATE(tbl_mustereingang.eingangDateTime) AS eingangDate, TIME(tbl_mustereingang.eingangDateTime) AS eingangTime, tbl_mustereingang.beurteilungZpnBerechnung,
-                DATE(tbl_zerlegung.zerlegungStart) AS zerlegungStartDate, TIME(tbl_zerlegung.zerlegungStart) AS zerlegungStartTime, tbl_zerlegung.zerlegungEnde, tbl_zerlegung.zerlegungBerechnung,
-                tbl_probennahme.einwaageBeginn, tbl_probennahme.einwaageEnde, tbl_probennahme.einwaageBerechnung,
+                DATE_FORMAT(tbl_zerlegung.zerlegungStart, '%d.%m.%Y' ) AS zerlegungStartDate, TIME(tbl_zerlegung.zerlegungStart) AS zerlegungStartTime, DATE_FORMAT(tbl_zerlegung.zerlegungEnde, '%d.%m.%Y') AS zerlegungEndeDate, TIME(tbl_zerlegung.zerlegungEnde) AS zerlegungEndeTime, tbl_zerlegung.zerlegungBerechnung,
+                DATE(tbl_probennahme.einwaageBeginn) AS einwaageBeginnDate, TIME(tbl_probennahme.einwaageBeginn) AS einwaageBeginnTime, tbl_probennahme.einwaageEnde, tbl_probennahme.einwaageBerechnung,
                 tbl_zpnwagen.zpnWagenDateTime, tbl_zpnwagen.berechnungDateTimeZpnwagen,
                 tbl_mana.manaGestelltDateTime, tbl_mana.manaErhaltenDateTime, tbl_mana.manaEinwaageDateTime, tbl_mana.manaZpnWagenDateTime, tbl_mana.manaBerechnungDateTimeAnfrage, tbl_mana.manaBerechnungDateTimeEinwaage, tbl_mana.manaBerechnungDateTimeGesamt,
                 tbl_klaerfall.klaerfallBeginnDateTime, tbl_klaerfall.klaerfallEndeDateTime, tbl_klaerfall.klaerfallBerechnung,
@@ -54,28 +45,3 @@ function sqlSelectObject( $pdoConnect, $probenNummer )
             ON tbl_mustereingang.probenNummer = tbl_beurteilung.probenNummer
     
             WHERE tbl_mustereingang.probenNummer = :probenNummer
-        ";
-        $pdoStatement = $pdoConnect->prepare( $sql );
-        $pdoStatement->bindParam( ':probenNummer', $probenNummer, PDO::PARAM_STR );
-        $pdoStatement->execute();
-        $pdoObject = $pdoStatement->fetch( PDO::FETCH_OBJ );
-    
-        if( $pdoObject != false )
-        {
-            foreach( $pdoObject as $key => $value )
-            {
-                if( $value === null )
-                {
-                    unset( $pdoObject->{$key} );
-                }
-            }
-        }
-
-        $pdoConnect->commit();
-
-        return $pdoObject;
-    }
-    catch( PDOException $pdoException ){
-        $pdoConnect->rollBack();
-    }
-}

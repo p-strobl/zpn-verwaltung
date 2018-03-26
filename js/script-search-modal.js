@@ -34,40 +34,49 @@ function searchDataSet(probenNummer) {
 
         console.log(data);
 
-        // const toFillItems = {
-        //     berechnungDateTimeZpnwagen: $('#pullSql-gesamt-zpnDauer'),
-        //     eingangDateTime: $(''),
-        //     einwaageBeginn: $(''),
-        //     einwaageBerechnung: $(''),
-        //     einwaageEnde: $(''),
-        //     klaerfallBeginnDateTime: $(''),
-        //     klaerfallBerechnung: $(''),
-        //     klaerfallEndeDateTime: $(''),
-        //     kommentarText: $(''),
-        //     manaBerechnungDateTimeAnfrage: $(''),
-        //     manaBerechnungDateTimeEinwaage: $(''),
-        //     manaBerechnungDateTimeGesamt: $(''),
-        //     manaEinwaageDateTime: $(''),
-        //     manaErhaltenDateTime: $(''),
-        //     manaGestelltDateTime: $(''),
-        //     manaZpnWagenDateTime: $(''),
-        //     mit60g: $(''),
-        //     mitExpress: $(''),
-        //     mitIntern: $(''),
-        //     mitKlaerfallBack: $(''),
-        //     mitLfgb: $(''),
-        //     mitNickel: $(''),
-        //     mitToys: $(''),
-        //     nickelRueckgabeDateTime: $(''),
-        //     nickelBerechnung: $(''),
-        //     probenNummer: $(''),
-        //     sollDatum: $(''),
-        //     stornoDateTime: $(''),
-        //     zerlegungBerechnung: $(''),
-        //     zerlegungEnde: $(''),
-        //     zerlegungStart: $(''),
-        //     zpnWagenDateTime: $(''),
-        // }
+        let dateTime = new Date(data.eingangDateTime);
+
+        console.log(dateTime.getDate);
+        console.log(dateTime.getTime);
+
+
+
+        const toFillItems = {
+            berechnungDateTimeZpnwagen: $('#pullSql-gesamt-zpnDauer'),
+            beurteilungZpnBerechnung: $(''),
+            beurteilungBereitgestelltDateTime: $(''),
+            eingangDateTime: $(''),
+            einwaageBeginn: $(''),
+            einwaageBerechnung: $(''),
+            einwaageEnde: $(''),
+            klaerfallBeginnDateTime: $(''),
+            klaerfallBerechnung: $(''),
+            klaerfallEndeDateTime: $(''),
+            kommentarText: $(''),
+            manaBerechnungDateTimeAnfrage: $(''),
+            manaBerechnungDateTimeEinwaage: $(''),
+            manaBerechnungDateTimeGesamt: $(''),
+            manaEinwaageDateTime: $(''),
+            manaErhaltenDateTime: $(''),
+            manaGestelltDateTime: $(''),
+            manaZpnWagenDateTime: $(''),
+            mit60g: $(''),
+            mitExpress: $(''),
+            mitIntern: $(''),
+            mitKlaerfallBack: $(''),
+            mitLfgb: $(''),
+            mitNickel: $(''),
+            mitToys: $(''),
+            nickelRueckgabeDateTime: $(''),
+            nickelBerechnung: $(''),
+            probenNummer: $('#modal-content-caption-nummber-text'),
+            sollDatum: $('#modal-content-caption-soll-text'),
+            stornoDateTime: $(''),
+            zerlegungBerechnung: $(''),
+            zerlegungEnde: $(''),
+            zerlegungStart: $(''),
+            zpnWagenDateTime: $(''),
+        }
 
         function setButtonStatus(rowItems, itemKey) {
             const setItem = rowItems[itemKey];
