@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="de">
+
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="../css/style-verwaltung.css">
+        <title>Muster Verwaltung</title>
+    </head>
+
+    <body>
+        <div class="wrap-page">
+            
+            <header class="wrap-header">
+                
+                <section class="header">
+                    <a class="header-a-wrap" href="../index.html"><img class="header-home-image" src="../css/icons/home.png"></a>
+                    <div class="header-caption-text item-to-center ">Muster Verwaltung</div>
+                </section>
+                
+                <section class="header input-section">
+                    <input class="header-input-field item-to-center" id="header-input-verwaltung" type="text" maxlength="12" value="16-011111-01" spellcheck="false" placeholder="Proben Nummer...">
+                    <div class="header-fail-message-wrap" id="header-fail-message-wrap">
+                        <div class="header-fail-message-content" id="header-fail-message-content">
+                        </div>
+                    </div>
+                </section>
+
+                <section class="header">
+                    <div class="header-input-text probennummer item-to-center"><span class="span-input-text-probenummer" id="span-input-text-probenummer"></span></div>
+                    <div class="header-input-text solldatum item-to-center"><span class="span-input-text-solldatum" id="span-input-text-solldatum"></span></div>
+                </section>
+
+            </header>
+            
+            <section class="wrap-details-open-button">
+                <div class="details-open-button-wrap" id="detailsOpenButtonWrap">
+                    <button class="details-open-button" id="details-open-button">Details Anzeigen</button>
+                </div>
+            </section>
+
+            <main class="wrap-main">
+                
+                <section class="main-content details left-wrap" id="main-content-left-wrap">
+                     
+                    <div class="details-status-content left-wrap">
+                        <button class="details-status-button express null" id="mitExpress" value="deactive">Express</button>
+                        <button class="details-status-button intern null" id="mitIntern" value="deactive">Intern Vorziehen</button>
+                        <button class="details-status-button toys null" id="mitToys" value="deactive">Toys</button>
+                    </div>
+
+                    <div class="details-timing-content left-wrap">
+                        
+                        <div class="details-timing-wrap eingang">
+                            <div class="timing-caption eingang">Muster Eingang</div>
+                            <div class="timing-content-wrap">
+                                <div class="timing date eingang">Datum: <span class="span-timing-date" id="span-timing-date-eingang"> - </span></div>
+                                <div class="timing time eingang">Uhrzeit: <span class="span-timing-time" id="span-timing-time-eingang"> - </span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="details-timing-wrap probenahme">
+                            <div class="timing-caption probenahme">Probenahme Beginn</div>
+                            <div class="timing-content-wrap">
+                                <div class="timing date probenahme">Datum: <span class="span-timing-date" id="span-timing-date-probenNahme"> - </span></div>
+                                <div class="timing time probenahme">Uhrzeit: <span class="span-timing-time" id="span-timing-time-probenNahme"> - </span></div>
+                            </div>
+                        </div>
+
+                        <div class="details-timing-wrap probenahme">
+                            <div class="timing-caption probenahmeEnde">Probenahme Ende</div>
+                            <div class="timing-content-wrap">
+                                <div class="timing date probenahme">Datum: <span class="span-timing-date" id="span-timing-date-probenNahmeEnde"> - </span></div>
+                                <div class="timing time probenahme">Uhrzeit: <span class="span-timing-time" id="span-timing-time-probenNahmeEnde"> - </span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="details-timing-wrap ZPNWagen">
+                            <div class="timing-caption ZPNWagen">ZPN Wagen</div>
+                            <div class="timing-content-wrap">
+                                <div class="timing date ZPNWagen">Datum: <span class="span-timing-date" id="span-timing-date-zpnWagen"> - </span></div>
+                                <div class="timing time ZPNWagen">Uhrzeit: <span class="span-timing-time" id="span-timing-time-zpnWagen"> - </span></div>
+                            </div>
+                        </div>
+                        
+                       <div class="details-timing-wrap nickel">
+                            <div class="timing-caption nickel">Nickel Rückgabe</div>
+                            <div class="timing-content-wrap">
+                                <div class="timing date nickel">Datum: <span class="span-timing-date" id="span-timing-date-nickelRueckgabeDateTime"> - </span></div>
+                                <div class="timing time nickel">Uhrzeit: <span class="span-timing-time" id="span-timing-time-nickelRueckgabeDateTime"> - </span></div>
+                            </div>
+                        </div>
+                        
+                        <div class="details-timing-wrap klaerfall">
+                            <div class="timing-caption">Klärfall</div>
+                            <div class="timing-tiny-caption">Gestellt am:</div>
+                            <div class="timing-content-wrap">
+                                <div class="timing date">Datum: <span class="span-timing-date" id="span-timing-date-klaerfallGestellt"> - </span></div>
+                                <div class="timing time">Uhrzeit: <span class="span-timing-time" id="span-timing-time-klaerfallGestellt"> - </span></div>
+                            </div>
+                            <div class="timing-tiny-caption">Zurück erhalten am:</div>
+                            <div class="timing-content-wrap">
+                                <div class="timing date">Datum: <span class="span-timing-date" id="span-timing-date-klaerfallErhalten"> - </span></div>
+                                <div class="timing time">Uhrzeit: <span class="span-timing-time" id="span-timing-time-klaerfallErhalten"> - </span></div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </section>
+
+                <section class="main-content middle-wrap" id="mainContentMiddleWrap">
+                    
+                    <div class="main-middle-item-wrap">
+                        <div class="comment-text" id="comment-text"></div>
+                    </div>
+                    <div class="main-middle-item-wrap">
+                        <button class="main-middle-item type-probenahme tbl_probennahme default" id="main-middle-item-probenNahme" value="default" data-default="Probenahme beginnen" data-hoverStarten="Probenahme beginnen..." data-started="Probenahme begonnen"  data-hoverStoppen="Probenahme beenden..." data-done="Probenahme beendet" data-hoverRestart="Probenahme erneut beginnen..." data-restarted="Probenahme wird fortgeführt"></button>
+                    </div>
+                    <div class="main-middle-item-wrap">
+                        <button class="main-middle-item type-nickel tbl_nickel default" id="main-middle-item-nickel" value="default" data-default="Nickel Rückgabe" data-hoverStarten="Nickel Rückgabe..." data-done="Nickelnahme abgeschlossen"></button>
+                    </div>
+                    <div class="main-middle-item-wrap">
+                        <button class="main-middle-item type-klaerfall tbl_klaerfall default" id="main-middle-item-klaerfall" value="default" data-default="Starte Klärfall" data-hoverStarten="Starte Klärfall..." data-done="Klärfall abgeschlossen" data-hoverErneut=""></button>
+                    </div>
+                    <div class="main-middle-item-wrap">
+                        <button class="main-middle-item type-MaNa tbl_mana gestellt default" id="main-middle-item-maNa" value="default" data-default="MaNa stellen" data-hoverStarten="MaNa stellen..." data-done="MaNa eingewogen" data-hoverErneut=""></button>
+                    </div>
+                    <div class="main-middle-item-wrap">
+                        <button class="main-middle-item type-ZPNWagen tbl_zpnwagen default" id="main-middle-item-zpnWagen" value="default" data-default="ZPN Wagen" data-hoverStarten="Bereitstellen..." data-done="Bereitgestellt" data-hoverErneut=""></button>
+                    </div>
+                    <div class="main-middle-item-wrap">
+                        <div class="main-middle-item comment-wrap">
+                            <input class="comment item input-field" id="comment-input-field">
+                            <div class="comment-item type-comment-send-button tbl_kommentar default" id="comment-send-button" value="default" data-default="Kommentar hinzufügen" data-hoverStarten="Kommentar hinzufügen..."></div>
+                        </div>
+                    </div>
+                    
+                </section>
+                
+                <section class="main-content details right-wrap" id="main-content-right-wrap">
+                     
+                    <div class="details-status-content right-wrap">
+                        <button class="details-status-button nickel null" id="mitNickel" value="deactive">Mit Nickel</button>
+                        <button class="details-status-button lfgb null" id="mitLfgb" value="deactive">Aus der LFGB</button>
+                        <button class="details-status-button 60g null" id="mit60g" value="deactive">60g</button>
+                    </div>
+                    <div class="details-timing-content right-wrap">
+                        <div class="details-timing-wrap right mana">
+                            <div class="timing-caption">MaNa</div>
+                            <div class="timing-tiny-caption">Angefordert am:</div>
+                            <div class="timing-content-wrap">
+                                <div class="timing date">Datum: <span class="span-timing-date" id="span-timing-date-maNaAngefordert"> - </span></div>
+                                <div class="timing time">Uhrzeit: <span class="span-timing-time" id="span-timing-time-maNaAngefordert"> - </span></div>
+                            </div>
+                            <div class="timing-tiny-caption">Erhalten am:</div>
+                            <div class="timing-content-wrap">
+                                <div class="timing date">Datum: <span class="span-timing-date" id="span-timing-date-maNaErhalten"> - </span></div>
+                                <div class="timing time">Uhrzeit: <span class="span-timing-time" id="span-timing-time-maNaErhalten"> - </span></div>
+                            </div>
+                            <div class="timing-tiny-caption">Eingewogen am:</div>
+                            <div class="timing-content-wrap">
+                                <div class="timing date">Datum: <span class="span-timing-date" id="span-timing-date-maNaEingewogen"> - </span></div>
+                                <div class="timing time">Uhrzeit: <span class="span-timing-time" id="span-timing-time-maNaEingewogen"> - </span></div>
+                            </div>
+                        </div>
+                         <div class="details-timing-wrap gesamt">
+                            <div class="timing-caption gesamt">Gesamt Dauer</div>
+                            <div class="timing-content-wrap gesamt">
+                                <div class="timing-gesamt-item-wrap">
+                                    <div class="timing-item">Probenahme:</div>
+                                    <div class="timing-timer"><span id="gesamt-timing-probenahme"> - </span> Std.</div> 
+                                </div>
+                                <div class="timing-gesamt-item-wrap">
+                                    <div class="timing-item">In der ZPN:</div>
+                                    <div class="timing-timer"><span id="gesamt-timing-ZPNWagen"> - </span> Std.</div> 
+                                </div>
+                                <div class="timing-gesamt-item-wrap">
+                                    <div class="timing-item">Nickelnahme:</div>
+                                    <div class="timing-timer"><span id="gesamt-timing-nickel"> - </span> Std.</div> 
+                                </div>
+                                <div class="timing-gesamt-item-wrap">
+                                    <div class="timing-item">Klärfall:</div>
+                                    <div class="timing-timer"><span id="gesamt-timing-klaerfall"> - </span> Std.</div> 
+                                </div>
+                                <div class="timing-gesamt-item-wrap">
+                                    <div class="timing-item">MaNa Anfrage:</div>
+                                    <div class="timing-timer"><span id="gesamt-timing-manaAnfrag"> - </span> Std.</div> 
+                                </div>
+                                <div class="timing-gesamt-item-wrap last-child">
+                                    <div class="timing-item">MaNa gesamt:</div>
+                                    <div class="timing-timer"><span id="gesamt-timing-manaGesamt"> - </span> Std.</div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </section>
+
+            </main>
+
+            <div id="test1"></div>
+            <div id="test2"></div>
+            <div id="test3"></div>
+            <div id="test4"></div>
+            <div id="test5"></div>
+
+            
+        </div>
+        <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="../js/jquery-ui.js"></script>
+        <script type="text/javascript" src="../js/script-verwaltung.js"></script>
+        
+    </body>
+
+</html>

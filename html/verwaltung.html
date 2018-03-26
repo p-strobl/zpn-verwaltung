@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/style-global.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <title>Muster Verwaltung</title>
+</head>
+
+<body>
+    <div class="wrap-eingang" id="wrap-eingang">
+
+        <header class="wrap-header">
+            <div class="header-caption-eingang">
+                <a class="header-a-button-home" href="../index.html">
+                    <img class="img-home" src="../css/icons/HermesLogo.png" title="Zurück zum Hauptmenü.">
+                </a>
+                <p class="header-caption">ZPN Muster Verwaltung</p>
+            </div>
+            <input class="header-input-eingang border-edged" id="header-input" type="text" value="16-011111-01;24.06.2016" spellcheck="false"
+                placeholder="Proben Nummer..." title="Bitte tragen Sie hier eine gültige Proben Nummer ein.">
+            <div class="header-fail-message-wrap" id="header-fail-message-wrap">
+                <div class="header-fail-message-content" id="header-fail-message-content">
+                </div>
+            </div>
+        </header>
+
+        <main class="wrap-content displayNoneImportant" id="wrap-content">
+
+            <section class="content-header-row verwaltung" id="content-header-row">
+                <div class="content-header-cell verwaltung">Proben Nr.</div>
+                <div class="content-header-cell verwaltung">Soll</div>
+                <div class="content-header-cell verwaltung">Zerlegung
+                    <br />Start
+                </div>
+                <div class="content-header-cell verwaltung">Zerlegung
+                    <br />Ende
+                </div>
+                <div class="content-header-cell verwaltung">Einwaage
+                    <br />Start
+                </div>
+                <div class="content-header-cell verwaltung">Einwaage
+                    <br />Ende
+                </div>
+                <div class="content-header-cell verwaltung">ZPN
+                    <br />Wagen
+                </div>
+                <div class="content-header-cell verwaltung">Klärfall
+                    <br />Beginn
+                </div>
+                <div class="content-header-cell verwaltung">Klärfall
+                    <br />Ende
+                </div>
+                <div class="content-header-cell verwaltung">MaNa
+                    <br />Bestellt
+                </div>
+                <div class="content-header-cell verwaltung">MaNa
+                    <br />Erhalten
+                </div>
+                <div class="content-header-cell verwaltung">MaNa
+                    <br />Einwaage
+                </div>
+                <div class="content-header-cell verwaltung">MaNa
+                    <br />Eingewogen
+                </div>
+                <div class="content-header-cell verwaltung">Entfernen</div>
+            </section>
+
+            <section class="content-footer-count-row verwaltung" id="content-footer-count-row">
+                <div class="content-footer-count-input verwaltung probenSoll" title="Anzahl der eingetragenen Muster.">Muster Anzahl
+                    <br />
+                    <br />
+                    <span class="content-footer-counter" id="content-footer-counter-muster">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung sollDatum"></div>
+                <div class="content-footer-count-input verwaltung zStart" title="Anzahl der gestarteten Zerlegungen.">Zerlegung
+                    <br />Start
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-zerlegungStart">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung zEnde" title="Anzahl der beendeten Zerlegungen.">Zerlegung
+                    <br />Ende
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-zerlegungEnde">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung eStart" title="Anzahl der begonnenen Einwaagen.">Einwaage
+                    <br />begonnen
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-einwaageBeginn">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung eEnde" title="Anzahl der beendeten Einwaagen.">Einwaage
+                    <br />beendet
+                    <br />
+                    <span class="content-footer-counter" id="content-footer-counter-einwaageEnde">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung zpnEnde" title="Anzahl der auf dem ZPN Wagen bereitgestellten Muster.">ZPN
+                    <br />Wagen
+                    <br />
+                    <span class="content-footer-counter" id="content-footer-counter-zpnWagen">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung kStart" title="Anzahl der begonnenen Klärfälle.">Klärfall
+                    <br />begonnen
+                    <br />
+                    <span class="content-footer-counter" id="content-footer-counter-klaerfallBeginn">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung kEnde" title="Anzahl der beendeten Klärfälle.">Klärfall
+                    <br />beendet
+                    <br />
+                    <span class="content-footer-counter" id="content-footer-counter-klaerfallEnde">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung mStart" title="Anzahl der bestellten MaNa&#39;s.">MaNa
+                    <br />Bestellt
+                    <br />
+                    <span class="content-footer-counter" id="content-footer-counter-manaBestellt">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung mErhalt" title="Anzahl der erhaltenen MaNa&#39;s.">MaNa
+                    <br />Erhalten
+                    <br />
+                    <span class="content-footer-counter" id="content-footer-counter-manaErhalten">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung mEinwaage" title="Anzahl der begonnenen MaNa einwaagen.">MaNa
+                    <br />Einwaage
+                    <br />
+                    <span class="content-footer-counter" id="content-footer-counter-manaEinwaage">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung mEnde" title="Anzahl der auf dem ZPN Wagen bereitgestellten MaNa&#39;s.">MaNa
+                    <br />Eingewogen
+                    <br />
+                    <span class="content-footer-counter" id="content-footer-counter-manaEingewogen">0</span> x
+                </div>
+                <div class="content-footer-count-input verwaltung delete"></div>
+            </section>
+
+        </main>
+
+        <footer class="wrap-footer displayNoneImportant" id="wrap-footer">
+            <button class="footer-button-send" id="footer-button-send" onclick="wrapData()" title="Aktualisieren Sie den&#92;die eingefügten Datensatz&#92;Datensätze.">--> Datensatz&#92;sätze aktualisieren
+                <-- </button>
+        </footer>
+
+    </div>
+
+    <div class="sticky-footer-message-wrap sticky-footer-height" id="sticky-footer-message-wrap">
+
+        <div class="transmission-successful-wrapper" id="transmission-successful-wrapper">
+            <section class="transmission-success-message-wrap">
+                <span class="transmission-success-counter" id="transmission-success-counter">Datensatz&#92;s&#228;tze erfolgreich aktualisiert</span>
+            </section>
+        </div>
+
+    </div>
+
+    <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.js"></script>
+    <script type="text/javascript" src="../js/script-global.js"></script>
+    <script type="text/javascript" src="../js/script-verwaltung.js"></script>
+</body>
+
+</html>

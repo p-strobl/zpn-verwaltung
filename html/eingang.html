@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/style-global.css">
+    <link rel="stylesheet" type="text/css" href="../css/style-search-modal.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <title>Muster Eingang</title>
+</head>
+
+<body>
+    <div class="wrap-eingang" id="wrap-eingang">
+
+        <header class="wrap-header">
+            <div class="header-caption-eingang">
+                <a class="header-a-button-home" href="../index.html">
+                    <img class="img-home" src="../css/icons/HermesLogo.png" title="Zurück zum Hauptmenü.">
+                </a>
+                <p class="header-caption">ZPN Muster Eingang</p>
+                <div class="header-search-button-wrap">
+                    <img id="img-search" class="img-search" src="../css/icons/searchIcon.png">
+                </div>
+            </div>
+            <input id="header-input" class="header-input-eingang border-edged" type="text" value="" spellcheck="false" placeholder="Proben Nummer..."
+                title="Bitte tragen Sie hier eine gültige Proben Nummer ein.">
+            <div class="header-fail-message-wrap" id="header-fail-message-wrap">
+                <div class="header-fail-message-content" id="header-fail-message-content">
+
+                </div>
+            </div>
+        </header>
+
+        <main class="wrap-content displayNoneImportant" id="wrap-content">
+
+            <section class="content-header-row eingang" id="content-header-row">
+                <div class="content-header-cell">Proben Nr.</div>
+                <div class="content-header-cell">Soll</div>
+                <div class="content-header-cell">Express</div>
+                <div class="content-header-cell">Intern Vorziehen</div>
+                <div class="content-header-cell">Mit Nickel</div>
+                <div class="content-header-cell">Aus der LFGB</div>
+                <div class="content-header-cell">Team Toys</div>
+                <div class="content-header-cell">Mit 60g</div>
+                <div class="content-header-cell">Klärfall geklärt</div>
+                <div class="content-header-cell">Nickel Rückgabe</div>
+                <div class="content-header-cell">Entfernen</div>
+            </section>
+
+            <section class="content-footer-count-row eingang" id="content-footer-count-row">
+                <div class="content-footer-count-input eingang probenSoll" title="Anzahl der eingetragenen Muster.">Muster
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-muster">0</span> x
+                </div>
+                <div class="content-footer-count-input eingang sollDatum">
+                </div>
+                <div class="content-footer-count-input eingang express" title="Anzahl der aufgeführten Express Muster.">Express
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-express">0</span> x
+                </div>
+                <div class="content-footer-count-input eingang iVorziehen" title="Anzahl der aufgeführten Intern Vorziehen Muster.">Intern Vorziehen
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-intern">0</span> x
+                </div>
+                <div class="content-footer-count-input eingang nickel" title="Anzahl der aufgeführten Nickel Muster.">Nickel
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-nickel">0</span> x
+                </div>
+                <div class="content-footer-count-input eingang lfgb" title="Anzahl der Muster die aus der LFGB zurück gekommen sind.">Aus der LFGB
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-LFGB">0</span> x
+                </div>
+                <div class="content-footer-count-input eingang toys" title="Anzahl der Mister die vom Team Toy&#39;s gekommen sind.">Toys
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-toys">0</span> x
+                </div>
+                <div class="content-footer-count-input eingang g60" title="Anzahl der Muster bei den 60g für die LFGB vorbereitet werden müssen.">Mit 60g
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-60g">0</span> x
+                </div>
+                <div class="content-footer-count-input eingang geklaert" title="Anzahl der Klärfälle die geklärt wurden.">Klärfall geklärt
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-klaerfallBack">0</span> x
+                </div>
+                <div class="content-footer-count-input eingang geklaert" title="Anzahl der Nickel Rückgaben.">Nickel Rückgabe
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-nickelBack">0</span> x
+                </div>
+                <div class="content-footer-count-input eingang delete"></div>
+            </section>
+
+        </main>
+
+        <footer class="wrap-footer displayNoneImportant" id="wrap-footer">
+            <button class="footer-button-send" id="footer-button-send" onclick="wrapData()" title="Diese Schaltfläche betätigen um die aufgeführten Datensatz&#92;sätze zu übertragen.">
+                --&#62; Zur Datenbank hinzufügen &#60;-- </button>
+        </footer>
+
+    </div>
+
+    <div class="sticky-footer-message-wrap sticky-footer-height" id="sticky-footer-message-wrap">
+
+        <div class="transmission-successful-wrapper" id="transmission-successful-wrapper">
+            <section class="transmission-success-message-wrap">
+                <span class="transmission-success-counter" id="transmission-success-counter"></span>
+                <span> von </span>
+                <span class="present-item-counter"></span>
+                <span class="transmission-success-caption"> Muster erfolgreich Übertragungen.</span>
+            </section>
+        </div>
+
+        <div class="transmission-fail-wrap" id="transmission-fail-wrap">
+
+            <div class="transmission-failed-wrapper-failMessage" id="transmission-failed-double-input-wrap">
+                <section class="transmission-fail-message-wrap">
+                    <span class="transmission-fail-counter" id="transmission-fail-counter"></span>
+                    <span> von </span>
+                    <span class="present-item-counter"></span>
+                    <span class="transmission-fail-caption"> Datensätze bereits in der Datenbank vorhanden!</span>
+                </section>
+            </div>
+
+            <div class="transmission-failed-wrapper-doubleItems">
+                <section class="transmission-double-input-wrap" id="transmission-double-input-wrap">
+                </section>
+            </div>
+
+        </div>
+
+    </div>
+
+    <section class="wrap__modal / show-modal" id="wrap-modal">
+
+        <div class="content__modal / show-modal" id="content-modal">
+
+            <section class="wrap__modal__header">
+                <p class="modal__header__capture">Muster Verlauf</p>
+                <p id="modal-header-close" class="modal__header__close">&times;</p>
+                <div class="modal__header__input__wrap">
+                    <input id="modal-header-input" class="modal__header__input" name="modalHeaderInput" type="text" spellcheck="false" placeholder="Proben Nummer..."
+                        value="">
+                </div>
+                <div class="modal__fail__message__wrap" id="modal-fail-message-wrap">
+                    <div class="modal__fail__message__content" id="modal-fail-message-content">
+
+                    </div>
+                </div>
+            </section>
+
+            <section id="wrap-modal-content" class="wrap__modal__content / transform__modal__content">
+
+                <section class="modal__content__header__wrap">
+                    <div class="modal__content__header__caption / probennummer">
+                        <span id="modal-content-caption-nummber-text" class="modal__content__caption__span">16-045644-01</span>
+                    </div>
+                    <div class="modal__content__header__caption / solldatum">
+                        <span id="modal-content-caption-soll-text" class="modal__content__caption__span">24.03.2018</span>
+                    </div>
+                </section>
+
+                <section class="modal__content__main__wrap">
+
+                    <div class="modal__content__main__item / eingang">
+
+                        <div class="modal__content__main__timing__wrap / beurteilung">
+                            <p class="modal__content__main__capture-text / beurteilung">Beurteilung</p>
+                            <span id="pullSql-beurteilung-datum" class="modal__content__main__pullSql__item / eingang">24.02.2018</span>
+                            <span id="pullSql-beurteilung-uhrzeit" class="modal__content__main__pullSql__item / eingang">16:24:11 Uhr</span>
+
+                        </div>
+                        <div class="modal__content__main__timing__wrap / zpnEingang">
+                            <p class="modal__content__main__capture-text / zpnEingang">ZPN Muster Eingang</p>
+                            <span id="modal-pullSql-zpnEingang-datum" class="modal__content__main__pullSql__item / eingang">24.02.2018</span>
+                            <span id="modal-pullSql-zpnEingang-uhrzeit" class="modal__content__main__pullSql__item / eingang">16:24:11 Uhr</span>
+
+                        </div>
+                        <div class="modal__content__main__timing__wrap / status">
+                            <button id="modal-status-60g" class="modal__status / 60g">Mit 60g</button>
+                            <button id="modal-status-express" class="modal__status / express">Express</button>
+                            <button id="modal-status-mitNickel" class="modal__status / mitNickel">Mit Nickel</button>
+                            <button id="modal-status-lfgb" class="modal__status / lfgb">Aus der LFGB</button>
+                            <button id="modal-status-kDone" class="modal__status / skDone">Klärfall geklärt</button>
+                            <button id="modal-status-toys" class="modal__status / toys">Aus Team Toy&#39;s</button>
+                            <button id="modal-status-nickelBack" class="modal__status / nickelBack">Nickel Rückgabe</button>
+                            <button id="modal-status-internVorziehen" class="modal__status / internVorziehen">Intern vorziehen</button>
+                        </div>
+                    </div>
+
+                    <div class="modal__content__main__item / vorbereitung">
+                        <div class="modal__content__main__timing__wrap / zerlegung">
+                            <p class="modal__content__main__capture-text / zerlegung">Vorzerlegung Start</p>
+                            <span id="pullSql-zerlegung-start-datum" class="modal__content__main__pullSql__item / zerlegung">24.02.2018</span>
+                            <span id="pullSql-zerlegung-start-uhrzeit" class="modal__content__main__pullSql__item / zerlegung">16:24:11 Uhr</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / zerlegung">
+                            <p class="modal__content__main__capture-text / zerlegung">Vorzerlegung Ende</p>
+                            <span id="pullSql-zerlegung-ende-datum" class="modal__content__main__pullSql__item / zerlegung">24.02.2018</span>
+                            <span id="pullSql-zerlegung-ende-uhrzeit" class="modal__content__main__pullSql__item / zerlegung">16:24:11 Uhr</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / zerlegung">
+                            <p class="modal__content__main__capture-text / einwaage">Einwaage Start</p>
+                            <span id="pullSql-einwaage-start-datum" class="modal__content__main__pullSql__item / einwaage">24.02.2018</span>
+                            <span id="pullSql-einwaage-start-uhrzeit" class="modal__content__main__pullSql__item / einwaage">16:24:11 Uhr</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / zerlegung">
+                            <p class="modal__content__main__capture-text / einwaage">Einwaage Ende</p>
+                            <span id="pullSql-einwaage-ende-datum" class="modal__content__main__pullSql__item / einwaage">24.02.2018</span>
+                            <span id="pullSql-einwaage-uhrzeit" class="modal__content__main__pullSql__item / einwaage">16:24:11 Uhr</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / zpnWagen">
+                            <p class="modal__content__main__capture-text / zpnWagen">ZPN Wagen</p>
+                            <span id="pullSql-zpnWagen-datum" class="modal__content__main__pullSql__item / zpnWagen lastChild-no-border">24.02.2018</span>
+                            <span id="pullSql-zpnWagen-uhrzeit" class="modal__content__main__pullSql__item / zpnWagen lastChild-no-border">16:24:11 Uhr</span>
+                        </div>
+                    </div>
+
+                    <div class="modal__content__main__item / vorfall">
+
+                        <div class="modal__content__main__timing__wrap / klaerfall">
+                            <p class="modal__content__main__capture-text / vorfall">Klärfall Start</p>
+                            <span id="pullSql-klaerfall-start-datum" class="modal__content__main__pullSql__item / klaerfall">24.02.2018</span>
+                            <span id="pullSql-klaerfall-start-uhrzeit" class="modal__content__main__pullSql__item / klaerfall">16:24:11 Uhr</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / klaerfall">
+                            <p class="modal__content__main__capture-text / vorfall">Klärfall Ende</p>
+                            <span id="pullSql-klaerfall-ende-datum" class="modal__content__main__pullSql__item / klaerfall">24.02.2018</span>
+                            <span id="pullSql-klaerfall-ende-uhrzeit" class="modal__content__main__pullSql__item / klaerfall">16:24:11 Uhr</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / mana">
+                            <p class="modal__content__main__capture-text / vorfall">MaNa bestellt</p>
+                            <span id="pullSql-mBestellt-start-datum" class="modal__content__main__pullSql__item / mBestellt">24.02.2018</span>
+                            <span id="pullSql-mBestellt-start-uhrzeit" class="modal__content__main__pullSql__item / mBestellt">16:24:11 Uhr</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / mana">
+                            <p class="modal__content__main__capture-text / vorfall">MaNa erhalten</p>
+                            <span id="pullSql-mErhalten-ende-datum" class="modal__content__main__pullSql__item / mErhalten">24.02.2018</span>
+                            <span id="pullSql-mErhalten-uhrzeit" class="modal__content__main__pullSql__item / mErhalten">16:24:11 Uhr</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / mana">
+                            <p class="modal__content__main__capture-text / vorfall">MaNa Einwaage Start</p>
+                            <span id="pullSql-mEinwaage-ende-datum" class="modal__content__main__pullSql__item / mEinwaage">24.02.2018</span>
+                            <span id="pullSql-mEinwaage-uhrzeit" class="modal__content__main__pullSql__item / mEinwaage">16:24:11 Uhr</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / mana">
+                            <p class="modal__content__main__capture-text / vorfall">MaNa ZPN Wagen</p>
+                            <span id="pullSql-mWagen-ende-datum" class="modal__content__main__pullSql__item / mWagen lastChild-no-border">24.02.2018</span>
+                            <span id="pullSql-mWagen-uhrzeit" class="modal__content__main__pullSql__item / mWagen lastChild-no-border">16:24:11 Uhr</span>
+                        </div>
+                    </div>
+
+                    <div class="modal__content__main__item / gesamt">
+
+                        <div class="modal__content__main__timing__wrap / gesamt">
+                            <p class="modal__content__main__capture-text / gesamt">Gesamtzeit Zerlegung</p>
+                            <span id="pullSql-gesamt-zerlegung" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / gesamt">
+                            <p class="modal__content__main__capture-text / gesamt">Gesamtzeit Einwaage</p>
+                            <span id="pullSql-gesamt-einwaage" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / gesamt">
+                            <p class="modal__content__main__capture-text / gesamt">Gesamtzeit ZPN</p>
+                            <span id="pullSql-gesamt-zpnDauer" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / gesamt">
+                            <p class="modal__content__main__capture-text / gesamt">Gesamtzeit Klärfall</p>
+                            <span id="pullSql-gesamt-klaerfall" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / gesamt">
+                            <p class="modal__content__main__capture-text / gesamt">Gesamtzeit MaNa Bestellung</p>
+                            <span id="pullSql-gesamt-mBestellung" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / gesamt">
+                            <p class="modal__content__main__capture-text / gesamt">Gesamtzeit MaNa Liegezeit</p>
+                            <span id="pullSql-gesamt-mLiegezeit" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / gesamt">
+                            <p class="modal__content__main__capture-text / gesamt lastChild-no-border">Gesamtzeit MaNa</p>
+                            <span id="pullSql-gesamt-mGesamt" class="modal__content__main__pullSql__item / gesamt lastChild-no-border">23:44:13 Std.</span>
+                        </div>
+
+                    </div>
+                </section>
+
+                <section class="modal__content__footer__wrap">
+                    <span id="modal-content-footer-span-text" class="modal__content__footer__span / text">Dies ist ein längerer Text, der ein Kommentar darstellen soll. Dies ist ein längerer Text, der ein Kommentar
+                        darstellen soll. Dies ist ein längerer Text, der ein Kommentar darstellen soll.</span>
+                    <input id="modal-content-footer-input" class="modal__content__footer__input" spellcheck="false" placeholder="Kommentar Text..."
+                        title="Hier können Sie einen Kommentar zu diesem Muster hinterlegen.">
+                </section>
+            </section>
+
+        </div>
+    </section>
+
+    <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.js"></script>
+    <script type="text/javascript" src="../js/script-search-modal.js"></script>
+    <script type="text/javascript" src="../js/script-eingang.js"></script>
+    <script type="text/javascript" src="../js/script-global.js"></script>
+</body>
+
+</html>

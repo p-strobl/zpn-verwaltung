@@ -1,0 +1,30 @@
+
+Todo:
+✔ ZPN Wagen doppelter Eintrag @done(18-03-12 20:02)
+✔ Disable Buttons aufhebung @done(18-03-12 21:27)
+☐ Bubble Nachricht über Element hover
+✔ Wenn nichts bei der Verwaltung aktiviert wurde @done(18-03-15 22:12)
+✔ Schon bei dem einscann prüfen, und entsprechende Buttons ausgrauen @done(18-03-17 20:40)
+✔ MaNa einwaage beginn hinzufügen @done(18-03-17 03:08)
+☐ Nickel Rückgabe zum Muster Eingang | Es funktioniert aber UNSCHÖN!
+☐ Antwort der Datenbank abfrage verarbeiten.
+✔ PHP Seitige Antworten verbessern @done(18-03-19 02:15)
+✔ Aktivierung/Deaktivierung bei der Verwaltun checken. @done(18-03-20 01:09)
+☐ MySql Nacht und Wochenende raus rechnen
+✔ Verwaltung Header Ordnung @done(18-03-23 12:53)
+☐ Modal befüllung
+☐ Modal Conten toggleSlide
+☐ Überall noch Kommentare einfügen!
+
+
+
+
+
+
+Start "" "C:\XAMPP\xampp-control.exe"
+
+Start "" "D:\HeidiSQL\heidisql.exe"
+
+Start "" "C:\Program Files\Microsoft VS Code\Code.exe"
+
+exit
