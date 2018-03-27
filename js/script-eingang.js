@@ -5,7 +5,7 @@
 function appendContentMainRow(inputTextLeft, inputTextRight) {
     const $contentHeaderRow = $('#content-header-row');
     const $wrapContent$wrapFooter = $('#wrap-content').add($('#wrap-footer'));
-    const $headerInput = $('#header-input');
+    const $headerInputEingang = $('#header-input-eingang');
     const contentAppend =
         (
             " <section class='content-main-row eingang' id='content-main-row'> " +
@@ -53,7 +53,7 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
         );
 
     //Zeigt den Tabellen Header, die Tabelle und den sende Button wieder an.
-    $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : "";
+    $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInputEingang).removeClass('border-edged') : "";
     ///Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
     $contentHeaderRow.after(contentAppend);
     //Ruft die Funktion "countRows" auf um die Anzahl der vorhandenen Datensätze zu zählen.
@@ -141,10 +141,12 @@ function sendData(dataPackEingang) {
         //Funktion zum verstecken des ContentWrap und FooterWrap
         const hideContentFooter = function () {
             const $headerInputEingang = $('#header-input-eingang');
+            const $headerInputVerwaltung = $('#header-input-verwaltung');
             const $wrapContent$wrapFooter = $('#wrap-content').add($('#wrap-footer'));
             $wrapContent$wrapFooter
                 .addClass('displayNoneImportant')
                 .add($headerInputEingang)
+                .add($headerInputVerwaltung)
                 .addClass('border-edged');
         };
 

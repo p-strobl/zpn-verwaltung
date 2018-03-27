@@ -9,10 +9,11 @@ function regexInput() {
     //noRegEx gibt an welche Zeichen nicht eingegeben werden können.
     //   const noRegEx = /[^\d{2}-\d{6}-\d{2}]/g;
     const noRegEx = /[^0-9#;.-]/g;
-    const $headerInput = $('#header-input');
+    const $headerInputEingang = $('#header-input-eingang');
+    const $headerInputVerwaltung = $('#header-input-verwaltung');
     const $modalHeaderInput = $('#modal-header-input');
 
-    $headerInput.add($modalHeaderInput).on('keyup', function () {
+    $headerInputEingang.add($modalHeaderInput).add($headerInputVerwaltung).on('keyup', function () {
         //Überprüft die Eingabe der Inputbox und ersetzt die Eingabe von Buchstaben und ungewünschten Zeichen mit einem leeren Zeichen.
         if (noRegEx.test(this.value)) {
             $(this).val(this.value.replace(noRegEx, ''))
@@ -27,29 +28,37 @@ function regexInput() {
 //Überwacht die Inputbox und stellt sicher das nur erlaubte Zeichenfolgen angenommen werden.
 function checkInput() {
     //Referenz zum Header Input Eingang Feld
-    const $headerInput = $('#header-input');
+    const $headerInputEingang = $('#header-input-eingang');
+    const $headerInputVerwaltung = $('#header-input-verwaltung');
     const $modalHeaderInput = $('#modal-header-input');
 
+
     //Setzt den Focus nach dem laden der Seite in die Inputbox
-    $headerInput.focus();
+    $headerInputEingang.add($headerInputVerwaltung).focus();
 
     function leftSplit(str, chr) {
         if (str.length > 12) {
             return str.slice(0, chr - str.length);
+        } else if (str.length === 10) {
+            const stripedInputText = str.substring(0, 2) + "-" + str.substring(2, 8) + "-" + str.substring(8, 10);
+            return stripedInputText;
         } else {
             return str;
         }
     }
 
     function rightSplit(str, chr) {
-        return str.slice(str.length - chr, str.length);
+        const yesRegEx = /\d{2}.\d{2}.\d{4}/;
+        let sliceStr = str.slice(str.length - chr, str.length);
+        return sliceStr.match(yesRegEx) ? sliceStr : '-';
     }
 
     //Enter Taste in der Inputbox wird betätigt.
-    $headerInput.add($modalHeaderInput).on('keyup', function (pressedKey) {
+    $headerInputEingang.add($headerInputVerwaltung).add($modalHeaderInput).on('keyup', function (pressedKey) {
         //Überprüft ob der focus auf der Inputbox liegt und die Enter Taste gedrückt wurde.
         if (pressedKey.keyCode === 13 && this.value != "") {
             // if (pressedKey.keyCode === 13 && $headerInput.val() != "") {
+            const test = $(this).id;
             //Teilt den inputText auf
             const inputTextLeft = leftSplit($(this).val(), 12);
             // const inputTextLeft = leftSplit($headerInput.val(), 12);
@@ -67,19 +76,20 @@ function checkInput() {
             //Überprüft ob die Eingabe in der Inputbox, einer Probennummer entspricht.
             if (inputTextLeft.match(yesRegEx) && inputTextLeft.length === minCharacter) {
                 switch (this.id) {
-                    case 'header-input':
+                    case 'header-input-eingang':
+                    case 'header-input-verwaltung':
                         if ($.inArray(inputTextLeft, globalMainRowCounter) > -1) {
                             //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
-                            $headerInput.effect('highlight', {
+                            $headerInputEingang.add($headerInputVerwaltung).effect('highlight', {
                                 color: '#FF3100'
                             }, 200);
                             //Ja es ist bereits ein Datensatz vorhanden, es wird eine Fehler Meldung angezeigt.
                             //Blendet für 3,5 sek. eine "Fehlgeschlagen, Doppelter Eintrag" auskunft ein.
-                            $headerInput.val("");
+                            $headerInputEingang.add($headerInputVerwaltung).val('');
                             showFailMessage.failMessage('double-input', 2000, this.id);
                         } else {
                             //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
-                            $headerInput.effect('highlight', {
+                            $headerInputEingang.add($headerInputVerwaltung).effect('highlight', {
                                 color: '#FFB700'
                             }, 200);
                             //in die Globale Variable "globalMainRowCounter" wird der hinzugefügte Datensatz zwischengespeichert.
@@ -88,7 +98,7 @@ function checkInput() {
                             //Ruft die Funktion "appendContentMainRow" auf um dem Inhalt der Variablen "inputText" als Tabelle in das DOM zu übertragen.
                             appendContentMainRow(inputTextLeft, inputTextRight);
                             //Leert das eingabe Feld nach einem Fehlerhaften Eintrag
-                            $headerInput.val('');
+                            $headerInputEingang.add($headerInputVerwaltung).val('');
                         }
                         break;
 
@@ -130,7 +140,8 @@ const showFailMessage = {
 
     failMessage: function (errorClassType, setTimeoutTimer, thisObject) {
         switch (thisObject) {
-            case 'header-input':
+            case 'header-input-eingang':
+            case 'header-input-verwaltung':
                 this.$wrapContent.hasClass('displayNoneImportant') === true ? this.$headerFailMessageWrap.addClass('border-edged').add(this.$headerInputEingang.removeClass('border-edged')) : "";
                 this.$headerFailMessageContent.addClass(errorClassType);
                 this.$headerFailMessageWrap.addClass('header-fail-message-animation');
@@ -160,8 +171,9 @@ const showFailMessage = {
 //                                                                                                                                            
 //Setzt den cursor nach dem betätigen eines button in das Input Feld zurück.
 function backToInput() {
-    const $headerInput = $('#header-input');
-    $headerInput.focus();
+    const $headerInputEingang = $('#header-input-eingang');
+    const $headerInputVerwaltung = $('#header-input-verwaltung');
+    $headerInputEingang.add($headerInputVerwaltung).focus();
 }
 
 //                                                                                                                                            

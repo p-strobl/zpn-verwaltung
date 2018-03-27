@@ -154,15 +154,19 @@
     place-self: center;
     border-radius: 5px;
     background-color: gainsboro;
-    box-shadow: 0px 1px 10px 0px rgb(0, 0, 0);
+    box-shadow: 0px 0px 12px 1px rgb(0, 0, 0);
 }
 
 .modal__content__main__timing__wrap {
     display: grid;
 }
 
+.modal__content__main__timing__wrap.status {
+    grid-gap: .4vw;
+}
+
 .modal__content__main__item.eingang {
-    grid-template-rows: 20% 20% 60%;
+    grid-template-rows: repeat(3, 1fr) auto;
 }
 
 .modal__content__main__item.vorbereitung {
@@ -174,33 +178,31 @@
 }
 
 .modal__content__main__item.gesamt {
-    grid-template-rows: repeat(8, 1fr);
+    grid-template-rows: repeat(9, 1fr);
 }
 
-.modal__content__main__timing__wrap.beurteilung,
-.modal__content__main__timing__wrap.zpnEingang {
+.modal__content__main__timing__wrap.item-1 {
     grid-template-rows: 40% 30%;
     grid-template-columns: 1fr 1fr;
+    align-items: center;
 }
 
-.modal__content__main__timing__wrap.zerlegung,
-.modal__content__main__timing__wrap.einwaage,
-.modal__content__main__timing__wrap.zpnWagen,
-.modal__content__main__timing__wrap.klaerfall,
-.modal__content__main__timing__wrap.mana {
+.modal__content__main__timing__wrap.item-2-3 {
     grid-template-rows: 40% 30%;
     grid-template-columns: 1fr 1fr;
+    align-items: center;
 }
 
 .modal__content__main__timing__wrap.gesamt {
     grid-template-rows: 45% 45%;
+    align-items: end;
 }
 
 .modal__status {
     place-self: center;
-    height: 90%;
+    height: 100%;
     width: 100%;
-    font-size: .7vw;
+    font-size: .8vw;
     border: 1px solid #0091CD;
     border-radius: 3px;
     background-color: transparent;
@@ -228,10 +230,12 @@
 
 .modal__content__main__capture-text.gesamt {
     font-size: 1vw;
+    align-self: start;
 }
 
 .modal__content__main__pullSql__item {
     width: 100%;
+    padding-bottom: .2vw;
     color: #0091CD;
     font-size: 1vw;
     text-align: center;
@@ -271,6 +275,6 @@
 
 /* Cross select */
 
-.lastChild-no-border {
+/* .lastChild-no-border {
     border-bottom: 0;
-}
+} */

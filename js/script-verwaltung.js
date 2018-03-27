@@ -13,38 +13,40 @@ function getButtonStatus(probenNummer) {
     ajaxRequestObject.done(function (data) {
 
         const rowItems = {
-            zerlegungStart: $('#content-btn-zerlegungStart'),
-            zerlegungEnde: $('#content-btn-zerlegungEnde'),
-            einwaageBeginn: $('#content-btn-einwaageBeginn'),
-            einwaageEnde: $('#content-btn-einwaageEnde'),
+            zerlegungStartDate: $('#content-btn-zerlegungStart'),
+            zerlegungEndeDate: $('#content-btn-zerlegungEnde'),
+            einwaageBeginnDate: $('#content-btn-einwaageBeginn'),
+            einwaageEndeDate: $('#content-btn-einwaageEnde'),
             zpnWagenDateTime: $('#content-btn-zpnWagen'),
-            klaerfallBeginnDateTime: $('#content-btn-klaerfallBeginn'),
-            klaerfallEndeDateTime: $('#content-btn-klaerfallEnde'),
-            manaGestelltDateTime: $('#content-btn-manaBestellt'),
-            manaErhaltenDateTime: $('#content-btn-manaErhalten'),
-            manaEinwaageDateTime: $('#content-btn-manaEinwaage'),
-            manaZpnWagenDateTime: $('#content-btn-manaEingewogen')
+            klaerfallBeginnDate: $('#content-btn-klaerfallBeginn'),
+            klaerfallEndeDate: $('#content-btn-klaerfallEnde'),
+            manaErhaltenDate: $('#content-btn-manaErhalten'),
+            manaGestelltDate: $('#content-btn-manaBestellt'),
+            manaEinwaageDate: $('#content-btn-manaEinwaage'),
+            manaZpnWagenDate: $('#content-btn-manaEingewogen'),
+            sollDatum: $('#text-sollNr')
         };
 
-        const sollDatum = $('#text-sollNr');
-
-        function setButtonStatus(rowItems, itemKey) {
+        function setButtonStatus(rowItems, itemKey, dataValue) {
             const setItem = rowItems[itemKey];
-            setItem
-                .prop('disabled', true)
-                .addClass('setButtonStatus')
-                .val('preSet');
+            if (itemKey == 'sollDatum') {
+                setItem.html(dataValue)
+            } else {
+                setItem
+                    .prop('disabled', true)
+                    .addClass('setButtonStatus')
+                    .val('preSet');
+            }
         }
 
         $.each(data, function (dataKey, dataValue) {
             $.each(rowItems, function (itemKey, itemValue) {
-
                 switch (dataKey) {
                     case itemKey:
-                        setButtonStatus(rowItems, itemKey);
+                        setButtonStatus(rowItems, itemKey, dataValue);
                         break;
+                    default:
                 }
-
             });
         });
     });
@@ -53,16 +55,16 @@ function getButtonStatus(probenNummer) {
         // console.log( textStatus, errorThrown );
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
         // showFailMessage.failMessage( 'no-server header-fail-message-content-margin', 8000 );
-
         backToInput();
     });
 }
 //                                                                                                                                            
 //Fügt einen Neuen Datensatz in das HTML ein.
 function appendContentMainRow(inputTextLeft, inputTextRight) {
+
     const $contentHeaderRow = $('#content-header-row');
     const $wrapContent$wrapFooter = $('#wrap-content').add($('#wrap-footer'));
-    const $headerInput = $('#header-input');
+    const $headerInput = $('#header-input-verwaltung');
     const contentAppend =
         (
             " <section class='content-main-row verwaltung' id='content-main-row'> " +

@@ -22,7 +22,7 @@
                     <img id="img-search" class="img-search" src="../css/icons/searchIcon.png">
                 </div>
             </div>
-            <input id="header-input" class="header-input-eingang border-edged" type="text" value="" spellcheck="false" placeholder="Proben Nummer..."
+            <input id="header-input-eingang" class="header-input-eingang border-edged" type="text" value="" spellcheck="false" placeholder="Proben Nummer..."
                 title="Bitte tragen Sie hier eine gültige Proben Nummer ein.">
             <div class="header-fail-message-wrap" id="header-fail-message-wrap">
                 <div class="header-fail-message-content" id="header-fail-message-content">
@@ -129,9 +129,9 @@
 
     </div>
 
-    <section class="wrap__modal / show-modal" id="wrap-modal">
+    <section id="wrap-modal" class="wrap__modal / show-modal">
 
-        <div class="content__modal / show-modal" id="content-modal">
+        <div id="content-modal" class="content__modal / show-modal">
 
             <section class="wrap__modal__header">
                 <p class="modal__header__capture">Muster Verlauf</p>
@@ -162,18 +162,24 @@
 
                     <div class="modal__content__main__item / eingang">
 
-                        <div class="modal__content__main__timing__wrap / beurteilung">
+                        <div class="modal__content__main__timing__wrap / item-1">
                             <p class="modal__content__main__capture-text / beurteilung">Beurteilung</p>
                             <span id="pullSql-beurteilung-date" class="modal__content__main__pullSql__item / eingang">24.02.2018</span>
                             <span id="pullSql-beurteilung-time" class="modal__content__main__pullSql__item / eingang">16:24:11 Uhr</span>
-
                         </div>
-                        <div class="modal__content__main__timing__wrap / zpnEingang">
+
+                        <div class="modal__content__main__timing__wrap / item-1">
                             <p class="modal__content__main__capture-text / zpnEingang">ZPN Muster Eingang</p>
                             <span id="modal-pullSql-zpnEingang-date" class="modal__content__main__pullSql__item / eingang">24.02.2018</span>
                             <span id="modal-pullSql-zpnEingang-time" class="modal__content__main__pullSql__item / eingang">16:24:11 Uhr</span>
-
                         </div>
+
+                        <div class="modal__content__main__timing__wrap / item-1">
+                            <p class="modal__content__main__capture-text / nickelRueckgabe">Nickel Rückgabe</p>
+                            <span id="modal-pullSql-nickelBack-date" class="modal__content__main__pullSql__item / eingang">24.02.2018</span>
+                            <span id="modal-pullSql-nickelBack-time" class="modal__content__main__pullSql__item / eingang">16:24:11 Uhr</span>
+                        </div>
+
                         <div class="modal__content__main__timing__wrap / status">
                             <button id="modal-status-60g" class="modal__status / 60g">Mit 60g</button>
                             <button id="modal-status-express" class="modal__status / express">Express</button>
@@ -181,37 +187,37 @@
                             <button id="modal-status-lfgb" class="modal__status / lfgb">Aus der LFGB</button>
                             <button id="modal-status-mitKlaerfall" class="modal__status / skDone">Klärfall geklärt</button>
                             <button id="modal-status-toys" class="modal__status / toys">Aus Team Toy&#39;s</button>
-                            <button id="modal-status-nickelBack" class="modal__status / nickelBack">Nickel Rückgabe</button>
+                            <!-- <button id="modal-status-nickelBack" class="modal__status / nickelBack">Nickel Rückgabe</button> -->
                             <button id="modal-status-internVorziehen" class="modal__status / internVorziehen">Intern vorziehen</button>
                         </div>
                     </div>
 
                     <div class="modal__content__main__item / vorbereitung">
-                        <div class="modal__content__main__timing__wrap / zerlegung">
+                        <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / zerlegung">Vorzerlegung Start</p>
                             <span id="pullSql-zerlegung-start-date" class="modal__content__main__pullSql__item / zerlegung">24.02.2018</span>
                             <span id="pullSql-zerlegung-start-time" class="modal__content__main__pullSql__item / zerlegung">16:24:11 Uhr</span>
                         </div>
 
-                        <div class="modal__content__main__timing__wrap / zerlegung">
+                        <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / zerlegung">Vorzerlegung Ende</p>
                             <span id="pullSql-zerlegung-ende-date" class="modal__content__main__pullSql__item / zerlegung">24.02.2018</span>
                             <span id="pullSql-zerlegung-ende-time" class="modal__content__main__pullSql__item / zerlegung">16:24:11 Uhr</span>
                         </div>
 
-                        <div class="modal__content__main__timing__wrap / zerlegung">
+                        <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / einwaage">Einwaage Start</p>
                             <span id="pullSql-einwaage-start-date" class="modal__content__main__pullSql__item / einwaage">24.02.2018</span>
                             <span id="pullSql-einwaage-start-time" class="modal__content__main__pullSql__item / einwaage">16:24:11 Uhr</span>
                         </div>
 
-                        <div class="modal__content__main__timing__wrap / zerlegung">
+                        <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / einwaage">Einwaage Ende</p>
                             <span id="pullSql-einwaage-ende-date" class="modal__content__main__pullSql__item / einwaage">24.02.2018</span>
-                            <span id="pullSql-einwaage-time" class="modal__content__main__pullSql__item / einwaage">16:24:11 Uhr</span>
+                            <span id="pullSql-einwaage-ende-time" class="modal__content__main__pullSql__item / einwaage">16:24:11 Uhr</span>
                         </div>
 
-                        <div class="modal__content__main__timing__wrap / zpnWagen">
+                        <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / zpnWagen">ZPN Wagen</p>
                             <span id="pullSql-zpnWagen-date" class="modal__content__main__pullSql__item / zpnWagen lastChild-no-border">24.02.2018</span>
                             <span id="pullSql-zpnWagen-time" class="modal__content__main__pullSql__item / zpnWagen lastChild-no-border">16:24:11 Uhr</span>
@@ -220,47 +226,47 @@
 
                     <div class="modal__content__main__item / vorfall">
 
-                        <div class="modal__content__main__timing__wrap / klaerfall">
+                        <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">Klärfall Start</p>
                             <span id="pullSql-klaerfall-start-date" class="modal__content__main__pullSql__item / klaerfall">24.02.2018</span>
                             <span id="pullSql-klaerfall-start-time" class="modal__content__main__pullSql__item / klaerfall">16:24:11 Uhr</span>
                         </div>
 
-                        <div class="modal__content__main__timing__wrap / klaerfall">
+                        <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">Klärfall Ende</p>
                             <span id="pullSql-klaerfall-ende-date" class="modal__content__main__pullSql__item / klaerfall">24.02.2018</span>
                             <span id="pullSql-klaerfall-ende-time" class="modal__content__main__pullSql__item / klaerfall">16:24:11 Uhr</span>
                         </div>
 
-                        <div class="modal__content__main__timing__wrap / mana">
+                        <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">MaNa bestellt</p>
                             <span id="pullSql-mBestellt-start-date" class="modal__content__main__pullSql__item / mBestellt">24.02.2018</span>
                             <span id="pullSql-mBestellt-start-time" class="modal__content__main__pullSql__item / mBestellt">16:24:11 Uhr</span>
                         </div>
 
-                        <div class="modal__content__main__timing__wrap / mana">
+                        <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">MaNa erhalten</p>
                             <span id="pullSql-mErhalten-ende-date" class="modal__content__main__pullSql__item / mErhalten">24.02.2018</span>
-                            <span id="pullSql-mErhalten-time" class="modal__content__main__pullSql__item / mErhalten">16:24:11 Uhr</span>
+                            <span id="pullSql-mErhalten-ende-time" class="modal__content__main__pullSql__item / mErhalten">16:24:11 Uhr</span>
                         </div>
 
-                        <div class="modal__content__main__timing__wrap / mana">
+                        <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">MaNa Einwaage Start</p>
                             <span id="pullSql-mEinwaage-ende-date" class="modal__content__main__pullSql__item / mEinwaage">24.02.2018</span>
-                            <span id="pullSql-mEinwaage-time" class="modal__content__main__pullSql__item / mEinwaage">16:24:11 Uhr</span>
+                            <span id="pullSql-mEinwaage-ende-time" class="modal__content__main__pullSql__item / mEinwaage">16:24:11 Uhr</span>
                         </div>
 
-                        <div class="modal__content__main__timing__wrap / mana">
+                        <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">MaNa ZPN Wagen</p>
                             <span id="pullSql-mWagen-ende-date" class="modal__content__main__pullSql__item / mWagen lastChild-no-border">24.02.2018</span>
-                            <span id="pullSql-mWagen-time" class="modal__content__main__pullSql__item / mWagen lastChild-no-border">16:24:11 Uhr</span>
+                            <span id="pullSql-mWagen-ende-time" class="modal__content__main__pullSql__item / mWagen lastChild-no-border">16:24:11 Uhr</span>
                         </div>
                     </div>
 
                     <div class="modal__content__main__item / gesamt">
 
                         <div class="modal__content__main__timing__wrap / gesamt">
-                            <p class="modal__content__main__capture-text / gesamt">Gesamtliegezeit Beurteilung</p>
+                            <p class="modal__content__main__capture-text / gesamt">Liegezeit Beurteiler Kiste</p>
                             <span id="pullSql-gesamt-beurteilung" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
                         </div>
 
@@ -275,7 +281,7 @@
                         </div>
 
                         <div class="modal__content__main__timing__wrap / gesamt">
-                            <p class="modal__content__main__capture-text / gesamt">Gesamtliegezeit ZPN</p>
+                            <p class="modal__content__main__capture-text / gesamt">Liegezeit ZPN</p>
                             <span id="pullSql-gesamt-zpnDauer" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
                         </div>
 
@@ -285,13 +291,18 @@
                         </div>
 
                         <div class="modal__content__main__timing__wrap / gesamt">
+                            <p class="modal__content__main__capture-text / gesamt">Muster bei Nickel</p>
+                            <span id="pullSql-gesamt-nickelDauer" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
+                        </div>
+
+                        <div class="modal__content__main__timing__wrap / gesamt">
                             <p class="modal__content__main__capture-text / gesamt">Gesamtzeit MaNa Bestellung</p>
                             <span id="pullSql-gesamt-mBestellung" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
                         </div>
 
                         <div class="modal__content__main__timing__wrap / gesamt">
-                            <p class="modal__content__main__capture-text / gesamt">Gesamtzeit MaNa Liegezeit</p>
-                            <span id="pullSql-gesamt-mLiegezeit" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
+                            <p class="modal__content__main__capture-text / gesamt">Gesamtzeit MaNa Einwaage</p>
+                            <span id="pullSql-gesamt-mEinwaage" class="modal__content__main__pullSql__item / gesamt">23:44:13 Std.</span>
                         </div>
 
                         <div class="modal__content__main__timing__wrap / gesamt">
@@ -304,10 +315,19 @@
 
                 <section class="modal__content__footer__wrap">
                     <span id="modal-content-footer-span-text" class="modal__content__footer__span / text">Dies ist ein längerer Text, der ein Kommentar darstellen soll. Dies ist ein längerer Text, der ein Kommentar
-                        darstellen soll. Dies ist ein längerer Text, der ein Kommentar darstellen soll.</span>
+                        darstellen soll. Dies ist ein längerer Text, der ein Kommentar darstellen soll.
+                        <span id="modal-content-footer-span-date" class="modal__content__footer__span / date">24.02.2018</span>
+                        <span id="modal-content-footer-span-time" class="modal__content__footer__span / time">18:24:22 Uhr</span>
+                    </span>
                     <input id="modal-content-footer-input" class="modal__content__footer__input" spellcheck="false" placeholder="Kommentar Text..."
                         title="Hier können Sie einen Kommentar zu diesem Muster hinterlegen.">
                 </section>
+            </section>
+
+            <section id="wrap-modal-storno" class="wrap__modal__storno">
+                <div class="modal__storno__wrap">
+
+                </div>
             </section>
 
         </div>
