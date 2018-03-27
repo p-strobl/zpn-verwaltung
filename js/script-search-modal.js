@@ -20,6 +20,49 @@ function resetDetails() {
     // $detailsOpenButtonWrap.hasClass('transition') ? "" : $detailsOpenButtonWrap.add($mainContentMiddleWrap).addClass('transition');
 }
 
+const showCloseModal = (() => {
+
+    const $indexModal = $('#wrap-modal').add('#content-modal');
+    const $imgSearch = $('#img-search');
+    const $wrapModal = $('#wrap-modal');
+    const $modalHeaderClose = $('#modal-header-close');
+    const $modalHeaderInput = $('#modal-header-input');
+
+    const showModal = (() => {
+        $imgSearch.on('click', function (event) {
+            // resetDetails();
+            $indexModal.toggleClass('show-modal');
+            backToModalInput();
+        });
+    });
+
+    const closeModal = (() => {
+        $wrapModal.on('click', function (event) {
+            if (event.target == event.currentTarget) {
+                $indexModal.toggleClass('show-modal');
+                backToInput();
+            }
+        });
+
+        $modalHeaderClose.on('click', function () {
+            $indexModal.toggleClass('show-modal');
+            backToInput();
+        });
+    });
+
+    const backToModalInput = (() => {
+        setTimeout(() => {
+            $modalHeaderInput.focus();
+        }, 100);
+        return;
+    });
+
+    return {
+        showModal: showModal,
+        closeModal: closeModal
+    }
+})();
+
 function searchDataSet(probenNummer) {
     const ajaxRequestObject = $.ajax({
         url: '../php/db-requestObject.php',
@@ -34,52 +77,65 @@ function searchDataSet(probenNummer) {
 
         console.log(data);
 
-        let dateTime = new Date(data.eingangDateTime);
+        const toFillObject = {
 
-        console.log(dateTime.getDate);
-        console.log(dateTime.getTime);
-
-
-
-        const toFillItems = {
-            berechnungDateTimeZpnwagen: $('#pullSql-gesamt-zpnDauer'),
-            beurteilungZpnBerechnung: $(''),
-            beurteilungBereitgestelltDateTime: $(''),
-            eingangDateTime: $(''),
-            einwaageBeginn: $(''),
-            einwaageBerechnung: $(''),
-            einwaageEnde: $(''),
-            klaerfallBeginnDateTime: $(''),
-            klaerfallBerechnung: $(''),
-            klaerfallEndeDateTime: $(''),
-            kommentarText: $(''),
-            manaBerechnungDateTimeAnfrage: $(''),
-            manaBerechnungDateTimeEinwaage: $(''),
-            manaBerechnungDateTimeGesamt: $(''),
-            manaEinwaageDateTime: $(''),
-            manaErhaltenDateTime: $(''),
-            manaGestelltDateTime: $(''),
-            manaZpnWagenDateTime: $(''),
-            mit60g: $(''),
-            mitExpress: $(''),
-            mitIntern: $(''),
-            mitKlaerfallBack: $(''),
-            mitLfgb: $(''),
-            mitNickel: $(''),
-            mitToys: $(''),
-            nickelRueckgabeDateTime: $(''),
-            nickelBerechnung: $(''),
+            anAbteilung: $('#'),
+            berechnungDateTimeZpnwagen: $('#'),
+            beurteilungBereitDate: $('#pullSql-beurteilung-date'),
+            beurteilungBereitTime: $('#pullSql-beurteilung-time'),
+            beurteilungZpnBerechnung: $('#pullSql-gesamt-beurteilung'),
+            eingangDate: $('#modal-pullSql-zpnEingang-date'),
+            eingangTime: $('#modal-pullSql-zpnEingang-time'),
+            einwaageBeginnDate: $('#'),
+            einwaageBeginnTime: $('#'),
+            einwaageBerechnung: $('#'),
+            einwaageEndeDate: $('#'),
+            einwaageEndeTime: $('#'),
+            klaerfallAnzahl: $('#'),
+            klaerfallBeginnDate: $('#'),
+            klaerfallBeginnTime: $('#'),
+            klaerfallBerechnung: $('#'),
+            klaerfallEndeDate: $('#'),
+            klaerfallEndeTime: $('#'),
+            kommentarDate: $('#'),
+            kommentarText: $('#'),
+            kommentarTime: $('#'),
+            manaBerechnungDateTimeAnfrage: $('#'),
+            manaBerechnungDateTimeEinwaage: $('#'),
+            manaBerechnungDateTimeGesamt: $('#'),
+            manaEinwaageDate: $('#'),
+            manaEinwaageTime: $('#'),
+            manaErhaltenDate: $('#'),
+            manaErhaltenTime: $('#'),
+            manaGestelltDate: $('#'),
+            manaGestelltTime: $('#'),
+            manaZpnWagenDate: $('#'),
+            manaZpnWagenTime: $('#'),
+            mit60g: $('#modal-status-60g'),
+            mitExpress: $('#modal-status-express'),
+            mitIntern: $('#'),
+            mitKlaerfallBack: $('#modal-status-kDone'),
+            mitLfgb: $('#modal-status-lfgb'),
+            mitNickel: $('#modal-status-mitNickel'),
+            mitToys: $('#modal-status-toys'),
+            nickelBerechnung: $('#'),
+            nickelRueckgabeDate: $('#'),
+            nickelRueckgabeTime: $('#'),
             probenNummer: $('#modal-content-caption-nummber-text'),
             sollDatum: $('#modal-content-caption-soll-text'),
-            stornoDateTime: $(''),
-            zerlegungBerechnung: $(''),
-            zerlegungEnde: $(''),
-            zerlegungStart: $(''),
-            zpnWagenDateTime: $(''),
+            stornoDate: $('#'),
+            stornoTime: $('#'),
+            zerlegungBerechnung: $('#'),
+            zerlegungEndeDate: $('#'),
+            zerlegungEndeTime: $('#'),
+            zerlegungStartDate: $('#'),
+            zerlegungStartTime: $('#'),
+            zpnWagenDate: $('#'),
+            zpnWagenTime: $('#'),
         }
 
         function setButtonStatus(rowItems, itemKey) {
-            const setItem = rowItems[itemKey];
+            const setItem = toFillObject[itemKey];
             setItem
                 .prop('disabled', true)
                 .addClass('setButtonStatus')
@@ -87,11 +143,11 @@ function searchDataSet(probenNummer) {
         }
 
         $.each(data, function (dataKey, dataValue) {
-            $.each(rowItems, function (itemKey, itemValue) {
+            $.each(toFillObject, function (itemKey, itemValue) {
 
                 switch (dataKey) {
                     case itemKey:
-                        setButtonStatus(rowItems, itemKey);
+                        setButtonStatus(toFillObject, itemKey);
                         break;
                 }
             });

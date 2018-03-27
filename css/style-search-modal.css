@@ -174,7 +174,7 @@
 }
 
 .modal__content__main__item.gesamt {
-    grid-template-rows: repeat(7, 1fr);
+    grid-template-rows: repeat(8, 1fr);
 }
 
 .modal__content__main__timing__wrap.beurteilung,
@@ -193,7 +193,7 @@
 }
 
 .modal__content__main__timing__wrap.gesamt {
-    grid-template-rows: 45% 40%;
+    grid-template-rows: 45% 45%;
 }
 
 .modal__status {
@@ -226,6 +226,10 @@
     grid-column: 1/3;
 }
 
+.modal__content__main__capture-text.gesamt {
+    font-size: 1vw;
+}
+
 .modal__content__main__pullSql__item {
     width: 100%;
     color: #0091CD;
@@ -236,6 +240,7 @@
 
 .modal__content__main__pullSql__item.gesamt {
     grid-column: 1/3;
+    font-size: .8vw;
 }
 
 /*Modal Content Footer*/

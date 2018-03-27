@@ -746,6 +746,8 @@ $(document).ready(function () {
     countCheckedButtons();
     highlightSelectedRow();
     confirmDelete();
-    showModal();
-    closeModal();
+    showCloseModal.showModal();
+    showCloseModal.closeModal();
+    // showModal();
+    // closeModal();
 });

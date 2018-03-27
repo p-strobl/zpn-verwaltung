@@ -26,6 +26,8 @@ function getButtonStatus(probenNummer) {
             manaZpnWagenDateTime: $('#content-btn-manaEingewogen')
         };
 
+        const sollDatum = $('#text-sollNr');
+
         function setButtonStatus(rowItems, itemKey) {
             const setItem = rowItems[itemKey];
             setItem
@@ -42,6 +44,7 @@ function getButtonStatus(probenNummer) {
                         setButtonStatus(rowItems, itemKey);
                         break;
                 }
+
             });
         });
     });
