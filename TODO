@@ -21,16 +21,3 @@ Todo:
 ☐ Search Modal-- Status Button Funktion
 ☐ Search Modal-- Kommentar hinzufügen Funktion erstellen
 
-
-
-
-
-
-
-Start "" "C:\XAMPP\xampp-control.exe"
-
-Start "" "D:\HeidiSQL\heidisql.exe"
-
-Start "" "C:\Program Files\Microsoft VS Code\Code.exe"
-
-exit

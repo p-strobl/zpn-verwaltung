@@ -104,12 +104,6 @@ function checkInput() {
 
                     case 'modal-header-input':
                         searchDataSet(inputTextLeft);
-                        // wrapModalContent.hasClass('transform__modal__down') === true ? wrapModalContent.removeClass('transform__modal__down') : '';
-                        // setTimeout(() => {
-                        //     searchDataSet(inputTextLeft);
-                        //     $modalHeaderInput.val('');
-                        //     wrapModalContent.addClass('transform__modal__down');
-                        // }, 400);
                         break;
                     default:
                 }
@@ -158,7 +152,6 @@ const showFailMessage = {
                 break;
 
             case 'modal-header-input':
-                // console.log(this);
                 this.$modalFailMessageContent.addClass(errorClassType);
                 this.$modalFailMessageWrap.addClass('hide');
                 setTimeout(() => {

@@ -79,7 +79,7 @@ function searchDataSet(probenNummer) {
         const wrapModalContent = $('#wrap-modal-content');
         const $modalHeaderInput = $('#modal-header-input');
 
-        if (!data.hasOwnProperty(0)) {
+        if (data !== false && !data.hasOwnProperty(0)) {
 
             resetDetails();
             wrapModalContent.hasClass('transform__modal__down') === true ? wrapModalContent.removeClass('transform__modal__down') : '';
@@ -185,7 +185,10 @@ function searchDataSet(probenNummer) {
                 });
             });
             showCloseModal.backToModalInput;
-        } else {
+        } else if (data === false) {
+            showFailMessage.failMessage('fail-input', 2000, $modalHeaderInput.attr('id'));
+            showCloseModal.backToModalInput;
+        } else if (data.hasOwnProperty(0)) {
             showFailMessage.failMessage('fail-connect', 8000, $modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
         }
@@ -203,12 +206,12 @@ const updateStatusButton = () => {
 
     const modalStatusButton = $('.modal__status');
 
-    modalStatusButton.on('click', () => {
+    modalStatusButton.on('click', function () {
 
-        console.log(this);
-        console.log(this.id);
         console.log($(this));
         console.log($(this).attr('id'));
+
+        const probenNummer = $('#modal-content-caption-nummber-text').html();
 
         const statusButtonObject = {
             mit60g: $('#modal-status-60g'),
@@ -220,12 +223,27 @@ const updateStatusButton = () => {
             mitToys: $('#modal-status-toys')
         }
 
+        const ajaxRequestStatusButton = $.ajax({
+            url: '../php/db-modalStatusUpdate.php',
+            method: 'POST',
+            data: {
+                updateModalStatus: probenNummer
+            },
+            dataType: 'json'
+        });
+
+        ajaxRequestStatusButton.done((data) => {
+            console.log("Done");
+        });
+
+        ajaxRequestStatusButton.fail((jqXHR, textStatus, errorThrown) => {
+            console.log("Fail");
+        });
 
     });
-
-    $(document).ready(() => {
-        updateStatusButton.modalStatusButton;
-    });
-
-
 }
+
+
+$(document).ready(function () {
+    updateStatusButton();
+});
