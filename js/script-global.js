@@ -71,7 +71,7 @@ function checkInput() {
             //Eingabe länge einer Probennummer beträgt 23 Zeichen.
             const minCharacter = 12;
 
-            const wrapModalContent = $('#wrap-modal-content');
+            // const wrapModalContent = $('#wrap-modal-content');
 
             //Überprüft ob die Eingabe in der Inputbox, einer Probennummer entspricht.
             if (inputTextLeft.match(yesRegEx) && inputTextLeft.length === minCharacter) {
@@ -103,10 +103,13 @@ function checkInput() {
                         break;
 
                     case 'modal-header-input':
-                        wrapModalContent.hasClass('transform__modal__down') === true ? wrapModalContent.removeClass('transform__modal__down') : "";
                         searchDataSet(inputTextLeft);
-
-                        // wrapModalContent.addClass('transform__modal__down');
+                        // wrapModalContent.hasClass('transform__modal__down') === true ? wrapModalContent.removeClass('transform__modal__down') : '';
+                        // setTimeout(() => {
+                        //     searchDataSet(inputTextLeft);
+                        //     $modalHeaderInput.val('');
+                        //     wrapModalContent.addClass('transform__modal__down');
+                        // }, 400);
                         break;
                     default:
                 }
@@ -155,12 +158,12 @@ const showFailMessage = {
                 break;
 
             case 'modal-header-input':
-                console.log(this);
-                this.$modalFailMessageWrap.addClass('hide');
+                // console.log(this);
                 this.$modalFailMessageContent.addClass(errorClassType);
+                this.$modalFailMessageWrap.addClass('hide');
                 setTimeout(() => {
-                    this.$modalFailMessageWrap.removeClass('hide');
                     this.$modalFailMessageContent.removeClass(errorClassType);
+                    this.$modalFailMessageWrap.removeClass('hide');
                 }, setTimeoutTimer);
                 break;
             default:

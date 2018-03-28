@@ -39,7 +39,7 @@
 
 .wrap__modal__header {
     display: grid;
-    grid-template-rows: 50% 25% 25%;
+    grid-template-rows: 50% 25% auto;
     grid-template-columns: 10% 80% 10%;
 }
 
@@ -85,19 +85,27 @@
 .modal__fail__message__wrap {
     grid-row: 3;
     grid-column: 1/4;
-    height: 0;
+    /* height: 0; */
     background-color: #FF3100;
+    transform: scaleY(0);
+    transform-origin: top;
+    transition: transform 0.26s ease;
+    overflow-y: hidden;
 }
 
 .modal__fail__message__content {
     display: grid;
+    padding: 10vw 0;
     place-content: center;
     height: 100%;
-    font-size: 2vw;
+    font-size: 3vw;
+    text-align: center;
 }
 
 .modal__fail__message__wrap.hide {
-    height: 100%
+    /* height: 100% */
+    transform: scaleY(1);
+    overflow-y: visible;
 }
 
 /* Modal Content */
@@ -110,7 +118,7 @@
 .transform__modal__content {
     transform: scaleY(0);
     transform-origin: top;
-    transition: transform 0.26s ease;
+    transition: transform 0.2s ease;
     overflow-y: hidden;
 }
 
@@ -213,6 +221,10 @@
 
 .modal__status:hover {
     box-shadow: 0px 0px 8px 0px rgb(0, 0, 0);
+}
+
+.modal__status.button__set {
+    background-color: #FFB700;
 }
 
 .modal__content__main__capture-text {
