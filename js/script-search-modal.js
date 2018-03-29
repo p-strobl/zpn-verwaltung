@@ -139,13 +139,13 @@ function searchDataSet(probenNummer) {
             }
 
             const toFillStatusButton = {
-                mit60g: $('#modal-status-60g'),
-                mitExpress: $('#modal-status-express'),
-                mitIntern: $('#modal-status-internVorziehen'),
-                mitKlaerfallBack: $('#modal-status-mitKlaerfall'),
-                mitLfgb: $('#modal-status-lfgb'),
-                mitNickel: $('#modal-status-mitNickel'),
-                mitToys: $('#modal-status-toys')
+                mit60g: $('#mit60g'),
+                mitExpress: $('#mitExpress'),
+                mitIntern: $('#mitIntern'),
+                mitKlaerfallBack: $('#mitKlaerfallBack'),
+                mitLfgb: $('#mitLfgb'),
+                mitNickel: $('#mitNickel'),
+                mitToys: $('#mitToys')
             }
 
             function setStatus(literalObject, itemKey, dataValue) {
@@ -208,36 +208,45 @@ const updateStatusButton = () => {
 
     modalStatusButton.on('click', function () {
 
-        console.log($(this));
-        console.log($(this).attr('id'));
-
         const probenNummer = $('#modal-content-caption-nummber-text').html();
+        const statusButtonID = $(this).attr('id');
+        const statusButtonValue = $(this).attr('value');
 
         const statusButtonObject = {
-            mit60g: $('#modal-status-60g'),
-            mitExpress: $('#modal-status-express'),
-            mitIntern: $('#modal-status-internVorziehen'),
-            mitKlaerfallBack: $('#modal-status-mitKlaerfall'),
-            mitLfgb: $('#modal-status-lfgb'),
-            mitNickel: $('#modal-status-mitNickel'),
-            mitToys: $('#modal-status-toys')
+            mit60g: $('#mit60g'),
+            mitExpress: $('#mitExpress'),
+            mitIntern: $('#mitIntern'),
+            mitKlaerfallBack: $('#mitKlaerfallBack'),
+            mitLfgb: $('#mitLfgb'),
+            mitNickel: $('#mitNickel'),
+            mitToys: $('#mitToys')
         }
+
+        let sendData = {
+            probenNummer: probenNummer,
+            statusButtonID: statusButtonID,
+            statusButtonValue: statusButtonValue
+        }
+
+        sendData.statusButtonValue === 'deactive' ? sendData.statusButtonValue = 'active' : sendData.statusButtonValue = 'deactive';
 
         const ajaxRequestStatusButton = $.ajax({
             url: '../php/db-modalStatusUpdate.php',
             method: 'POST',
             data: {
-                updateModalStatus: probenNummer
+                updateModalStatus: sendData
             },
             dataType: 'json'
         });
 
         ajaxRequestStatusButton.done((data) => {
-            console.log("Done");
+
+            // statusButtonObject.data['buttonStatus'] = data['buttonStatus'];
+            // console.log(statusButtonObject);
         });
 
         ajaxRequestStatusButton.fail((jqXHR, textStatus, errorThrown) => {
-            console.log("Fail");
+            console.log(data);
         });
 
     });
