@@ -1,63 +1,55 @@
 'use strict'
+/// <reference path="../typings/globals/jquery/index.d.ts" />
 
 //Leert alle Zeit Angaben der Verwaltungs Anzeige
 function resetDetails() {
-
     const modalContentMainPullSqlItem = $('.modal__content__main__pullSql__item');
     const modalContentCaptionSpan = $('.modal__content__caption__span');
     const modalContentFooterSpan = $('.modal__content__footer__span');
     const modalStatusItems = $('.modal__status');
-
     modalContentMainPullSqlItem.html(' - ');
     modalContentCaptionSpan.add(modalContentFooterSpan).html('');
-
     modalStatusItems.each(function () {
         $(this)
             .val('deactive')
-            .removeClass('button__set');
+            .removeClass('statusButton-preSet');
     });
 }
 
 const showCloseModal = (() => {
-
-    const $indexModal = $('#wrap-modal').add('#content-modal');
-    const $imgSearch = $('#img-search');
-    const $wrapModal = $('#wrap-modal');
-    const $modalHeaderClose = $('#modal-header-close');
-    const $modalHeaderInput = $('#modal-header-input');
+    const indexModal = $('#wrap-modal').add('#content-modal');
+    const imgSearch = $('#img-search');
+    const wrapModal = $('#wrap-modal');
+    const modalHeaderClose = $('#modal-header-close');
+    const modalHeaderInput = $('#modal-header-input');
     const wrapModalContent = $('#wrap-modal-content');
-
     const showModal = (() => {
-        $imgSearch.on('click', function (event) {
+        imgSearch.on('click', function (event) {
             resetDetails();
-            $indexModal.toggleClass('show-modal');
+            indexModal.toggleClass('show-modal');
             backToModalInput();
         });
     });
-
     const closeModal = (() => {
-        $wrapModal.on('click', function (event) {
+        wrapModal.on('click', function (event) {
             if (event.target == event.currentTarget) {
-                $indexModal.toggleClass('show-modal');
+                indexModal.toggleClass('show-modal');
                 wrapModalContent.removeClass('transform__modal__down');
                 backToInput();
             }
         });
-
-        $modalHeaderClose.on('click', function () {
-            $indexModal.toggleClass('show-modal');
+        modalHeaderClose.on('click', function () {
+            indexModal.toggleClass('show-modal');
             wrapModalContent.removeClass('transform__modal__down');
             backToInput();
         });
     });
-
     const backToModalInput = (() => {
         setTimeout(() => {
-            $modalHeaderInput.focus();
+            modalHeaderInput.focus();
         }, 100);
         return;
     });
-
     return {
         showModal: showModal,
         closeModal: closeModal
@@ -75,21 +67,16 @@ function searchDataSet(probenNummer) {
     });
 
     ajaxRequestObject.done(function (data) {
-
         const wrapModalContent = $('#wrap-modal-content');
-        const $modalHeaderInput = $('#modal-header-input');
-
+        const modalHeaderInput = $('#modal-header-input');
         if (data !== false && !data.hasOwnProperty(0)) {
-
             resetDetails();
             wrapModalContent.hasClass('transform__modal__down') === true ? wrapModalContent.removeClass('transform__modal__down') : '';
             setTimeout(() => {
-                $modalHeaderInput.val('');
+                modalHeaderInput.val('');
                 wrapModalContent.addClass('transform__modal__down');
             }, 400);
-
             const toFillTimingSpansValue = {
-
                 // anAbteilung: $('#'),
                 berechnungDateTimeZpnwagen: $('#pullSql-gesamt-zpnDauer'),
                 beurteilungBereitDate: $('#pullSql-beurteilung-date'),
@@ -137,7 +124,6 @@ function searchDataSet(probenNummer) {
                 zpnWagenDate: $('#pullSql-zpnWagen-date'),
                 zpnWagenTime: $('#pullSql-zpnWagen-time')
             }
-
             const toFillStatusButton = {
                 mit60g: $('#mit60g'),
                 mitExpress: $('#mitExpress'),
@@ -154,18 +140,16 @@ function searchDataSet(probenNummer) {
                         literalObject[itemKey]
                             .html(dataValue);
                         break;
-
                     case toFillStatusButton:
                         if (dataValue == 'active') {
                             literalObject[itemKey]
-                                .addClass('button__set')
+                                .addClass('statusButton-preSet')
                                 .val('active');
                         }
                         break;
                     default:
                 }
             }
-
             $.each(data, function (dataKey, dataValue) {
                 $.each(toFillTimingSpansValue, (itemKey, itemValue) => {
                     switch (dataKey) {
@@ -186,32 +170,28 @@ function searchDataSet(probenNummer) {
             });
             showCloseModal.backToModalInput;
         } else if (data === false) {
-            showFailMessage.failMessage('fail-input', 2000, $modalHeaderInput.attr('id'));
+            showFailMessage.failMessage('fail-input', 2000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
         } else if (data.hasOwnProperty(0)) {
-            showFailMessage.failMessage('fail-connect', 8000, $modalHeaderInput.attr('id'));
+            showFailMessage.failMessage('fail-connect', 8000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
         }
     });
-
     ajaxRequestObject.fail(function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
+        const modalHeaderInput = $('#modal-header-input');
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        showFailMessage.failMessage('fail-connect', 8000, $modalHeaderInput.attr('id'));
+        showFailMessage.failMessage('fail-connect', 8000, modalHeaderInput.attr('id'));
         showCloseModal.backToModalInput;
     });
 }
 
 const updateStatusButton = () => {
-
     const modalStatusButton = $('.modal__status');
-
     modalStatusButton.on('click', function () {
-
         const probenNummer = $('#modal-content-caption-nummber-text').html();
-        const statusButtonID = $(this).attr('id');
-        const statusButtonValue = $(this).attr('value');
-
+        let statusButtonID = $(this).attr('id');
+        let statusButtonValue = $(this).attr('value');
         const statusButtonObject = {
             mit60g: $('#mit60g'),
             mitExpress: $('#mitExpress'),
@@ -221,15 +201,16 @@ const updateStatusButton = () => {
             mitNickel: $('#mitNickel'),
             mitToys: $('#mitToys')
         }
-
         let sendData = {
             probenNummer: probenNummer,
             statusButtonID: statusButtonID,
             statusButtonValue: statusButtonValue
         }
-
-        sendData.statusButtonValue === 'deactive' ? sendData.statusButtonValue = 'active' : sendData.statusButtonValue = 'deactive';
-
+        if (sendData.statusButtonValue === 'active') {
+            sendData.statusButtonValue = 'deactive'
+        } else if (sendData.statusButtonValue === 'deactive') {
+            sendData.statusButtonValue = 'active'
+        }
         const ajaxRequestStatusButton = $.ajax({
             url: '../php/db-modalStatusUpdate.php',
             method: 'POST',
@@ -238,18 +219,22 @@ const updateStatusButton = () => {
             },
             dataType: 'json'
         });
-
         ajaxRequestStatusButton.done((data) => {
-
-            // statusButtonObject.data['buttonStatus'] = data['buttonStatus'];
-            // console.log(statusButtonObject);
+            if (data.success === true && data.successItem === probenNummer) {
+                this.id = data.statusButtonID;
+                this.value = data.statusButtonValue;
+                $(this).toggleClass('statusButton-preSet');
+            }
         });
-
-        ajaxRequestStatusButton.fail((jqXHR, textStatus, errorThrown) => {
-            console.log(data);
-        });
-
+        ajaxRequestStatusButton.fail((jqXHR, textStatus, errorThrown) => {});
     });
+}
+
+const updateKommentar = () => {
+    const modalKommentarSendButton = $('#');
+    const modalKommentarInput = $('#modal-content-footer-input');
+    const test = $('#modal-');
+    console.log(modalKommentarInput);
 }
 
 

@@ -225,6 +225,10 @@
     background-color: #ffd977;
 }
 
+.modal__status.statusButton-preSet {
+    background-color: #FFB700;
+}
+
 .modal__status.button__set {
     background-color: #FFB700;
 }

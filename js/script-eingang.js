@@ -283,36 +283,3 @@ function sendData(dataPackEingang) {
         backToInput();
     });
 }
-
-
-
-// function showModal() {
-//     const $wrapModal = $('#wrap-modal');
-//     const $indexModal = $('#wrap-modal').add('#content-modal');
-//     const $imgSearch = $('#img-search');
-//     const $modalHeaderClose = $('#modal-header-close');
-
-//     $imgSearch.on('click', function (event) {
-//         resetDetails();
-//         $indexModal.toggleClass('show-modal');
-//         backToModalInput();
-//     });
-// }
-
-// function closeModal() {
-//     const $wrapModal = $('#wrap-modal');
-//     const $indexModal = $('#wrap-modal').add('#content-modal');
-//     const $modalHeaderClose = $('#modal-header-close');
-
-//     $wrapModal.on('click', function (event) {
-//         if (event.target == event.currentTarget) {
-//             $indexModal.toggleClass('show-modal');
-//             backToInput();
-//         }
-//     });
-
-//     $modalHeaderClose.on('click', function () {
-//         $indexModal.toggleClass('show-modal');
-//         backToInput();
-//     });
-// }

@@ -3,18 +3,13 @@
 require_once 'db-connect.php';
 
 if ( isset( $_POST['updateModalStatus'] ) ) {
+
     $receivedItem = (object) $_POST['updateModalStatus'];
 
     $yesRegEx = '/\d{2}-\d{6}-\d{2}/';
 
     $responseData = new StdClass;
-    $responseData->success = false;
-    $responseData->successItem = '';
-    $responseData->buttonStatus =  '';
-    $responseData->failItem = '';
-    $responseData->failCode = '';
-    $responseData->pdoException = '';
-    
+
     if (preg_match($yesRegEx, $receivedItem->probenNummer)) {
 
         try{
@@ -35,11 +30,13 @@ if ( isset( $_POST['updateModalStatus'] ) ) {
             $pdoStatement->bindParam(':updateStatusValue', $receivedItem->statusButtonValue, PDO::PARAM_STR);
             $pdoStatement->execute();
 
+            $pdoConnect->commit();
+
             $responseData->success = true;
             $responseData->successItem = $receivedItem->probenNummer;
-            $responseData->buttonStatus = $receivedItem->statusButtonValue;
-    
-            $pdoConnect->commit();
+            $responseData->statusButtonValue = $receivedItem->statusButtonValue;
+            $responseData->statusButtonID = $receivedItem->statusButtonID;
+           
         }
         catch(PDOException $pdoException){
             $pdoConnect->rollBack();

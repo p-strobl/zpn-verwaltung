@@ -18,6 +18,7 @@ Todo:
 ✔ Datenbank--SQL Abfrage in Date und Time splitten @done(18-03-27 08:28)
 ✔ Datenbank--Muster Verwaltung Soll Datum abfrage @done(18-03-27 21:08)
 ☐ Datenbank-- Mehrere Kommentare und Klärfall abfragen der Datenbank verarbeiten
-☐ Search Modal-- Status Button Funktion
+✔ Search Modal--Status Button Funktion @done(18-03-30 06:55)
+☐ Search Modal -> Status Button Fehler abfangen
 ☐ Search Modal-- Kommentar hinzufügen Funktion erstellen
 
