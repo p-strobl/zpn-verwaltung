@@ -95,9 +95,9 @@ function searchDataSet(probenNummer) {
                 klaerfallBerechnung: $('#pullSql-gesamt-klaerfall'),
                 klaerfallEndeDate: $('#pullSql-klaerfall-ende-date'),
                 klaerfallEndeTime: $('#pullSql-klaerfall-ende-time'),
-                kommentarDate: $('#modal-content-footer-span-date'),
-                kommentarText: $('#modal-content-footer-span-text'),
-                kommentarTime: $('#modal-content-footer-span-time'),
+                // kommentarDate: $('#modal-content-footer-span-date'),
+                // kommentarText: $('#modal-content-footer-span-text'),
+                // kommentarTime: $('#modal-content-footer-span-time'),
                 manaBerechnungDateTimeAnfrage: $('#pullSql-gesamt-mBestellung'),
                 manaBerechnungDateTimeEinwaage: $('#pullSql-gesamt-mEinwaage'),
                 manaBerechnungDateTimeGesamt: $('#pullSql-gesamt-mGesamt'),
@@ -231,13 +231,66 @@ const updateStatusButton = () => {
 }
 
 const updateKommentar = () => {
-    const modalKommentarSendButton = $('#');
     const modalKommentarInput = $('#modal-content-footer-input');
-    const test = $('#modal-');
-    console.log(modalKommentarInput);
+    const modalPromtSliderWrap = $('#modal-content-footer-promt-slider');
+    const modalPromtConfirm = $('#modal-promt-confirm');
+    const modalPromtCancel = $('#modal-promt-cancel');
+    let probenNummer = $('#modal-content-caption-nummber-text');
+    let modalTextContent = $('#modal-content-footer-span-text');
+    let modalTextDate = $('#modal-content-footer-span-date');
+    let modalTextTime = $('#modal-content-footer-span-time');
+
+    modalKommentarInput.on('keyup', function (pressedKey) {
+        if (pressedKey.keyCode === 13 && this.value != "") {
+            modalPromtSliderWrap.slideToggle(100, () => {
+                console.log(this);
+            });
+        }
+    });
+    modalPromtCancel.on('click', () => {
+        modalPromtSliderWrap.slideToggle(100, () => {});
+    });
+    modalPromtConfirm.on('click', () => {
+
+        const sendData = {
+            probenNummer: probenNummer.html(),
+            modalKommentarText: modalKommentarInput.val()
+        }
+
+        console.log(sendData);
+
+        const ajaxRequestAddKommentar = $.ajax({
+            url: '../php/db-modalAddComment.php',
+            method: 'POST',
+            data: {
+                updateAddKommentar: sendData
+            },
+            dataType: 'json'
+        });
+        ajaxRequestAddKommentar.done((data) => {
+            if (data.success === true && data.successItem === probenNummer.html()) {
+                console.log(data);
+                console.log("success");
+                const modalKommentarSpanWrap = $('#modal-content-footer-span-wrap');
+                const appendKommentar = (
+                    ' <div class="modal__content__footer__append__span__wrap"> ' +
+                    '     <span class="modal__append__span / text"> ' + data.kommentarText + ' ' +
+                    '         <span class="modal__append__span / dateTime">' + data.kommentarDate + '</span> ' +
+                    '         <span class="modal__append__span / dateTime">' + data.kommentarTime + ' Uhr</span> ' +
+                    '     </span> ' +
+                    ' </div> '
+                );
+                modalKommentarSpanWrap.after(appendKommentar);
+            }
+        });
+        ajaxRequestAddKommentar.fail((jqXHR, textStatus, errorThrown) => {
+            console.log("fail");
+        });
+    });
 }
 
 
 $(document).ready(function () {
     updateStatusButton();
+    updateKommentar();
 });

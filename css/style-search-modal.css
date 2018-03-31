@@ -13,7 +13,7 @@
 
 .content__modal {
     display: grid;
-    grid-template-rows: 20% 80%;
+    grid-template-rows: 15% 85%;
     width: 80vw;
     height: 96vh;
     background-color: #0091CD;
@@ -113,7 +113,7 @@
 
 .wrap__modal__content {
     display: grid;
-    grid-template-rows: 15% 65% 20%;
+    grid-template-rows: 15% 60% 25%;
 }
 
 .transform__modal__content {
@@ -265,34 +265,71 @@
     font-size: .8vw;
 }
 
-/*Modal Content Footer*/
+/* Modal Footer Kommentar */
 
-.modal__content__footer__wrap {
+.modal__content__footer__content__wrap {
     grid-row: 3;
     display: grid;
-    grid-template-rows: 70% 30%;
-    border-radius: 0 0 5px 5px;
+    grid-template-rows: repeat(2, 1fr);
+    border-radius: 0 0 3px 3px;
+    overflow: scroll;
 }
 
-.modal__content__footer__span.text {
-    width: 95%;
-    font-size: 1.5vw;
-    place-self: center;
-    text-align: center;
-    padding: .7vw 0;
-    border-top: 1px dashed gainsboro;
+.modal__content__footer__span__wrap {
+    display: grid;
+    width: 90%;
+    justify-self: center;
 }
+
+.modal__content__footer__input__wrap {
+    background-color: floralwhite;
+    display: grid;
+}
+
+/* Footer Input */
 
 .modal__content__footer__input {
-    font-size: 1.5vw;
-    border-radius: 0 0 5px 5px;
-    border-right: 0;
+    justify-self: end;
+    font-size: 1.4em;
+    width: 99.9%;
     border-left: 0;
+    outline: 0;
     text-align: center;
 }
 
-/* Cross select */
+/* Footer Promt */
 
-/* .lastChild-no-border {
-    border-bottom: 0;
-} */
+.modal__content__footer__promt__slider__wrap {
+    display: none;
+}
+
+.modal__content__footer__promt__wrap {
+    display: grid;
+    grid-template-columns: 50% 50%;
+}
+
+.modal__content__footer__promt__button {}
+
+.modal__content__footer__promt__button.confirmPromt:hover {
+    background-color: #10FC6F;
+}
+
+.modal__content__footer__promt__button.cancelPromt:hover {
+    background-color: #FFB9A9;
+}
+
+/* Modal appended Kommentar */
+
+.modal__content__footer__append__span__wrap {
+    padding: .4vw 0;
+    border-top: 1px dashed gainsboro;
+    text-align: center;
+    width: 90%;
+    justify-self: center;
+}
+
+.modal__append__span.text {}
+
+.modal__append__span.dateTime {
+    font-size: .6em;
+}

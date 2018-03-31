@@ -15,10 +15,11 @@ Todo:
 ✔ Search Modal--befüllung @done(18-03-28 11:11)
 ✔ Search Modal--Content toggleSlide @done(18-03-28 11:11)
 ☐ All-- Überall noch Kommentare einfügen!
-✔ Datenbank--SQL Abfrage in Date und Time splitten @done(18-03-27 08:28)
-✔ Datenbank--Muster Verwaltung Soll Datum abfrage @done(18-03-27 21:08)
-☐ Datenbank-- Mehrere Kommentare und Klärfall abfragen der Datenbank verarbeiten
-✔ Search Modal--Status Button Funktion @done(18-03-30 06:55)
+✔ Datenbank -> SQL Abfrage in Date und Time splitten @done(18-03-27 08:28)
+✔ Datenbank -> Muster Verwaltung Soll Datum abfrage @done(18-03-27 21:08)
+☐ Datenbank-> Mehrere Kommentare und Klärfall abfragen der Datenbank verarbeiten
+✔ Search Modal -> Status Button Funktion @done(18-03-30 06:55)
 ☐ Search Modal -> Status Button Fehler abfangen
-☐ Search Modal-- Kommentar hinzufügen Funktion erstellen
-
+☐ Search Modal-> Kommentar hinzufügen Funktion erstellen
+☐ Search Modal -> Kommentar SQL dynamisch hinzufügen
+☐ Search Modal -> Input mit Promt aus dem Append Wrap lösen
