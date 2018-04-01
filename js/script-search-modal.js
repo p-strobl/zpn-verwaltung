@@ -5,10 +5,16 @@
 function resetDetails() {
     const modalContentMainPullSqlItem = $('.modal__content__main__pullSql__item');
     const modalContentCaptionSpan = $('.modal__content__caption__span');
-    const modalContentFooterSpan = $('.modal__content__footer__span');
+    const modalContentAppendedSpan = $('.modal__content__footer__append__span__wrap');
+    const modalPromtSlider = $('#modal-content-footer-promt-slider');
     const modalStatusItems = $('.modal__status');
+    const modalFooterInput = $('#modal-content-footer-input');
+
     modalContentMainPullSqlItem.html(' - ');
-    modalContentCaptionSpan.add(modalContentFooterSpan).html('');
+    modalContentCaptionSpan.html('');
+    modalContentAppendedSpan.remove();
+    modalFooterInput.val('');
+    modalPromtSlider.removeClass('transform__modal');
     modalStatusItems.each(function () {
         $(this)
             .val('deactive')
@@ -16,6 +22,7 @@ function resetDetails() {
     });
 }
 
+// Schließt das Search Modal Fenster durch klick auf das X oder ausserhalb des bereiches und führt dann die Funktion resetDetails(); aus
 const showCloseModal = (() => {
     const indexModal = $('#wrap-modal').add('#content-modal');
     const imgSearch = $('#img-search');
@@ -23,6 +30,9 @@ const showCloseModal = (() => {
     const modalHeaderClose = $('#modal-header-close');
     const modalHeaderInput = $('#modal-header-input');
     const wrapModalContent = $('#wrap-modal-content');
+    const modalPromtSlider = $('#modal-content-footer-promt-slider');
+    const modalFooterInputWrap = $('.modal__content__footer__input__wrap');
+
     const showModal = (() => {
         imgSearch.on('click', function (event) {
             resetDetails();
@@ -30,20 +40,22 @@ const showCloseModal = (() => {
             backToModalInput();
         });
     });
+
     const closeModal = (() => {
         wrapModal.on('click', function (event) {
             if (event.target == event.currentTarget) {
                 indexModal.toggleClass('show-modal');
-                wrapModalContent.removeClass('transform__modal__down');
+                wrapModalContent.add(modalPromtSlider).add(modalFooterInputWrap).removeClass('transform__modal');
                 backToInput();
             }
         });
         modalHeaderClose.on('click', function () {
             indexModal.toggleClass('show-modal');
-            wrapModalContent.removeClass('transform__modal__down');
+            wrapModalContent.add(modalPromtSlider).add(modalFooterInputWrap).removeClass('transform__modal');
             backToInput();
         });
     });
+
     const backToModalInput = (() => {
         setTimeout(() => {
             modalHeaderInput.focus();
@@ -56,6 +68,8 @@ const showCloseModal = (() => {
     }
 })();
 
+// Übernimmt die geprüfte Input Eingabe und macht eine Datenbank Abfrag zu der gesuchten Nummer.
+// Wenn erfolgreich, werden alle ensptechenden Felder gefüllt.
 function searchDataSet(probenNummer) {
     const ajaxRequestObject = $.ajax({
         url: '../php/db-requestObject.php',
@@ -69,12 +83,16 @@ function searchDataSet(probenNummer) {
     ajaxRequestObject.done(function (data) {
         const wrapModalContent = $('#wrap-modal-content');
         const modalHeaderInput = $('#modal-header-input');
+        const modalFooterInputWrap = $('.modal__content__footer__input__wrap');
+
+        console.log(data);
+
         if (data !== false && !data.hasOwnProperty(0)) {
             resetDetails();
-            wrapModalContent.hasClass('transform__modal__down') === true ? wrapModalContent.removeClass('transform__modal__down') : '';
+            wrapModalContent.hasClass('transform__modal') === true ? wrapModalContent.removeClass('transform__modal') : '';
             setTimeout(() => {
                 modalHeaderInput.val('');
-                wrapModalContent.addClass('transform__modal__down');
+                wrapModalContent.add(modalFooterInputWrap).addClass('transform__modal');
             }, 400);
             const toFillTimingSpansValue = {
                 // anAbteilung: $('#'),
@@ -89,15 +107,11 @@ function searchDataSet(probenNummer) {
                 einwaageBerechnung: $('#pullSql-gesamt-einwaage'),
                 einwaageEndeDate: $('#pullSql-einwaage-ende-date'),
                 einwaageEndeTime: $('#pullSql-einwaage-ende-time'),
-                // klaerfallAnzahl: $('#'),
                 klaerfallBeginnDate: $('#pullSql-klaerfall-start-date'),
                 klaerfallBeginnTime: $('#pullSql-klaerfall-start-time'),
                 klaerfallBerechnung: $('#pullSql-gesamt-klaerfall'),
                 klaerfallEndeDate: $('#pullSql-klaerfall-ende-date'),
                 klaerfallEndeTime: $('#pullSql-klaerfall-ende-time'),
-                // kommentarDate: $('#modal-content-footer-span-date'),
-                // kommentarText: $('#modal-content-footer-span-text'),
-                // kommentarTime: $('#modal-content-footer-span-time'),
                 manaBerechnungDateTimeAnfrage: $('#pullSql-gesamt-mBestellung'),
                 manaBerechnungDateTimeEinwaage: $('#pullSql-gesamt-mEinwaage'),
                 manaBerechnungDateTimeGesamt: $('#pullSql-gesamt-mGesamt'),
@@ -133,7 +147,13 @@ function searchDataSet(probenNummer) {
                 mitNickel: $('#mitNickel'),
                 mitToys: $('#mitToys')
             }
+            const toFillKommentar = {
+                kommentarDate: $('#modal-content-footer-span-date'),
+                kommentarText: $('#modal-content-footer-span-text'),
+                kommentarTime: $('#modal-content-footer-span-time'),
+            }
 
+            // Befüllt die Status Button's
             function setStatus(literalObject, itemKey, dataValue) {
                 switch (literalObject) {
                     case toFillTimingSpansValue:
@@ -150,6 +170,21 @@ function searchDataSet(probenNummer) {
                     default:
                 }
             }
+
+            // Befüllt das Kommentarfeld
+            function setKommentar(kommentarItem) {
+                const modalKommentarSpanWrap = $('#modal-content-footer-span-wrap');
+                const appendKommentar = (
+                    ' <div class="modal__content__footer__append__span__wrap"> ' +
+                    '     <span class="modal__append__span / text"> ' + kommentarItem.kommentarText + ' ' +
+                    '         <span class="modal__append__span / dateTime">' + kommentarItem.kommentarDate + '</span> ' +
+                    '         <span class="modal__append__span / dateTime">' + kommentarItem.kommentarTime + " Uhr" + ' Uhr</span> ' +
+                    '     </span> ' +
+                    ' </div> '
+                );
+                modalKommentarSpanWrap.after(appendKommentar);
+            }
+
             $.each(data, function (dataKey, dataValue) {
                 $.each(toFillTimingSpansValue, (itemKey, itemValue) => {
                     switch (dataKey) {
@@ -167,6 +202,9 @@ function searchDataSet(probenNummer) {
                         default:
                     }
                 });
+            });
+            $.each(data.kommentar, function (dataKey, dataValue) {
+                setKommentar(dataValue);
             });
             showCloseModal.backToModalInput;
         } else if (data === false) {
@@ -186,8 +224,11 @@ function searchDataSet(probenNummer) {
     });
 }
 
+// In einem aufgerufenen Datensatz kann nachträglich der "Proben Status" geändert werden,
+// hier wird der gesetzte Status abgefragt und dann in der Datenbank geändert.
 const updateStatusButton = () => {
     const modalStatusButton = $('.modal__status');
+
     modalStatusButton.on('click', function () {
         const probenNummer = $('#modal-content-caption-nummber-text').html();
         let statusButtonID = $(this).attr('id');
@@ -206,6 +247,7 @@ const updateStatusButton = () => {
             statusButtonID: statusButtonID,
             statusButtonValue: statusButtonValue
         }
+
         if (sendData.statusButtonValue === 'active') {
             sendData.statusButtonValue = 'deactive'
         } else if (sendData.statusButtonValue === 'deactive') {
@@ -230,9 +272,10 @@ const updateStatusButton = () => {
     });
 }
 
+// Nach einer Prüfung wird der enstprechende Kommentar dem Datensatz hinzugefüht und auch direkt mit angezeigt.
 const updateKommentar = () => {
     const modalKommentarInput = $('#modal-content-footer-input');
-    const modalPromtSliderWrap = $('#modal-content-footer-promt-slider');
+    const modalPromtSlider = $('#modal-content-footer-promt-slider');
     const modalPromtConfirm = $('#modal-promt-confirm');
     const modalPromtCancel = $('#modal-promt-cancel');
     let probenNummer = $('#modal-content-caption-nummber-text');
@@ -242,23 +285,18 @@ const updateKommentar = () => {
 
     modalKommentarInput.on('keyup', function (pressedKey) {
         if (pressedKey.keyCode === 13 && this.value != "") {
-            modalPromtSliderWrap.slideToggle(100, () => {
-                console.log(this);
-            });
+            modalPromtSlider.addClass('transform__modal');
+            modalPromtConfirm.focus();
         }
     });
     modalPromtCancel.on('click', () => {
-        modalPromtSliderWrap.slideToggle(100, () => {});
+        modalPromtSlider.removeClass('transform__modal');
     });
     modalPromtConfirm.on('click', () => {
-
         const sendData = {
             probenNummer: probenNummer.html(),
             modalKommentarText: modalKommentarInput.val()
         }
-
-        console.log(sendData);
-
         const ajaxRequestAddKommentar = $.ajax({
             url: '../php/db-modalAddComment.php',
             method: 'POST',
@@ -269,8 +307,6 @@ const updateKommentar = () => {
         });
         ajaxRequestAddKommentar.done((data) => {
             if (data.success === true && data.successItem === probenNummer.html()) {
-                console.log(data);
-                console.log("success");
                 const modalKommentarSpanWrap = $('#modal-content-footer-span-wrap');
                 const appendKommentar = (
                     ' <div class="modal__content__footer__append__span__wrap"> ' +
@@ -281,6 +317,8 @@ const updateKommentar = () => {
                     ' </div> '
                 );
                 modalKommentarSpanWrap.after(appendKommentar);
+                modalKommentarInput.val('');
+                modalPromtSlider.removeClass('transform__modal');
             }
         });
         ajaxRequestAddKommentar.fail((jqXHR, textStatus, errorThrown) => {

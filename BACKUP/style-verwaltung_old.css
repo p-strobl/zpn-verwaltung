@@ -1,30 +1,26 @@
 /*CSS Reset!*/
+
 @import "cssReset.css";
-
-
 /*Globale Start*/
-*
-{
+
+* {
     font-family: "Tahoma", Times New Roman, sans-serif;
     text-shadow: 0px 2px 10px rgba(0, 0, 0, .5);
 }
 
-body
-{
+body {
     height: 100%;
     width: 100%;
     background-color: ghostwhite;
 }
 
-button
-{
+button {
     cursor: pointer;
     outline: 0;
     background-color: #ededed;
 }
 
-button:hover
-{
+button:hover {
     box-shadow: 0px 1px 5px 0px rgb(0, 0, 0);
     text-shadow: 0px 1px 5px rgb(0, 0, 0);
     transition: all 0.2s cubic-bezier(0, 0.01, 0.9, 0.36);
@@ -36,28 +32,23 @@ a,
 a:focus,
 a:active,
 a::-moz-focus-inner,
-button::-moz-focus-inner
-{
+button::-moz-focus-inner {
     border: 0;
     outline: 0;
 }
 
-.displayNone
-{
+.displayNone {
     display: none;
 }
 
-.item-to-center
-{
+.item-to-center {
     justify-self: center;
     align-self: center;
 }
 
 /*Global End*/
 
-
-.wrap-page
-{
+.wrap-page {
     display: grid;
     grid-template-rows: 30% 5% 65%;
     grid-template-areas: "wrapHeader" "wrapDetails" "wrapMain";
@@ -71,8 +62,8 @@ button::-moz-focus-inner
 }
 
 /*Header*/
-.wrap-header
-{
+
+.wrap-header {
     grid-area: wrapHeader;
     display: grid;
     grid-template-rows: 35% auto 35%;
@@ -83,8 +74,7 @@ button::-moz-focus-inner
     background-color: gainsboro;
 }
 
-.header
-{
+.header {
     display: grid;
     height: 100%;
     width: 100%;
@@ -93,15 +83,14 @@ button::-moz-focus-inner
 }
 
 /*Header Caption*/
-.header-a-wrap
-{
+
+.header-a-wrap {
     position: fixed;
     left: 2.6vw;
     top: 3.2vh;
 }
 
-.header-home-image
-{
+.header-home-image {
     width: 2vw;
     -webkit-transition: all .1s ease-in;
     -moz-transition: all .1s ease-in;
@@ -109,24 +98,21 @@ button::-moz-focus-inner
     transition: all .1s ease-in;
 }
 
-.header-home-image:hover
-{
+.header-home-image:hover {
     transform: scale(2);
 }
 
-.header-caption-text
-{
+.header-caption-text {
     font-size: 4vw;
 }
 
 /*Header Input*/
-.header.input-section
-{
+
+.header.input-section {
     align-content: start;
 }
-    
-.header-input-field
-{
+
+.header-input-field {
     width: 27vw;
     margin-top: 1vh;
     font-size: 2.5vw;
@@ -142,14 +128,14 @@ button::-moz-focus-inner
 }
 
 .header-input-field:focus,
-.header-input-field:hover
-{
+.header-input-field:hover {
     transform: scale(1.1);
     border-color: gold;
 }
+
 /*Header Fail*/
-.header-fail-message-wrap
-{
+
+.header-fail-message-wrap {
     justify-self: center;
     display: grid;
     height: 0;
@@ -164,81 +150,69 @@ button::-moz-focus-inner
     transition: height .2s linear;
     transform: translateY(-110%); */
 }
-.header-fail-message-wrap.transition
-{
+
+.header-fail-message-wrap.transition {
     /* transform: translateY(0%); */
     height: 3vw;
 }
 
-.header-fail-message-content
-{
+.header-fail-message-content {
     justify-self: center;
     align-self: center;
     font-size: 2vw;
 }
 
-
-.no-server::after
-{
+.no-server::after {
     content: "Verbindung zum Server ist fehlgeschlagen!";
 }
 
-.no-connection::after
-{
+.no-connection::after {
     content: "Verbindung zur Datenbank ist fehlgeschlagen!";
     white-space: pre-wrap;
 }
 
-.no-database::after
-{
+.no-database::after {
     content: "Datenbank nicht gefunden!";
     white-space: pre-wrap;
 }
 
-.no-usernameOrPassword::after
-{
+.no-usernameOrPassword::after {
     content: "Falscher Benutzernamen oder Passwort für den Server Zugang!";
     white-space: pre-wrap;
 }
 
-.no-entry::after
-{
+.no-entry::after {
     content: " als Datensatz nicht gefunden!";
     white-space: pre-wrap;
 }
 
-.no-table::after
-{
+.no-table::after {
     content: "Tabelle in der Datenbank nicht gefunden!";
     white-space: pre-wrap;
 }
 
-.no-tableField::after
-{
+.no-tableField::after {
     content: "Tabellen Spalte in der Datenbank nicht gefunden!";
     white-space: pre-wrap;
 }
 
-.fail-input::after
-{
+.fail-input::after {
     content: "Die Eingabe ist leer oder entspricht keiner Probenummer!";
     white-space: pre-wrap;
 }
 
-.fail-database::after
-{
+.fail-database::after {
     content: "Fehler in der Datenbank Abfrage!";
     white-space: pre-wrap;
 }
 
 /*Header Input Text*/
-.header-input-text
-{
+
+.header-input-text {
     text-align: center;
 }
 
-.header-input-text.probennummer
-{
+.header-input-text.probennummer {
     margin-bottom: .5vh;
     font-size: 3vw;
     text-decoration-line: underline;
@@ -246,15 +220,14 @@ button::-moz-focus-inner
     white-space: nowrap;
 }
 
-.header-input-text.solldatum
-{
+.header-input-text.solldatum {
     height: 100%;
     font-size: 2vw;
 }
 
 /*Details Open Button*/
-.wrap-details-open-button
-{
+
+.wrap-details-open-button {
     grid-area: wrapDetails;
     height: 100%;
     width: 100%;
@@ -263,8 +236,7 @@ button::-moz-focus-inner
     overflow: hidden;
 }
 
-.details-open-button-wrap
-{
+.details-open-button-wrap {
     display: grid;
     height: 100%;
     width: 100%;
@@ -276,13 +248,11 @@ button::-moz-focus-inner
     transform: translateY(-105%);
 }
 
-.details-open-button-wrap.transition
-{
+.details-open-button-wrap.transition {
     transform: translateY(0%);
 }
 
-.details-open-button
-{
+.details-open-button {
     height: 100%;
     width: 100%;
     font-size: 1.5vw;
@@ -293,8 +263,8 @@ button::-moz-focus-inner
 }
 
 /*Main Section*/
-.wrap-main
-{
+
+.wrap-main {
     grid-area: wrapMain;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -314,8 +284,8 @@ button::-moz-focus-inner
 }
 
 /*Main items*/
-.main-content
-{
+
+.main-content {
     margin-top: 0;
     display: grid;
     grid-template-rows: 10% 90%;
@@ -326,8 +296,7 @@ button::-moz-focus-inner
     background-color: silver;
 }
 
-.main-content.middle-wrap
-{
+.main-content.middle-wrap {
     grid-area: mainMiddle;
     grid-template-rows: 8% repeat(5, 16%) 12%;
     padding: .7vw 0 .3vw 0;
@@ -339,23 +308,19 @@ button::-moz-focus-inner
     transform: translateY(-105%);
 }
 
-.main-content.middle-wrap.transition
-{
+.main-content.middle-wrap.transition {
     transform: translateY(0%);
 }
 
-.main-content.left-wrap
-{
+.main-content.left-wrap {
     grid-area: mainLeft;
 }
 
-.main-content.right-wrap
-{
+.main-content.right-wrap {
     grid-area: mainRight;
 }
 
-.main-content.details
-{
+.main-content.details {
     justify-self: center;
     -webkit-transition: all .4s linear;
     -moz-transition: all .4s linear;
@@ -366,14 +331,13 @@ button::-moz-focus-inner
     overflow: hidden;
 }
 
-.main-content.transition
-{
+.main-content.transition {
     transform: translateY(0%);
 }
 
-    /*Middle Items*/
-.main-middle-item-wrap
-{
+/*Middle Items*/
+
+.main-middle-item-wrap {
     position: relative;
     display: grid;
     justify-items: center;
@@ -382,8 +346,7 @@ button::-moz-focus-inner
     width: 100%;
 }
 
-.main-middle-item
-{
+.main-middle-item {
     height: 85%;
     width: 95%;
     border-radius: 3px;
@@ -397,14 +360,12 @@ button::-moz-focus-inner
     transition: all 0.4s ease;
 } */
 
-.main-middle-item.default::after
-{
+.main-middle-item.default::after {
     font-size: 3.5vmin;
     content: attr(data-default);
 }
 
-.main-middle-item.default:hover
-{
+.main-middle-item.default:hover {
     background-color: #98e698;
 }
 
@@ -413,6 +374,7 @@ button::-moz-focus-inner
     font-size: 3.5vmin;
     content: attr(data-hoverStarten);
 } */
+
 /* 
 .main-middle-item.started::after
 {
@@ -436,19 +398,16 @@ button::-moz-focus-inner
     content: attr(data-hoverStoppen);
 } */
 
-.main-middle-item.type-nickel.started:hover:after
-{
+.main-middle-item.type-nickel.started:hover:after {
     font-size: 3.5vmin;
     content: attr(data-hoverStarten);
 }
 
-.main-middle-item.done
-{
+.main-middle-item.done {
     background-color: lime;
 }
 
-.main-middle-item.done::after
-{
+.main-middle-item.done::after {
     font-size: 3.5vmin;
     content: attr(data-done) ' \2714';
 }
@@ -464,60 +423,49 @@ button::-moz-focus-inner
     content: attr(data-hoverRestart);
 } */
 
-.main-middle-item.restarted::after
-{
+.main-middle-item.restarted::after {
     background-color: #98e698;
     font-size: 3.5vmin;
     content: attr(data-restarted);
 }
 
-
-
-
-.type-MaNa.twoElementFontSize
-{
+.type-MaNa.twoElementFontSize {
     font-size: 3vmin;
 }
 
-.type-MaNa.threeElementFontSize
-{
+.type-MaNa.threeElementFontSize {
     font-size: 2vmin;
 }
 
 .type-probenahme,
-.type-ZPNWagen
-{
+.type-ZPNWagen {
     font-weight: bold;
 }
 
-    /*Middle Item Comment*/
-.main-middle-item.comment-wrap
-{
+/*Middle Item Comment*/
+
+.main-middle-item.comment-wrap {
     display: grid;
     grid-template-rows: 1fr 1fr;
     box-shadow: 0px 1px 5px 0px rgb(0, 0, 0);
 }
 
-.comment-item
-{
+.comment-item {
     justify-self: center;
     height: 100%;
     width: 100%;
 }
 
-.comment-item::after
-{
+.comment-item::after {
     font-size: .8vw;
     content: attr(data-default);
 }
 
-.comment-item:hover::after
-{
+.comment-item:hover::after {
     content: attr(data-hoverStarten);
 }
 
-.comment-text
-{
+.comment-text {
     display: grid;
     align-content: center;
     font-size: 1vw;
@@ -527,8 +475,7 @@ button::-moz-focus-inner
     width: 95%;
 }
 
-.comment-item.input-field
-{    
+.comment-item.input-field {
     text-align: center;
     border-radius: 3px 3px 0 0;
     border-bottom: none;
@@ -539,15 +486,13 @@ button::-moz-focus-inner
     background-color: ghostwhite;
 }
 
-.comment-item.input-field:hover
-{
+.comment-item.input-field:hover {
     border-color: gold;
     border-width: 1px;
     border-bottom-style: dotted;
 }
 
-.comment-item.type-comment-send-button
-{
+.comment-item.type-comment-send-button {
     display: grid;
     justify-items: center;
     align-items: center;
@@ -558,8 +503,7 @@ button::-moz-focus-inner
     background-color: ghostwhite
 }
 
-.comment-item.type-comment-send-button:hover
-{
+.comment-item.type-comment-send-button:hover {
     font-weight: bold;
     border-color: gold;
     border-width: 1px;
@@ -568,10 +512,9 @@ button::-moz-focus-inner
     background-color: #98e698;
 }
 
-
 /*Details Section*/
-.details-status-content
-{
+
+.details-status-content {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
@@ -584,8 +527,8 @@ button::-moz-focus-inner
 }
 
 /*Details Status Section*/
-.details-status-button
-{
+
+.details-status-button {
     justify-self: center;
     align-self: center;
     height: 3.3vh;
@@ -598,31 +541,27 @@ button::-moz-focus-inner
     color: rgba(0, 0, 0, 0.4);
 }
 
-.details-status-button.active
-{
+.details-status-button.active {
     color: darkslategray;
     background-color: lime;
 }
 
-.details-status-button.active:hover
-{
+.details-status-button.active:hover {
     /* background-color: transparent; */
     color: rgba(0, 0, 0, 0.4);
 }
-.details-status-button.deactive
-{
+
+.details-status-button.deactive {
     color: rgba(0, 0, 0, 0.4);
     background-color: transparent;
 }
 
-.details-status-button.deactive:hover
-{
+.details-status-button.deactive:hover {
     background-color: #98e698;
     color: ghostwhite;
 }
 
-.details-timing-content
-{
+.details-timing-content {
     justify-self: center;
     display: grid;
     margin-top: 3px;
@@ -634,19 +573,17 @@ button::-moz-focus-inner
     background-color: gainsboro;
 }
 
-.details-timing-content.left-wrap
-{
+.details-timing-content.left-wrap {
     grid-template-rows: repeat(6, auto);
 }
 
-.details-timing-content.right-wrap
-{
+.details-timing-content.right-wrap {
     grid-template-rows: repeat(2, auto);
 }
 
 /*Details Timing Section*/
-.details-timing-wrap
-{
+
+.details-timing-wrap {
     display: grid;
     justify-self: center;
     align-items: center;
@@ -657,32 +594,28 @@ button::-moz-focus-inner
     box-shadow: 0px 1px 5px 0px rgb(0, 0, 0);
 }
 
-.details-timing-wrap.gesamt
-{
+.details-timing-wrap.gesamt {
     grid-template-rows: 20% 80%;
 }
 
-.timing-caption
-{
+.timing-caption {
     display: grid;
     justify-items: center;
     align-items: center;
     height: 100%;
     width: 100%;
     padding-top: 5px;
-    font-size: 1.2vw;
+    font-size: 1.1vw;
     text-align: center;
     border-bottom: 1px solid rgba(0, 0, 0, 0.4);
     border-radius: 3px 3px 0 0;
 }
 
-.timing-caption.gesamt
-{
+.timing-caption.gesamt {
     font-size: 2.1vw;
 }
 
-.timing-content-wrap
-{
+.timing-content-wrap {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     justify-items: center;
@@ -694,14 +627,12 @@ button::-moz-focus-inner
     background-color: ghostwhite;
 }
 
-.timing-content-wrap.gesamt
-{
+.timing-content-wrap.gesamt {
     grid-template-rows: repeat(6, auto);
     grid-template-columns: 1fr;
 }
 
-.timing-tiny-caption
-{
+.timing-tiny-caption {
     justify-self: center;
     align-self: center;
     display: grid;
@@ -715,8 +646,7 @@ button::-moz-focus-inner
     border-radius: 3px 3px 0 0;
 }
 
-.timing-gesamt-item-wrap
-{
+.timing-gesamt-item-wrap {
     display: grid;
     grid-template-columns: repeat(8, 1fr);
     height: 100%;
@@ -729,30 +659,25 @@ button::-moz-focus-inner
     background-color: ghostwhite;
 }
 
-.timing-item
-{
+.timing-item {
     grid-column: 2/5;
     width: 100%;
     border-right: 1px solid rgba(0, 0, 0, 0.4);
 }
 
-.timing-timer
-{
+.timing-timer {
     grid-column: 5/9;
 }
 
-.timing
-{
+.timing {
     font-size: 1.1vw;
 }
 
-.timing.gesamt
-{
+.timing.gesamt {
     font-size: 1.3vw;
 }
 
-.timing.date
-{
+.timing.date {
     width: 100%;
     border-right: 1px solid rgba(0, 0, 0, 0.4);
     text-align: center;

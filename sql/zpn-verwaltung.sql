@@ -1,8 +1,8 @@
 -- --------------------------------------------------------
--- Host:                         mysqlhcham01.hcham.de
--- Server Version:               5.5.57-0+deb7u1 - (Debian)
--- Server Betriebssystem:        debian-linux-gnu
--- HeidiSQL Version:             9.5.0.5196
+-- Host:                         localhost
+-- Server Version:               10.1.31-MariaDB - mariadb.org binary distribution
+-- Server Betriebssystem:        Win32
+-- HeidiSQL Version:             9.4.0.5125
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -29,16 +29,14 @@ CREATE TABLE IF NOT EXISTS `tbl_beurteilung` (
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_klaerfall
 CREATE TABLE IF NOT EXISTS `tbl_klaerfall` (
-  `autoID` int(11) NOT NULL AUTO_INCREMENT,
+  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
   `klaerfallBeginnDateTime` datetime DEFAULT NULL,
   `klaerfallEndeDateTime` datetime DEFAULT NULL,
   `klaerfallBerechnung` time DEFAULT NULL,
-  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
-  `klaerfallAnzahl` int(11) NOT NULL DEFAULT '1',
-  PRIMARY KEY (`autoID`),
+  UNIQUE KEY `probenNummer` (`probenNummer`),
   KEY `probenNummerFK` (`probenNummer`),
   CONSTRAINT `FK_klaerfall-probenNummer` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_mustereingang` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_kommentar
@@ -50,12 +48,12 @@ CREATE TABLE IF NOT EXISTS `tbl_kommentar` (
   PRIMARY KEY (`autoID`),
   KEY `probenNummerFK` (`probenNummer`),
   CONSTRAINT `FK_kommentar-probenNummer` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_mustereingang` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_mana
 CREATE TABLE IF NOT EXISTS `tbl_mana` (
-  `autoID` int(11) NOT NULL AUTO_INCREMENT,
+  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
   `manaGestelltDateTime` datetime DEFAULT NULL,
   `manaErhaltenDateTime` datetime DEFAULT NULL,
   `manaEinwaageDateTime` datetime DEFAULT NULL,
@@ -63,12 +61,10 @@ CREATE TABLE IF NOT EXISTS `tbl_mana` (
   `manaBerechnungDateTimeAnfrage` time DEFAULT NULL,
   `manaBerechnungDateTimeEinwaage` time DEFAULT NULL,
   `manaBerechnungDateTimeGesamt` time DEFAULT NULL,
-  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`autoID`),
   UNIQUE KEY `probenNummer` (`probenNummer`),
   KEY `probenNummerFK` (`probenNummer`),
   CONSTRAINT `FK_maNa-probenNummer` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_mustereingang` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_mustereingang
@@ -95,10 +91,10 @@ CREATE TABLE IF NOT EXISTS `tbl_nickel` (
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_probennahme
 CREATE TABLE IF NOT EXISTS `tbl_probennahme` (
+  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
   `einwaageBeginn` datetime DEFAULT NULL,
   `einwaageEnde` datetime DEFAULT NULL,
   `einwaageBerechnung` time DEFAULT NULL,
-  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `probenNummer` (`probenNummer`),
   KEY `probenNummerFK` (`probenNummer`),
   CONSTRAINT `FK_probenNahme-probenNummer` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_mustereingang` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -133,10 +129,10 @@ CREATE TABLE IF NOT EXISTS `tbl_storno` (
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_zerlegung
 CREATE TABLE IF NOT EXISTS `tbl_zerlegung` (
+  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
   `zerlegungStart` datetime DEFAULT NULL,
   `zerlegungEnde` datetime DEFAULT NULL,
   `zerlegungBerechnung` time DEFAULT NULL,
-  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
   UNIQUE KEY `probenNummer` (`probenNummer`),
   KEY `probenNummerFK` (`probenNummer`),
   CONSTRAINT `tbl_zerlegung_ibfk_1` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_mustereingang` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE

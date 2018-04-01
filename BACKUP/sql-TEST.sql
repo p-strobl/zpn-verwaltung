@@ -1,4 +1,4 @@
-  SELECT 
+SELECT 
         tbl_mustereingang.probenNummer, DATE_Format(tbl_mustereingang.sollDatum, '%d.%m.%Y') AS sollDatum, DATE_Format(tbl_mustereingang.eingangDateTime, '%d.%m.%Y') AS eingangDate, TIME(tbl_mustereingang.eingangDateTime) AS eingangTime, tbl_mustereingang.beurteilungZpnBerechnung,
         DATE_FORMAT(tbl_zerlegung.zerlegungStart, '%d.%m.%Y' ) AS zerlegungStartDate, TIME(tbl_zerlegung.zerlegungStart) AS zerlegungStartTime, DATE_FORMAT(tbl_zerlegung.zerlegungEnde, '%d.%m.%Y') AS zerlegungEndeDate, TIME(tbl_zerlegung.zerlegungEnde) AS zerlegungEndeTime, tbl_zerlegung.zerlegungBerechnung,
         DATE_FORMAT(tbl_probennahme.einwaageBeginn, '%d.%m.%Y') AS einwaageBeginnDate, TIME(tbl_probennahme.einwaageBeginn) AS einwaageBeginnTime, DATE_FORMAT(tbl_probennahme.einwaageEnde, '%d.%m.%Y') AS einwaageEndeDate, TIME(tbl_probennahme.einwaageEnde) AS einwaageEndeTime, tbl_probennahme.einwaageBerechnung,
@@ -10,38 +10,38 @@
         tbl_kommentar.kommentarText, DATE_Format(tbl_kommentar.kommentarDateTime, '%d.%m.%Y') AS kommentarDate, TIME(tbl_kommentar.kommentarDateTime) AS kommentarTime,
         DATE_Format(tbl_nickel.nickelRueckgabeDateTime, '%d.%m.%Y') AS nickelRueckgabeDate, TIME(tbl_nickel.nickelRueckgabeDateTime) AS nickelRueckgabeTime, tbl_nickel.nickelBerechnung,
         DATE_Format(tbl_beurteilung.beurteilungBereitgestelltDateTime, '%d.%m.%Y') AS beurteilungBereitDate, TIME(tbl_beurteilung.beurteilungBereitgestelltDateTime) AS beurteilungBereitTime, tbl_beurteilung.anAbteilung
-    
-    FROM
-        tbl_mustereingang
+        
+        FROM
+            tbl_mustereingang
 
-    LEFT OUTER JOIN tbl_probennahme
-    ON tbl_mustereingang.probenNummer = tbl_probennahme.probenNummer
+        LEFT OUTER JOIN tbl_probennahme
+        ON tbl_mustereingang.probenNummer = tbl_probennahme.probenNummer
 
-    LEFT OUTER JOIN tbl_zerlegung
-    ON tbl_mustereingang.probenNummer = tbl_zerlegung.probenNummer
+        LEFT OUTER JOIN tbl_zerlegung
+        ON tbl_mustereingang.probenNummer = tbl_zerlegung.probenNummer
 
-    LEFT OUTER JOIN tbl_zpnwagen
-    ON tbl_mustereingang.probenNummer = tbl_zpnwagen.probenNummer
+        LEFT OUTER JOIN tbl_zpnwagen
+        ON tbl_mustereingang.probenNummer = tbl_zpnwagen.probenNummer
 
-    LEFT OUTER JOIN tbl_mana
-    ON tbl_mustereingang.probenNummer = tbl_mana.probenNummer
+        LEFT OUTER JOIN tbl_mana
+        ON tbl_mustereingang.probenNummer = tbl_mana.probenNummer
 
-    LEFT OUTER JOIN tbl_klaerfall
-    ON tbl_mustereingang.probenNummer = tbl_klaerfall.probenNummer
+        LEFT OUTER JOIN tbl_klaerfall
+        ON tbl_mustereingang.probenNummer = tbl_klaerfall.probenNummer
 
-    LEFT OUTER JOIN tbl_status
-    ON tbl_mustereingang.probenNummer = tbl_status.probenNummer
+        LEFT OUTER JOIN tbl_status
+        ON tbl_mustereingang.probenNummer = tbl_status.probenNummer
 
-    LEFT OUTER JOIN tbl_storno
-    ON tbl_mustereingang.probenNummer = tbl_storno.probenNummer
+        LEFT OUTER JOIN tbl_storno
+        ON tbl_mustereingang.probenNummer = tbl_storno.probenNummer
 
-    LEFT OUTER JOIN tbl_kommentar
-    ON tbl_mustereingang.probenNummer = tbl_kommentar.probenNummer
+        LEFT OUTER JOIN tbl_kommentar
+        ON tbl_mustereingang.probenNummer = tbl_kommentar.probenNummer
 
-    LEFT OUTER JOIN tbl_nickel
-    ON tbl_mustereingang.probenNummer = tbl_nickel.probenNummer
+        LEFT OUTER JOIN tbl_nickel
+        ON tbl_mustereingang.probenNummer = tbl_nickel.probenNummer
 
-    LEFT OUTER JOIN tbl_beurteilung
-    ON tbl_mustereingang.probenNummer = tbl_beurteilung.probenNummer
+        LEFT OUTER JOIN tbl_beurteilung
+        ON tbl_mustereingang.probenNummer = tbl_beurteilung.probenNummer
 
-    WHERE tbl_mustereingang.probenNummer = :probenNummer
+        WHERE tbl_mustereingang.probenNummer = :probenNummer

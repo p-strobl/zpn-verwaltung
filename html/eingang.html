@@ -11,7 +11,6 @@
 
 <body>
     <div class="wrap-eingang" id="wrap-eingang">
-
         <header class="wrap-header">
             <div class="header-caption-eingang">
                 <a class="header-a-button-home" href="../index.html">
@@ -26,13 +25,10 @@
                 title="Bitte tragen Sie hier eine gültige Proben Nummer ein.">
             <div class="header-fail-message-wrap" id="header-fail-message-wrap">
                 <div class="header-fail-message-content" id="header-fail-message-content">
-
                 </div>
             </div>
         </header>
-
         <main class="wrap-content displayNoneImportant" id="wrap-content">
-
             <section class="content-header-row eingang" id="content-header-row">
                 <div class="content-header-cell">Proben Nr.</div>
                 <div class="content-header-cell">Soll</div>
@@ -46,7 +42,6 @@
                 <div class="content-header-cell">Nickel Rückgabe</div>
                 <div class="content-header-cell">Entfernen</div>
             </section>
-
             <section class="content-footer-count-row eingang" id="content-footer-count-row">
                 <div class="content-footer-count-input eingang probenSoll" title="Anzahl der eingetragenen Muster.">Muster
                     <br/>
@@ -88,18 +83,13 @@
                 </div>
                 <div class="content-footer-count-input eingang delete"></div>
             </section>
-
         </main>
-
         <footer class="wrap-footer displayNoneImportant" id="wrap-footer">
             <button class="footer-button-send" id="footer-button-send" onclick="wrapData()" title="Diese Schaltfläche betätigen um die aufgeführten Datensatz&#92;sätze zu übertragen.">
                 --&#62; Zur Datenbank hinzufügen &#60;-- </button>
         </footer>
-
     </div>
-
     <div class="sticky-footer-message-wrap sticky-footer-height" id="sticky-footer-message-wrap">
-
         <div class="transmission-successful-wrapper" id="transmission-successful-wrapper">
             <section class="transmission-success-message-wrap">
                 <span class="transmission-success-counter" id="transmission-success-counter"></span>
@@ -108,9 +98,7 @@
                 <span class="transmission-success-caption"> Muster erfolgreich Übertragungen.</span>
             </section>
         </div>
-
         <div class="transmission-fail-wrap" id="transmission-fail-wrap">
-
             <div class="transmission-failed-wrapper-failMessage" id="transmission-failed-double-input-wrap">
                 <section class="transmission-fail-message-wrap">
                     <span class="transmission-fail-counter" id="transmission-fail-counter"></span>
@@ -119,35 +107,27 @@
                     <span class="transmission-fail-caption"> Datensätze bereits in der Datenbank vorhanden!</span>
                 </section>
             </div>
-
             <div class="transmission-failed-wrapper-doubleItems">
                 <section class="transmission-double-input-wrap" id="transmission-double-input-wrap">
                 </section>
             </div>
-
         </div>
-
     </div>
-
     <section id="wrap-modal" class="wrap__modal / show-modal">
-
         <div id="content-modal" class="content__modal / show-modal">
-
             <section class="wrap__modal__header">
                 <p class="modal__header__capture">Muster Verlauf</p>
                 <p id="modal-header-close" class="modal__header__close">&times;</p>
                 <div class="modal__header__input__wrap">
-                    <input id="modal-header-input" class="modal__header__input" name="modalHeaderInput" type="text" spellcheck="false" placeholder="Proben Nummer..."
-                        value="1601111101">
+                    <input id="modal-header-input" class="modal__header__input" name="modalHeaderInput" type="text" maxlength="12" spellcheck="false"
+                        placeholder="Proben Nummer..." value="1601111101">
                 </div>
                 <div class="modal__fail__message__wrap" id="modal-fail-message-wrap">
                     <div class="modal__fail__message__content" id="modal-fail-message-content">
-
                     </div>
                 </div>
             </section>
             <section id="wrap-modal-content" class="wrap__modal__content / transform__modal__content">
-
                 <section class="modal__content__header__wrap">
                     <div class="modal__content__header__caption / probennummer">
                         <span id="modal-content-caption-nummber-text" class="modal__content__caption__span"></span>
@@ -156,29 +136,23 @@
                         <span id="modal-content-caption-soll-text" class="modal__content__caption__span"></span>
                     </div>
                 </section>
-
                 <section class="modal__content__main__wrap">
-
                     <div class="modal__content__main__item / eingang">
-
                         <div class="modal__content__main__timing__wrap / item-1">
                             <p class="modal__content__main__capture-text / beurteilung">Beurteilung</p>
                             <span id="pullSql-beurteilung-date" class="modal__content__main__pullSql__item / eingang"></span>
                             <span id="pullSql-beurteilung-time" class="modal__content__main__pullSql__item / eingang"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / item-1">
                             <p class="modal__content__main__capture-text / zpnEingang">ZPN Muster Eingang</p>
                             <span id="modal-pullSql-zpnEingang-date" class="modal__content__main__pullSql__item / eingang"></span>
                             <span id="modal-pullSql-zpnEingang-time" class="modal__content__main__pullSql__item / eingang"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / item-1">
                             <p class="modal__content__main__capture-text / nickelRueckgabe">Nickel Rückgabe</p>
                             <span id="modal-pullSql-nickelBack-date" class="modal__content__main__pullSql__item / eingang"></span>
                             <span id="modal-pullSql-nickelBack-time" class="modal__content__main__pullSql__item / eingang"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / status">
                             <button id="mit60g" class="modal__status / 60g" value="deactive">Mit 60g</button>
                             <button id="mitExpress" class="modal__status / express" value="deactive">Express</button>
@@ -189,159 +163,128 @@
                             <button id="mitIntern" class="modal__status / internVorziehen" value="deactive">Intern vorziehen</button>
                         </div>
                     </div>
-
                     <div class="modal__content__main__item / vorbereitung">
                         <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / zerlegung">Vorzerlegung Start</p>
                             <span id="pullSql-zerlegung-start-date" class="modal__content__main__pullSql__item / zerlegung"></span>
                             <span id="pullSql-zerlegung-start-time" class="modal__content__main__pullSql__item / zerlegung"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / zerlegung">Vorzerlegung Ende</p>
                             <span id="pullSql-zerlegung-ende-date" class="modal__content__main__pullSql__item / zerlegung"></span>
                             <span id="pullSql-zerlegung-ende-time" class="modal__content__main__pullSql__item / zerlegung"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / einwaage">Einwaage Start</p>
                             <span id="pullSql-einwaage-start-date" class="modal__content__main__pullSql__item / einwaage"></span>
                             <span id="pullSql-einwaage-start-time" class="modal__content__main__pullSql__item / einwaage"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / einwaage">Einwaage Ende</p>
                             <span id="pullSql-einwaage-ende-date" class="modal__content__main__pullSql__item / einwaage"></span>
                             <span id="pullSql-einwaage-ende-time" class="modal__content__main__pullSql__item / einwaage"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / zpnWagen">ZPN Wagen</p>
-                            <span id="pullSql-zpnWagen-date" class="modal__content__main__pullSql__item / zpnWagen lastChild-no-border"></span>
-                            <span id="pullSql-zpnWagen-time" class="modal__content__main__pullSql__item / zpnWagen lastChild-no-border"></span>
+                            <span id="pullSql-zpnWagen-date" class="modal__content__main__pullSql__item / zpnWagen"></span>
+                            <span id="pullSql-zpnWagen-time" class="modal__content__main__pullSql__item / zpnWagen"></span>
                         </div>
                     </div>
-
                     <div class="modal__content__main__item / vorfall">
-
                         <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">Klärfall Start</p>
                             <span id="pullSql-klaerfall-start-date" class="modal__content__main__pullSql__item / klaerfall"></span>
                             <span id="pullSql-klaerfall-start-time" class="modal__content__main__pullSql__item / klaerfall"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">Klärfall Ende</p>
                             <span id="pullSql-klaerfall-ende-date" class="modal__content__main__pullSql__item / klaerfall"></span>
                             <span id="pullSql-klaerfall-ende-time" class="modal__content__main__pullSql__item / klaerfall"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">MaNa bestellt</p>
                             <span id="pullSql-mBestellt-start-date" class="modal__content__main__pullSql__item / mBestellt"></span>
                             <span id="pullSql-mBestellt-start-time" class="modal__content__main__pullSql__item / mBestellt"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">MaNa erhalten</p>
                             <span id="pullSql-mErhalten-ende-date" class="modal__content__main__pullSql__item / mErhalten"></span>
                             <span id="pullSql-mErhalten-ende-time" class="modal__content__main__pullSql__item / mErhalten"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">MaNa Einwaage Start</p>
                             <span id="pullSql-mEinwaage-ende-date" class="modal__content__main__pullSql__item / mEinwaage"></span>
                             <span id="pullSql-mEinwaage-ende-time" class="modal__content__main__pullSql__item / mEinwaage"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / item-2-3">
                             <p class="modal__content__main__capture-text / vorfall">MaNa ZPN Wagen</p>
-                            <span id="pullSql-mWagen-ende-date" class="modal__content__main__pullSql__item / mWagen lastChild-no-border"></span>
-                            <span id="pullSql-mWagen-ende-time" class="modal__content__main__pullSql__item / mWagen lastChild-no-border"></span>
+                            <span id="pullSql-mWagen-ende-date" class="modal__content__main__pullSql__item / mWagen"></span>
+                            <span id="pullSql-mWagen-ende-time" class="modal__content__main__pullSql__item / mWagen"></span>
                         </div>
                     </div>
-
                     <div class="modal__content__main__item / gesamt">
-
                         <div class="modal__content__main__timing__wrap / gesamt">
                             <p class="modal__content__main__capture-text / gesamt">Liegezeit Beurteiler Kiste</p>
                             <span id="pullSql-gesamt-beurteilung" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / gesamt">
                             <p class="modal__content__main__capture-text / gesamt">Gesamtzeit Zerlegung</p>
                             <span id="pullSql-gesamt-zerlegung" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / gesamt">
                             <p class="modal__content__main__capture-text / gesamt">Gesamtzeit Einwaage</p>
                             <span id="pullSql-gesamt-einwaage" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / gesamt">
                             <p class="modal__content__main__capture-text / gesamt">Liegezeit ZPN</p>
                             <span id="pullSql-gesamt-zpnDauer" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / gesamt">
                             <p class="modal__content__main__capture-text / gesamt">Gesamtzeit Klärfall</p>
                             <span id="pullSql-gesamt-klaerfall" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / gesamt">
                             <p class="modal__content__main__capture-text / gesamt">Muster bei Nickel</p>
                             <span id="pullSql-gesamt-nickelDauer" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / gesamt">
                             <p class="modal__content__main__capture-text / gesamt">Gesamtzeit MaNa Bestellung</p>
                             <span id="pullSql-gesamt-mBestellung" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / gesamt">
                             <p class="modal__content__main__capture-text / gesamt">Gesamtzeit MaNa Einwaage</p>
                             <span id="pullSql-gesamt-mEinwaage" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-
                         <div class="modal__content__main__timing__wrap / gesamt">
                             <p class="modal__content__main__capture-text / gesamt lastChild-no-border">Gesamtzeit MaNa</p>
-                            <span id="pullSql-gesamt-mGesamt" class="modal__content__main__pullSql__item / gesamt lastChild-no-border"></span>
-                        </div>
-
-                    </div>
-                </section>
-
-                <section class="modal__content__footer__content__wrap">
-                    <div id="modal-content-footer-span-wrap" class="modal__content__footer__span__wrap">
-
-                    </div>
-                    <div class="modal__content__footer__input__wrap">
-                        <input id="modal-content-footer-input" class="modal__content__footer__input" spellcheck="false" placeholder="Kommentar Text..."
-                            title="Hier können Sie einen Kommentar zu diesem Datensatz hinterlegen.">
-                        <div id="modal-content-footer-promt-slider" class="modal__content__footer__promt__slider__wrap">
-                            <div class="modal__content__footer__promt__wrap">
-                                <button id="modal-promt-confirm" class="modal__content__footer__promt__button / confirmPromt" title="Betätigen Sie diese Schaltfläche, um dem Datensatz diesen Kommentar hinzuzufügen.">Ja, Kommentar hinzufügen</button>
-                                <button id="modal-promt-cancel" class="modal__content__footer__promt__button / cancelPromt" title="Betätigen Sie diese Schaltfläche, wenn Sie dem Datensatz doch keinen Kommentat hinzufügen wollen.">Nein, Kommentar nicht hinzufügen</button>
-                            </div>
-
+                            <span id="pullSql-gesamt-mGesamt" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
                     </div>
                 </section>
             </section>
 
-            <section id="wrap-modal-storno" class="wrap__modal__storno">
-                <div class="modal__storno__wrap">
-
+            <section id="modal-content-footer-content-wrap" class="modal__content__footer__content__wrap">
+                <div id="modal-content-footer-span-wrap" class="modal__content__footer__span__wrap">
                 </div>
             </section>
-
-
-
+            <section class="modal__content__footer__inputPromt__wrap">
+                <div id="modal-content-footer-promt-slider" class="modal__content__footer__promt__slider__wrap">
+                    <div class="modal__content__footer__promt__wrap">
+                        <button id="modal-promt-confirm" class="modal__content__footer__promt__button / confirmPromt" title="Betätigen Sie diese Schaltfläche, um dem Datensatz diesen Kommentar hinzuzufügen.">Ja, Kommentar hinzufügen</button>
+                        <button id="modal-promt-cancel" class="modal__content__footer__promt__button / cancelPromt" title="Betätigen Sie diese Schaltfläche, wenn Sie dem Datensatz doch keinen Kommentat hinzufügen wollen.">Nein, Kommentar nicht hinzufügen</button>
+                    </div>
+                </div>
+                <div class="modal__content__footer__input__wrap">
+                    <input id="modal-content-footer-input" class="modal__content__footer__input" spellcheck="false" placeholder="Kommentar Text..."
+                        title="Hier können Sie einen Kommentar zu diesem Datensatz hinterlegen.">
+                </div>
+            </section>
+            <section id="wrap-modal-storno" class="wrap__modal__storno">
+                <div class="modal__storno__wrap">
+                </div>
+            </section>
         </div>
     </section>
-
-
-
     <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="../js/jquery-ui.js"></script>
     <script type="text/javascript" src="../js/script-search-modal.js"></script>

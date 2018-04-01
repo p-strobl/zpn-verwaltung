@@ -9,7 +9,6 @@ $yesRegEx = '/\d{2}-\d{6}-\d{2}/';
             $pdoConnect = db_connect();
             $pdoConnect->beginTransaction();
 
-
             $pdoConnect->commit();
 
             $responseData = new StdClass;

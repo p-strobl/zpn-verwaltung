@@ -1,8 +1,8 @@
 <?php
 
-function sqlSelectObject( $pdoConnect, $probenNummer )
+function sqlSelectObject($pdoConnect, $probenNummer)
 {
-    try{
+    try {
         $pdoConnect->beginTransaction();
 
         $sql =
@@ -13,10 +13,9 @@ function sqlSelectObject( $pdoConnect, $probenNummer )
                 DATE_FORMAT(tbl_probennahme.einwaageBeginn, '%d.%m.%Y') AS einwaageBeginnDate, TIME(tbl_probennahme.einwaageBeginn) AS einwaageBeginnTime, DATE_FORMAT(tbl_probennahme.einwaageEnde, '%d.%m.%Y') AS einwaageEndeDate, TIME(tbl_probennahme.einwaageEnde) AS einwaageEndeTime, tbl_probennahme.einwaageBerechnung,
                 DATE_FORMAT(tbl_zpnwagen.zpnWagenDateTime, '%d.%m.%Y') AS zpnWagenDate, TIME(tbl_zpnwagen.zpnWagenDateTime) AS zpnWagenTime, tbl_zpnwagen.berechnungDateTimeZpnwagen,
                 DATE_FORMAT(tbl_mana.manaGestelltDateTime, '%d.%m.%Y') AS manaGestelltDate, TIME(tbl_mana.manaGestelltDateTime) AS manaGestelltTime, DATE_FORMAT(tbl_mana.manaErhaltenDateTime, '%d.%m.%Y') AS manaErhaltenDate, TIME(tbl_mana.manaErhaltenDateTime) AS manaErhaltenTime, DATE_Format(tbl_mana.manaEinwaageDateTime, '%d.%m.%Y') AS manaEinwaageDate, TIME(tbl_mana.manaEinwaageDateTime) AS manaEinwaageTime, DATE_Format(tbl_mana.manaZpnWagenDateTime, '%d.%m.%Y') AS manaZpnWagenDate, TIME(tbl_mana.manaZpnWagenDateTime) AS manaZpnWagenTime, tbl_mana.manaBerechnungDateTimeAnfrage, tbl_mana.manaBerechnungDateTimeEinwaage, tbl_mana.manaBerechnungDateTimeGesamt,
-                DATE_Format(tbl_klaerfall.klaerfallBeginnDateTime, '%d.%m.%Y') AS klaerfallBeginnDate, TIME(tbl_klaerfall.klaerfallBeginnDateTime) AS klaerfallBeginnTime, DATE_Format(tbl_klaerfall.klaerfallEndeDateTime, '%d.%m.%Y') AS klaerfallEndeDate, TIME(tbl_klaerfall.klaerfallEndeDateTime) AS klaerfallEndeTime, tbl_klaerfall.klaerfallBerechnung, tbl_klaerfall.klaerfallAnzahl,
+                DATE_Format(tbl_klaerfall.klaerfallBeginnDateTime, '%d.%m.%Y') AS klaerfallBeginnDate, TIME(tbl_klaerfall.klaerfallBeginnDateTime) AS klaerfallBeginnTime, DATE_Format(tbl_klaerfall.klaerfallEndeDateTime, '%d.%m.%Y') AS klaerfallEndeDate, TIME(tbl_klaerfall.klaerfallEndeDateTime) AS klaerfallEndeTime, tbl_klaerfall.klaerfallBerechnung,
                 tbl_status.mitExpress, tbl_status.mitIntern, tbl_status.mitNickel, tbl_status.mitLfgb, tbl_status.mitToys, tbl_status.mit60g, tbl_status.mitKlaerfallBack,
                 DATE_Format(tbl_storno.stornoDateTime, '%d.%m.%Y') AS stornoDate, TIME(tbl_storno.stornoDateTime) AS stornoTime,
-                tbl_kommentar.kommentarText, DATE_Format(tbl_kommentar.kommentarDateTime, '%d.%m.%Y') AS kommentarDate, TIME(tbl_kommentar.kommentarDateTime) AS kommentarTime,
                 DATE_Format(tbl_nickel.nickelRueckgabeDateTime, '%d.%m.%Y') AS nickelRueckgabeDate, TIME(tbl_nickel.nickelRueckgabeDateTime) AS nickelRueckgabeTime, tbl_nickel.nickelBerechnung,
                 DATE_Format(tbl_beurteilung.beurteilungBereitgestelltDateTime, '%d.%m.%Y') AS beurteilungBereitDate, TIME(tbl_beurteilung.beurteilungBereitgestelltDateTime) AS beurteilungBereitTime, tbl_beurteilung.anAbteilung
             
@@ -44,9 +43,6 @@ function sqlSelectObject( $pdoConnect, $probenNummer )
             LEFT OUTER JOIN tbl_storno
             ON tbl_mustereingang.probenNummer = tbl_storno.probenNummer
 
-            LEFT OUTER JOIN tbl_kommentar
-            ON tbl_mustereingang.probenNummer = tbl_kommentar.probenNummer
-
             LEFT OUTER JOIN tbl_nickel
             ON tbl_mustereingang.probenNummer = tbl_nickel.probenNummer
 
@@ -59,23 +55,36 @@ function sqlSelectObject( $pdoConnect, $probenNummer )
         $pdoStatement->bindParam( ':probenNummer', $probenNummer, PDO::PARAM_STR );
         $pdoStatement->execute();
         $pdoObject = $pdoStatement->fetch( PDO::FETCH_OBJ );
+
+        $sql =
+        "
+            SELECT
+                tbl_kommentar.kommentarText, DATE_Format(tbl_kommentar.kommentarDateTime, '%d.%m.%Y') AS kommentarDate, TIME(tbl_kommentar.kommentarDateTime) AS kommentarTime
+            FROM
+                tbl_kommentar
+            WHERE
+                probennummer = :probenNummer
+        ";
+        $pdoStatement = $pdoConnect->prepare( $sql );
+        $pdoStatement->bindParam( ':probenNummer', $probenNummer, PDO::PARAM_STR );
+        $pdoStatement->execute();
+        $pdoObject->kommentar = $pdoStatement->fetchAll();
+
+        $pdoConnect->commit();
     
-        if( $pdoObject != false )
+        if ($pdoObject != false)
         {
-            foreach( $pdoObject as $key => $value )
+            foreach ($pdoObject as $key => $value)
             {
-                if( $value === null )
+                if ($value === null)
                 {
-                    unset( $pdoObject->{$key} );
+                    unset($pdoObject->{$key});
                 }
             }
         }
-
-        $pdoConnect->commit();
-
         return $pdoObject;
     }
-    catch( PDOException $pdoException ){
+    catch (PDOException $pdoException){
         $pdoConnect->rollBack();
     }
 }

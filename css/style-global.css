@@ -7,7 +7,6 @@
 
 * {
     font-family: "Tahoma", Times New Roman, sans-serif;
-    /*text-shadow: 0px 0px 3px rgba(0, 0, 0, .5);*/
 }
 
 body {
@@ -18,12 +17,10 @@ body {
 
 button {
     cursor: pointer;
-    /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.8);  */
 }
 
 button:hover {
     box-shadow: 0px 1px 5px 0px rgb(0, 0, 0);
-    /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.8); */
     transition: all 0.2s ease;
 }
 
@@ -53,13 +50,10 @@ button::-moz-focus-inner {
     grid-template-columns: auto;
     grid-template-rows: repeat(3, auto);
     grid-template-areas: "wrapHeader" "wrapMain" "wrapFooter";
-    width: 98vw;
-    /* margin: 1vh 1vw; */
+    width: 97vw;
     margin: 1.5vh auto 0 auto;
-    border-radius: 5px;
+    border-radius: .1vw;
     box-shadow: 0px 2px 20px 1px rgb(4, 10, 43);
-    /* box-shadow: 0px 1px 5px 0px rgb(0, 0, 0); */
-    /* box-shadow: 0 1px 1px 0 rgba(82, 36, 36, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.8);  */
 }
 
 /*Ende Page wrapper*/
@@ -69,7 +63,6 @@ button::-moz-focus-inner {
 .wrap-header {
     display: grid;
     grid-area: wrapHeader;
-    /*grid-template-columns: 70px 1fr;*/
     grid-template-rows: repeat(3, auto);
     height: 100%;
     width: 100%;
@@ -77,13 +70,8 @@ button::-moz-focus-inner {
 
 .header-a-button-home {
     display: grid;
-    /* grid-column: 1; */
-    /* grid-row: 1; */
     justify-content: center;
     align-content: center;
-    /* width: 20px; */
-    /* padding-left: 2vw; */
-    /* z-index: 1; */
     text-decoration: none;
 }
 
@@ -113,14 +101,11 @@ img:hover {
 }
 
 .header-caption-eingang {
-    /* grid-row: 1; */
-    /*z-index: 1;*/
     display: grid;
     grid-template-columns: 10% 80% 10%;
     height: 100%;
     padding: .7vw 0;
-    border-radius: 5px 5px 0 0;
-    /* border-radius: 10px 10px 0 0; */
+    border-radius: .1vw .1vw 0 0;
     font-size: 4vw;
     text-align: center;
     text-shadow: 0px 4px 10px rgba(0, 0, 0, .5);
@@ -129,7 +114,6 @@ img:hover {
 
 .header-caption {
     grid-column: 2;
-    /* grid-row: 1 / span 3; */
     width: 100%;
     height: 100%;
     text-align: center;
@@ -145,7 +129,6 @@ img:hover {
     font-size: 2vw;
     text-align: center;
     box-shadow: 0px 0px 6px 0px rgb(0, 0, 0);
-    /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.8);  */
     background-color: ghostwhite;
 }
 
@@ -158,9 +141,7 @@ img:hover {
     overflow: hidden;
     transition: max-height 0.3s;
     box-shadow: 0px 1px 5px 0px rgb(0, 0, 0);
-    /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.8); */
     background: #FF3100;
-    /* background: #ff0000; */
 }
 
 .header-fail-message-content {
@@ -209,7 +190,7 @@ img:hover {
 }
 
 .border-edged {
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 .1vw .1vw;
 }
 
 /*Ende Header wrap*/
@@ -220,13 +201,8 @@ img:hover {
     grid-area: wrapMain;
     display: grid;
     grid-template-rows: repeat(3, auto);
-    /* grid-template-areas: "tableHeader" "tableMain" "tableFooter"; */
-    /* text-align: center; */
-    /* width: 100%; */
-    /* margin-top: .1vw; */
     border-left: solid 1px ghostwhite;
     border-right: solid 1px ghostwhite;
-    /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.8); */
     background-color: ghostwhite;
 }
 
@@ -253,26 +229,16 @@ img:hover {
 }
 
 .content-header-row {
-    /* grid-area: tableHeader; */
-    /* display: grid; */
-    /* grid-template-columns: repeat(10, 10%); */
-    /* font-weight: bold; */
     background-color: gainsboro;
-    /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.8);  */
 }
 
 .content-header-cell {
-    /* display: table-cell; */
     padding: 1.2vh;
-    /* padding: 1.2vh 0 1.2vh 0; */
     border-left: solid 1px ghostwhite;
     border-bottom: none;
     border-bottom: 2px solid #18B7FB;
-    /* border-bottom: 2px solid cornflowerblue; */
     text-align: center;
     font-size: 1vw;
-    /* white-space: nowrap; */
-    /* vertical-align: middle; */
 }
 
 .content-header-cell:nth-child(1),
@@ -304,19 +270,14 @@ img:hover {
 .content-main-row:hover {
     text-shadow: -1px 0 black;
     background-color: #67C0E6;
-    /* background-color: #ededed; */
     box-shadow: 0px 1px 5px 0px rgb(0, 0, 0);
-    /*background-color: #f2f2f2;*/
 }
 
 .content-main-cell {
     display: grid;
     padding: .8vh .3vw .8vh .3vw;
-    /* vertical-align: middle; */
     border-left: solid 1px gainsboro;
     border-bottom: solid 1px gainsboro;
-    /* font-size: 1.2vw; */
-    /* white-space: nowrap; */
 }
 
 .content-main-cell:nth-child(1) {
@@ -332,18 +293,13 @@ img:hover {
 .content-button-check {
     height: 100%;
     width: 100%;
-    border-radius: 3px;
+    border-radius: .1vw;
     font-size: .8vw;
     background-color: #ededed;
-    /* white-space: nowrap; */
 }
 
 .content-button-check:hover {
     background-color: #FFB700 !important;
-    /* background-color: #FFc940 !important; */
-    /* background-color: #98e698; */
-    /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.8);
-    transition: all 0.4s ease; */
 }
 
 .setButtonStatus {
@@ -364,33 +320,19 @@ img:hover {
 }
 
 .content-button-delete {
-    /* height: 100%; */
     width: 100%;
-    /* font-size: 95%; */
-    /*min-width: 40px;*/
-    border-radius: 3px;
+    border-radius: .1vw;
     font-size: .7vw;
     background-color: #FFB9A9;
-    /* background-color: #f77; */
 }
 
 .content-button-delete:hover {
     background-color: #FF3100;
-    /* background-color: #f22; */
-    /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.8);
-    transition: all 0.4s ease; */
 }
 
-.content-footer-count-row {
-    /* grid-area: tableFooter; */
-    /* display: grid; */
-    /* grid-template-columns: repeat(10, 10%); */
-    /* width: 100%; */
-}
+.content-footer-count-row {}
 
 .content-footer-count-input {
-    /* display: table-cell; */
-    /* height: 3vw; */
     padding: 5px 0 5px 0;
     border-top: solid 2px #18B7FB;
     border-left: solid 1px ghostwhite;
@@ -422,9 +364,7 @@ img:hover {
 .wrap-hidden-row {
     display: grid;
     grid-template-columns: 50% 50%;
-    /*grid-template-rows: auto;*/
     grid-template-areas: "confirmButton cancelButton";
-    /* width: 100%; */
 }
 
 .hidden-row {
@@ -434,23 +374,19 @@ img:hover {
 .hidden-row.confirm-button {
     grid-area: confirmButton;
     background-color: #00B64A;
-    /* background-color: #98e698; */
 }
 
 .hidden-row.confirm-button:hover {
     background-color: #10FC6F;
-    /* background-color: #32CD32; */
 }
 
 .hidden-row.cancel-button {
     grid-area: cancelButton;
     background-color: #FFB9A9;
-    /* background-color: #f77; */
 }
 
 .hidden-row.cancel-button:hover {
     background-color: #FF3100;
-    /* background-color: #ff0000; */
 }
 
 /*Ender Content wrap*/
@@ -470,17 +406,14 @@ img:hover {
     padding-bottom: .3vw;
     border: 0;
     border-top: solid 2px #9A9A9A;
-    border-radius: 0 0 5px 5px;
+    border-radius: 0 0 .1vw .1vw;
     font-size: 3vw;
-    /* box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.06), 0 2px 5px 0 rgba(0, 0, 0, 0.8); */
     background-color: gainsboro;
     text-shadow: 0px 4px 10px rgba(0, 0, 0, .5);
 }
 
 .footer-button-send:hover {
     background-color: #FFB700;
-    /* background-color: #FFB700; */
-    /* background-color: #32CD32; */
 }
 
 /*Ende Footer wrap*/
@@ -514,8 +447,6 @@ img:hover {
     align-items: center;
     height: 10vw;
     background-color: #FFB700;
-    /* background-color: #FFB700; */
-    /* background-color: #32CD32; */
 }
 
 .transmission-success-message-wrap {
@@ -526,7 +457,6 @@ img:hover {
 .transmission-fail-wrap {
     grid-area: failContent;
     background-color: #FF3100;
-    /* background-color: #ff0000; */
     width: 100%;
 }
 
@@ -548,7 +478,6 @@ img:hover {
     padding: 1vh;
     width: 100%;
     background-color: #FF3100;
-    /* background-color: #ff0000; */
 }
 
 .transmission-double-input-wrap {
@@ -572,19 +501,14 @@ img:hover {
 .highlightSelectedRow {
     text-shadow: -1px 0 black;
     background-color: rgba(255, 49, 0, 0.5);
-    /* background-color: #f22; */
 }
 
 .highlightSelectedRow:hover {
     background-color: rgba(255, 49, 0, 0.5);
-    ;
-    /*background-color: #FF3100;*/
-    /* background-color: #f22; */
 }
 
 .highlightSelectedButton {
     background-color: rgba(255, 49, 0, 0.5) !important;
-    /* background-color: #f22 !important; */
 }
 
 /*Ende Highlight Rows*/

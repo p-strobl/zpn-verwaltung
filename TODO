@@ -1,25 +1,36 @@
 
 Todo:
+✔ Wenn nichts bei der Verwaltung aktiviert wurde @done(18-03-15 22:12)
+✔ MaNa einwaage beginn hinzufügen @done(18-03-17 03:08)
+✔ Antwort der Datenbank abfrage verarbeiten. @done(18-03-28 11:11)
+✔ Aktivierung/Deaktivierung bei der Verwaltung checken. @done(18-03-20 01:09)
+✔ Verwaltung Header Ordnung @done(18-03-23 12:53)
+
+☐ All-- Überall noch Kommentare einfügen!
+
+☐ HTML--Bubble Nachricht über Element hover
+
+☐ CSS -> Zusammenfassung von transform: scaleY(0);
+
 ✔ JS--ZPN Wagen doppelter Eintrag @done(18-03-12 20:02)
 ✔ JS--Disable Buttons aufhebung @done(18-03-12 21:27)
-☐ HTML--Bubble Nachricht über Element hover
-✔ Wenn nichts bei der Verwaltung aktiviert wurde @done(18-03-15 22:12)
 ✔ JS/Datenbank--Schon bei dem einscann prüfen, und entsprechende Buttons ausgrauen @done(18-03-17 20:40)
-✔ MaNa einwaage beginn hinzufügen @done(18-03-17 03:08)
-☐ Datenbank-- Nickel Rückgabe zum Muster Eingang | Es funktioniert aber UNSCHÖN!
-✔ Antwort der Datenbank abfrage verarbeiten. @done(18-03-28 11:11)
-✔ PHP Seitige Antworten verbessern @done(18-03-19 02:15)
-✔ Aktivierung/Deaktivierung bei der Verwaltung checken. @done(18-03-20 01:09)
-☐ Datenbank-- MySql Nacht und Wochenende raus rechnen
-✔ Verwaltung Header Ordnung @done(18-03-23 12:53)
-✔ Search Modal--befüllung @done(18-03-28 11:11)
-✔ Search Modal--Content toggleSlide @done(18-03-28 11:11)
-☐ All-- Überall noch Kommentare einfügen!
+
 ✔ Datenbank -> SQL Abfrage in Date und Time splitten @done(18-03-27 08:28)
 ✔ Datenbank -> Muster Verwaltung Soll Datum abfrage @done(18-03-27 21:08)
 ☐ Datenbank-> Mehrere Kommentare und Klärfall abfragen der Datenbank verarbeiten
+☐ Datenbank-- MySql Nacht und Wochenende raus rechnen
+☐ Datenbank-- Nickel Rückgabe zum Muster Eingang | Es funktioniert aber UNSCHÖN!
+
+✔ Search Modal--befüllung @done(18-03-28 11:11)
+✔ Search Modal--Content toggleSlide @done(18-03-28 11:11)
 ✔ Search Modal -> Status Button Funktion @done(18-03-30 06:55)
 ☐ Search Modal -> Status Button Fehler abfangen
 ☐ Search Modal-> Kommentar hinzufügen Funktion erstellen
-☐ Search Modal -> Kommentar SQL dynamisch hinzufügen
-☐ Search Modal -> Input mit Promt aus dem Append Wrap lösen
+✔ Search Modal -> Kommentar SQL dynamisch hinzufügen @done(18-04-01 02:59)
+✔ Search Modal -> Input mit Promt aus dem Append Wrap lösen @done(18-03-31 22:16)
+✔ Search Modal -> Promt Slider ändern @done(18-03-31 22:16)
+☐ Search Modal -> Bei Neuaufruf, Kommentar nach unten sliden lassen
+☐ Search Modal -> SQL Injection durch verbot von bestimmten Zeichen verhindern!!!
+
+✔ PHP -> Seitige Antworten verbessern @done(18-03-19 02:15)
