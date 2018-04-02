@@ -1,14 +1,18 @@
 .wrap__modal {
-    background-color: rgba(0, 0, 0, .8);
     width: 100%;
     height: 100vh;
     position: absolute;
-    top: 0;
+    top: -100%;
     left: 0;
     z-index: 10;
-    /* opacity: 0;
-    visibility: hidden; */
-    transition: all .4s;
+    /* transform-origin: top; */
+    /* transition: all .4s; */
+    display: grid;
+}
+
+.wrap__modal.show__modal {
+    background-color: rgba(0, 0, 0, .8);
+    top: 0;
 }
 
 .content__modal {
@@ -17,20 +21,15 @@
     width: 80vw;
     height: 96vh;
     background-color: #0091CD;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    border-radius: .1vw;
+    /* position: absolute; */
+    /* top: 50%; */
+    /* left: 50%; */
+    transform-origin: top;
+    /* transform: translate(-50%, -50%); */
+    border-radius: .2vw;
     box-shadow: 0px 0px 20px 5px rgb(0, 0, 0);
-    /* opacity: 0;
-    visibility: hidden; */
-    transition: all .4s;
-}
-
-.show-modal {
-    opacity: 0;
-    visibility: hidden;
+    /* transition: all .4s; */
+    place-self: center;
 }
 
 /* Modal */
@@ -42,7 +41,7 @@
     grid-template-rows: 70% 30% auto;
     grid-template-columns: 10% 80% 10%;
     background-color: gainsboro;
-    border-radius: .1vw .1vw 0 0;
+    border-radius: .2vw .2vw 0 0;
 }
 
 .modal__header__capture {
@@ -88,13 +87,10 @@
     grid-row: 3;
     grid-column: 1/4;
     background-color: #FF3100;
-    transform: scaleY(0);
     transform-origin: top;
-    transition: transform 0.2s ease;
-    overflow-y: hidden;
     z-index: 1;
     box-shadow: 0px 0px 6px 0px rgb(0, 0, 0);
-    border-radius: 0 0 .1vw .1vw;
+    border-radius: 0 0 .2vw .2vw;
 }
 
 .modal__fail__message__content {
@@ -106,27 +102,15 @@
     text-align: center;
 }
 
-.modal__fail__message__wrap.hide {
-    transform: scaleY(1);
-    overflow-y: visible;
-}
-
 /* Modal Content */
 
 .wrap__modal__content {
     display: grid;
+    transform-origin: top;
 }
 
 .transform__modal__content {
-    transform: scaleY(0);
-    transform-origin: top;
-    transition: transform 0.2s ease;
-    overflow-y: hidden;
-}
-
-.transform__modal {
-    transform: scaleY(1);
-    overflow-y: visible;
+    /* transform-origin: top; */
 }
 
 /*Modal Content Header*/
@@ -163,7 +147,7 @@
     width: 18vw;
     padding: .5vw;
     place-self: center;
-    border-radius: .1vw;
+    border-radius: .2vw;
     background-color: gainsboro;
     box-shadow: 0px 0px 12px 1px rgb(0, 0, 0);
 }
@@ -215,7 +199,7 @@
     width: 100%;
     font-size: .8vw;
     border: 1px solid #0091CD;
-    border-radius: .1vw;
+    border-radius: .2vw;
     background-color: transparent;
     color: #0091CD;
     text-align: left;
@@ -271,16 +255,15 @@
 
 .modal__content__footer__content__wrap {
     display: grid;
-    overflow-y: auto;
-    margin-top: .3vw;
-    margin-right: 1vw;
-    padding-left: 1vw;
-    justify-content: stretch;
+    transform-origin: bottom;
 }
 
 .modal__content__footer__span__wrap {
     display: grid;
-    width: 90%;
+    overflow-y: scroll;
+    margin-top: .3vw;
+    margin-right: 1vw;
+    padding-left: 1vw;
 }
 
 .modal__content__footer__inputPromt__wrap {
@@ -292,36 +275,20 @@
 .modal__content__footer__input__wrap {
     display: flex;
     width: 100%;
-    transform: scaleY(0);
     transform-origin: bottom;
-    transition: transform 0.2s ease;
-    overflow-y: hidden;
-}
-
-.modal__content__footer__input__wrap.transform__modal {
-    transform: scaleY(1);
-    overflow-y: visible;
 }
 
 .modal__content__footer__input {
     width: 100%;
     font-size: 1.3vw;
     text-align: center;
-    border-radius: 0 0 .1vw .1vw;
+    border-radius: 0 0 .2vw .2vw;
 }
 
 /* Footer Promt */
 
 .modal__content__footer__promt__slider__wrap {
-    transform: scaleY(0);
     transform-origin: bottom;
-    transition: transform 0.2s ease;
-    overflow-y: hidden;
-}
-
-.modal__content__footer__promt__slider__wrap.transform__modal {
-    transform: scaleY(1);
-    overflow-y: visible;
 }
 
 .modal__content__footer__promt__wrap {
@@ -349,7 +316,7 @@
     border-top: 1px dashed gainsboro;
     width: 90%;
     justify-self: center;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .modal__append__span.text {
@@ -359,12 +326,12 @@
 }
 
 .modal__append__span.dateTime {
-    font-size: .6vw;
+    font-size: .8vw;
 }
 
 /* Modal appended Element Scrollbar */
 
-#modal-content-footer-content-wrap::-webkit-scrollbar {
+#modal-content-footer-span-wrap::-webkit-scrollbar {
     width: .7vw;
 }
 
@@ -372,18 +339,31 @@
 
 /* #modal-content-footer-content-wrap::-webkit-scrollbar-corner {} */
 
-#modal-content-footer-content-wrap::-webkit-scrollbar-thumb {
-    border-radius: .1vw;
+#modal-content-footer-span-wrap::-webkit-scrollbar-thumb {
+    border-radius: .2vw;
     background-color: rgba(255, 183, 0, .5);
 }
 
-#modal-content-footer-content-wrap::-webkit-scrollbar-thumb:hover {
+#modal-content-footer-span-wrap::-webkit-scrollbar-thumb:hover {
     background-color: rgba(255, 183, 0, 1);
 }
 
-#modal-content-footer-content-wrap::-webkit-scrollbar-track {
-    border-radius: .1vw;
+#modal-content-footer-span-wrap::-webkit-scrollbar-track {
+    border-radius: .2vw;
     background-color: rgba(220, 220, 220, .6);
 }
 
 /* #modal-content-footer-content-wrap::-webkit-scrollbar-track-piece {} */
+
+/* Transform up and down */
+
+.transform__item {
+    transform: scaleY(0);
+    transition: transform .3s ease;
+    overflow-y: hidden;
+}
+
+.transform__item.transform__modal {
+    transform: scaleY(1);
+    overflow-y: visible;
+}

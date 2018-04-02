@@ -153,10 +153,10 @@ const showFailMessage = {
 
             case 'modal-header-input':
                 this.$modalFailMessageContent.addClass(errorClassType);
-                this.$modalFailMessageWrap.addClass('hide');
+                this.$modalFailMessageWrap.addClass('transform__modal');
                 setTimeout(() => {
                     this.$modalFailMessageContent.removeClass(errorClassType);
-                    this.$modalFailMessageWrap.removeClass('hide');
+                    this.$modalFailMessageWrap.removeClass('transform__modal');
                 }, setTimeoutTimer);
                 break;
             default:

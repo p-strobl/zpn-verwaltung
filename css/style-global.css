@@ -52,7 +52,7 @@ button::-moz-focus-inner {
     grid-template-areas: "wrapHeader" "wrapMain" "wrapFooter";
     width: 97vw;
     margin: 1.5vh auto 0 auto;
-    border-radius: .1vw;
+    border-radius: .2vw;
     box-shadow: 0px 2px 20px 1px rgb(4, 10, 43);
 }
 
@@ -105,7 +105,7 @@ img:hover {
     grid-template-columns: 10% 80% 10%;
     height: 100%;
     padding: .7vw 0;
-    border-radius: .1vw .1vw 0 0;
+    border-radius: .2vw .2vw 0 0;
     font-size: 4vw;
     text-align: center;
     text-shadow: 0px 4px 10px rgba(0, 0, 0, .5);
@@ -179,6 +179,11 @@ img:hover {
     white-space: pre-wrap;
 }
 
+.fail-forbidden::after {
+    content: "Sie haben eine verbotene Buchstabenreihenfolge eingegeben, bitte überdenken Sie noch mal ihre Eingabe!";
+    white-space: pre-wrap;
+}
+
 .no-server::after {
     content: "Die Verbindung zum Server ist fehlgeschlagen!\A \A Bitte versuchen Sie es erneut.";
     white-space: pre-wrap;
@@ -190,7 +195,7 @@ img:hover {
 }
 
 .border-edged {
-    border-radius: 0 0 .1vw .1vw;
+    border-radius: 0 0 .2vw .2vw;
 }
 
 /*Ende Header wrap*/
@@ -293,7 +298,7 @@ img:hover {
 .content-button-check {
     height: 100%;
     width: 100%;
-    border-radius: .1vw;
+    border-radius: .2vw;
     font-size: .8vw;
     background-color: #ededed;
 }
@@ -321,7 +326,7 @@ img:hover {
 
 .content-button-delete {
     width: 100%;
-    border-radius: .1vw;
+    border-radius: .2vw;
     font-size: .7vw;
     background-color: #FFB9A9;
 }
@@ -406,7 +411,7 @@ img:hover {
     padding-bottom: .3vw;
     border: 0;
     border-top: solid 2px #9A9A9A;
-    border-radius: 0 0 .1vw .1vw;
+    border-radius: 0 0 .2vw .2vw;
     font-size: 3vw;
     background-color: gainsboro;
     text-shadow: 0px 4px 10px rgba(0, 0, 0, .5);

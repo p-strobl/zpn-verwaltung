@@ -113,8 +113,8 @@
             </div>
         </div>
     </div>
-    <section id="wrap-modal" class="wrap__modal / show-modal">
-        <div id="content-modal" class="content__modal / show-modal">
+    <section id="wrap-modal" class="wrap__modal">
+        <div id="content-modal" class="content__modal [ transform__item ]">
             <section class="wrap__modal__header">
                 <p class="modal__header__capture">Muster Verlauf</p>
                 <p id="modal-header-close" class="modal__header__close">&times;</p>
@@ -122,12 +122,12 @@
                     <input id="modal-header-input" class="modal__header__input" name="modalHeaderInput" type="text" maxlength="12" spellcheck="false"
                         placeholder="Proben Nummer..." value="1601111101">
                 </div>
-                <div class="modal__fail__message__wrap" id="modal-fail-message-wrap">
+                <div class="modal__fail__message__wrap [ transform__item ]" id="modal-fail-message-wrap">
                     <div class="modal__fail__message__content" id="modal-fail-message-content">
                     </div>
                 </div>
             </section>
-            <section id="wrap-modal-content" class="wrap__modal__content / transform__modal__content">
+            <section id="wrap-modal-content" class="wrap__modal__content [ transform__item ]">
                 <section class="modal__content__header__wrap">
                     <div class="modal__content__header__caption / probennummer">
                         <span id="modal-content-caption-nummber-text" class="modal__content__caption__span"></span>
@@ -262,20 +262,19 @@
                     </div>
                 </section>
             </section>
-
-            <section id="modal-content-footer-content-wrap" class="modal__content__footer__content__wrap">
+            <section id="modal-content-footer-content-wrap" class="modal__content__footer__content__wrap [ transform__item ]">
                 <div id="modal-content-footer-span-wrap" class="modal__content__footer__span__wrap">
                 </div>
             </section>
             <section class="modal__content__footer__inputPromt__wrap">
-                <div id="modal-content-footer-promt-slider" class="modal__content__footer__promt__slider__wrap">
+                <div id="modal-content-footer-promt-slider" class="modal__content__footer__promt__slider__wrap [ transform__item ]">
                     <div class="modal__content__footer__promt__wrap">
                         <button id="modal-promt-confirm" class="modal__content__footer__promt__button / confirmPromt" title="Betätigen Sie diese Schaltfläche, um dem Datensatz diesen Kommentar hinzuzufügen.">Ja, Kommentar hinzufügen</button>
                         <button id="modal-promt-cancel" class="modal__content__footer__promt__button / cancelPromt" title="Betätigen Sie diese Schaltfläche, wenn Sie dem Datensatz doch keinen Kommentat hinzufügen wollen.">Nein, Kommentar nicht hinzufügen</button>
                     </div>
                 </div>
-                <div class="modal__content__footer__input__wrap">
-                    <input id="modal-content-footer-input" class="modal__content__footer__input" spellcheck="false" placeholder="Kommentar Text..."
+                <div class="modal__content__footer__input__wrap [ transform__item ]">
+                    <input id="modal-content-footer-input" class="modal__content__footer__input" spellcheck="true" placeholder="Kommentar Text..."
                         title="Hier können Sie einen Kommentar zu diesem Datensatz hinterlegen.">
                 </div>
             </section>

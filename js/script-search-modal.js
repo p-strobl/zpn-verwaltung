@@ -24,19 +24,21 @@ function resetDetails() {
 
 // Schließt das Search Modal Fenster durch klick auf das X oder ausserhalb des bereiches und führt dann die Funktion resetDetails(); aus
 const showCloseModal = (() => {
-    const indexModal = $('#wrap-modal').add('#content-modal');
     const imgSearch = $('#img-search');
     const wrapModal = $('#wrap-modal');
+    const contentModal = $('#content-modal');
     const modalHeaderClose = $('#modal-header-close');
     const modalHeaderInput = $('#modal-header-input');
     const wrapModalContent = $('#wrap-modal-content');
     const modalPromtSlider = $('#modal-content-footer-promt-slider');
     const modalFooterInputWrap = $('.modal__content__footer__input__wrap');
+    const modalFooterContentWrap = $('#modal-content-footer-content-wrap');
 
     const showModal = (() => {
         imgSearch.on('click', function (event) {
             resetDetails();
-            indexModal.toggleClass('show-modal');
+            wrapModal.addClass('show__modal');
+            contentModal.toggleClass('transform__modal');
             backToModalInput();
         });
     });
@@ -44,14 +46,22 @@ const showCloseModal = (() => {
     const closeModal = (() => {
         wrapModal.on('click', function (event) {
             if (event.target == event.currentTarget) {
-                indexModal.toggleClass('show-modal');
-                wrapModalContent.add(modalPromtSlider).add(modalFooterInputWrap).removeClass('transform__modal');
+                contentModal.toggleClass('transform__modal');
+                wrapModalContent.add(modalPromtSlider).add(modalFooterInputWrap).add(modalFooterContentWrap).removeClass('transform__modal');
+                setTimeout(() => {
+                    wrapModal.removeClass('show__modal');
+                }, 300);
+
                 backToInput();
             }
         });
+
         modalHeaderClose.on('click', function () {
-            indexModal.toggleClass('show-modal');
-            wrapModalContent.add(modalPromtSlider).add(modalFooterInputWrap).removeClass('transform__modal');
+            contentModal.toggleClass('transform__modal');
+            wrapModalContent.add(modalPromtSlider).add(modalFooterInputWrap).add(modalFooterContentWrap).removeClass('transform__modal');
+            setTimeout(() => {
+                wrapModal.removeClass('show__modal');
+            }, 300);
             backToInput();
         });
     });
@@ -84,16 +94,16 @@ function searchDataSet(probenNummer) {
         const wrapModalContent = $('#wrap-modal-content');
         const modalHeaderInput = $('#modal-header-input');
         const modalFooterInputWrap = $('.modal__content__footer__input__wrap');
-
-        console.log(data);
+        const modalFooterContentWrap = $('#modal-content-footer-content-wrap');
 
         if (data !== false && !data.hasOwnProperty(0)) {
             resetDetails();
             wrapModalContent.hasClass('transform__modal') === true ? wrapModalContent.removeClass('transform__modal') : '';
             setTimeout(() => {
                 modalHeaderInput.val('');
-                wrapModalContent.add(modalFooterInputWrap).addClass('transform__modal');
+                wrapModalContent.add(modalFooterInputWrap).add(modalFooterContentWrap).addClass('transform__modal');
             }, 400);
+
             const toFillTimingSpansValue = {
                 // anAbteilung: $('#'),
                 berechnungDateTimeZpnwagen: $('#pullSql-gesamt-zpnDauer'),
@@ -138,6 +148,7 @@ function searchDataSet(probenNummer) {
                 zpnWagenDate: $('#pullSql-zpnWagen-date'),
                 zpnWagenTime: $('#pullSql-zpnWagen-time')
             }
+
             const toFillStatusButton = {
                 mit60g: $('#mit60g'),
                 mitExpress: $('#mitExpress'),
@@ -147,6 +158,7 @@ function searchDataSet(probenNummer) {
                 mitNickel: $('#mitNickel'),
                 mitToys: $('#mitToys')
             }
+
             const toFillKommentar = {
                 kommentarDate: $('#modal-content-footer-span-date'),
                 kommentarText: $('#modal-content-footer-span-text'),
@@ -174,7 +186,7 @@ function searchDataSet(probenNummer) {
             // Befüllt das Kommentarfeld
             function setKommentar(kommentarItem) {
                 const modalKommentarSpanWrap = $('#modal-content-footer-span-wrap');
-                const appendKommentar = (
+                const prependKommentar = (
                     ' <div class="modal__content__footer__append__span__wrap"> ' +
                     '     <span class="modal__append__span / text"> ' + kommentarItem.kommentarText + ' ' +
                     '         <span class="modal__append__span / dateTime">' + kommentarItem.kommentarDate + '</span> ' +
@@ -182,7 +194,7 @@ function searchDataSet(probenNummer) {
                     '     </span> ' +
                     ' </div> '
                 );
-                modalKommentarSpanWrap.after(appendKommentar);
+                modalKommentarSpanWrap.prepend(prependKommentar);
             }
 
             $.each(data, function (dataKey, dataValue) {
@@ -207,14 +219,17 @@ function searchDataSet(probenNummer) {
                 setKommentar(dataValue);
             });
             showCloseModal.backToModalInput;
+
         } else if (data === false) {
             showFailMessage.failMessage('fail-input', 2000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
+
         } else if (data.hasOwnProperty(0)) {
             showFailMessage.failMessage('fail-connect', 8000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
         }
     });
+
     ajaxRequestObject.fail(function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
         const modalHeaderInput = $('#modal-header-input');
@@ -242,6 +257,7 @@ const updateStatusButton = () => {
             mitNickel: $('#mitNickel'),
             mitToys: $('#mitToys')
         }
+
         let sendData = {
             probenNummer: probenNummer,
             statusButtonID: statusButtonID,
@@ -253,6 +269,7 @@ const updateStatusButton = () => {
         } else if (sendData.statusButtonValue === 'deactive') {
             sendData.statusButtonValue = 'active'
         }
+
         const ajaxRequestStatusButton = $.ajax({
             url: '../php/db-modalStatusUpdate.php',
             method: 'POST',
@@ -261,6 +278,7 @@ const updateStatusButton = () => {
             },
             dataType: 'json'
         });
+
         ajaxRequestStatusButton.done((data) => {
             if (data.success === true && data.successItem === probenNummer) {
                 this.id = data.statusButtonID;
@@ -268,7 +286,13 @@ const updateStatusButton = () => {
                 $(this).toggleClass('statusButton-preSet');
             }
         });
-        ajaxRequestStatusButton.fail((jqXHR, textStatus, errorThrown) => {});
+
+        ajaxRequestStatusButton.fail((jqXHR, textStatus, errorThrown) => {
+            const modalHeaderInput = $('#modal-header-input');
+            //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
+            showFailMessage.failMessage('fail-connect', 8000, modalHeaderInput.attr('id'));
+            console.log(textStatus, errorThrown);
+        });
     });
 }
 
@@ -284,14 +308,16 @@ const updateKommentar = () => {
     let modalTextTime = $('#modal-content-footer-span-time');
 
     modalKommentarInput.on('keyup', function (pressedKey) {
-        if (pressedKey.keyCode === 13 && this.value != "") {
+        if (pressedKey.keyCode === 13 && this.value != '') {
             modalPromtSlider.addClass('transform__modal');
             modalPromtConfirm.focus();
         }
     });
+
     modalPromtCancel.on('click', () => {
         modalPromtSlider.removeClass('transform__modal');
     });
+
     modalPromtConfirm.on('click', () => {
         const sendData = {
             probenNummer: probenNummer.html(),
@@ -305,28 +331,37 @@ const updateKommentar = () => {
             },
             dataType: 'json'
         });
+
         ajaxRequestAddKommentar.done((data) => {
             if (data.success === true && data.successItem === probenNummer.html()) {
                 const modalKommentarSpanWrap = $('#modal-content-footer-span-wrap');
-                const appendKommentar = (
+                const prependKommentar = (
                     ' <div class="modal__content__footer__append__span__wrap"> ' +
                     '     <span class="modal__append__span / text"> ' + data.kommentarText + ' ' +
                     '         <span class="modal__append__span / dateTime">' + data.kommentarDate + '</span> ' +
-                    '         <span class="modal__append__span / dateTime">' + data.kommentarTime + ' Uhr</span> ' +
+                    '         <span class="modal__append__span / dateTime">' + data.kommentarTime + " Uhr" + ' Uhr</span> ' +
                     '     </span> ' +
                     ' </div> '
                 );
-                modalKommentarSpanWrap.after(appendKommentar);
+                modalKommentarSpanWrap.prepend(prependKommentar);
                 modalKommentarInput.val('');
                 modalPromtSlider.removeClass('transform__modal');
+            } else if (data.success === false && data.failCode === 999) {
+                const modalHeaderInput = $('#modal-header-input');
+                modalPromtSlider.removeClass('transform__modal');
+                modalKommentarInput.val('');
+                showFailMessage.failMessage('fail-forbidden', 8000, modalHeaderInput.attr('id'));
             }
         });
+
         ajaxRequestAddKommentar.fail((jqXHR, textStatus, errorThrown) => {
-            console.log("fail");
+            const modalHeaderInput = $('#modal-header-input');
+            //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
+            showFailMessage.failMessage('fail-connect', 8000, modalHeaderInput.attr('id'));
+            console.log(textStatus, errorThrown);
         });
     });
 }
-
 
 $(document).ready(function () {
     updateStatusButton();
