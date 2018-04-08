@@ -2,9 +2,10 @@
 .eslintrc.js
 package-lock.json
 package.json
-php/db-connect.php
 /typings
 jsconfig.json
 package.json
 package-lock.json
 .idea
+/sql
+/BACKUP

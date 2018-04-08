@@ -1,6 +1,8 @@
 "use strict";
 
-function appendContentMainRow(inputTextLeft, inputTextRight, abteilung) {
+function appendContentMainRow(probenNummer, abteilung) {
+    const inputTextLeft = leftSplit(probenNummer, 12);
+    const inputTextRight = rightSplit(probenNummer, 10);
     const $contentHeaderRow = $("#content-header-row");
     const $wrapContent$wrapFooter = $("#wrap-content").add($("#wrap-footer"));
     const $headerInput = $("#header-input-beurteilung-abteilung");

@@ -43,6 +43,24 @@ function regexInput() {
         });
 }
 
+//Splittet dein eingegebenen String
+function leftSplit(str, chr) {
+    if (str.length > 12) {
+        return str.slice(0, chr - str.length);
+    } else if (str.length === 10) {
+        const stripedInputText = str.substring(0, 2) + '-' + str.substring(2, 8) + '-' + str.substring(8, 10);
+        return stripedInputText;
+    } else {
+        return str;
+    }
+}
+//Splittet dein eingegebenen String
+function rightSplit(str, chr) {
+    const yesRegEx = /\d{2}.\d{2}.\d{4}/;
+    let sliceStr = str.slice(str.length - chr, str.length);
+    return sliceStr.match(yesRegEx) ? sliceStr : '-';
+}
+
 //
 //Überwacht die Inputbox und stellt sicher das nur erlaubte Zeichenfolgen angenommen werden.
 function checkInput() {
@@ -57,23 +75,7 @@ function checkInput() {
         .add($headerInputVerwaltung)
         .add($headerInputBeurteilungProbennummer)
         .focus();
-    //Splittet dein eingegebenen String
-    function leftSplit(str, chr) {
-        if (str.length > 12) {
-            return str.slice(0, chr - str.length);
-        } else if (str.length === 10) {
-            const stripedInputText = str.substring(0, 2) + '-' + str.substring(2, 8) + '-' + str.substring(8, 10);
-            return stripedInputText;
-        } else {
-            return str;
-        }
-    }
-    //Splittet dein eingegebenen String
-    function rightSplit(str, chr) {
-        const yesRegEx = /\d{2}.\d{2}.\d{4}/;
-        let sliceStr = str.slice(str.length - chr, str.length);
-        return sliceStr.match(yesRegEx) ? sliceStr : '-';
-    }
+
     //Enter Taste in der Inputbox wird betätigt.
     $headerInputEingang
         .add($headerInputVerwaltung)
@@ -81,80 +83,81 @@ function checkInput() {
         .add($headerInputBeurteilungAbteilung)
         .add($modalHeaderInput)
         .on("keyup", function(pressedKey) {
-            //Überprüft ob der focus auf der Inputbox liegt und die Enter Taste gedrückt wurde.
-            if (pressedKey.keyCode === 13 && this.value !== '') {
-                const test = $(this).id;
-                //Teilt den inputText auf
-                const inputTextLeft = leftSplit($(this).val(), 12);
-                const inputTextRight = rightSplit($(this).val(), 10);
-                //Speichert den Inhalt der Inputbox in der Variable "inputText".
-                const inputText = $(this).val();
-                //Eingabe Muster einer Probennummer entspricht
-                const yesRegEx = /\d{2}-\d{6}-\d{2}/;
-                const zpnRegEx = /[zpnZPN]/g;
-                const lfgbRegEx = /[LFGB]/g;
-                const physikRegEx = /[Textilphysik]/g;
-                //Eingabe länge einer Probennummer beträgt 23 Zeichen.
-                const minCharacter = 12;
+        //Überprüft ob der focus auf der Inputbox liegt und die Enter Taste gedrückt wurde.
+        if (pressedKey.keyCode === 13 && this.value !== '') {
+            const test = $(this).id;
+            //Teilt den inputText auf
+            const inputTextLeft = leftSplit($(this).val(), 12);
+            const inputTextRight = rightSplit($(this).val(), 10);
+            //Speichert den Inhalt der Inputbox in der Variable "inputText".
+            const inputText = $(this).val();
+            //Eingabe Muster einer Probennummer entspricht
+            const yesRegEx = /\d{2}-\d{6}-\d{2}/;
+            const zpnRegEx = /[zpnZPN]/g;
+            const lfgbRegEx = /[LFGB]/g;
+            const physikRegEx = /[Textilphysik]/g;
+            //Eingabe länge einer Probennummer beträgt 23 Zeichen.
+            const minCharacter = 12;
 
-                //Überprüft ob die Eingabe in der Inputbox, einer Probennummer entspricht.
-                if (inputTextLeft.match(yesRegEx) && inputTextLeft.length === minCharacter) {
-                    switch (this.id) {
-                        case 'header-input-eingang':
-                        case 'header-input-verwaltung':
-                            if ($.inArray(inputTextLeft, globalMainRowCounter) > -1) {
-                                //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
-                                $headerInputEingang
-                                    .add($headerInputVerwaltung)
-                                    .effect('highlight', {color: '#FF3100'}, 200);
-                                //Ja es ist bereits ein Datensatz vorhanden, es wird eine Fehler Meldung angezeigt.
-                                //Blendet für 3,5 sek. eine "Fehlgeschlagen, Doppelter Eintrag" auskunft ein.
-                                $headerInputEingang
-                                    .add($headerInputVerwaltung)
-                                    .val('');
-                                showFailMessage.failMessage('double-input', 2000, this.id);
-                            } else {
-                                //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
-                                $headerInputEingang
-                                    .add($headerInputVerwaltung)
-                                    .effect('highlight', {color: '#FFB700'}, 200);
-                                //in die Globale Variable "globalMainRowCounter" wird der hinzugefügte Datensatz zwischengespeichert.
-                                globalMainRowCounter.push(inputTextLeft);
-                                //Nein, es ist noch kein Datensatz vorhanden, eine neue Zeile mit dem Datensatz wird erstellt.
-                                //Ruft die Funktion "appendContentMainRow" auf um dem Inhalt der Variablen "inputText" als Tabelle in das DOM zu übertragen.
-                                appendContentMainRow(inputTextLeft, inputTextRight);
-                                //Leert das eingabe Feld nach einem Fehlerhaften Eintrag
-                                $headerInputEingang
-                                    .add($headerInputVerwaltung)
-                                    .val('');
-                            }
-                            break;
-
-                        case 'modal-header-input':
-                            searchDataSet(inputTextLeft);
-                            break;
-                        case 'header-input-beurteilung-probennummer':
-                            $headerInputBeurteilungAbteilung.focus();
-                            break;
-                        case 'header-input-beurteilung-abteilung':
-                            console.log(this.val());
-                            break;
-                        default:
-                    }
-                    //Überprüft ob in der Globalen Variable "globalMainRowCounter" bereits ein Datensatz der Variable "splitInputText[0]" beinhält.
-                } else if (this.value.match(zpnRegEx) && this.value.length === 3 || this.value.match(lfgbRegEx) && this.value.length === 4 || this.value.match(physikRegEx) && this.value.length === 12 ) {
-                    $headerInputBeurteilungProbennummer.add($headerInputBeurteilungAbteilung).val('');
-                    appendContentMainRow(inputTextLeft, inputTextRight, this.value)
-                } else {
-                    //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
-                    $(this).effect('highlight', {color: '#FF3100'}, 200);
-                    //Leert das eingabe Feld nach einem Fehlerhaften Eintrag
-                    $(this).val('');
-                    //Zeigt dem Benutzer eine kurze(2s) Fehler Nachricht an, via CSS "content".
-                    showFailMessage.failMessage('fail-input-not-a-nummber', 2500, this.id);
+            //Überprüft ob die Eingabe in der Inputbox, einer Probennummer entspricht.
+            if (inputTextLeft.match(yesRegEx) && inputTextLeft.length === minCharacter || inputText.match(zpnRegEx) && this.value.length === 3 || inputText.match(lfgbRegEx) && this.value.length === 4 || inputText.match(physikRegEx) && this.value.length === 12)  {
+                switch (this.id) {
+                    case 'header-input-eingang':
+                    case 'header-input-verwaltung':
+                        if ($.inArray(inputTextLeft, globalMainRowCounter) > -1) {
+                            //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
+                            $headerInputEingang
+                                .add($headerInputVerwaltung)
+                                .effect('highlight', {color: '#FF3100'}, 200);
+                            //Ja es ist bereits ein Datensatz vorhanden, es wird eine Fehler Meldung angezeigt.
+                            //Blendet für 3,5 sek. eine "Fehlgeschlagen, Doppelter Eintrag" auskunft ein.
+                            $headerInputEingang
+                                .add($headerInputVerwaltung)
+                                .val('');
+                            showFailMessage.failMessage('double-input', 2000, this.id);
+                        } else {
+                            //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
+                            $headerInputEingang
+                                .add($headerInputVerwaltung)
+                                .effect('highlight', {color: '#FFB700'}, 200);
+                            //in die Globale Variable "globalMainRowCounter" wird der hinzugefügte Datensatz zwischengespeichert.
+                            globalMainRowCounter.push(inputTextLeft);
+                            //Nein, es ist noch kein Datensatz vorhanden, eine neue Zeile mit dem Datensatz wird erstellt.
+                            //Ruft die Funktion "appendContentMainRow" auf um dem Inhalt der Variablen "inputText" als Tabelle in das DOM zu übertragen.
+                            appendContentMainRow(inputTextLeft, inputTextRight);
+                            //Leert das eingabe Feld nach einem Fehlerhaften Eintrag
+                            $headerInputEingang
+                                .add($headerInputVerwaltung)
+                                .val('');
+                        }
+                        break;
+                    case 'modal-header-input':
+                        searchDataSet(inputTextLeft);
+                        break;
+                    case 'header-input-beurteilung-probennummer':
+                        $headerInputBeurteilungAbteilung.focus();
+                        break;
+                    case 'header-input-beurteilung-abteilung':
+                        appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value)
+                        $headerInputBeurteilungProbennummer.add($headerInputBeurteilungAbteilung).val('');
+                        $headerInputBeurteilungProbennummer.focus();
+                        break;
+                    default:
                 }
+                //Überprüft ob in der Globalen Variable "globalMainRowCounter" bereits ein Datensatz der Variable "splitInputText[0]" beinhält.
+            // } else if (this.value.match(zpnRegEx) && this.value.length === 3 || this.value.match(lfgbRegEx) && this.value.length === 4 || this.value.match(physikRegEx) && this.value.length === 12 ) {
+            //     $headerInputBeurteilungProbennummer.add($headerInputBeurteilungAbteilung).val('');
+            //     appendContentMainRow(inputTextLeft, inputTextRight, this.value)
+            } else {
+                //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
+                $(this).effect('highlight', {color: '#FF3100'}, 200);
+                //Leert das eingabe Feld nach einem Fehlerhaften Eintrag
+                $(this).val('');
+                //Zeigt dem Benutzer eine kurze(2s) Fehler Nachricht an, via CSS "content".
+                showFailMessage.failMessage('fail-input-not-a-nummber', 2500, this.id);
             }
-        });
+        }
+    });
 }
 
 //
