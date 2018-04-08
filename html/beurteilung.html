@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="../css/style-global.css">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
+    <title>Muster beurteilung</title>
+</head>
+
+<body>
+    <div class="wrap-eingang" id="wrap-eingang">
+
+        <header class="wrap-header beurteilung">
+            <div class="header-caption-eingang">
+                <a class="header-a-button-home" href="../index.html">
+                    <img class="img-home" src="../css/icons/HermesLogo.png" title="Zurück zum Hauptmenü.">
+                </a>
+                <p class="header-caption">Beurteilung Ausgang</p>
+            </div>
+            <input class="header-input-eingang border-edged" id="header-input-beurteilung-probennummer" type="text" value="" spellcheck="false"
+                placeholder="Proben Nummer..." title="Bitte tragen Sie hier eine gültige Proben Nummer ein.">
+            <input class="header-input-eingang border-edged beurteilung-abteilung" id="header-input-beurteilung-abteilung" type="text" value="" spellcheck="false"
+                placeholder="an die Abteilung..." title="Bitte tragen Sie hier eine gültige Proben Nummer ein.">
+            <div class="header-fail-message-wrap beurteilung" id="header-fail-message-wrap">
+                <div class="header-fail-message-content" id="header-fail-message-content">
+                </div>
+            </div>
+        </header>
+
+        <main class="wrap-content displayNoneImportant" id="wrap-content">
+
+            <section class="content-header-row beurteilung" id="content-header-row">
+                <div class="content-header-cell beurteilung">Proben Nr.</div>
+                <div class="content-header-cell beurteilung">Soll</div>
+                <div class="content-header-cell beurteilung">An die ZPN</div>
+                <div class="content-header-cell beurteilung">An die LFGB</div>
+                <div class="content-header-cell beurteilung">An die Textilphysik</div>
+                <div class="content-header-cell beurteilung">Entfernen</div>
+            </section>
+
+            <section class="content-footer-count-row beurteilung" id="content-footer-count-row">
+
+                <div class="content-footer-count-input beurteilung probenSoll" title="Anzahl der eingetragenen Muster.">Muster Anzahl
+                    <br />
+                    <span class="content-footer-counter" id="content-footer-counter-muster">0</span> x
+                </div>
+                <div class="content-footer-count-input beurteilung sollDatum"></div>
+                <div class="content-footer-count-input beurteilung zStart" title="Anzahl der gestarteten Zerlegungen.">Anzahl an die ZPN
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-zerlegungStart">0</span> x
+                </div>
+                <div class="content-footer-count-input beurteilung zEnde" title="Anzahl der beendeten Zerlegungen.">Anzahl an die LFGB
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-zerlegungEnde">0</span> x
+                </div>
+                <div class="content-footer-count-input beurteilung eStart" title="Anzahl der begonnenen Einwaagen.">Anzahl an die Textilphysik
+                    <br/>
+                    <span class="content-footer-counter" id="content-footer-counter-einwaageBeginn">0</span> x
+                </div>
+                <div class="content-footer-count-input beurteilung delete"></div>
+            </section>
+
+        </main>
+        <footer class="wrap-footer displayNoneImportant" id="wrap-footer">
+            <button class="footer-button-send" id="footer-button-send" onclick="wrapData()" title="Aktualisieren Sie den&#92;die eingefügten Datensatz&#92;Datensätze.">&#151;&#62; Muster bereit stellen &#60;&#151; </button>
+        </footer>
+    </div>
+    <div class="sticky-footer-message-wrap sticky-footer-height" id="sticky-footer-message-wrap">
+        <div class="transmission-successful-wrapper" id="transmission-successful-wrapper">
+            <section class="transmission-success-message-wrap">
+                <span class="transmission-success-counter" id="transmission-success-counter">Bereitstellung erfolgreich eingetragen</span>
+            </section>
+        </div>
+    </div>
+    <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
+    <script type="text/javascript" src="../js/jquery-ui.js"></script>
+    <script type="text/javascript" src="../js/script-global.js"></script>
+    <script type="text/javascript" src="../js/script-beurteilung.js"></script>
+</body>
+
+</html>

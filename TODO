@@ -1,36 +1,65 @@
 
 Todo:
-✔ Wenn nichts bei der Verwaltung aktiviert wurde @done(18-03-15 22:12)
-✔ MaNa einwaage beginn hinzufügen @done(18-03-17 03:08)
-✔ Antwort der Datenbank abfrage verarbeiten. @done(18-03-28 11:11)
-✔ Aktivierung/Deaktivierung bei der Verwaltung checken. @done(18-03-20 01:09)
-✔ Verwaltung Header Ordnung @done(18-03-23 12:53)
+    Global:
+        ☐ All -> Überall noch Kommentare einfügen! @critical 
+        ☐ All -> Rechtschreibprüfung @critical 
 
-☐ All-- Überall noch Kommentare einfügen!
+        ☐ HTML -> Bubble Nachricht über Element hover @low
 
-☐ HTML--Bubble Nachricht über Element hover
+        ✔ PHP/DATENBANK/JS -> Neues Object Abfrage und verarbeitung @done(18-04-03 20:53)
 
-✔ CSS -> Zusammenfassung von transform: scaleY(0); @done(18-04-01 23:55)
+    Search Modal:
+        ✔ Search Modal -> befüllung @done(18-03-28 11:11)
+        ✔ Search Modal -> Content toggleSlide @done(18-03-28 11:11)
+        ✔ Search Modal -> Status Button Funktion @done(18-03-30 06:55)
+        ✔ Search Modal -> Status Button Fehler abfangen @done(18-04-02 02:29)
+        ✔ Search Modal -> Kommentar hinzufügen Funktion erstellen @done(18-04-01 23:55)
+        ✔ Search Modal -> Kommentar SQL dynamisch hinzufügen @done(18-04-01 02:59)
+        ✔ Search Modal -> Input mit Promt aus dem Append Wrap lösen @done(18-03-31 22:16)
+        ✔ Search Modal -> Promt Slider ändern @done(18-03-31 22:16)
+        ✔ Search Modal -> Bei Neuaufruf, Kommentar nach unten sliden lassen @done(18-04-01 23:55)
+        ✔ Search Modal -> SQL Injection durch verbot von bestimmten Zeichen verhindern!!! @done(18-04-02 02:28)
+        ✔ Wenn nichts bei der Verwaltung aktiviert wurde @done(18-03-15 22:12)
+        ✔ MaNa einwaage beginn hinzufügen @done(18-03-17 03:08)
+        ✔ Antwort der Datenbank abfrage verarbeiten. @done(18-03-28 11:11)
+        ✔ Aktivierung/Deaktivierung bei der Verwaltung checken. @done(18-03-20 01:09)
+        ✔ Verwaltung Header Ordnung @done(18-03-23 12:53)
 
-✔ JS--ZPN Wagen doppelter Eintrag @done(18-03-12 20:02)
-✔ JS--Disable Buttons aufhebung @done(18-03-12 21:27)
-✔ JS/Datenbank--Schon bei dem einscann prüfen, und entsprechende Buttons ausgrauen @done(18-03-17 20:40)
+        ✔ HTML -> "Std.", "Uhr", "Nicht vorhanden" und "Nicht zu ermitteln" einfügen @done(18-04-03 20:53)
 
-✔ Datenbank -> SQL Abfrage in Date und Time splitten @done(18-03-27 08:28)
-✔ Datenbank -> Muster Verwaltung Soll Datum abfrage @done(18-03-27 21:08)
-✘ Datenbank-> Mehrere Kommentare und Klärfall abfragen der Datenbank verarbeiten @cancelled(18-04-01 23:56)
-☐ Datenbank-- MySql Nacht und Wochenende raus rechnen
-☐ Datenbank-- Nickel Rückgabe zum Muster Eingang | Es funktioniert aber UNSCHÖN!
+        ✔ CSS -> Zusammenfassung von transform: scaleY(0); @done(18-04-01 23:55)
 
-✔ Search Modal--befüllung @done(18-03-28 11:11)
-✔ Search Modal--Content toggleSlide @done(18-03-28 11:11)
-✔ Search Modal -> Status Button Funktion @done(18-03-30 06:55)
-✔ Search Modal -> Status Button Fehler abfangen @done(18-04-02 02:29)
-✔ Search Modal-> Kommentar hinzufügen Funktion erstellen @done(18-04-01 23:55)
-✔ Search Modal -> Kommentar SQL dynamisch hinzufügen @done(18-04-01 02:59)
-✔ Search Modal -> Input mit Promt aus dem Append Wrap lösen @done(18-03-31 22:16)
-✔ Search Modal -> Promt Slider ändern @done(18-03-31 22:16)
-✔ Search Modal -> Bei Neuaufruf, Kommentar nach unten sliden lassen @done(18-04-01 23:55)
-✔ Search Modal -> SQL Injection durch verbot von bestimmten Zeichen verhindern!!! @done(18-04-02 02:28)
+    Eingang Seite:
+        ✔ JS -> Auch für den ZPN Muster Eingang eine status Abfrage der Button's @low @done(18-04-04 16:27)
+        ✘ JS -> Eingang Input Soll Datum Abfragen @high @cancelled(18-04-08 02:09)
 
-✔ PHP -> Seitige Antworten verbessern @done(18-03-19 02:15)
+    Verwaltung Seite:
+
+        ✔ JS -> ZPN Wagen doppelter Eintrag @done(18-03-12 20:02)
+        ✔ JS -> Disable Buttons aufhebung @done(18-03-12 21:27)
+        ✔ JS/Datenbank -> Schon bei dem einscann prüfen, und entsprechende Buttons ausgrauen @done(18-03-17 20:40)
+        ✔ JS -> Disable der Buttons erweitern @done(18-04-04 05:17)
+        ✔ JS -> Button Status Funktion umstrukturieren!! @done(18-04-04 13:56)
+        ✔ JS -> Umstrukturierung der aktiven Button abfrage!! @high @done(18-04-07 23:33)
+
+    Beurteilung Seite:
+        ☐ HTML -> Seite erstellen
+        ☐ HTML -> Doppelte Input Abfrage: "Probennummer" und "an Abteilung"
+
+    Übersichte Seite:
+        ☐ HTML -> Seite erstellen
+
+        ☐ JS -> Dynamische Anzeige der bereit leigenden Muster
+        ☐ JS -> Dynamische Anzeige für eingereichte Klärfälle
+
+        ☐ CSS -> Media Query umd dynamisch die Anzeige als dünnes Fenster anzuzeigen
+
+    Datenbank:
+        ✔ Datenbank -> SQL Abfrage in Date und Time splitten @done(18-03-27 08:28)
+        ✔ Datenbank -> Muster Verwaltung Soll Datum abfrage @done(18-03-27 21:08)
+        ✔ Datenbank -> Mehrere Kommentare abfragen der Datenbank verarbeiten @done(18-04-04 05:32)
+        ☐ Datenbank -> MySql Nacht und Wochenende raus rechnen @high
+        ☐ Datenbank -> Nickel Rückgabe zum Muster Eingang | Es funktioniert aber UNSCHÖN! @low
+        ✔ Datenbank -> Primary Key auf die Beurteiler Probennummer setzten und sicherstellen das die Fremdschlüssel gehen @critical @done(18-04-07 23:33)
+
+        ✔ PHP -> Seitige Antworten verbessern @done(18-03-19 02:15)

@@ -12,7 +12,7 @@
 body {
     height: 100%;
     width: 100%;
-    background-color: #0091CD;
+    background-color: #0091cd;
 }
 
 button {
@@ -52,7 +52,7 @@ button::-moz-focus-inner {
     grid-template-areas: "wrapHeader" "wrapMain" "wrapFooter";
     width: 97vw;
     margin: 1.5vh auto 0 auto;
-    border-radius: .2vw;
+    border-radius: 0.2vw;
     box-shadow: 0px 2px 20px 1px rgb(4, 10, 43);
 }
 
@@ -66,6 +66,10 @@ button::-moz-focus-inner {
     grid-template-rows: repeat(3, auto);
     height: 100%;
     width: 100%;
+}
+
+.wrap-header.beurteilung{
+    grid-template-rows: repeat(4, auto);
 }
 
 .header-a-button-home {
@@ -104,11 +108,11 @@ img:hover {
     display: grid;
     grid-template-columns: 10% 80% 10%;
     height: 100%;
-    padding: .7vw 0;
-    border-radius: .2vw .2vw 0 0;
+    padding: 0.7vw 0;
+    border-radius: 0.2vw 0.2vw 0 0;
     font-size: 4vw;
     text-align: center;
-    text-shadow: 0px 4px 10px rgba(0, 0, 0, .5);
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
     background-color: gainsboro;
 }
 
@@ -125,11 +129,15 @@ img:hover {
     outline: 0;
     border-right: solid 1px gainsboro;
     border-left: solid 1px gainsboro;
-    border-bottom: solid 2px #9A9A9A;
+    border-bottom: solid 2px #9a9a9a;
     font-size: 2vw;
     text-align: center;
     box-shadow: 0px 0px 6px 0px rgb(0, 0, 0);
     background-color: ghostwhite;
+}
+
+.header-input-eingang.beurteilung-abteilung {
+    grid-row: 3;
 }
 
 .header-fail-message-wrap {
@@ -141,7 +149,11 @@ img:hover {
     overflow: hidden;
     transition: max-height 0.3s;
     box-shadow: 0px 1px 5px 0px rgb(0, 0, 0);
-    background: #FF3100;
+    background: #ff3100;
+}
+
+.header-fail-message-wrap.beurteilung {
+    grid-row: 4;
 }
 
 .header-fail-message-content {
@@ -169,9 +181,25 @@ img:hover {
     white-space: pre-wrap;
 }
 
+.fail-input-not-a-nummber::after {
+    content: "Die Eingabe entspricht keiner Probennummer!";
+    white-space: pre-wrap;
+}
+
 .fail-input-verwaltung::after {
     content: "Ups!\A \A Sie habe in einer oder mehreren Zeile/n \A \A keine Auswahl getroffen!";
     white-space: pre-wrap;
+}
+
+.fail-input-search-modal::after {
+    content: "Ihre Eingabe entspricht keiner g&#252;ltige Probennummer!";
+    white-space: pre-wrap;
+}
+
+.fail-input-no-dataset::after {
+    content: "Datensatz nicht vorhanden!";
+    white-space: pre-wrap;
+    font-size: 5vw;
 }
 
 .fail-connect::after {
@@ -180,7 +208,7 @@ img:hover {
 }
 
 .fail-forbidden::after {
-    content: "Sie haben eine verbotene Buchstabenreihenfolge eingegeben, bitte überdenken Sie noch mal ihre Eingabe!";
+    content: "Sie haben eine verbotene Buchstabenreihenfolge eingegeben, bitte &#252;berdenken Sie noch mal ihre Eingabe!";
     white-space: pre-wrap;
 }
 
@@ -195,7 +223,7 @@ img:hover {
 }
 
 .border-edged {
-    border-radius: 0 0 .2vw .2vw;
+    border-radius: 0 0 0.2vw 0.2vw;
 }
 
 /*Ende Header wrap*/
@@ -216,6 +244,13 @@ img:hover {
 .content-footer-count-row.verwaltung {
     display: grid;
     grid-template-columns: repeat(14, 1fr);
+}
+
+.content-header-row.beurteilung,
+.content-main-row.beurteilung,
+.content-footer-count-row.beurteilung {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
 }
 
 .content-footer-count-row.verwaltung {
@@ -241,7 +276,7 @@ img:hover {
     padding: 1.2vh;
     border-left: solid 1px ghostwhite;
     border-bottom: none;
-    border-bottom: 2px solid #18B7FB;
+    border-bottom: 2px solid #18b7fb;
     text-align: center;
     font-size: 1vw;
 }
@@ -269,18 +304,18 @@ img:hover {
 .content-footer-count-input:nth-child(8).verwaltung,
 .content-footer-count-input:nth-child(10).verwaltung,
 .content-footer-count-input:nth-child(14).verwaltung {
-    border-left-color: #18B7FB;
+    border-left-color: #18b7fb;
 }
 
 .content-main-row:hover {
     text-shadow: -1px 0 black;
-    background-color: #67C0E6;
+    background-color: #67c0e6;
     box-shadow: 0px 1px 5px 0px rgb(0, 0, 0);
 }
 
 .content-main-cell {
     display: grid;
-    padding: .8vh .3vw .8vh .3vw;
+    padding: 0.8vh 0.3vw 0.8vh 0.3vw;
     border-left: solid 1px gainsboro;
     border-bottom: solid 1px gainsboro;
 }
@@ -298,17 +333,17 @@ img:hover {
 .content-button-check {
     height: 100%;
     width: 100%;
-    border-radius: .2vw;
-    font-size: .8vw;
+    border-radius: 0.2vw;
+    font-size: 0.8vw;
     background-color: #ededed;
 }
 
 .content-button-check:hover {
-    background-color: #FFB700 !important;
+    background-color: #ffb700 !important;
 }
 
 .setButtonStatus {
-    background-color: #00FF67;
+    background-color: #00ff67;
     text-decoration-line: line-through;
 }
 
@@ -326,22 +361,23 @@ img:hover {
 
 .content-button-delete {
     width: 100%;
-    border-radius: .2vw;
-    font-size: .7vw;
-    background-color: #FFB9A9;
+    border-radius: 0.2vw;
+    font-size: 0.7vw;
+    background-color: #ffb9a9;
 }
 
 .content-button-delete:hover {
-    background-color: #FF3100;
+    background-color: #ff3100;
 }
 
-.content-footer-count-row {}
+.content-footer-count-row {
+}
 
 .content-footer-count-input {
     padding: 5px 0 5px 0;
-    border-top: solid 2px #18B7FB;
+    border-top: solid 2px #18b7fb;
     border-left: solid 1px ghostwhite;
-    font-size: .8vw;
+    font-size: 0.8vw;
     text-align: center;
     line-height: 1.2;
     background-color: gainsboro;
@@ -373,25 +409,25 @@ img:hover {
 }
 
 .hidden-row {
-    font-size: .6vw;
+    font-size: 0.6vw;
 }
 
 .hidden-row.confirm-button {
     grid-area: confirmButton;
-    background-color: #00B64A;
+    background-color: #00b64a;
 }
 
 .hidden-row.confirm-button:hover {
-    background-color: #10FC6F;
+    background-color: #10fc6f;
 }
 
 .hidden-row.cancel-button {
     grid-area: cancelButton;
-    background-color: #FFB9A9;
+    background-color: #ffb9a9;
 }
 
 .hidden-row.cancel-button:hover {
-    background-color: #FF3100;
+    background-color: #ff3100;
 }
 
 /*Ender Content wrap*/
@@ -408,17 +444,17 @@ img:hover {
     grid-area: SendButton;
     width: 100%;
     height: 100%;
-    padding-bottom: .3vw;
+    padding-bottom: 0.3vw;
     border: 0;
-    border-top: solid 2px #9A9A9A;
-    border-radius: 0 0 .2vw .2vw;
+    border-top: solid 2px #9a9a9a;
+    border-radius: 0 0 0.2vw 0.2vw;
     font-size: 3vw;
     background-color: gainsboro;
-    text-shadow: 0px 4px 10px rgba(0, 0, 0, .5);
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 .footer-button-send:hover {
-    background-color: #FFB700;
+    background-color: #ffb700;
 }
 
 /*Ende Footer wrap*/
@@ -436,7 +472,7 @@ img:hover {
     grid-template-areas: "successContent" "failContent";
     width: 100%;
     position: fixed;
-    bottom: 0px;
+    bottom: 40%;
     right: -2000px;
     transition: transform 300ms cubic-bezier(0.47, 0, 0.75, 0.72);
 }
@@ -451,7 +487,7 @@ img:hover {
     justify-items: center;
     align-items: center;
     height: 10vw;
-    background-color: #FFB700;
+    background-color: #ffb700;
 }
 
 .transmission-success-message-wrap {
@@ -461,7 +497,7 @@ img:hover {
 
 .transmission-fail-wrap {
     grid-area: failContent;
-    background-color: #FF3100;
+    background-color: #ff3100;
     width: 100%;
 }
 
@@ -482,7 +518,7 @@ img:hover {
 .transmission-failed-wrapper-doubleItems {
     padding: 1vh;
     width: 100%;
-    background-color: #FF3100;
+    background-color: #ff3100;
 }
 
 .transmission-double-input-wrap {
@@ -496,7 +532,7 @@ img:hover {
 .transmission-doubleInput-data {
     padding: 0 10px;
     font-size: 2vw;
-    text-shadow: 0px 4px 10px rgba(0, 0, 0, .5);
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.5);
 }
 
 /*Ende Sticky Footer*/

@@ -2,119 +2,98 @@
 
 require_once 'db-connect.php';
 
-    if ( isset( $_POST['updateDataSet'] ) )
-    {
-        $receivedItem = $_POST['updateDataSet'];
-        $transmitResponse = [
-            'itemCount' => '',
-        ];
+$receivedPostData = json_decode(json_encode($_POST, JSON_FORCE_OBJECT));
 
-        //Durchläuft das angekommene Array
-        foreach ( $receivedItem as $i )
-        {
-            $yesRegEx = '/\d{2}-\d{6}-\d{2}/';
+if (isset($receivedPostData->updateDataSet)) {
+    $receivedItem = $receivedPostData->updateDataSet;
+    // $receivedItem = $_POST['updateDataSet'];
+    $transmitResponse = new stdClass;
+    // $transmitResponse->itemCount = 0;
+    $transmitResponse = [
+        'itemCount' => '',
+    ];
 
-            $pdoConnect = db_connect();
+    //Durchläuft das angekommene Array
+    foreach ($receivedItem as $i) {
+        $yesRegEx = '/\d{2}-\d{6}-\d{2}/';
+        $pdoObject = new stdClass;
+        $responseData = new stdClass;
+        $updateObject = new stdClass;
 
-            $responseData = array
-            (
-                'success'       => '',
-                'objectItem'    => '',
-                'objectTable'   => '',
-                'objectText'    => '',
-                'berechnung'    => '',
-                'failCode'      => '',
-                'pdoException'  => ''
-            );
+        foreach ($i as $key => $value) {
+            $updateObject->$key = $value;
+        }
 
-            $updateObject = array
-            (
-                'probenNummer'      => $i['probenNummer'],
-                'sollDatum'         => $i['sollDatum'],
-                'zerlegungStart'    => $i['zerlegungStart'],
-                'zerlegungEnde'     => $i['zerlegungEnde'],
-                'einwaageBeginn'    => $i['einwaageBeginn'],
-                'einwaageEnde'      => $i['einwaageEnde'],
-                'klaerfallBeginn'   => $i['klaerfallBeginn'],
-                'klaerfallEnde'     => $i['klaerfallEnde'],
-                'manaBestellt'      => $i['manaBestellt'],
-                'manaErhalten'      => $i['manaErhalten'],
-                'manaEinwaage'      => $i['manaEinwaage'],
-                'manaEingewogen'    => $i['manaEingewogen'],
-                'zpnWagen'          => $i['zpnWagen']
-            );
+        $pdoConnect = db_connect();
 
-            if ( preg_match( $yesRegEx, $i['probenNummer'] ) )
-            {
-                set_include_path( 'php/' );
-                include_once( 'fn/fn-checkIfEingang.php' );
-                include_once( 'fn/fn-setDateTime.php' );
+        if (preg_match($yesRegEx, $updateObject->probenNummer)) {
+            set_include_path( 'php/' );
+            include_once( 'fn/fn-checkIfEingang.php' );
+            include_once( 'fn/fn-setDateTime.php' );
 
-                $transmitResponse['itemCount']++;
+            $transmitResponse['itemCount']++;
 
-                //Durchläuft das einzelene Array
-                foreach ( $updateObject as $key => $value )
-                {
-                    if ( $value === 'active' )
-                    {
-                        $checkIfEingang =  checkIfEingang( $pdoConnect, $i['probenNummer'], $i["sollDatum"], $transmitResponse );
+            //Durchläuft das einzelene Array
+            foreach ($updateObject as $key => $value) {
+                if ($value === 'active') {
 
-                        switch ( $key )
-                        {
-                            case 'zerlegungStart':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_zerlegung', 'zerlegungStart', 'zerlegungEnde', 'zerlegungBerechnung', $checkIfEingang, $transmitResponse, 'start' ) );
-                            break;
-                            
-                            case 'zerlegungEnde':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_zerlegung', 'zerlegungStart', 'zerlegungEnde', 'zerlegungBerechnung', $checkIfEingang, $transmitResponse, 'ende' ) );
-                            break;
-                            
-                            case 'einwaageBeginn':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_probennahme', 'einwaageBeginn', 'einwaageEnde', 'einwaageBerechnung', $checkIfEingang, $transmitResponse, 'start' ) );
-                            break;
+                    $checkIfEingang = checkIfEingang($pdoConnect, $i->probenNummer, $i->sollDatum, $transmitResponse, $pdoObject, $responseData);
 
-                            case 'einwaageEnde':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_probennahme', 'einwaageBeginn', 'einwaageEnde', 'einwaageBerechnung', $checkIfEingang, $transmitResponse, 'ende' ) );
-                            break;
+                    switch ($key) {
+                        case 'zerlegungStart':
+                            array_push($transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_zerlegung', 'zerlegungStart', 'zerlegungEnde', 'zerlegungBerechnung', $checkIfEingang, $transmitResponse, $pdoObject, 'start'));
+                        break;
+                        
+                        case 'zerlegungEnde':
+                            array_push( $transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_zerlegung', 'zerlegungStart', 'zerlegungEnde', 'zerlegungBerechnung', $checkIfEingang, $transmitResponse, $pdoObject, 'ende'));
+                        break;
+                        
+                        case 'einwaageBeginn':
+                            array_push( $transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_probennahme', 'einwaageBeginn', 'einwaageEnde', 'einwaageBerechnung', $checkIfEingang, $transmitResponse, $pdoObject, 'start'));
+                        break;
 
-                            case 'nickelBack':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_nickel', 'eingangDateTime', 'nickelRueckgabeDateTime', 'nickeBerechnung', $checkIfEingang, $transmitResponse, 'ende' ) );
-                            break;
+                        case 'einwaageEnde':
+                            array_push( $transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_probennahme', 'einwaageBeginn', 'einwaageEnde', 'einwaageBerechnung', $checkIfEingang, $transmitResponse, $pdoObject, 'ende'));
+                        break;
 
-                            case 'klaerfallBeginn':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_klaerfall', 'klaerfallBeginnDateTime', 'klaerfallEndeDateTime', 'klaerfallBerechnung', $checkIfEingang, $transmitResponse, 'start' ) );
-                            break;
+                        case 'nickelBack':
+                            array_push( $transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_nickel', 'eingangDateTime', 'nickelRueckgabeDateTime', 'nickeBerechnung', $checkIfEingang, $transmitResponse, $pdoObject, 'ende'));
+                        break;
 
-                            case 'klaerfallEnde':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_klaerfall','klaerfallBeginnDateTime', 'klaerfallEndeDateTime', 'klaerfallBerechnung', $checkIfEingang, $transmitResponse, 'ende' ) );
-                            break;
+                        case 'klaerfallBeginn':
+                            array_push($transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_klaerfall', 'klaerfallBeginnDateTime', 'klaerfallEndeDateTime', 'klaerfallBerechnung', $checkIfEingang, $transmitResponse, $pdoObject, 'start'));
+                        break;
 
-                            case 'manaBestellt':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_mana', 'manaGestelltDateTime', 'manaErhaltenDateTime', '', $checkIfEingang, $transmitResponse, 'start' ) );
-                            break;
+                        case 'klaerfallEnde':
+                            array_push($transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_klaerfall','klaerfallBeginnDateTime', 'klaerfallEndeDateTime', 'klaerfallBerechnung', $checkIfEingang, $transmitResponse, $pdoObject, 'ende'));
+                        break;
 
-                            case 'manaErhalten':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_mana','manaGestelltDateTime', 'manaErhaltenDateTime', 'manaBerechnungDateTimeAnfrage', $checkIfEingang, $transmitResponse, 'ende' ) );
-                            break;
+                        case 'manaBestellt':
+                            array_push($transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_mana', 'manaGestelltDateTime', 'manaErhaltenDateTime', '', $checkIfEingang, $transmitResponse, $pdoObject, 'start'));
+                        break;
 
-                            case 'manaEinwaage':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_mana','manaEinwaageDateTime', 'manaZpnWagenDateTime', '', $checkIfEingang, $transmitResponse, 'start' ) );
-                            break;
+                        case 'manaErhalten':
+                            array_push($transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_mana','manaGestelltDateTime', 'manaErhaltenDateTime', 'manaBerechnungDateTimeAnfrage', $checkIfEingang, $transmitResponse, $pdoObject, 'ende'));
+                        break;
 
-                            case 'manaEingewogen':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_mana', 'manaEinwaageDateTime', 'manaZpnWagenDateTime', 'manaBerechnungDateTimeEinwaage', $checkIfEingang, $transmitResponse, 'ende' ) );
-                            break;
+                        case 'manaEinwaage':
+                            array_push($transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_mana','manaEinwaageDateTime', 'manaZpnWagenDateTime', '', $checkIfEingang, $transmitResponse, $pdoObject, 'start'));
+                        break;
 
-                            case 'zpnWagen':
-                                array_push( $transmitResponse, setDateTime( $pdoConnect, $i['probenNummer'], 'tbl_zpnwagen', 'eingangDateTime', 'zpnWagenDateTime', 'berechnungDateTimeZpnwagen', $checkIfEingang, $transmitResponse, 'ende' ) );
-                            break;
-                            
-                            default:
-                        }
+                        case 'manaEingewogen':
+                            array_push($transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_mana', 'manaEinwaageDateTime', 'manaZpnWagenDateTime', 'manaBerechnungDateTimeEinwaage', $checkIfEingang, $transmitResponse, $pdoObject, 'ende'));
+                        break;
+
+                        case 'zpnWagen':
+                            array_push($transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_zpnwagen', 'zpnEingangDateTime', 'zpnWagenDateTime', 'berechnungDateTimeZpnwagen', $checkIfEingang, $transmitResponse, $pdoObject, 'ende'));
+                        break;
+                        
+                        default:
                     }
                 }
             }
         }
-        echo json_encode( $transmitResponse );
-        $pdoConnect = null;
     }
+    echo json_encode($transmitResponse);
+    $pdoConnect = null;
+}

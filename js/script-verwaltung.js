@@ -1,139 +1,155 @@
-'use strict'
+"use strict";
 
-function getButtonStatus(probenNummer) {
+function getVerwaltungButtonStatus(probenNummer) {
     const ajaxRequestObject = $.ajax({
-        url: '../php/db-requestObject.php',
-        method: 'POST',
+        url: "../php/db-requestObject.php",
+        method: "POST",
         data: {
-            requestDataSet: probenNummer
+            requestDataSetDate: probenNummer
         },
-        dataType: 'json'
+        dataType: "json"
     });
 
-    ajaxRequestObject.done(function (data) {
+    ajaxRequestObject.done(function(data) {
+        console.log(data);
+        const baseItems = {
+            probenNummer: $("#text-prbNr"),
+            sollDatum: $("#text-sollNr")
+        };
 
         const rowItems = {
-            zerlegungStartDate: $('#content-btn-zerlegungStart'),
-            zerlegungEndeDate: $('#content-btn-zerlegungEnde'),
-            einwaageBeginnDate: $('#content-btn-einwaageBeginn'),
-            einwaageEndeDate: $('#content-btn-einwaageEnde'),
-            zpnWagenDateTime: $('#content-btn-zpnWagen'),
-            klaerfallBeginnDate: $('#content-btn-klaerfallBeginn'),
-            klaerfallEndeDate: $('#content-btn-klaerfallEnde'),
-            manaErhaltenDate: $('#content-btn-manaErhalten'),
-            manaGestelltDate: $('#content-btn-manaBestellt'),
-            manaEinwaageDate: $('#content-btn-manaEinwaage'),
-            manaZpnWagenDate: $('#content-btn-manaEingewogen'),
-            sollDatum: $('#text-sollNr')
+            einwaageBeginn: $("#content-btn-einwaageBeginn"),
+            einwaageEnde: $("#content-btn-einwaageEnde"),
+            klaerfallBeginnDateTime: $("#content-btn-klaerfallBeginn"),
+            klaerfallEndeDateTime: $("#content-btn-klaerfallEnde"),
+            manaEinwaageDateTime: $("#content-btn-manaEinwaage"),
+            manaErhaltenDateTime: $("#content-btn-manaErhalten"),
+            manaGestelltDateTime: $("#content-btn-manaBestellt"),
+            manaZpnWagenDateTime: $("#content-btn-manaEingewogen"),
+            zerlegungStart: $("#content-btn-zerlegungStart"),
+            zerlegungEnde: $("#content-btn-zerlegungEnde"),
+            zpnWagenDateTime: $("#content-btn-zpnWagen")
         };
+
+        baseItems.probenNummer.html(data.base.probenNummer);
+        baseItems.sollDatum.html(data.base.sollDatum);
 
         function setButtonStatus(rowItems, itemKey, dataValue) {
             const setItem = rowItems[itemKey];
-            if (itemKey == 'sollDatum') {
-                setItem.html(dataValue)
-            } else {
-                setItem
-                    .prop('disabled', true)
-                    .addClass('setButtonStatus')
-                    .val('preSet');
-            }
+            setItem
+                .prop("disabled", true)
+                .addClass("setButtonStatus")
+                .val("preSet");
         }
 
-        $.each(data, function (dataKey, dataValue) {
-            $.each(rowItems, function (itemKey, itemValue) {
-                switch (dataKey) {
-                    case itemKey:
-                        setButtonStatus(rowItems, itemKey, dataValue);
-                        break;
-                    default:
-                }
+        //Prüft ob des den gewünschten Wert gibt, wenn ja setzt den entsprechenden status auf den Button um
+        $.each(data.date, function(dataKey, dataValue) {
+            $.each(rowItems, function(itemKey, itemValue) {
+                itemKey === dataKey
+                    ? setButtonStatus(rowItems, itemKey, dataValue)
+                    : "";
             });
         });
     });
 
-    ajaxRequestObject.fail(function (jqXHR, textStatus, errorThrown) {
-        // console.log( textStatus, errorThrown );
+    ajaxRequestObject.fail(function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
         // showFailMessage.failMessage( 'no-server header-fail-message-content-margin', 8000 );
         backToInput();
     });
 }
-//                                                                                                                                            
+//
 //Fügt einen Neuen Datensatz in das HTML ein.
 function appendContentMainRow(inputTextLeft, inputTextRight) {
-
-    const $contentHeaderRow = $('#content-header-row');
-    const $wrapContent$wrapFooter = $('#wrap-content').add($('#wrap-footer'));
-    const $headerInput = $('#header-input-verwaltung');
+    const $contentHeaderRow = $("#content-header-row");
+    const $wrapContent$wrapFooter = $("#wrap-content").add($("#wrap-footer"));
+    const $headerInput = $("#header-input-verwaltung");
     const contentAppend =
-        (
-            " <section class='content-main-row verwaltung' id='content-main-row'> " +
-            " <div class='content-main-cell' title='Eingetragene Proben Nummer.'> " +
-            " <p class='content-main-text' id='text-prbNr'>" + inputTextLeft + " </p> " +
-            "</div> " +
-            " <div class='content-main-cell verwaltung' title='Solldatum zum Muster.'>" +
-            " <p class='content-main-text' id='text-sollNr' contenteditable='false'>" + inputTextRight + " </p> " +
-            "</div> " +
-            " <div class='content-main-cell verwaltung' title='Betätigen Sie diese Schaltfläche bevor Sie mit der Zerlegung beginnen möchten.'> " +
-            " <button type='button' class='content-button-check' id='content-btn-zerlegungStart' value='deactive'>Zerlegung<br />Start</button> " +
-            " </div> " +
-            " <div class='content-main-cell verwaltung' title='Betätigen Sie diese Schaltfläche nach beendigung der Zerlegung.'> " +
-            " <button type='button' class='content-button-check' id='content-btn-zerlegungEnde' value='deactive'>Zerlegung<br />Ende</button> " +
-            " </div> " +
-            " <div class='content-main-cell verwaltung' title='Betätigen Sie diese Schaltfläche bevor Sie die Einwaage beginnen möchten.'> " +
-            " <button type='button' class='content-button-check' id='content-btn-einwaageBeginn' value='deactive'>Einwaage<br />Start</button> " +
-            " </div> " +
-            " <div class='content-main-cell verwaltung' title='Betätigen Sie diese Schaltfläche nach beendigung der Einwaage.'> " +
-            " <button type='button' class='content-button-check' id='content-btn-einwaageEnde' value='deactive'>Einwaage<br />Ende</button> " +
-            " </div> " +
-            " <div class='content-main-cell verwaltung' title='Betätigen Sie diese Schaltfläche wenn Sie die Einwaage&#47;n&#10;auf dem ZPN Wagen bereit gestellt habe&#47;n.'> " +
-            " <button type='button' class='content-button-check' id='content-btn-zpnWagen' value='deactive'>ZPN<br />Wagen</button>" +
-            " </div> " +
-            " <div class='content-main-cell verwaltung' title='Betätigen Sie diese Schaltfläche wenn Sie einen Kl&#228;rfall beginnen möchten.'> " +
-            " <button type='button' class='content-button-check' id='content-btn-klaerfallBeginn' value='deactive'>Klärfall<br />Beginn</button> " +
-            " </div> " +
-            " <div class='content-main-cell verwaltung' title='Betätigen Sie diese Schaltfläche wenn eine Kl&#228;rfall beendet wurde.'> " +
-            " <button type='button' class='content-button-check' id='content-btn-klaerfallEnde' value='deactive'>Klärfall<br />Ende</button> " +
-            " </div> " +
-            " <div class='content-main-cell verwaltung' title='Betätigen Sie diese Schaltfläche wenn Sie eine MaNa bestellt haben.'> " +
-            " <button type='button' class='content-button-check' id='content-btn-manaBestellt' value='deactive'>MaNa<br />Bestellt</button> " +
-            " </div> " +
-            " <div class='content-main-cell verwaltung' title='Betätigen Sie diese Schaltfläche wenn Sie das MaNa Material erhalten haben.'> " +
-            " <button type='button' class='content-button-check' id='content-btn-manaErhalten' value='deactive'>MaNa<br />Erhalten</button>" +
-            " </div> " +
-            " <div class='content-main-cell verwaltung' title='Betätigen Sie diese Schaltfläche wenn Sie die MaNa Einwaage beginnen möchten.'> " +
-            " <button type='button' class='content-button-check' id='content-btn-manaEinwaage' value='deactive'>MaNa<br />Einwaage</button>" +
-            " </div> " +
-            " <div class='content-main-cell verwaltung' title='Betätigen Sie diese Schaltfläche nach beendigung der MaNa Einwaage.'> " +
-            " <button type='button' class='content-button-check' id='content-btn-manaEingewogen' value='deactive'>MaNa<br />Eingewogen</button>" +
-            " </div> " +
-            " <div class='content-main-cell verwaltung'> " +
-            " <div class='content-button-delete-wrap'> " +
-            " <button type='button' class='content-button-delete' id='content-main-row-delete-button' title='Betätigen Sie diese Schaltfläche um den entfernen Dialog zu starten und zu beenden.'>Entfernen</button> " +
-            " <div class='slideToggle-wrap-hidden-row' id='slideToggle-wrap-hidden-row'> " +
-            " <div class='wrap-hidden-row' id='wrap-hidden-row'> " +
-            " <button class='hidden-row confirm-button' id='hidden-row-confirm-button' title='Mit dieser Schaltfläche bestätigen Sie das entfernen der ausgewählten Zeile&#33;'>Ja</button> " +
-            " <button class='hidden-row cancel-button' id='hidden-row-cancel-button' title='Mit dieser Schaltfläche beenden Sie den entfernen Dialog.'>Nein</button> " +
-            " </div> " +
-            " </div> " +
-            " </div> " +
-            " </div> " +
-            " </section>"
-        );
+        " <section class='content-main-row verwaltung' id='content-main-row'> " +
+        " <div class='content-main-cell' title='Eingetragene Proben Nummer.'> " +
+        " <p class='content-main-text' id='text-prbNr'>" +
+        inputTextLeft +
+        "</p> " +
+        "</div> " +
+        " <div class='content-main-cell verwaltung' title='Solldatum zum Muster.'>" +
+        " <p class='content-main-text' id='text-sollNr' contenteditable='false'>" +
+        inputTextRight +
+        "</p> " +
+        "</div> " +
+        " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie mit der Zerlegung beginnen möchten.'> " +
+        " <button type='button' class='content-button-check' id='content-btn-zerlegungStart' value='deactive'>Zerlegung<br />Start</button> " +
+        " </div> " +
+        " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der Zerlegung.'> " +
+        " <button type='button' class='content-button-check' id='content-btn-zerlegungEnde' value='deactive'>Zerlegung<br />Ende</button> " +
+        " </div> " +
+        " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie die Einwaage beginnen möchten.'> " +
+        " <button type='button' class='content-button-check' id='content-btn-einwaageBeginn' value='deactive'>Einwaage<br />Start</button> " +
+        " </div> " +
+        " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der Einwaage.'> " +
+        " <button type='button' class='content-button-check' id='content-btn-einwaageEnde' value='deactive'>Einwaage<br />Ende</button> " +
+        " </div> " +
+        " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn Sie die Einwaage&#47;n&#10;auf dem ZPN Wagen bereit gestellt habe&#47;n.'> " +
+        " <button type='button' class='content-button-check' id='content-btn-zpnWagen' value='deactive'>ZPN<br />Wagen</button>" +
+        " </div> " +
+        " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn Sie einen Kl&#228;rfall beginnen möchten.'> " +
+        " <button type='button' class='content-button-check' id='content-btn-klaerfallBeginn' value='deactive'>Kl&#228;rfall<br />Beginn</button> " +
+        " </div> " +
+        " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn eine Kl&#228;rfall beendet wurde.'> " +
+        " <button type='button' class='content-button-check' id='content-btn-klaerfallEnde' value='deactive'>Kl&#228;rfall<br />Ende</button> " +
+        " </div> " +
+        " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn Sie eine MaNa bestellt haben.'> " +
+        " <button type='button' class='content-button-check' id='content-btn-manaBestellt' value='deactive'>MaNa<br />Bestellt</button> " +
+        " </div> " +
+        " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn Sie das MaNa Material erhalten haben.'> " +
+        " <button type='button' class='content-button-check' id='content-btn-manaErhalten' value='deactive'>MaNa<br />Erhalten</button>" +
+        " </div> " +
+        " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn Sie die MaNa Einwaage beginnen möchten.'> " +
+        " <button type='button' class='content-button-check' id='content-btn-manaEinwaage' value='deactive'>MaNa<br />Einwaage</button>" +
+        " </div> " +
+        " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der MaNa Einwaage.'> " +
+        " <button type='button' class='content-button-check' id='content-btn-manaEingewogen' value='deactive'>MaNa<br />Eingewogen</button>" +
+        " </div> " +
+        " <div class='content-main-cell verwaltung'> " +
+        " <div class='content-button-delete-wrap'> " +
+        " <button type='button' class='content-button-delete' id='content-main-row-delete-button' title='Bet&#228;tigen Sie diese Schaltfl&#228;che um den entfernen Dialog zu starten und zu beenden.'>Entfernen</button> " +
+        " <div class='slideToggle-wrap-hidden-row' id='slideToggle-wrap-hidden-row'> " +
+        " <div class='wrap-hidden-row' id='wrap-hidden-row'> " +
+        " <button class='hidden-row confirm-button' id='hidden-row-confirm-button' title='Mit dieser Schaltfl&#228;che best&#228;tigen Sie das entfernen der ausgew&#228;hlten Zeile&#33;'>Ja</button> " +
+        " <button class='hidden-row cancel-button' id='hidden-row-cancel-button' title='Mit dieser Schaltfl&#228;che beenden Sie den entfernen Dialog.'>Nein</button> " +
+        " </div> " +
+        " </div> " +
+        " </div> " +
+        " </div> " +
+        " </section>";
 
-    getButtonStatus(inputTextLeft);
+    getVerwaltungButtonStatus(inputTextLeft);
 
     //Zeigt den Tabellen Header, die Tabelle und den sende Button wieder an.
-    $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : "";
+    $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : '' ;
     ///Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
     $contentHeaderRow.after(contentAppend);
     //Ruft die Funktion "countRows" auf um die Anzahl der vorhandenen Datensätze zu zählen.
     countMainRows.addHighlight('highlight', '#FFB700', 100);
 }
 
-//                                                                                                                                            
+//
 //Konstruktor für das Array "dataPack"
-function ConstructDataPack(probenNummer, sollDatum, zerlegungStart, zerlegungEnde, einwaageBeginn, einwaageEnde, klaerfallBeginn, klaerfallEnde, manaBestellt, manaErhalten, manaEinwaage, manaEingewogen, zpnWagen) {
+function ConstructDataPack(
+    probenNummer,
+    sollDatum,
+    zerlegungStart,
+    zerlegungEnde,
+    einwaageBeginn,
+    einwaageEnde,
+    klaerfallBeginn,
+    klaerfallEnde,
+    manaBestellt,
+    manaErhalten,
+    manaEinwaage,
+    manaEingewogen,
+    zpnWagen
+) {
     this.probenNummer = probenNummer;
     this.sollDatum = sollDatum;
     this.zerlegungStart = zerlegungStart;
@@ -149,15 +165,14 @@ function ConstructDataPack(probenNummer, sollDatum, zerlegungStart, zerlegungEnd
     this.zpnWagen = zpnWagen;
 }
 
-//                                                                                                                                            
+//
 //Entfernt in der aus wrapData übertragenes Object die values mit einem "deactive" key
 function checkForUnchecked(dataPackUpdate) {
     let countActive = 0;
     const dataPackLength = dataPackUpdate.length;
-    // console.log(dataPackUpdate);
 
-    $.each(dataPackUpdate, function (packKey, packValue) {
-        $.each(packValue, function (objectKey, objectValue) {
+    $.each(dataPackUpdate, function(packKey, packValue) {
+        $.each(packValue, function(objectKey, objectValue) {
             if (objectValue.match(/^(active)/)) {
                 countActive++;
                 return false;
@@ -166,111 +181,169 @@ function checkForUnchecked(dataPackUpdate) {
     });
 
     if (countActive === dataPackLength) {
-        // console.log(dataPackUpdate);
         sendData(dataPackUpdate);
         return false;
     } else if (countActive != dataPackLength) {
-        showFailMessage.failMessage('fail-input-verwaltung header-fail-message-content-margin', 5000);
+        showFailMessage.failMessage("fail-input-verwaltung header-fail-message-content-margin", 5000);
         return false;
     }
 }
 
-//                                                                                                                                            
+//
 //Fügt alle Daten einer Zeile in ein Paket zusammen.
 function wrapData() {
-    const $contentMainRow = $('.content-main-row');
+    const $contentMainRow = $(".content-main-row");
     //Leeres Array für den Datentransfer in die Datenbank.
     const dataPackUpdate = [];
     //Zeit Sting pattern
     const newDatePattern = /(\d{2})\.(\d{2})\.(\d{4})/;
     //Durchläuft jede erstellte Zeile der Tabelle.
-    $.when($contentMainRow.each(function () {
-        //Speichert den Inhalt der einzelnen Spalten der ausgewählten Zeile in einer Variable ab.
-        //Überprüft die Checkboxen und übergibt 0 oder 1 als Wert.
-        const probenNummer = $(this).find('#text-prbNr').text();
-        let sollDatum = $(this).find('#text-sollNr').text();
-        const zerlegungStart = $(this).find('#content-btn-zerlegungStart').attr('value');
-        const zerlegungEnde = $(this).find('#content-btn-zerlegungEnde').attr('value');
-        const einwaageBeginn = $(this).find('#content-btn-einwaageBeginn').attr('value');
-        const einwaageEnde = $(this).find('#content-btn-einwaageEnde').attr('value');
-        const klaerfallBeginn = $(this).find('#content-btn-klaerfallBeginn').attr('value');
-        const klaerfallEnde = $(this).find('#content-btn-klaerfallEnde').attr('value');
-        const manaBestellt = $(this).find('#content-btn-manaBestellt').attr('value');
-        const manaErhalten = $(this).find('#content-btn-manaErhalten').attr('value');
-        const manaEinwaage = $(this).find('#content-btn-manaEinwaage').attr('value');
-        const manaEingewogen = $(this).find('#content-btn-manaEingewogen').attr('value');
-        const zpnWagen = $(this).find('#content-btn-zpnWagen').attr('value');
+    $.when(
+        $contentMainRow.each(function() {
+            //Speichert den Inhalt der einzelnen Spalten der ausgewählten Zeile in einer Variable ab.
+            //Überprüft die Checkboxen und übergibt 0 oder 1 als Wert.
+            const probenNummer = $(this)
+                .find("#text-prbNr")
+                .text();
+            let sollDatum = $(this)
+                .find("#text-sollNr")
+                .text();
+            const zerlegungStart = $(this)
+                .find("#content-btn-zerlegungStart")
+                .attr("value");
+            const zerlegungEnde = $(this)
+                .find("#content-btn-zerlegungEnde")
+                .attr("value");
+            const einwaageBeginn = $(this)
+                .find("#content-btn-einwaageBeginn")
+                .attr("value");
+            const einwaageEnde = $(this)
+                .find("#content-btn-einwaageEnde")
+                .attr("value");
+            const klaerfallBeginn = $(this)
+                .find("#content-btn-klaerfallBeginn")
+                .attr("value");
+            const klaerfallEnde = $(this)
+                .find("#content-btn-klaerfallEnde")
+                .attr("value");
+            const manaBestellt = $(this)
+                .find("#content-btn-manaBestellt")
+                .attr("value");
+            const manaErhalten = $(this)
+                .find("#content-btn-manaErhalten")
+                .attr("value");
+            const manaEinwaage = $(this)
+                .find("#content-btn-manaEinwaage")
+                .attr("value");
+            const manaEingewogen = $(this)
+                .find("#content-btn-manaEingewogen")
+                .attr("value");
+            const zpnWagen = $(this)
+                .find("#content-btn-zpnWagen")
+                .attr("value");
 
-        //Umbau des sollDatum Sting
-        sollDatum = sollDatum.replace(newDatePattern, '$3-$2-$1');
-        //Fügt mit hilfer eines Constructor's, den Inhalt der gegenwärtig selektierten Zeile, als Array in das "dataPack" hinzu.
-        dataPackUpdate.push(new ConstructDataPack(probenNummer, sollDatum, zerlegungStart, zerlegungEnde, einwaageBeginn, einwaageEnde, klaerfallBeginn, klaerfallEnde, manaBestellt, manaErhalten, manaEinwaage, manaEingewogen, zpnWagen));
-        // dataPackUpdate.push(JSON.stringify(new ConstructDataPack(probenNummer, sollDatum, einwaageBeginn, einwaageEnde, nickelBack, klaerfallBeginn, klaerfallEnde, manaBestellt, manaErhalten, manaEingewogen, zpnWagen)));
-        // console.log(dataPackUpdate);
-        //Übergibt das "dataPack" Array zum Ajax handler
-    })).done(checkForUnchecked(dataPackUpdate));
+            //Umbau des sollDatum Sting
+            sollDatum = sollDatum.replace(newDatePattern, "$3-$2-$1");
+            //Fügt mit hilfer eines Constructor's, den Inhalt der gegenwärtig selektierten Zeile, als Array in das "dataPack" hinzu.
+            dataPackUpdate.push(
+                new ConstructDataPack(
+                    probenNummer,
+                    sollDatum,
+                    zerlegungStart,
+                    zerlegungEnde,
+                    einwaageBeginn,
+                    einwaageEnde,
+                    klaerfallBeginn,
+                    klaerfallEnde,
+                    manaBestellt,
+                    manaErhalten,
+                    manaEinwaage,
+                    manaEingewogen,
+                    zpnWagen
+                )
+            );
+            //Übergibt das "dataPack" Array zum Ajax handler
+        })
+    ).done(checkForUnchecked(dataPackUpdate));
 }
 
-//                                                                                                                                            
+//
 //Übersendet per Ajax und der POST Methode, dass Objekt "dataPack" an die PHP Datei "db-handling.php".
 function sendData(dataPackUpdate) {
+
+    function stripDataPack (dataPackUpdate) {
+        Object.entries(dataPackUpdate).forEach(([dataPackKey, dataPackValue]) => {
+            Object.entries(dataPackValue).forEach(([itemKey, itemValue]) => {
+                if (itemValue === "preSet" || itemValue === "deactive") {
+                    delete dataPackValue[itemKey];
+                }
+            });
+        });
+        return;
+    }
+
+    stripDataPack(dataPackUpdate);
+
     const ajaxRequestUpdate = $.ajax({
-        url: '../php/db-update.php',
-        method: 'POST',
+        url: "../php/db-update.php",
+        method: "POST",
         data: {
             updateDataSet: dataPackUpdate
         },
-        dataType: 'json'
+        dataType: "json"
     });
-
     //Ajax Anfrage ist erfolgreich.
-    ajaxRequestUpdate.done(function (data) {
-
-        const itemCount = data['itemCount'];
-        const $stickyFooterMessageWrap = $('#sticky-footer-message-wrap');
-        const $stickyFooterSuccessWrap = $('#transmission-successful-wrapper');
-        const $stickyFooterFailWrap = $('#transmission-fail-wrap');
+    ajaxRequestUpdate.done(function(data) {
+        console.log(data);
+        const itemCount = data["itemCount"];
+        const $stickyFooterMessageWrap = $("#sticky-footer-message-wrap");
+        const $stickyFooterSuccessWrap = $("#transmission-successful-wrapper");
+        const $stickyFooterFailWrap = $("#transmission-fail-wrap");
         // const $transmissionCounter = $('.present-item-counter');
         // const $transmissionSuccessCounter = $('#transmission-success-counter');
         // const $transmissionFailCounter = $('#transmission-fail-counter');
 
         //Funktion zum verstecken des ContentWrap und FooterWrap
-        const hideContentFooter = function () {
-            const $headerInputEingang = $('#header-input-eingang');
-            const $wrapContent$wrapFooter = $('#wrap-content ').add($('#wrap-footer'));
+        const hideContentFooter = function() {
+            const $headerInputEingang = $("#header-input-eingang");
+            const $wrapContent$wrapFooter = $("#wrap-content ").add(
+                $("#wrap-footer")
+            );
             $wrapContent$wrapFooter
-                .addClass('displayNoneImportant')
+                .addClass("displayNoneImportant")
                 .add($headerInputEingang)
-                .addClass('border-edged');
+                .addClass("border-edged");
         };
 
         //Funktion zum entfernen der FooterCounter Anzeige inhalte.
-        const emptyMainRowsAndCounter = function () {
-            const $contentMainRows = $('.content-main-row');
-            const $contentFooterCounter = $('.content-footer-counter');
+        const emptyMainRowsAndCounter = function() {
+            const $contentMainRows = $(".content-main-row");
+            const $contentFooterCounter = $(".content-footer-counter");
             $contentMainRows.remove();
-            $contentFooterCounter.html('0');
+            $contentFooterCounter.html("0");
         };
 
         //Funktion zum Hinzufügen und entfernen von Class des Sticky Footer Elements
-        $.fn.animateStickyFooterWrapper = function (animationClass, heightClass, delay) {
+        $.fn.animateStickyFooterWrapper = function(animationClass, heightClass, delay) {
             const $stickyFooterWrapper = $(this);
             const $animationClass = animationClass;
             const $heightClass = heightClass;
-
+            const $wrapEingang = $("#wrap-eingang");
+            $wrapEingang.css("visibility", "hidden");
             $stickyFooterWrapper
                 .removeClass($heightClass)
                 .addClass($animationClass);
 
-            setTimeout(function () {
+            setTimeout(function() {
                 $stickyFooterWrapper.removeClass($animationClass);
             }, delay);
 
-            setTimeout(function () {
+            setTimeout(function() {
+                $wrapEingang.css("visibility", "visible");
                 $stickyFooterWrapper.addClass($heightClass);
                 $stickyFooterSuccessWrap
                     .add($stickyFooterFailWrap)
-                    .css('display', '');
+                    .css("display", "");
 
                 globalMainRowCounter.length = 0;
                 backToInput();
@@ -280,15 +353,19 @@ function sendData(dataPackUpdate) {
         if (itemCount >= 1) {
             hideContentFooter();
             emptyMainRowsAndCounter();
-            $stickyFooterMessageWrap.animateStickyFooterWrapper('sticky-footer-message-animation', 'sticky-footer-height', 4000);
+            $stickyFooterMessageWrap.animateStickyFooterWrapper(
+                "sticky-footer-message-animation",
+                "sticky-footer-height",
+                4000
+            );
         }
     });
 
     //Ajax Verbindung fehlgeschlagen.
-    ajaxRequestUpdate.fail(function (jqXHR, textStatus, errorThrown) {
-        // console.log(textStatus, errorThrown);
+    ajaxRequestUpdate.fail(function(jqXHR, textStatus, errorThrown) {
+        console.log(textStatus, errorThrown);
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        showFailMessage.failMessage('no-server header-fail-message-content-margin', 8000);
+        showFailMessage.failMessage("no-server header-fail-message-content-margin", 8000);
 
         backToInput();
     });

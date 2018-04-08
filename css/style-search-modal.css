@@ -17,7 +17,7 @@
 
 .content__modal {
     display: grid;
-    grid-template-rows: 15% 60% 15% 10%;
+    grid-template-rows: 15% 60% 25%;
     width: 80vw;
     height: 96vh;
     background-color: #0091CD;
@@ -253,32 +253,39 @@
 
 /* Modal Footer Kommentar */
 
-.modal__content__footer__content__wrap {
+.wrap__modal__footer {
+    display: grid;
+    grid-template-rows: 65% 35%;
+    height: 100%;
+    transform-origin: bottom;
+}
+
+.modal__footer__content__wrap {
     display: grid;
     transform-origin: bottom;
 }
 
-.modal__content__footer__span__wrap {
+.modal__footer__span__wrap {
     display: grid;
-    overflow-y: scroll;
-    margin-top: .3vw;
+    margin-top: .5vw;
     margin-right: 1vw;
     padding-left: 1vw;
 }
 
-.modal__content__footer__inputPromt__wrap {
+.modal__footer__inputPromt__wrap {
     display: grid;
+    transform-origin: bottom;
 }
 
 /* Footer Input */
 
-.modal__content__footer__input__wrap {
+.modal__footer__input__wrap {
     display: flex;
     width: 100%;
     transform-origin: bottom;
 }
 
-.modal__content__footer__input {
+.modal__footer__input {
     width: 100%;
     font-size: 1.3vw;
     text-align: center;
@@ -287,31 +294,31 @@
 
 /* Footer Promt */
 
-.modal__content__footer__promt__slider__wrap {
+.modal__footer__promt__slider__wrap {
     transform-origin: bottom;
 }
 
-.modal__content__footer__promt__wrap {
+.modal__footer__promt__wrap {
     display: grid;
     grid-template-columns: 50% 50%;
     height: 100%;
 }
 
-.modal__content__footer__promt__button {
+.modal__footer__promt__button {
     font-size: 1.1vw;
 }
 
-.modal__content__footer__promt__button.confirmPromt:hover {
+.modal__footer__promt__button.confirmPromt:hover {
     background-color: #10FC6F;
 }
 
-.modal__content__footer__promt__button.cancelPromt:hover {
+.modal__footer__promt__button.cancelPromt:hover {
     background-color: #FFB9A9;
 }
 
 /* Modal appended Kommentar */
 
-.modal__content__footer__append__span__wrap {
+.modal__footer__append__span__wrap {
     padding: .4vw 0;
     border-top: 1px dashed gainsboro;
     width: 90%;
@@ -331,29 +338,29 @@
 
 /* Modal appended Element Scrollbar */
 
-#modal-content-footer-span-wrap::-webkit-scrollbar {
-    width: .7vw;
+#modal-footer-span-wrap::-webkit-scrollbar {
+    width: .2vw;
 }
 
-/* #modal-content-footer-content-wrap::-webkit-scrollbar-button {} */
+/* #modal-footer-content-wrap::-webkit-scrollbar-button {} */
 
-/* #modal-content-footer-content-wrap::-webkit-scrollbar-corner {} */
+/* #modal-footer-content-wrap::-webkit-scrollbar-corner {} */
 
-#modal-content-footer-span-wrap::-webkit-scrollbar-thumb {
+#modal-footer-span-wrap::-webkit-scrollbar-thumb {
     border-radius: .2vw;
     background-color: rgba(255, 183, 0, .5);
 }
 
-#modal-content-footer-span-wrap::-webkit-scrollbar-thumb:hover {
+#modal-footer-span-wrap::-webkit-scrollbar-thumb:hover {
     background-color: rgba(255, 183, 0, 1);
 }
 
-#modal-content-footer-span-wrap::-webkit-scrollbar-track {
+#modal-footer-span-wrap::-webkit-scrollbar-track {
     border-radius: .2vw;
     background-color: rgba(220, 220, 220, .6);
 }
 
-/* #modal-content-footer-content-wrap::-webkit-scrollbar-track-piece {} */
+/* #modal-footer-content-wrap::-webkit-scrollbar-track-piece {} */
 
 /* Transform up and down */
 

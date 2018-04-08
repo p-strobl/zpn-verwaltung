@@ -18,7 +18,7 @@
                 </a>
                 <p class="header-caption">ZPN Muster Verwaltung</p>
             </div>
-            <input class="header-input-eingang border-edged" id="header-input-verwaltung" type="text" value="16-011111-01;24.06.2016" spellcheck="false"
+            <input class="header-input-eingang border-edged" id="header-input-verwaltung" type="text" value="16-055555-01" spellcheck="false"
                 placeholder="Proben Nummer..." title="Bitte tragen Sie hier eine gültige Proben Nummer ein.">
             <div class="header-fail-message-wrap" id="header-fail-message-wrap">
                 <div class="header-fail-message-content" id="header-fail-message-content">
@@ -31,39 +31,17 @@
             <section class="content-header-row verwaltung" id="content-header-row">
                 <div class="content-header-cell verwaltung">Proben Nr.</div>
                 <div class="content-header-cell verwaltung">Soll</div>
-                <div class="content-header-cell verwaltung">Zerlegung
-                    <br />Start
-                </div>
-                <div class="content-header-cell verwaltung">Zerlegung
-                    <br />Ende
-                </div>
-                <div class="content-header-cell verwaltung">Einwaage
-                    <br />Start
-                </div>
-                <div class="content-header-cell verwaltung">Einwaage
-                    <br />Ende
-                </div>
-                <div class="content-header-cell verwaltung">ZPN
-                    <br />Wagen
-                </div>
-                <div class="content-header-cell verwaltung">Klärfall
-                    <br />Beginn
-                </div>
-                <div class="content-header-cell verwaltung">Klärfall
-                    <br />Ende
-                </div>
-                <div class="content-header-cell verwaltung">MaNa
-                    <br />Bestellt
-                </div>
-                <div class="content-header-cell verwaltung">MaNa
-                    <br />Erhalten
-                </div>
-                <div class="content-header-cell verwaltung">MaNa
-                    <br />Einwaage
-                </div>
-                <div class="content-header-cell verwaltung">MaNa
-                    <br />Eingewogen
-                </div>
+                <div class="content-header-cell verwaltung">Zerlegung<br />Start</div>
+                <div class="content-header-cell verwaltung">Zerlegung<br />Ende</div>
+                <div class="content-header-cell verwaltung">Einwaage<br />Start</div>
+                <div class="content-header-cell verwaltung">Einwaage<br />Ende</div>
+                <div class="content-header-cell verwaltung">ZPN<br />Wagen</div>
+                <div class="content-header-cell verwaltung">Klärfall<br />Beginn</div>
+                <div class="content-header-cell verwaltung">Klärfall<br />Ende</div>
+                <div class="content-header-cell verwaltung">MaNa<br />Bestellt</div>
+                <div class="content-header-cell verwaltung">MaNa<br />Erhalten</div>
+                <div class="content-header-cell verwaltung">MaNa<br />Einwaage</div>
+                <div class="content-header-cell verwaltung">MaNa<br />Eingewogen</div>
                 <div class="content-header-cell verwaltung">Entfernen</div>
             </section>
 
@@ -99,12 +77,12 @@
                     <br />
                     <span class="content-footer-counter" id="content-footer-counter-zpnWagen">0</span> x
                 </div>
-                <div class="content-footer-count-input verwaltung kStart" title="Anzahl der begonnenen Klärfälle.">Klärfall
+                <div class="content-footer-count-input verwaltung kStart" title="Anzahl der begonnenen Klärfälle.">Kl&#228;rfall
                     <br />begonnen
                     <br />
                     <span class="content-footer-counter" id="content-footer-counter-klaerfallBeginn">0</span> x
                 </div>
-                <div class="content-footer-count-input verwaltung kEnde" title="Anzahl der beendeten Klärfälle.">Klärfall
+                <div class="content-footer-count-input verwaltung kEnde" title="Anzahl der beendeten Klärfälle.">Kl&#228;rfall
                     <br />beendet
                     <br />
                     <span class="content-footer-counter" id="content-footer-counter-klaerfallEnde">0</span> x
@@ -133,24 +111,17 @@
             </section>
 
         </main>
-
         <footer class="wrap-footer displayNoneImportant" id="wrap-footer">
-            <button class="footer-button-send" id="footer-button-send" onclick="wrapData()" title="Aktualisieren Sie den&#92;die eingefügten Datensatz&#92;Datensätze.">--> Datensatz&#92;sätze aktualisieren
-                <-- </button>
+            <button class="footer-button-send" id="footer-button-send" onclick="wrapData()" title="Aktualisieren Sie den&#92;die eingefügten Datensatz&#92;Datensätze.">&#151;&#62; Datensatz&#92;s&auml;tze aktualisieren &#60;&#151; </button>
         </footer>
-
     </div>
-
     <div class="sticky-footer-message-wrap sticky-footer-height" id="sticky-footer-message-wrap">
-
         <div class="transmission-successful-wrapper" id="transmission-successful-wrapper">
             <section class="transmission-success-message-wrap">
                 <span class="transmission-success-counter" id="transmission-success-counter">Datensatz&#92;s&#228;tze erfolgreich aktualisiert</span>
             </section>
         </div>
-
     </div>
-
     <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="../js/jquery-ui.js"></script>
     <script type="text/javascript" src="../js/script-global.js"></script>

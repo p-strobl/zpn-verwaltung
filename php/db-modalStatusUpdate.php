@@ -19,14 +19,16 @@ if ( isset( $_POST['updateModalStatus'] ) ) {
     
             $sql =
                 "
-                    UPDATE tbl_status
-                    SET $receivedItem->statusButtonID = :updateStatusValue
-                    WHERE probenNummer = :probenNummer
+                    INSERT INTO
+                        tbl_status(probenNummer, $receivedItem->statusButtonID)
+                    VALUES(:probenNummer, :statusButtonValue)
+                    ON DUPLICATE KEY UPDATE
+                        $receivedItem->statusButtonID = :updateStatusValue
                 ";
 
             $pdoStatement = $pdoConnect->prepare($sql);
             $pdoStatement->bindParam(':probenNummer', $receivedItem->probenNummer, PDO::PARAM_STR);
-            // $pdoStatement->bindParam(':statusButtonID', $receivedItem->statusButtonID, PDO::PARAM_STR);
+            $pdoStatement->bindParam(':statusButtonValue', $receivedItem->statusButtonValue, PDO::PARAM_STR);
             $pdoStatement->bindParam(':updateStatusValue', $receivedItem->statusButtonValue, PDO::PARAM_STR);
             $pdoStatement->execute();
 

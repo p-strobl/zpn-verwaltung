@@ -4,16 +4,19 @@
 //Leert alle Zeit Angaben der Verwaltungs Anzeige
 function resetDetails() {
     const modalContentMainPullSqlItem = $('.modal__content__main__pullSql__item');
+    const modalContentMainPullSqlItemGesamt = $('.modal__content__main__pullSql__item.gesamt');
     const modalContentCaptionSpan = $('.modal__content__caption__span');
-    const modalContentAppendedSpan = $('.modal__content__footer__append__span__wrap');
-    const modalPromtSlider = $('#modal-content-footer-promt-slider');
+    const modalContentAppendedSpan = $('.modal__footer__append__span__wrap');
+    const modalHeaderInput = $('#modal-header-input');
+    const modalPromtSlider = $('#modal-footer-promt-slider');
     const modalStatusItems = $('.modal__status');
-    const modalFooterInput = $('#modal-content-footer-input');
+    const modalFooterInput = $('#modal-footer-input');
 
-    modalContentMainPullSqlItem.html(' - ');
+    modalContentMainPullSqlItem.html('Nicht Vorhanden');
+    modalContentMainPullSqlItemGesamt.html('Nicht zu ermitteln');
     modalContentCaptionSpan.html('');
     modalContentAppendedSpan.remove();
-    modalFooterInput.val('');
+    modalHeaderInput.add(modalHeaderInput).val('');
     modalPromtSlider.removeClass('transform__modal');
     modalStatusItems.each(function () {
         $(this)
@@ -30,9 +33,9 @@ const showCloseModal = (() => {
     const modalHeaderClose = $('#modal-header-close');
     const modalHeaderInput = $('#modal-header-input');
     const wrapModalContent = $('#wrap-modal-content');
-    const modalPromtSlider = $('#modal-content-footer-promt-slider');
-    const modalFooterInputWrap = $('.modal__content__footer__input__wrap');
-    const modalFooterContentWrap = $('#modal-content-footer-content-wrap');
+    const wrapModalFooter = $('#wrap-modal-footer');
+    const modalPromtSlider = $('#modal-footer-promt-slider');
+    const modalFooterContentWrap = $('#modal-footer-content-wrap');
 
     const showModal = (() => {
         imgSearch.on('click', function (event) {
@@ -47,7 +50,7 @@ const showCloseModal = (() => {
         wrapModal.on('click', function (event) {
             if (event.target == event.currentTarget) {
                 contentModal.toggleClass('transform__modal');
-                wrapModalContent.add(modalPromtSlider).add(modalFooterInputWrap).add(modalFooterContentWrap).removeClass('transform__modal');
+                wrapModalContent.add(wrapModalFooter).add(modalPromtSlider).add(modalFooterContentWrap).removeClass('transform__modal');
                 setTimeout(() => {
                     wrapModal.removeClass('show__modal');
                 }, 300);
@@ -58,7 +61,7 @@ const showCloseModal = (() => {
 
         modalHeaderClose.on('click', function () {
             contentModal.toggleClass('transform__modal');
-            wrapModalContent.add(modalPromtSlider).add(modalFooterInputWrap).add(modalFooterContentWrap).removeClass('transform__modal');
+            wrapModalContent.add(wrapModalFooter).add(modalPromtSlider).add(modalFooterContentWrap).removeClass('transform__modal');
             setTimeout(() => {
                 wrapModal.removeClass('show__modal');
             }, 300);
@@ -85,109 +88,94 @@ function searchDataSet(probenNummer) {
         url: '../php/db-requestObject.php',
         method: 'POST',
         data: {
-            requestDataSet: probenNummer
+            requestDataSetComplete: probenNummer
         },
         dataType: 'json'
     });
 
     ajaxRequestObject.done(function (data) {
         const wrapModalContent = $('#wrap-modal-content');
+        const wrapModalFooter = $('#wrap-modal-footer');
         const modalHeaderInput = $('#modal-header-input');
-        const modalFooterInputWrap = $('.modal__content__footer__input__wrap');
-        const modalFooterContentWrap = $('#modal-content-footer-content-wrap');
+        const modalFooterSpanWrap = $('#modal-footer-span-wrap');
+        console.log(data);
+        if (Object.keys(data).length && !data.hasOwnProperty(0)) {
 
-        if (data !== false && !data.hasOwnProperty(0)) {
             resetDetails();
-            wrapModalContent.hasClass('transform__modal') === true ? wrapModalContent.removeClass('transform__modal') : '';
-            setTimeout(() => {
-                modalHeaderInput.val('');
-                wrapModalContent.add(modalFooterInputWrap).add(modalFooterContentWrap).addClass('transform__modal');
-            }, 400);
 
-            const toFillTimingSpansValue = {
-                // anAbteilung: $('#'),
-                berechnungDateTimeZpnwagen: $('#pullSql-gesamt-zpnDauer'),
-                beurteilungBereitDate: $('#pullSql-beurteilung-date'),
-                beurteilungBereitTime: $('#pullSql-beurteilung-time'),
-                beurteilungZpnBerechnung: $('#pullSql-gesamt-beurteilung'),
-                eingangDate: $('#modal-pullSql-zpnEingang-date'),
-                eingangTime: $('#modal-pullSql-zpnEingang-time'),
-                einwaageBeginnDate: $('#pullSql-einwaage-start-date'),
-                einwaageBeginnTime: $('#pullSql-einwaage-start-time'),
-                einwaageBerechnung: $('#pullSql-gesamt-einwaage'),
-                einwaageEndeDate: $('#pullSql-einwaage-ende-date'),
-                einwaageEndeTime: $('#pullSql-einwaage-ende-time'),
-                klaerfallBeginnDate: $('#pullSql-klaerfall-start-date'),
-                klaerfallBeginnTime: $('#pullSql-klaerfall-start-time'),
-                klaerfallBerechnung: $('#pullSql-gesamt-klaerfall'),
-                klaerfallEndeDate: $('#pullSql-klaerfall-ende-date'),
-                klaerfallEndeTime: $('#pullSql-klaerfall-ende-time'),
-                manaBerechnungDateTimeAnfrage: $('#pullSql-gesamt-mBestellung'),
-                manaBerechnungDateTimeEinwaage: $('#pullSql-gesamt-mEinwaage'),
-                manaBerechnungDateTimeGesamt: $('#pullSql-gesamt-mGesamt'),
-                manaEinwaageDate: $('#pullSql-mEinwaage-ende-date'),
-                manaEinwaageTime: $('#pullSql-mEinwaage-ende-time'),
-                manaErhaltenDate: $('#pullSql-mErhalten-ende-date'),
-                manaErhaltenTime: $('#pullSql-mErhalten-ende-time'),
-                manaGestelltDate: $('#pullSql-mBestellt-start-date'),
-                manaGestelltTime: $('#pullSql-mBestellt-start-time'),
-                manaZpnWagenDate: $('#pullSql-mWagen-ende-date'),
-                manaZpnWagenTime: $('#pullSql-mWagen-ende-time'),
-                nickelBerechnung: $('#pullSql-gesamt-nickelDauer'),
-                nickelRueckgabeDate: $('#modal-pullSql-nickelBack-date'),
-                nickelRueckgabeTime: $('#modal-pullSql-nickelBack-time'),
-                probenNummer: $('#modal-content-caption-nummber-text'),
-                sollDatum: $('#modal-content-caption-soll-text'),
-                // stornoDate: $('#'),
-                // stornoTime: $('#'),
-                zerlegungBerechnung: $('#pullSql-gesamt-zerlegung'),
-                zerlegungEndeDate: $('#pullSql-zerlegung-ende-date'),
-                zerlegungEndeTime: $('#pullSql-zerlegung-ende-time'),
-                zerlegungStartDate: $('#pullSql-zerlegung-start-date'),
-                zerlegungStartTime: $('#pullSql-zerlegung-start-time'),
-                zpnWagenDate: $('#pullSql-zpnWagen-date'),
-                zpnWagenTime: $('#pullSql-zpnWagen-time')
-            }
-
-            const toFillStatusButton = {
-                mit60g: $('#mit60g'),
-                mitExpress: $('#mitExpress'),
-                mitIntern: $('#mitIntern'),
-                mitKlaerfallBack: $('#mitKlaerfallBack'),
-                mitLfgb: $('#mitLfgb'),
-                mitNickel: $('#mitNickel'),
-                mitToys: $('#mitToys')
-            }
-
-            const toFillKommentar = {
-                kommentarDate: $('#modal-content-footer-span-date'),
-                kommentarText: $('#modal-content-footer-span-text'),
-                kommentarTime: $('#modal-content-footer-span-time'),
-            }
-
-            // Befüllt die Status Button's
-            function setStatus(literalObject, itemKey, dataValue) {
-                switch (literalObject) {
-                    case toFillTimingSpansValue:
-                        literalObject[itemKey]
-                            .html(dataValue);
-                        break;
-                    case toFillStatusButton:
-                        if (dataValue == 'active') {
-                            literalObject[itemKey]
-                                .addClass('statusButton-preSet')
-                                .val('active');
-                        }
-                        break;
-                    default:
+            const toFillItems = {
+                base: {
+                    probenNummer: $('#modal-content-caption-nummber-text'),
+                    sollDatum: $('#modal-content-caption-soll-text'),
+                    // anAbteilung: $('#')
+                },
+                date: {
+                    beurteilungBereitDate: $('#pullSql-beurteilung-date'),
+                    einwaageBeginn: $('#pullSql-einwaage-start-date'),
+                    einwaageEnde: $('#pullSql-einwaage-ende-date'),
+                    klaerfallBeginnDateTime: $('#pullSql-klaerfall-start-date'),
+                    klaerfallEndeDateTime: $('#pullSql-klaerfall-ende-date'),
+                    manaEinwaageDateTime: $('#pullSql-mEinwaage-ende-date'),
+                    manaErhaltenDateTime: $('#pullSql-mErhalten-ende-date'),
+                    manaGestelltDateTime: $('#pullSql-mBestellt-start-date'),
+                    manaZpnWagenDateTime: $('#pullSql-mWagen-ende-date'),
+                    nickelRueckgabeDateTime: $('#modal-pullSql-nickelBack-date'),
+                    // stornoDate: $('#'),
+                    zerlegungEnde: $('#pullSql-zerlegung-ende-date'),
+                    zerlegungStart: $('#pullSql-zerlegung-start-date'),
+                    zpnEingangDateTime: $('#modal-pullSql-zpnEingang-date'),
+                    zpnWagenDateTime: $('#pullSql-zpnWagen-date')
+                },
+                time: {
+                    beurteilungBereitTime: $('#pullSql-beurteilung-time'),
+                    eingangTime: $('#modal-pullSql-zpnEingang-time'),
+                    einwaageBeginnTime: $('#pullSql-einwaage-start-time'),
+                    einwaageEndeTime: $('#pullSql-einwaage-ende-time'),
+                    klaerfallBeginnTime: $('#pullSql-klaerfall-start-time'),
+                    klaerfallEndeTime: $('#pullSql-klaerfall-ende-time'),
+                    manaEinwaageTime: $('#pullSql-mEinwaage-ende-time'),
+                    manaErhaltenTime: $('#pullSql-mErhalten-ende-time'),
+                    manaGestelltTime: $('#pullSql-mBestellt-start-time'),
+                    manaZpnWagenTime: $('#pullSql-mWagen-ende-time'),
+                    nickelRueckgabeTime: $('#modal-pullSql-nickelBack-time'),
+                    // stornoTime: $('#'),
+                    zerlegungStartTime: $('#pullSql-zerlegung-start-time'),
+                    zerlegungEndeTime: $('#pullSql-zerlegung-ende-time'),
+                    zpnMusterEingangTime: $('#modal-pullSql-zpnEingang-time'),
+                    zpnWagenTime: $('#pullSql-zpnWagen-time')
+                },
+                berechnung: {
+                    berechnungDateTimeZpnwagen: $('#pullSql-gesamt-zpnDauer'),
+                    beurteilungZpnBerechnung: $('#pullSql-gesamt-beurteilung'),
+                    einwaageBerechnung: $('#pullSql-gesamt-einwaage'),
+                    klaerfallBerechnung: $('#pullSql-gesamt-klaerfall'),
+                    manaBerechnungDateTimeAnfrage: $('#pullSql-gesamt-mBestellung'),
+                    manaBerechnungDateTimeEinwaage: $('#pullSql-gesamt-mEinwaage'),
+                    manaBerechnungDateTimeGesamt: $('#pullSql-gesamt-mGesamt'),
+                    nickelBerechnung: $('#pullSql-gesamt-nickelDauer'),
+                    zerlegungBerechnung: $('#pullSql-gesamt-zerlegung')
+                },
+                status: {
+                    mit60g: $('#mit60g'),
+                    mitExpress: $('#mitExpress'),
+                    mitIntern: $('#mitIntern'),
+                    mitKlaerfallBack: $('#mitKlaerfallBack'),
+                    mitLfgb: $('#mitLfgb'),
+                    mitNickel: $('#mitNickel'),
+                    mitToys: $('#mitToys')
+                },
+                kommentar: {
+                    kommentarDate: $('#modal-footer-span-date'),
+                    kommentarText: $('#modal-footer-span-text'),
+                    kommentarTime: $('#modal-footer-span-time')
                 }
             }
 
             // Befüllt das Kommentarfeld
             function setKommentar(kommentarItem) {
-                const modalKommentarSpanWrap = $('#modal-content-footer-span-wrap');
+                const modalKommentarSpanWrap = $('#modal-footer-span-wrap');
                 const prependKommentar = (
-                    ' <div class="modal__content__footer__append__span__wrap"> ' +
+                    ' <div class="modal__footer__append__span__wrap"> ' +
                     '     <span class="modal__append__span / text"> ' + kommentarItem.kommentarText + ' ' +
                     '         <span class="modal__append__span / dateTime">' + kommentarItem.kommentarDate + '</span> ' +
                     '         <span class="modal__append__span / dateTime">' + kommentarItem.kommentarTime + " Uhr" + ' Uhr</span> ' +
@@ -197,31 +185,62 @@ function searchDataSet(probenNummer) {
                 modalKommentarSpanWrap.prepend(prependKommentar);
             }
 
-            $.each(data, function (dataKey, dataValue) {
-                $.each(toFillTimingSpansValue, (itemKey, itemValue) => {
-                    switch (dataKey) {
-                        case itemKey:
-                            setStatus(toFillTimingSpansValue, itemKey, dataValue);
-                            break;
-                        default:
+            $.each(data.base, (basicKey, basicValue) => {
+                $.each(toFillItems.base, (toFillBasicKey, toFillBasicValue) => {
+                    if (basicKey === toFillBasicKey) {
+                        toFillBasicValue.html(basicValue);
+                        return false;
                     }
                 });
-                $.each(toFillStatusButton, (itemKey, itemValue) => {
-                    switch (dataKey) {
-                        case itemKey:
-                            setStatus(toFillStatusButton, itemKey, dataValue);
-                            break;
-                        default:
+            });
+            $.each(data.status, (statusKey, statusValue) => {
+                $.each(toFillItems.status, (toFillStatusKey, toFillStatusValue) => {
+                    if (statusKey === toFillStatusKey) {
+                        toFillStatusValue.val(statusValue).addClass('statusButton-preSet');
+                        return false;
+                    }
+                });
+            });
+            $.each(data.date, (dateKey, dateValue) => {
+                $.each(toFillItems.date, (toFillDateKey, toFillDateValue) => {
+                    if (dateKey === toFillDateKey) {
+                        toFillDateValue.html(dateValue);
+                        return false;
+                    }
+                });
+            });
+            $.each(data.time, (timeKey, timeValue) => {
+                $.each(toFillItems.time, (toFillTimeKey, toFillTimeValue) => {
+                    if (timeKey === toFillTimeKey) {
+                        toFillTimeValue.html(timeValue + ' Uhr');
+                        return false;
+                    }
+                });
+            });
+            $.each(data.berechnung, (berechnungKey, berechnungValue) => {
+                $.each(toFillItems.berechnung, (toFillBerechnungKey, toFillBerechnungValue) => {
+                    if (berechnungKey === toFillBerechnungKey) {
+                        toFillBerechnungValue.html(berechnungValue + ' Std.');
+                        return false;
                     }
                 });
             });
             $.each(data.kommentar, function (dataKey, dataValue) {
                 setKommentar(dataValue);
             });
+
+            document.getElementById('modal-footer-span-wrap').childElementCount >= 4 ? modalFooterSpanWrap.css('overflow-y', 'scroll') : modalFooterSpanWrap.css('overflow-y', '');
+
+            wrapModalContent.hasClass('transform__modal') === true ? wrapModalContent.add(wrapModalFooter).removeClass('transform__modal') : '';
+            setTimeout(() => {
+                modalHeaderInput.val('');
+                wrapModalContent.add(wrapModalFooter).addClass('transform__modal');
+            }, 400);
+
             showCloseModal.backToModalInput;
 
-        } else if (data === false) {
-            showFailMessage.failMessage('fail-input', 2000, modalHeaderInput.attr('id'));
+        } else if (!Object.keys(data).length) {
+            showFailMessage.failMessage('fail-input-no-dataset', 3000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
 
         } else if (data.hasOwnProperty(0)) {
@@ -248,15 +267,6 @@ const updateStatusButton = () => {
         const probenNummer = $('#modal-content-caption-nummber-text').html();
         let statusButtonID = $(this).attr('id');
         let statusButtonValue = $(this).attr('value');
-        const statusButtonObject = {
-            mit60g: $('#mit60g'),
-            mitExpress: $('#mitExpress'),
-            mitIntern: $('#mitIntern'),
-            mitKlaerfallBack: $('#mitKlaerfallBack'),
-            mitLfgb: $('#mitLfgb'),
-            mitNickel: $('#mitNickel'),
-            mitToys: $('#mitToys')
-        }
 
         let sendData = {
             probenNummer: probenNummer,
@@ -298,14 +308,11 @@ const updateStatusButton = () => {
 
 // Nach einer Prüfung wird der enstprechende Kommentar dem Datensatz hinzugefüht und auch direkt mit angezeigt.
 const updateKommentar = () => {
-    const modalKommentarInput = $('#modal-content-footer-input');
-    const modalPromtSlider = $('#modal-content-footer-promt-slider');
+    const modalKommentarInput = $('#modal-footer-input');
+    const modalPromtSlider = $('#modal-footer-promt-slider');
     const modalPromtConfirm = $('#modal-promt-confirm');
     const modalPromtCancel = $('#modal-promt-cancel');
     let probenNummer = $('#modal-content-caption-nummber-text');
-    let modalTextContent = $('#modal-content-footer-span-text');
-    let modalTextDate = $('#modal-content-footer-span-date');
-    let modalTextTime = $('#modal-content-footer-span-time');
 
     modalKommentarInput.on('keyup', function (pressedKey) {
         if (pressedKey.keyCode === 13 && this.value != '') {
@@ -334,17 +341,18 @@ const updateKommentar = () => {
 
         ajaxRequestAddKommentar.done((data) => {
             if (data.success === true && data.successItem === probenNummer.html()) {
-                const modalKommentarSpanWrap = $('#modal-content-footer-span-wrap');
+                const modalFooterSpanWrap = $('#modal-footer-span-wrap');
                 const prependKommentar = (
-                    ' <div class="modal__content__footer__append__span__wrap"> ' +
+                    ' <div class="modal__footer__append__span__wrap"> ' +
                     '     <span class="modal__append__span / text"> ' + data.kommentarText + ' ' +
                     '         <span class="modal__append__span / dateTime">' + data.kommentarDate + '</span> ' +
                     '         <span class="modal__append__span / dateTime">' + data.kommentarTime + " Uhr" + ' Uhr</span> ' +
                     '     </span> ' +
                     ' </div> '
                 );
-                modalKommentarSpanWrap.prepend(prependKommentar);
+                modalFooterSpanWrap.prepend(prependKommentar);
                 modalKommentarInput.val('');
+                document.getElementById('modal-footer-span-wrap').childElementCount >= 4 ? modalFooterSpanWrap.css('overflow-y', 'scroll') : modalFooterSpanWrap.css('overflow-y', '');
                 modalPromtSlider.removeClass('transform__modal');
             } else if (data.success === false && data.failCode === 999) {
                 const modalHeaderInput = $('#modal-header-input');
