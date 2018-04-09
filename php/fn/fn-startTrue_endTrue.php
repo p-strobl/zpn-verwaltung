@@ -21,7 +21,7 @@ function startTrue_endTrue($pdoConnect, $probenNummer, $tblName, $beginDateTime,
 
         switch( $tblName ) {
             //Prüft ob eine Start und End-Zeit des jeweiligen Datensatz vorhanden ist und trägt dann einen Berechnungs Eintrag in die Datenbank ein.
-            case 'tbl_probennahme':
+            // case 'tbl_einwaage':
             case 'tbl_zpnwagen':
                 $pdoConnect->beginTransaction();
                 $sql =

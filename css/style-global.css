@@ -342,6 +342,10 @@ img:hover {
     background-color: #ffb700 !important;
 }
 
+.content-button-check.preSet {
+    background-color: #ffb700
+}
+
 .setButtonStatus {
     background-color: #00ff67;
     text-decoration-line: line-through;

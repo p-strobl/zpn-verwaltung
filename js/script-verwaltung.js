@@ -10,7 +10,7 @@ function getVerwaltungButtonStatus(probenNummer) {
         dataType: "json"
     });
 
-    ajaxRequestObject.done(function(data) {
+    ajaxRequestObject.done(function (data) {
         console.log(data);
         const baseItems = {
             probenNummer: $("#text-prbNr"),
@@ -43,8 +43,8 @@ function getVerwaltungButtonStatus(probenNummer) {
         }
 
         //Prüft ob des den gewünschten Wert gibt, wenn ja setzt den entsprechenden status auf den Button um
-        $.each(data.date, function(dataKey, dataValue) {
-            $.each(rowItems, function(itemKey, itemValue) {
+        $.each(data.date, function (dataKey, dataValue) {
+            $.each(rowItems, function (itemKey, itemValue) {
                 itemKey === dataKey
                     ? setButtonStatus(rowItems, itemKey, dataValue)
                     : "";
@@ -52,7 +52,7 @@ function getVerwaltungButtonStatus(probenNummer) {
         });
     });
 
-    ajaxRequestObject.fail(function(jqXHR, textStatus, errorThrown) {
+    ajaxRequestObject.fail(function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
         // showFailMessage.failMessage( 'no-server header-fail-message-content-margin', 8000 );
@@ -126,7 +126,7 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
     getVerwaltungButtonStatus(inputTextLeft);
 
     //Zeigt den Tabellen Header, die Tabelle und den sende Button wieder an.
-    $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : '' ;
+    $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : '';
     ///Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
     $contentHeaderRow.after(contentAppend);
     //Ruft die Funktion "countRows" auf um die Anzahl der vorhandenen Datensätze zu zählen.
@@ -171,8 +171,8 @@ function checkForUnchecked(dataPackUpdate) {
     let countActive = 0;
     const dataPackLength = dataPackUpdate.length;
 
-    $.each(dataPackUpdate, function(packKey, packValue) {
-        $.each(packValue, function(objectKey, objectValue) {
+    $.each(dataPackUpdate, function (packKey, packValue) {
+        $.each(packValue, function (objectKey, objectValue) {
             if (objectValue.match(/^(active)/)) {
                 countActive++;
                 return false;
@@ -199,7 +199,7 @@ function wrapData() {
     const newDatePattern = /(\d{2})\.(\d{2})\.(\d{4})/;
     //Durchläuft jede erstellte Zeile der Tabelle.
     $.when(
-        $contentMainRow.each(function() {
+        $contentMainRow.each(function () {
             //Speichert den Inhalt der einzelnen Spalten der ausgewählten Zeile in einer Variable ab.
             //Überprüft die Checkboxen und übergibt 0 oder 1 als Wert.
             const probenNummer = $(this)
@@ -245,23 +245,7 @@ function wrapData() {
             //Umbau des sollDatum Sting
             sollDatum = sollDatum.replace(newDatePattern, "$3-$2-$1");
             //Fügt mit hilfer eines Constructor's, den Inhalt der gegenwärtig selektierten Zeile, als Array in das "dataPack" hinzu.
-            dataPackUpdate.push(
-                new ConstructDataPack(
-                    probenNummer,
-                    sollDatum,
-                    zerlegungStart,
-                    zerlegungEnde,
-                    einwaageBeginn,
-                    einwaageEnde,
-                    klaerfallBeginn,
-                    klaerfallEnde,
-                    manaBestellt,
-                    manaErhalten,
-                    manaEinwaage,
-                    manaEingewogen,
-                    zpnWagen
-                )
-            );
+            dataPackUpdate.push(new ConstructDataPack(probenNummer, sollDatum, zerlegungStart, zerlegungEnde, einwaageBeginn, einwaageEnde, klaerfallBeginn, klaerfallEnde, manaBestellt, manaErhalten, manaEinwaage, manaEingewogen, zpnWagen));
             //Übergibt das "dataPack" Array zum Ajax handler
         })
     ).done(checkForUnchecked(dataPackUpdate));
@@ -271,7 +255,7 @@ function wrapData() {
 //Übersendet per Ajax und der POST Methode, dass Objekt "dataPack" an die PHP Datei "db-handling.php".
 function sendData(dataPackUpdate) {
 
-    function stripDataPack (dataPackUpdate) {
+    function stripDataPack(dataPackUpdate) {
         Object.entries(dataPackUpdate).forEach(([dataPackKey, dataPackValue]) => {
             Object.entries(dataPackValue).forEach(([itemKey, itemValue]) => {
                 if (itemValue === "preSet" || itemValue === "deactive") {
@@ -293,7 +277,7 @@ function sendData(dataPackUpdate) {
         dataType: "json"
     });
     //Ajax Anfrage ist erfolgreich.
-    ajaxRequestUpdate.done(function(data) {
+    ajaxRequestUpdate.done(function (data) {
         console.log(data);
         const itemCount = data["itemCount"];
         const $stickyFooterMessageWrap = $("#sticky-footer-message-wrap");
@@ -304,7 +288,7 @@ function sendData(dataPackUpdate) {
         // const $transmissionFailCounter = $('#transmission-fail-counter');
 
         //Funktion zum verstecken des ContentWrap und FooterWrap
-        const hideContentFooter = function() {
+        const hideContentFooter = function () {
             const $headerInputEingang = $("#header-input-eingang");
             const $wrapContent$wrapFooter = $("#wrap-content ").add(
                 $("#wrap-footer")
@@ -316,7 +300,7 @@ function sendData(dataPackUpdate) {
         };
 
         //Funktion zum entfernen der FooterCounter Anzeige inhalte.
-        const emptyMainRowsAndCounter = function() {
+        const emptyMainRowsAndCounter = function () {
             const $contentMainRows = $(".content-main-row");
             const $contentFooterCounter = $(".content-footer-counter");
             $contentMainRows.remove();
@@ -324,7 +308,7 @@ function sendData(dataPackUpdate) {
         };
 
         //Funktion zum Hinzufügen und entfernen von Class des Sticky Footer Elements
-        $.fn.animateStickyFooterWrapper = function(animationClass, heightClass, delay) {
+        $.fn.animateStickyFooterWrapper = function (animationClass, heightClass, delay) {
             const $stickyFooterWrapper = $(this);
             const $animationClass = animationClass;
             const $heightClass = heightClass;
@@ -334,11 +318,11 @@ function sendData(dataPackUpdate) {
                 .removeClass($heightClass)
                 .addClass($animationClass);
 
-            setTimeout(function() {
+            setTimeout(function () {
                 $stickyFooterWrapper.removeClass($animationClass);
             }, delay);
 
-            setTimeout(function() {
+            setTimeout(function () {
                 $wrapEingang.css("visibility", "visible");
                 $stickyFooterWrapper.addClass($heightClass);
                 $stickyFooterSuccessWrap
@@ -362,7 +346,7 @@ function sendData(dataPackUpdate) {
     });
 
     //Ajax Verbindung fehlgeschlagen.
-    ajaxRequestUpdate.fail(function(jqXHR, textStatus, errorThrown) {
+    ajaxRequestUpdate.fail(function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
         showFailMessage.failMessage("no-server header-fail-message-content-margin", 8000);

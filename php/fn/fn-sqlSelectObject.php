@@ -3,14 +3,17 @@
 function removeUnset($pdoObject) {
 
     foreach ($pdoObject as $pdoObjectkey => $pdoObjectValue) {
-        
-        foreach ($pdoObjectValue as $itemKey => $itemValue) {
-            if ($itemValue === null || $itemValue === 'deactive') {
-                unset($pdoObjectValue->{$itemKey});
+        if ($pdoObject->base !== false) {
+            foreach ($pdoObjectValue as $itemKey => $itemValue) {
+                if ($itemValue === null || $itemValue === 'deactive' || $itemValue === '00.00.0000') {
+                    unset($pdoObjectValue->{$itemKey});
+                }
             }
-        }
-        if (count( (array) $pdoObjectValue) === 0) {
-            unset($pdoObject->{$pdoObjectkey});
+            if (count( (array) $pdoObjectValue) === 0) {
+                unset($pdoObject->{$pdoObjectkey});
+            }
+        // }else if ($pdoObject->$pdoObjectkey === false) {
+        //     unset($pdoObject->{$pdoObjectkey});
         }
     }
     return $pdoObject;
@@ -51,8 +54,8 @@ function sqlSelectObjectDate($pdoConnect, $probenNummer, $pdoObject) {
         "
             SELECT
                 DATE_FORMAT(tbl_beurteilung.beurteilungBereitgestelltDateTime, '%d.%m.%Y') AS beurteilungBereitgestelltDateTime, 
-                DATE_FORMAT(tbl_probennahme.einwaageBeginn, '%d.%m.%Y') AS einwaageBeginn, 
-                DATE_FORMAT(tbl_probennahme.einwaageEnde, '%d.%m.%Y') AS einwaageEnde, 
+                DATE_FORMAT(tbl_einwaage.einwaageBeginn, '%d.%m.%Y') AS einwaageBeginn, 
+                DATE_FORMAT(tbl_einwaage.einwaageEnde, '%d.%m.%Y') AS einwaageEnde, 
                 DATE_FORMAT(tbl_klaerfall.klaerfallBeginnDateTime, '%d.%m.%Y') AS klaerfallBeginnDateTime, 
                 DATE_FORMAT(tbl_klaerfall.klaerfallEndeDateTime, '%d.%m.%Y') AS klaerfallEndeDateTime, 
                 DATE_FORMAT(tbl_mana.manaGestelltDateTime, '%d.%m.%Y') AS manaGestelltDateTime, 
@@ -74,8 +77,8 @@ function sqlSelectObjectDate($pdoConnect, $probenNummer, $pdoObject) {
                 ON tbl_baserecord.probenNummer = tbl_mana.probenNummer
             LEFT OUTER JOIN tbl_nickel
                 ON tbl_baserecord.probenNummer = tbl_nickel.probenNummer
-            LEFT OUTER JOIN tbl_probennahme
-                ON tbl_baserecord.probenNummer = tbl_probennahme.probenNummer
+            LEFT OUTER JOIN tbl_einwaage
+                ON tbl_baserecord.probenNummer = tbl_einwaage.probenNummer
             LEFT OUTER JOIN tbl_storno
                 ON tbl_baserecord.probenNummer = tbl_storno.probenNummer
             LEFT OUTER JOIN tbl_zerlegung
@@ -115,8 +118,8 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
                 TIME(tbl_mana.manaEinwaageDateTime) AS manaEinwaageTime,
                 TIME(tbl_mana.manaZpnWagenDateTime) AS manaZpnWagenTime,
                 TIME(tbl_nickel.nickelRueckgabeDateTime) AS nickelRueckgabeTime,
-                TIME(tbl_probennahme.einwaageBeginn) AS einwaageBeginnTime,
-                TIME(tbl_probennahme.einwaageEnde) AS einwaageEndeTime,
+                TIME(tbl_einwaage.einwaageBeginn) AS einwaageBeginnTime,
+                TIME(tbl_einwaage.einwaageEnde) AS einwaageEndeTime,
                 TIME(tbl_storno.stornoDateTime) AS stornoTime,
                 TIME(tbl_zerlegung.zerlegungStart) AS zerlegungStartTime,
                 TIME(tbl_zerlegung.zerlegungEnde) AS zerlegungEndeTime,
@@ -131,8 +134,8 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
                 ON tbl_baserecord.probenNummer = tbl_mana.probenNummer
             LEFT OUTER JOIN tbl_nickel
                 ON tbl_baserecord.probenNummer = tbl_nickel.probenNummer
-            LEFT OUTER JOIN tbl_probennahme
-                ON tbl_baserecord.probenNummer = tbl_probennahme.probenNummer
+            LEFT OUTER JOIN tbl_einwaage
+                ON tbl_baserecord.probenNummer = tbl_einwaage.probenNummer
             LEFT OUTER JOIN tbl_storno
                 ON tbl_baserecord.probenNummer = tbl_storno.probenNummer
             LEFT OUTER JOIN tbl_zerlegung
@@ -177,8 +180,8 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
                 tbl_status.mitNickel,
                 tbl_status.mitToys
             FROM tbl_baserecord
-            LEFT OUTER JOIN tbl_probennahme
-                ON tbl_baserecord.probenNummer = tbl_probennahme.probenNummer
+            LEFT OUTER JOIN tbl_einwaage
+                ON tbl_baserecord.probenNummer = tbl_einwaage.probenNummer
             LEFT OUTER JOIN tbl_status
                 ON tbl_baserecord.probenNummer = tbl_status.probenNummer
             WHERE tbl_baserecord.probenNummer = :probenNummer
@@ -198,7 +201,7 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
                 tbl_mana.manaBerechnungDateTimeEinwaage,
                 tbl_mana.manaBerechnungDateTimeGesamt,
                 tbl_nickel.nickelBerechnung,
-                tbl_probennahme.einwaageBerechnung,
+                tbl_einwaage.einwaageBerechnung,
                 tbl_zerlegung.zerlegungBerechnung,
                 tbl_zpnmustereingang.beurteilungZpnBerechnung,
                 tbl_zpnwagen.berechnungDateTimeZpnwagen
@@ -209,8 +212,8 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
                 ON tbl_baserecord.probenNummer = tbl_mana.probenNummer
             LEFT OUTER JOIN tbl_nickel
                 ON tbl_baserecord.probenNummer = tbl_nickel.probenNummer
-            LEFT OUTER JOIN tbl_probennahme
-                ON tbl_baserecord.probenNummer = tbl_probennahme.probenNummer
+            LEFT OUTER JOIN tbl_einwaage
+                ON tbl_baserecord.probenNummer = tbl_einwaage.probenNummer
             LEFT OUTER JOIN tbl_zerlegung
                 ON tbl_baserecord.probenNummer = tbl_zerlegung.probenNummer
             LEFT OUTER JOIN tbl_zpnmustereingang
@@ -225,9 +228,10 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
         $pdoConnect->commit();
         $pdoObject->berechnung = $pdoStatement->fetch( PDO::FETCH_OBJ );
 
+        $pdoObject = sqlSelectObjectBase($pdoConnect, $probenNummer, $pdoObject);
+
         $pdoObject = removeUnset($pdoObject);
 
-        $pdoObject = sqlSelectObjectBase($pdoConnect, $probenNummer, $pdoObject);
         $pdoObject = sqlSelectObjectDate($pdoConnect, $probenNummer, $pdoObject);
 
         return $pdoObject;

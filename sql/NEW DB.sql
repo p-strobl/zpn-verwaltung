@@ -87,8 +87,8 @@ CREATE TABLE IF NOT EXISTS `tbl_nickel` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
--- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_probennahme
-CREATE TABLE IF NOT EXISTS `tbl_probennahme` (
+-- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_einwaage
+CREATE TABLE IF NOT EXISTS `tbl_einwaage` (
   `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
   `einwaageBeginn` datetime DEFAULT NULL,
   `einwaageEnde` datetime DEFAULT NULL,

@@ -7,7 +7,7 @@ function checkIfEingang($pdoConnect, $probenNummer, $sollDatum, $transmitRespons
 
         $sqlSelectObject = sqlSelectObjectBase($pdoConnect, $probenNummer, $pdoObject);
 
-        if ($sqlSelectObject === false){
+        if ($sqlSelectObject->base === false){
 
             $pdoConnect->beginTransaction();
 

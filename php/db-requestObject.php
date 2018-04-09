@@ -11,7 +11,11 @@ if (isset($_POST) && preg_match($yesRegEx, array_values($_POST)[0]) && strlen(ar
     $pdoObject = new StdClass;
     switch (key($_POST)) {
         case 'requestDataSetComplete':
-            $sqlSelectObject = sqlSelectObjectComplete($pdoConnect, array_values($_POST)[0], $pdoObject);
+            $sqlSelectObject = sqlSelectObjectBase($pdoConnect, array_values($_POST)[0], $pdoObject);
+
+            if ($sqlSelectObject->base !== false) {
+                $sqlSelectObject = sqlSelectObjectComplete($pdoConnect, array_values($_POST)[0], $pdoObject);
+            }
             break;
         case 'requestDataSetDate':
             $sqlSelectObject = sqlSelectObjectDate($pdoConnect, array_values($_POST)[0], $pdoObject);

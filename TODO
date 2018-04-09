@@ -29,6 +29,8 @@ Todo:
 
         ✔ CSS -> Zusammenfassung von transform: scaleY(0); @done(18-04-01 23:55)
 
+        ☐ JS -> Keine Verbindung zum Server meldung abfangen
+
     Eingang Seite:
         ✔ JS -> Auch für den ZPN Muster Eingang eine status Abfrage der Button's @low @done(18-04-04 16:27)
         ✘ JS -> Eingang Input Soll Datum Abfragen @high @cancelled(18-04-08 02:09)
@@ -41,10 +43,13 @@ Todo:
         ✔ JS -> Disable der Buttons erweitern @done(18-04-04 05:17)
         ✔ JS -> Button Status Funktion umstrukturieren!! @done(18-04-04 13:56)
         ✔ JS -> Umstrukturierung der aktiven Button abfrage!! @high @done(18-04-07 23:33)
+        ☐ JS -> Wenn ein Button mit preSet geholt wurde, den Anfangs-button davon disablen
 
     Beurteilung Seite:
         ☐ HTML -> Seite erstellen
         ☐ HTML -> Doppelte Input Abfrage: "Probennummer" und "an Abteilung"
+
+        ☐ JS -> Button Status Funktion hinzufügen 
 
     Übersichte Seite:
         ☐ HTML -> Seite erstellen

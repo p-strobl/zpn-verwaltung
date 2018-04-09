@@ -99,7 +99,7 @@ function searchDataSet(probenNummer) {
         const modalHeaderInput = $('#modal-header-input');
         const modalFooterSpanWrap = $('#modal-footer-span-wrap');
         console.log(data);
-        if (Object.keys(data).length && !data.hasOwnProperty(0)) {
+        if (Object.keys(data).every((key) => data[key])) {
 
             resetDetails();
 
@@ -239,11 +239,11 @@ function searchDataSet(probenNummer) {
 
             showCloseModal.backToModalInput;
 
-        } else if (!Object.keys(data).length) {
+        } else if (Object.keys(data).every((key) => !data[key])) {
             showFailMessage.failMessage('fail-input-no-dataset', 3000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
 
-        } else if (data.hasOwnProperty(0)) {
+        } else if (data[0].failCode === 2002) {
             showFailMessage.failMessage('fail-connect', 8000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
         }

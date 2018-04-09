@@ -49,11 +49,11 @@ if (isset($receivedPostData->updateDataSet)) {
                         break;
                         
                         case 'einwaageBeginn':
-                            array_push( $transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_probennahme', 'einwaageBeginn', 'einwaageEnde', 'einwaageBerechnung', $checkIfEingang, $transmitResponse, $pdoObject, 'start'));
+                            array_push( $transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_einwaage', 'einwaageBeginn', 'einwaageEnde', 'einwaageBerechnung', $checkIfEingang, $transmitResponse, $pdoObject, 'start'));
                         break;
 
                         case 'einwaageEnde':
-                            array_push( $transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_probennahme', 'einwaageBeginn', 'einwaageEnde', 'einwaageBerechnung', $checkIfEingang, $transmitResponse, $pdoObject, 'ende'));
+                            array_push( $transmitResponse, setDateTime($pdoConnect, $i->probenNummer, 'tbl_einwaage', 'einwaageBeginn', 'einwaageEnde', 'einwaageBerechnung', $checkIfEingang, $transmitResponse, $pdoObject, 'ende'));
                         break;
 
                         case 'nickelBack':
