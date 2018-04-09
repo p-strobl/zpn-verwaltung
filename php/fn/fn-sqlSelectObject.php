@@ -3,6 +3,7 @@
 function removeUnset($pdoObject) {
 
     foreach ($pdoObject as $pdoObjectkey => $pdoObjectValue) {
+        
         foreach ($pdoObjectValue as $itemKey => $itemValue) {
             if ($itemValue === null || $itemValue === 'deactive') {
                 unset($pdoObjectValue->{$itemKey});
