@@ -36,6 +36,18 @@ CREATE TABLE IF NOT EXISTS `tbl_beurteilung` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Daten Export vom Benutzer nicht ausgewählt
+-- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_einwaage
+CREATE TABLE IF NOT EXISTS `tbl_einwaage` (
+  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `einwaageBeginn` datetime DEFAULT NULL,
+  `einwaageEnde` datetime DEFAULT NULL,
+  `einwaageBerechnung` time DEFAULT NULL,
+  PRIMARY KEY (`probenNummer`),
+  KEY `probenNummerFK` (`probenNummer`),
+  CONSTRAINT `fk_baserecord_probennahme` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_baserecord` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_klaerfall
 CREATE TABLE IF NOT EXISTS `tbl_klaerfall` (
   `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
@@ -84,18 +96,6 @@ CREATE TABLE IF NOT EXISTS `tbl_nickel` (
   PRIMARY KEY (`probenNummer`),
   KEY `probenNummerFK` (`probenNummer`),
   CONSTRAINT `fk_baserecord_nickel` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_baserecord` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
-
--- Daten Export vom Benutzer nicht ausgewählt
--- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_einwaage
-CREATE TABLE IF NOT EXISTS `tbl_einwaage` (
-  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
-  `einwaageBeginn` datetime DEFAULT NULL,
-  `einwaageEnde` datetime DEFAULT NULL,
-  `einwaageBerechnung` time DEFAULT NULL,
-  PRIMARY KEY (`probenNummer`),
-  KEY `probenNummerFK` (`probenNummer`),
-  CONSTRAINT `fk_baserecord_probennahme` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_baserecord` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
