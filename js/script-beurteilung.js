@@ -1,6 +1,34 @@
 "use strict";
 
-function appendContentMainRow(probenNummer, abteilung, zpnClass, lfgbClass, textClass, zpnSetTo, lfgbSetTo, TextSetTo, zpnDisabled, flgbDisabled, textDisabled) {
+function appendContentMainRow(probenNummer, abteilung) {
+
+    function setBeurteilungStatusButton(abteilung) {
+        const rowItems = {
+            ZPN: $('#content-btn-anZPN'),
+            LFGB: $('#content-btn-anLFGB'),
+            Textilphysik: $('#content-btn-anTextPhysik')
+        };
+
+        function setButtonStatus(rowItems, rowKey, abteilung) {
+            const setItem = rowItems[abteilung];
+            setItem
+                .prop("disabled", false)
+                .addClass("preSet")
+                .val("active");
+        };
+
+        Object.entries(rowItems).forEach(([rowKey, rowValue]) => {
+            rowKey === abteilung ? setButtonStatus(rowItems, rowKey, abteilung) : "";
+            // if (abteilung === rowKey) {
+            //     rowValue.val('active');
+            // }
+        });
+
+        //Prüft ob des den gewünschten Wert gibt, wenn ja setzt den entsprechenden status auf den Button um
+
+
+    }
+
     const inputTextLeft = leftSplit(probenNummer, 12);
     const inputTextRight = rightSplit(probenNummer, 10);
     const $contentHeaderRow = $("#content-header-row");
@@ -15,13 +43,13 @@ function appendContentMainRow(probenNummer, abteilung, zpnClass, lfgbClass, text
         "<p class='content-main-text' id='text-sollNr' contenteditable='true'>" + inputTextRight + "</p>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'  title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie mit der Zerlegung beginnen möchten.'>" +
-        "<button type='button' class='content-button-check " + zpnClass + "' id='content-btn-anZPN' value='" + zpnSetTo + "' " + zpnDisabled + ">An die ZPN</button>" +
+        "<button type='button' class='content-button-check' id='content-btn-anZPN' value='deactive' disabled>An die ZPN</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung '  title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der Zerlegung.'>" +
-        "<button type='button' class='content-button-check " + lfgbClass + "' id='content-btn-anLFGB' value='" + lfgbSetTo + "' " + flgbDisabled + ">An die LFGB</button>" +
+        "<button type='button' class='content-button-check' id='content-btn-anLFGB' value='deactive' disabled>An die LFGB</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'  title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie die Einwaage beginnen möchten.'>" +
-        "<button type='button' class='content-button-check " + textClass + "' id='content-btn-anTextPhysik' value='" + TextSetTo + "' " + textDisabled + ">An die Textilphysik</button>" +
+        "<button type='button' class='content-button-check' id='content-btn-anTextPhysik' value='deactive' disabled>An die Textilphysik</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'>" +
         "<div class='content-button-delete-wrap'>" +
@@ -35,6 +63,8 @@ function appendContentMainRow(probenNummer, abteilung, zpnClass, lfgbClass, text
         "</div>" +
         "</div>" +
         "</section>";
+
+    setBeurteilungStatusButton(abteilung);
 
     //Zeigt den Tabellen Header, die Tabelle und den sende Button wieder an.
     $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : '';

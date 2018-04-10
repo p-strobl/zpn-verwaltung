@@ -34,8 +34,7 @@ function regexInput() {
             if (this.value.match(zpnRegEx) || this.value.match(lfgbRegEx) || this.value.match(physikRegEx) || keypressed.keyCode === 13) {
                 // $(this)
                 // .effect('highlight', {color: 'lime'}, 200);
-            }
-            else {
+            } else {
                 $(this)
                     .val(this.value.replace(this.value, ""));
                 // .effect('highlight', {color: '#FF3100'}, 200);
@@ -134,35 +133,33 @@ function checkInput() {
                             break;
                         case 'header-input-beurteilung-probennummer':
                             if ($.inArray($headerInputBeurteilungProbennummer.val(), globalMainRowCounter) > -1) {
-                                $headerInputBeurteilungProbennummer
-                                    .effect('highlight', { color: '#FF3100' }, 200)
-                                    .val('');
+                                $headerInputBeurteilungProbennummer.effect('highlight', { color: '#FF3100' }, 200).val('');
                                 //Ja es ist bereits ein Datensatz vorhanden, es wird eine Fehler Meldung angezeigt.
                                 //Blendet für 3,5 sek. eine "Fehlgeschlagen, Doppelter Eintrag" auskunft ein.
                                 showFailMessage.failMessage('double-input', 2000, this.id);
-                            }
-                            else {
+                            } else {
                                 $headerInputBeurteilungProbennummer
                                     .effect('highlight', { color: '#FFB700' }, 200);
                                 //in die Globale Variable "globalMainRowCounter" wird der hinzugefügte Datensatz zwischengespeichert.
-                                globalMainRowCounter.push($headerInputBeurteilungProbennummer.val());
+                                globalMainRowCounter.push(inputText);
                                 $headerInputBeurteilungAbteilung.focus();
                             }
                             break;
                         case 'header-input-beurteilung-abteilung':
-                            switch (this.value) {
-                                case 'zpn':
-                                case 'ZPN':
-                                    appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value, 'preSet', '', '', 'active', 'deactive', 'deactive', '', 'disabled', 'disabled');
-                                    break;
-                                case 'LFGB':
-                                    appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value, '', 'preSet', '', 'deactive', 'active', 'deactive', 'disabled', '', 'disabled');
-                                    break;
-                                case 'Textilphysik':
-                                    appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value, '', '', 'preSet', 'deactive', 'deactive', 'active', 'disabled', 'disabled', '');
-                                    break;
-                                default:
-                            }
+                            appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value);
+                            // switch (this.value) {
+                            //     case 'zpn':
+                            //     case 'ZPN':
+                            //         appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value);
+                            //         break;
+                            //     case 'LFGB':
+                            //         appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value);
+                            //         break;
+                            //     case 'Textilphysik':
+                            //         appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value);
+                            //         break;
+                            //     default:
+                            // }
 
                             $headerInputBeurteilungProbennummer.add($headerInputBeurteilungAbteilung).val('');
                             $headerInputBeurteilungProbennummer.focus();
@@ -244,7 +241,9 @@ const countMainRows = {
         this.$footerAnzahlMusterText
             .html(globalMainRowCounter.length)
             .parent()
-            .effect(effect, { color: effectColor }, effectTimer);
+            .effect(effect, {
+                color: effectColor
+            }, effectTimer);
     }
 };
 
@@ -373,45 +372,69 @@ function countCheckedButtons() {
                     .css("background-color", "#FFB700");
                 switch (this.id) {
                     case "content-btn-anZPN":
-                        effectOnElement($footerAnzahlAnZPN, '#content-btn-anZPN[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlAnZPN, '#content-btn-anZPN[value="active"]', {
+                            color: "#FFB700"
+                        });
                         // enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         break;
                     case "content-btn-anLFGB":
-                        effectOnElement($footerAnzahlAnLFGB, '#content-btn-anLFGB[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlAnLFGB, '#content-btn-anLFGB[value="active"]', {
+                            color: "#FFB700"
+                        });
                         break;
                     case "content-btn-anTextPhysik":
-                        effectOnElement($footerAnzahlAnTextil, '#content-btn-anTextPhysik[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlAnTextil, '#content-btn-anTextPhysik[value="active"]', {
+                            color: "#FFB700"
+                        });
                         break;
                     //--------------------------------------------------------------------------------------------------------------------
                     case "content-btn-chkEx":
-                        effectOnElement($footerAnzahlExpress, '#content-btn-chkEx[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlExpress, '#content-btn-chkEx[value="active"]', {
+                            color: "#FFB700"
+                        });
                         break;
                     case "content-btn-chkIntern":
-                        effectOnElement($footerAnzahlIntern, '#content-btn-chkIntern[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlIntern, '#content-btn-chkIntern[value="active"]', {
+                            color: "#FFB700"
+                        });
                         break;
                     case "content-btn-chkNi":
-                        effectOnElement($footerAnzahlNickel, '#content-btn-chkNi[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlNickel, '#content-btn-chkNi[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-chkNickelBack", "disableMainRowButton");
                         break;
                     case "content-btn-chkLF":
-                        effectOnElement($footerAnzahlLFGB, '#content-btn-chkLF[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlLFGB, '#content-btn-chkLF[value="active"]', {
+                            color: "#FFB700"
+                        });
                         break;
                     case "content-btn-chkToy":
-                        effectOnElement($footerAnzahlToys, '#content-btn-chkToy[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlToys, '#content-btn-chkToy[value="active"]', {
+                            color: "#FFB700"
+                        });
                         break;
                     case "content-btn-chk60g":
-                        effectOnElement($footerAnzahl60g, '#content-btn-chk60g[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahl60g, '#content-btn-chk60g[value="active"]', {
+                            color: "#FFB700"
+                        });
                         break;
                     case "content-btn-chkKlaerBack":
-                        effectOnElement($footerAnzahlKlaerfall, '#content-btn-chkKlaerBack[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlKlaerfall, '#content-btn-chkKlaerBack[value="active"]', {
+                            color: "#FFB700"
+                        });
                         break;
                     case "content-btn-chkNickelBack":
-                        effectOnElement($footerAnzahlNickelBack, '#content-btn-chkNickelBack[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlNickelBack, '#content-btn-chkNickelBack[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-chkNi", "disableMainRowButton");
                         break;
                     //--------------------------------------------------------------------------------------------------------------------
                     case "content-btn-zerlegungStart":
-                        effectOnElement($footerAnzahlZerlegungStart, '#content-btn-zerlegungStart[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlZerlegungStart, '#content-btn-zerlegungStart[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
@@ -425,7 +448,9 @@ function countCheckedButtons() {
                         break;
 
                     case "content-btn-zerlegungEnde":
-                        effectOnElement($footerAnzahlZerlegungEnde, '#content-btn-zerlegungEnde[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlZerlegungEnde, '#content-btn-zerlegungEnde[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
@@ -439,11 +464,14 @@ function countCheckedButtons() {
                         break;
 
                     case "content-btn-einwaageBeginn":
-                        effectOnElement($footerAnzahlEinwaageBeginn, '#content-btn-einwaageBeginn[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlEinwaageBeginn, '#content-btn-einwaageBeginn[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-                        disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton"); disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
+                        disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
+                        disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
                         disableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
                         disableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
@@ -451,7 +479,9 @@ function countCheckedButtons() {
                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-einwaageEnde":
-                        effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -470,7 +500,9 @@ function countCheckedButtons() {
                     //     });
                     //     break;
                     case "content-btn-klaerfallBeginn":
-                        effectOnElement($footerAnzahlKlaerfallBeginn, '#content-btn-klaerfallBeginn[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlKlaerfallBeginn, '#content-btn-klaerfallBeginn[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -484,7 +516,9 @@ function countCheckedButtons() {
                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-klaerfallEnde":
-                        effectOnElement($footerAnzahlKlaerfallEnde, '#content-btn-klaerfallEnde[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlKlaerfallEnde, '#content-btn-klaerfallEnde[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -498,7 +532,9 @@ function countCheckedButtons() {
                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-manaBestellt":
-                        effectOnElement($footerAnzahlManaBestellt, '#content-btn-manaBestellt[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlManaBestellt, '#content-btn-manaBestellt[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -512,7 +548,9 @@ function countCheckedButtons() {
                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-manaErhalten":
-                        effectOnElement($footerAnzahlManaErhalten, '#content-btn-manaErhalten[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlManaErhalten, '#content-btn-manaErhalten[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -526,7 +564,9 @@ function countCheckedButtons() {
                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-manaEinwaage":
-                        effectOnElement($footerAnzahlManaEinwaage, '#content-btn-manaEinwaage[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlManaEinwaage, '#content-btn-manaEinwaage[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -540,7 +580,9 @@ function countCheckedButtons() {
                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-manaEingewogen":
-                        effectOnElement($footerAnzahlManaEingewogen, '#content-btn-manaEingewogen[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlManaEingewogen, '#content-btn-manaEingewogen[value="active"]', {
+                            color: "#FFB700"
+                        });
                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -564,8 +606,12 @@ function countCheckedButtons() {
                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
                         activateButton(this, "#content-btn-einwaageEnde");
-                        effectOnElement($footerAnzahlZpnWagen, '#content-btn-zpnWagen[value="active"]', { color: "#FFB700" });
-                        effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', { color: "#FFB700" });
+                        effectOnElement($footerAnzahlZpnWagen, '#content-btn-zpnWagen[value="active"]', {
+                            color: "#FFB700"
+                        });
+                        effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', {
+                            color: "#FFB700"
+                        });
                         break;
                     default:
                 }
@@ -576,45 +622,69 @@ function countCheckedButtons() {
                     .css("background-color", "#ededed");
                 switch (this.id) {
                     case "content-btn-anZPN":
-                        effectOnElement($footerAnzahlAnZPN, '#content-btn-anZPN[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlAnZPN, '#content-btn-anZPN[value="active"]', {
+                            color: "#FF3100"
+                        });
                         // enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         break;
                     case "content-btn-anLFGB":
-                        effectOnElement($footerAnzahlAnLFGB, '#content-btn-anLFGB[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlAnLFGB, '#content-btn-anLFGB[value="active"]', {
+                            color: "#FF3100"
+                        });
                         break;
                     case "content-btn-anTextPhysik":
-                        effectOnElement($footerAnzahlAnTextil, '#content-btn-anTextPhysik[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlAnTextil, '#content-btn-anTextPhysik[value="active"]', {
+                            color: "#FF3100"
+                        });
                         break;
                     //--------------------------------------------------------------------------------------------------------------------
                     case "content-btn-chkEx":
-                        effectOnElement($footerAnzahlExpress, '#content-btn-chkEx[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlExpress, '#content-btn-chkEx[value="active"]', {
+                            color: "#FF3100"
+                        });
                         break;
                     case "content-btn-chkIntern":
-                        effectOnElement($footerAnzahlIntern, '#content-btn-chkIntern[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlIntern, '#content-btn-chkIntern[value="active"]', {
+                            color: "#FF3100"
+                        });
                         break;
                     case "content-btn-chkNi":
-                        effectOnElement($footerAnzahlNickel, '#content-btn-chkNi[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlNickel, '#content-btn-chkNi[value="active"]', {
+                            color: "#FF3100"
+                        });
                         enableButton(this, "#content-btn-chkNickelBack", "disableMainRowButton");
                         break;
                     case "content-btn-chkLF":
-                        effectOnElement($footerAnzahlLFGB, '#content-btn-chkLF[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlLFGB, '#content-btn-chkLF[value="active"]', {
+                            color: "#FF3100"
+                        });
                         break;
                     case "content-btn-chkToy":
-                        effectOnElement($footerAnzahlToys, '#content-btn-chkToy[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlToys, '#content-btn-chkToy[value="active"]', {
+                            color: "#FF3100"
+                        });
                         break;
                     case "content-btn-chk60g":
-                        effectOnElement($footerAnzahl60g, '#content-btn-chk60g[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahl60g, '#content-btn-chk60g[value="active"]', {
+                            color: "#FF3100"
+                        });
                         break;
                     case "content-btn-chkKlaerBack":
-                        effectOnElement($footerAnzahlKlaerfall, '#content-btn-chkKlaerBack[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlKlaerfall, '#content-btn-chkKlaerBack[value="active"]', {
+                            color: "#FF3100"
+                        });
                         break;
                     case "content-btn-chkNickelBack":
-                        effectOnElement($footerAnzahlNickelBack, '#content-btn-chkNickelBack[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlNickelBack, '#content-btn-chkNickelBack[value="active"]', {
+                            color: "#FF3100"
+                        });
                         enableButton(this, "#content-btn-chkNi", "disableMainRowButton");
                         break;
                     //--------------------------------------------------------------------------------------------------------------------
                     case "content-btn-zerlegungStart":
-                        effectOnElement($footerAnzahlZerlegungStart, '#content-btn-zerlegungStart[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlZerlegungStart, '#content-btn-zerlegungStart[value="active"]', {
+                            color: "#FF3100"
+                        });
 
                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -628,7 +698,9 @@ function countCheckedButtons() {
                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-zerlegungEnde":
-                        effectOnElement($footerAnzahlZerlegungEnde, '#content-btn-zerlegungEnde[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlZerlegungEnde, '#content-btn-zerlegungEnde[value="active"]', {
+                            color: "#FF3100"
+                        });
                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
 
                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -642,7 +714,9 @@ function countCheckedButtons() {
                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-einwaageBeginn":
-                        effectOnElement($footerAnzahlEinwaageBeginn, '#content-btn-einwaageBeginn[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlEinwaageBeginn, '#content-btn-einwaageBeginn[value="active"]', {
+                            color: "#FF3100"
+                        });
                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
 
@@ -656,7 +730,9 @@ function countCheckedButtons() {
                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-einwaageEnde":
-                        effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', {
+                            color: "#FF3100"
+                        });
                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -675,7 +751,9 @@ function countCheckedButtons() {
                     //     });
                     //     break;
                     case "content-btn-klaerfallBeginn":
-                        effectOnElement($footerAnzahlKlaerfallBeginn, '#content-btn-klaerfallBeginn[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlKlaerfallBeginn, '#content-btn-klaerfallBeginn[value="active"]', {
+                            color: "#FF3100"
+                        });
                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -689,7 +767,9 @@ function countCheckedButtons() {
                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-klaerfallEnde":
-                        effectOnElement($footerAnzahlKlaerfallEnde, '#content-btn-klaerfallEnde[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlKlaerfallEnde, '#content-btn-klaerfallEnde[value="active"]', {
+                            color: "#FF3100"
+                        });
                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -703,7 +783,9 @@ function countCheckedButtons() {
                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-manaBestellt":
-                        effectOnElement($footerAnzahlManaBestellt, '#content-btn-manaBestellt[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlManaBestellt, '#content-btn-manaBestellt[value="active"]', {
+                            color: "#FF3100"
+                        });
                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -717,7 +799,9 @@ function countCheckedButtons() {
                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-manaErhalten":
-                        effectOnElement($footerAnzahlManaErhalten, '#content-btn-manaErhalten[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlManaErhalten, '#content-btn-manaErhalten[value="active"]', {
+                            color: "#FF3100"
+                        });
                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -731,7 +815,9 @@ function countCheckedButtons() {
                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-manaEinwaage":
-                        effectOnElement($footerAnzahlManaEinwaage, '#content-btn-manaEinwaage[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlManaEinwaage, '#content-btn-manaEinwaage[value="active"]', {
+                            color: "#FF3100"
+                        });
                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -745,7 +831,9 @@ function countCheckedButtons() {
                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
                     case "content-btn-manaEingewogen":
-                        effectOnElement($footerAnzahlManaEingewogen, '#content-btn-manaEingewogen[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlManaEingewogen, '#content-btn-manaEingewogen[value="active"]', {
+                            color: "#FF3100"
+                        });
                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
@@ -769,8 +857,12 @@ function countCheckedButtons() {
                         enableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
                         deactiveButton(this, "#content-btn-einwaageEnde");
-                        effectOnElement($footerAnzahlZpnWagen, '#content-btn-zpnWagen[value="active"]', { color: "#FF3100" });
-                        effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', { color: "#FF3100" });
+                        effectOnElement($footerAnzahlZpnWagen, '#content-btn-zpnWagen[value="active"]', {
+                            color: "#FF3100"
+                        });
+                        effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', {
+                            color: "#FF3100"
+                        });
                         break;
                     default:
                 }
@@ -793,76 +885,122 @@ function countCheckedButtons() {
                         .css("background-color", "#ededed");
                     switch (this.id) {
                         case "content-btn-anZPN":
-                            effectOnElement($footerAnzahlAnZPN, '#content-btn-anZPN[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlAnZPN, '#content-btn-anZPN[value="active"]', {
+                                color: "#FF3100"
+                            });
                             // enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                             break;
                         case "content-btn-anLFGB":
-                            effectOnElement($footerAnzahlAnLFGB, '#content-btn-anLFGB[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlAnLFGB, '#content-btn-anLFGB[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-anTextPhysik":
-                            effectOnElement($footerAnzahlAnTextil, '#content-btn-anTextPhysik[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlAnTextil, '#content-btn-anTextPhysik[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         //--------------------------------------------------------------------------------------------------------------------
                         case "content-btn-chkEx":
-                            effectOnElement($footerAnzahlExpress, '#content-btn-chkEx[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlExpress, '#content-btn-chkEx[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-chkIntern":
-                            effectOnElement($footerAnzahlIntern, '#content-btn-chkIntern[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlIntern, '#content-btn-chkIntern[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-chkNi":
-                            effectOnElement($footerAnzahlNickel, '#content-btn-chkNi[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlNickel, '#content-btn-chkNi[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-chkLF":
-                            effectOnElement($footerAnzahlLFGB, '#content-btn-chkLF[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlLFGB, '#content-btn-chkLF[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-chkToy":
-                            effectOnElement($footerAnzahlToys, '#content-btn-chkToy[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlToys, '#content-btn-chkToy[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-chk60g":
-                            effectOnElement($footerAnzahl60g, '#content-btn-chk60g[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahl60g, '#content-btn-chk60g[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-chkKlaerBack":
-                            effectOnElement($footerAnzahlKlaerfall, '#content-btn-chkKlaerBack[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlKlaerfall, '#content-btn-chkKlaerBack[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-chkNickelBack":
-                            effectOnElement($footerAnzahlNickelBack, '#content-btn-chkNickelBack[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlNickelBack, '#content-btn-chkNickelBack[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         //--------------------------------------------------------------------------------------------------------------------
                         case "content-btn-zerlegungStart":
-                            effectOnElement($footerAnzahlZerlegungStart, '#content-btn-zerlegungStart[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlZerlegungStart, '#content-btn-zerlegungStart[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-zerlegungEnde":
-                            effectOnElement($footerAnzahlZerlegungEnde, '#content-btn-zerlegungEnde[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlZerlegungEnde, '#content-btn-zerlegungEnde[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-einwaageBeginn":
-                            effectOnElement($footerAnzahlEinwaageBeginn, '#content-btn-einwaageBeginn[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlEinwaageBeginn, '#content-btn-einwaageBeginn[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-einwaageEnde":
-                            effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-nickelBack":
-                            effectOnElement($footerAnzahlNickelBack, '#content-btn-nickelBack[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlNickelBack, '#content-btn-nickelBack[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-klaerfallBeginn":
-                            effectOnElement($footerAnzahlKlaerfallBeginn, '#content-btn-klaerfallBeginn[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlKlaerfallBeginn, '#content-btn-klaerfallBeginn[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-klaerfallEnde":
-                            effectOnElement($footerAnzahlKlaerfallEnde, '#content-btn-klaerfallEnde[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlKlaerfallEnde, '#content-btn-klaerfallEnde[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-manaBestellt":
-                            effectOnElement($footerAnzahlManaBestellt, '#content-btn-manaBestellt[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlManaBestellt, '#content-btn-manaBestellt[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-manaErhalten":
-                            effectOnElement($footerAnzahlManaErhalten, '#content-btn-manaErhalten[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlManaErhalten, '#content-btn-manaErhalten[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-manaEinwaage":
-                            effectOnElement($footerAnzahlManaEinwaage, '#content-btn-manaEinwaage[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlManaEinwaage, '#content-btn-manaEinwaage[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-manaEingewogen":
-                            effectOnElement($footerAnzahlManaEingewogen, '#content-btn-manaEingewogen[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlManaEingewogen, '#content-btn-manaEingewogen[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         case "content-btn-zpnWagen":
-                            effectOnElement($footerAnzahlZpnWagen, '#content-btn-zpnWagen[value="active"]', { color: "#FF3100" });
+                            effectOnElement($footerAnzahlZpnWagen, '#content-btn-zpnWagen[value="active"]', {
+                                color: "#FF3100"
+                            });
                             break;
                         default:
                     }

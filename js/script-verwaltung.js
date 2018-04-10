@@ -45,11 +45,10 @@ function getVerwaltungButtonStatus(probenNummer) {
         //Prüft ob des den gewünschten Wert gibt, wenn ja setzt den entsprechenden status auf den Button um
         $.each(data.date, function (dataKey, dataValue) {
             $.each(rowItems, function (itemKey, itemValue) {
-                itemKey === dataKey
-                    ? setButtonStatus(rowItems, itemKey, dataValue)
-                    : "";
+                itemKey === dataKey ? setButtonStatus(rowItems, itemKey, dataValue) : "";
             });
         });
+
     });
 
     ajaxRequestObject.fail(function (jqXHR, textStatus, errorThrown) {

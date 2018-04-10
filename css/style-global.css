@@ -68,7 +68,7 @@ button::-moz-focus-inner {
     width: 100%;
 }
 
-.wrap-header.beurteilung{
+.wrap-header.beurteilung {
     grid-template-rows: repeat(4, auto);
 }
 
@@ -346,6 +346,14 @@ img:hover {
     background-color: #ffb700
 }
 
+.content-button-check.preSet:hover {
+    background-color: #ffb9a9
+}
+
+.content-button-check.disabled {
+    text-decoration-line: line-through;
+}
+
 .setButtonStatus {
     background-color: #00ff67;
     text-decoration-line: line-through;
@@ -374,8 +382,7 @@ img:hover {
     background-color: #ff3100;
 }
 
-.content-footer-count-row {
-}
+.content-footer-count-row {}
 
 .content-footer-count-input {
     padding: 5px 0 5px 0;
