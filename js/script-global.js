@@ -247,6 +247,30 @@ const countMainRows = {
     }
 };
 
+function setUnsetMainButtons() {
+
+    document.addEventListener('click', () => {
+        if (event.target.classList.contains('content-button-check')) {
+
+            let clickedButton = event.target;
+
+            if (clickedButton.value === 'deactive') {
+                clickedButton.value = 'active';
+            } else {
+                clickedButton.value = 'deactive';
+            }
+        } else {
+            return;
+        }
+
+
+
+
+
+
+    }, false);
+}
+
 //
 //Ermittelt welcher Auswahl-Button gedrückt wurde, und addiert oder subtrahiert die entsprechende Anzeige.
 function countCheckedButtons() {
@@ -1127,13 +1151,14 @@ function confirmDelete() {
     });
 }
 
-$(document).ready(function () {
+document.addEventListener('DOMContentLoaded', function () {
     regexInput();
     checkInput();
     backToInput();
     countCheckedButtons();
     highlightSelectedRow();
     confirmDelete();
+    setUnsetMainButtons();
     showCloseModal.showModal();
     showCloseModal.closeModal();
 });

@@ -2,31 +2,50 @@
 
 function appendContentMainRow(probenNummer, abteilung) {
 
+    //Setzt den entsprechenden status auf den Button um
     function setBeurteilungStatusButton(abteilung) {
-        const rowItems = {
+
+        const contentBtnItems = {
             ZPN: $('#content-btn-anZPN'),
             LFGB: $('#content-btn-anLFGB'),
             Textilphysik: $('#content-btn-anTextPhysik')
         };
 
-        function setButtonStatus(rowItems, rowKey, abteilung) {
-            const setItem = rowItems[abteilung];
-            setItem
-                .prop("disabled", false)
-                .addClass("preSet")
-                .val("active");
+        function activeButtonStatus(contentBtnID) {
+            contentBtnID
+                .prop('disabled', false)
+                .addClass('preSet')
+                .removeClass('disabled')
+                .val('active');
         };
 
-        Object.entries(rowItems).forEach(([rowKey, rowValue]) => {
-            rowKey === abteilung ? setButtonStatus(rowItems, rowKey, abteilung) : "";
-            // if (abteilung === rowKey) {
-            //     rowValue.val('active');
-            // }
+        function deactiveButtonStatus(contentBtnID) {
+            contentBtnID
+                .prop('disabled', true)
+                .addClass('disabled')
+                .val('deactive');
+        }
+
+        Object.entries(contentBtnItems).forEach(([contentBtnKey, contentBtnValue]) => {
+            contentBtnKey === abteilung ? activeButtonStatus(contentBtnValue) : deactiveButtonStatus(contentBtnValue);
         });
+    }
 
-        //Prüft ob des den gewünschten Wert gibt, wenn ja setzt den entsprechenden status auf den Button um
+    function addFooterCounter(abteilung) {
 
+        const footerCounter = {
+            ZPN: $('#content-footer-counter-anZPN'),
+            LFGB: $('#content-footer-counter-anLFGB'),
+            Textilphysik: $('#content-footer-counter-anTextilphysik')
+        }
 
+        function addCounter(footerCounterID) {
+            footerCounterID.text(Number(footerCounterID.text()) + 1);
+        }
+
+        Object.entries(footerCounter).forEach(([fcKey, fcValue]) => {
+            fcKey === abteilung ? addCounter(fcValue) : '';
+        });
     }
 
     const inputTextLeft = leftSplit(probenNummer, 12);
@@ -43,13 +62,13 @@ function appendContentMainRow(probenNummer, abteilung) {
         "<p class='content-main-text' id='text-sollNr' contenteditable='true'>" + inputTextRight + "</p>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'  title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie mit der Zerlegung beginnen möchten.'>" +
-        "<button type='button' class='content-button-check' id='content-btn-anZPN' value='deactive' disabled>An die ZPN</button>" +
+        "<button type='button' class='content-button-check' id='content-btn-anZPN' value=''>An die ZPN</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung '  title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der Zerlegung.'>" +
-        "<button type='button' class='content-button-check' id='content-btn-anLFGB' value='deactive' disabled>An die LFGB</button>" +
+        "<button type='button' class='content-button-check' id='content-btn-anLFGB' value=''>An die LFGB</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'  title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie die Einwaage beginnen möchten.'>" +
-        "<button type='button' class='content-button-check' id='content-btn-anTextPhysik' value='deactive' disabled>An die Textilphysik</button>" +
+        "<button type='button' class='content-button-check' id='content-btn-anTextPhysik' value=''>An die Textilphysik</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'>" +
         "<div class='content-button-delete-wrap'>" +
@@ -64,12 +83,16 @@ function appendContentMainRow(probenNummer, abteilung) {
         "</div>" +
         "</section>";
 
-    setBeurteilungStatusButton(abteilung);
+
 
     //Zeigt den Tabellen Header, die Tabelle und den sende Button wieder an.
     $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : '';
-    ///Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
+    //Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
     $contentHeaderRow.after(contentAppend);
+    //Setzt den entsprechenden Button im HTML auf aktiv
+    setBeurteilungStatusButton(abteilung);
+    //Addiert dem Footer Counter an entsprechender Stellt hoch
+    addFooterCounter(abteilung);
     //Ruft die Funktion "countRows" auf um die Anzahl der vorhandenen Datensätze zu zählen.
     countMainRows.addHighlight('highlight', '#FFB700', 100);
 }

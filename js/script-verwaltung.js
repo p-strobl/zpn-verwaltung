@@ -353,3 +353,4 @@ function sendData(dataPackUpdate) {
         backToInput();
     });
 }
+;
