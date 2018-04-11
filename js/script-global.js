@@ -256,8 +256,10 @@ function setUnsetMainButtons() {
 
             if (clickedButton.value === 'deactive') {
                 clickedButton.value = 'active';
+                clickedButton.classList.add('checked');
             } else {
                 clickedButton.value = 'deactive';
+                clickedButton.classList.remove('checked');
             }
         } else {
             return;
@@ -1155,7 +1157,7 @@ document.addEventListener('DOMContentLoaded', function () {
     regexInput();
     checkInput();
     backToInput();
-    countCheckedButtons();
+    // countCheckedButtons();
     highlightSelectedRow();
     confirmDelete();
     setUnsetMainButtons();

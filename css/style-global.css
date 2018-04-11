@@ -342,12 +342,16 @@ img:hover {
     background-color: #ffb700 !important;
 }
 
+.content-button-check.checked {
+    background-color: #FFB700;
+}
+
 .content-button-check.preSet {
-    background-color: #ffb700
+    background-color: #ffb700;
 }
 
 .content-button-check.preSet:hover {
-    background-color: #ffb9a9
+    background-color: #ffb9a9;
 }
 
 .content-button-check.disabled {

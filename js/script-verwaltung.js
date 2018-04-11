@@ -277,7 +277,7 @@ function sendData(dataPackUpdate) {
     });
     //Ajax Anfrage ist erfolgreich.
     ajaxRequestUpdate.done(function (data) {
-        console.log(data);
+        // console.log(data);
         const itemCount = data["itemCount"];
         const $stickyFooterMessageWrap = $("#sticky-footer-message-wrap");
         const $stickyFooterSuccessWrap = $("#transmission-successful-wrapper");
