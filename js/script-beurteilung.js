@@ -153,21 +153,11 @@ function wrapData() {
     $.when($contentMainRow.each(function () {
         //Speichert den Inhalt der einzelnen Spalten der ausgewählten Zeile in einer Variable ab.
         //Überprüft die Checkboxen und übergibt 0 oder 1 als Wert.
-        const probenNummer = $(this)
-            .find("#text-prbNr")
-            .text();
-        let sollDatum = $(this)
-            .find("#text-sollNr")
-            .text();
-        const anZPN = $(this)
-            .find("#anZPN")
-            .attr("value");
-        const anLFGB = $(this)
-            .find("#anLFGB")
-            .attr("value");
-        const anTextilphysik = $(this)
-            .find("#anTextilphysik")
-            .attr("value");
+        const probenNummer = $(this).find("#text-prbNr").text();
+        let sollDatum = $(this).find("#text-sollNr").text();
+        const anZPN = $(this).find("#anZPN").attr("value");
+        const anLFGB = $(this).find("#anLFGB").attr("value");
+        const anTextilphysik = $(this).find("#anTextilphysik").attr("value");
 
         //Umbau des sollDatum Sting
         sollDatum = sollDatum.replace(newDatePattern, "$3-$2-$1");
@@ -178,23 +168,23 @@ function wrapData() {
     })).done(checkForUnchecked(dataPackUpdate));
 }
 
+function stripDataPack(dataPackUpdate) {
+    Object.entries(dataPackUpdate).forEach(([dataPackKey, dataPackValue]) => {
+        Object.entries(dataPackValue).forEach(([itemKey, itemValue]) => {
+            if (itemValue === "preSet" || itemValue === "active" || itemValue === "deactive") {
+                delete dataPackValue[itemKey];
+            }
+        });
+    });
+    return;
+}
+
 //
 //Übersendet per Ajax und der POST Methode, dass Objekt "dataPack" an die PHP Datei "db-handling.php".
 function sendData(dataPackUpdate) {
 
-    function stripDataPack(dataPackUpdate) {
-        Object.entries(dataPackUpdate).forEach(([dataPackKey, dataPackValue]) => {
-            Object.entries(dataPackValue).forEach(([itemKey, itemValue]) => {
-                if (itemValue === "preSet" || itemValue === "active" || itemValue === "deactive") {
-                    delete dataPackValue[itemKey];
-                }
-            });
-        });
-        return;
-    }
-    console.log(dataPackUpdate);
     stripDataPack(dataPackUpdate);
-    // console.log(stripDataPack);
+
     const ajaxInsertDataset = $.ajax({
         url: "../php/db-insert.php",
         method: "POST",
@@ -265,10 +255,7 @@ function sendData(dataPackUpdate) {
                 "#transmission-double-input-wrap"
             );
             for (const doubleInputItem of data.doubleInput) {
-                const appendDoubleInput =
-                    " <div class='transmission-doubleInput-data'>" +
-                    doubleInputItem +
-                    "</div> ";
+                const appendDoubleInput = " <div class='transmission-doubleInput-data'>" + doubleInputItem + "</div> ";
                 $transmissionDoubleInput.append(appendDoubleInput);
             }
         };

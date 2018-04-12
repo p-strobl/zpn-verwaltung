@@ -69,8 +69,25 @@
     <div class="sticky-footer-message-wrap sticky-footer-height" id="sticky-footer-message-wrap">
         <div class="transmission-successful-wrapper" id="transmission-successful-wrapper">
             <section class="transmission-success-message-wrap">
-                <span class="transmission-success-counter" id="transmission-success-counter">Bereitstellung erfolgreich eingetragen</span>
+                <span class="transmission-success-counter" id="transmission-success-counter"></span>
+                <span> von </span>
+                <span class="present-item-counter"></span>
+                <span class="transmission-success-caption"> Muster erfolgreich Übertragungen.</span>
             </section>
+        </div>
+        <div class="transmission-fail-wrap" id="transmission-fail-wrap">
+            <div class="transmission-failed-wrapper-failMessage" id="transmission-failed-double-input-wrap">
+                <section class="transmission-fail-message-wrap">
+                    <span class="transmission-fail-counter" id="transmission-fail-counter"></span>
+                    <span> von </span>
+                    <span class="present-item-counter"></span>
+                    <span class="transmission-fail-caption"> Datens&#228;tze bereits in der Datenbank vorhanden!</span>
+                </section>
+            </div>
+            <div class="transmission-failed-wrapper-doubleItems">
+                <section class="transmission-double-input-wrap" id="transmission-double-input-wrap">
+                </section>
+            </div>
         </div>
     </div>
     <script type="text/javascript" src="../js/jquery-3.2.1.js"></script>
