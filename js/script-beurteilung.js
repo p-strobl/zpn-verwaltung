@@ -17,7 +17,7 @@ function appendContentMainRow(probenNummer, abteilung) {
                 .addClass('preSet')
                 .removeClass('disableMainRowButton')
                 .val('active');
-        };
+        }
 
         function deactiveButtonStatus(contentBtnID) {
             contentBtnID
@@ -37,7 +37,7 @@ function appendContentMainRow(probenNummer, abteilung) {
             ZPN: $('#content-footer-counter-anZPN'),
             LFGB: $('#content-footer-counter-anLFGB'),
             Textilphysik: $('#content-footer-counter-anTextilphysik')
-        }
+        };
 
         function addCounter(footerCounterID) {
             footerCounterID.text(Number(footerCounterID.text()) + 1);
@@ -119,7 +119,7 @@ function checkForUnchecked(dataPackUpdate) {
     if (countActive === dataPackLength) {
         sendData(dataPackUpdate);
         return false;
-    } else if (countActive != dataPackLength) {
+    } else if (countActive !== dataPackLength) {
         showFailMessage.failMessage("fail-input-verwaltung header-fail-message-content-margin", 5000);
         return false;
     }
@@ -176,7 +176,6 @@ function stripDataPack(dataPackUpdate) {
             }
         });
     });
-    return;
 }
 
 //
@@ -254,6 +253,7 @@ function sendData(dataPackUpdate) {
             const $transmissionDoubleInput = $(
                 "#transmission-double-input-wrap"
             );
+            /** @namespace data.doubleInput **/
             for (const doubleInputItem of data.doubleInput) {
                 const appendDoubleInput = " <div class='transmission-doubleInput-data'>" + doubleInputItem + "</div> ";
                 $transmissionDoubleInput.append(appendDoubleInput);
@@ -291,6 +291,7 @@ function sendData(dataPackUpdate) {
 
         //Alle vorliegenden Datensätze waren noch nicht in der Datenbank vorhanden und wurden jetzt eingetragen.
         if (data.success === true && data.doubleInput.length === 0) {
+            /** @namespace data.successInput **/
             hideContentFooter();
             emptyMainRowsAndCounter();
             transmissionCounter({
@@ -321,6 +322,7 @@ function sendData(dataPackUpdate) {
         } else if (data.success === false) {
             //Alle vorhandenen Datensätze sind bereits in der Datenbank eingetragen und wurden zur weiterverarbeitung in ein Array aufgeführt.
             // else if (data.success === false && data.doubleInput.length >= 1)
+            /** @namespace data.failCode **/
             switch (data.failCode) {
                 case 1049:
                     showFailMessage.failMessage(

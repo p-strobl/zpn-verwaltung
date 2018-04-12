@@ -182,7 +182,7 @@ function checkForUnchecked(dataPackUpdate) {
     if (countActive === dataPackLength) {
         sendData(dataPackUpdate);
         return false;
-    } else if (countActive != dataPackLength) {
+    } else if (countActive !== dataPackLength) {
         showFailMessage.failMessage("fail-input-verwaltung header-fail-message-content-margin", 5000);
         return false;
     }
@@ -262,7 +262,6 @@ function sendData(dataPackUpdate) {
                 }
             });
         });
-        return;
     }
 
     stripDataPack(dataPackUpdate);

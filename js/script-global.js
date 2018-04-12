@@ -330,8 +330,8 @@ const countMainRows = {
 //Ermittelt welcher Auswahl-Button gedrückt wurde, und addiert oder subtrahiert die entsprechende Anzeige.
 function countCheckedButtons() {
     const $wrapContent = $("#wrap-content");
-    const $contentButtonCheck = $(".content-button-check");
-    const $contentFooterCounter = $(".content-footer-counter");
+    // const $contentButtonCheck = $(".content-button-check");
+    // const $contentFooterCounter = $(".content-footer-counter");
 
     const $footerAnzahlAnZPN = $('#content-footer-counter-anZPN');
     const $footerAnzahlAnLFGB = $('#content-footer-counter-anLFGB');
@@ -359,33 +359,33 @@ function countCheckedButtons() {
     const $footerAnzahlManaEingewogen = $("#content-footer-counter-manaEingewogen");
     const $footerAnzahlZpnWagen = $("#content-footer-counter-zpnWagen");
 
-    const enableDisableButtonSet = {
-        zerlegungStart: $("#content-btn-zerlegungStart"),
-        zerlegungEnde: $("#content-btn-zerlegungEnde"),
-        einwaageStart: $("#content-btn-einwaageBeginn"),
-        einwaageEnde: $("#content-btn-einwaageEnde"),
-        zpnWagen: $("#content-btn-zpnWagen"),
-        klaerStart: $("#content-btn-klaerfallBeginn"),
-        klaerEnde: $("#content-btn-klaerfallEnde"),
-        mBestellt: $("#content-btn-manaBestellt"),
-        mErhalten: $("#content-btn-manaErhalten"),
-        mEinwaage: $("#content-btn-manaEinwaage"),
-        mEingewogen: $("#content-btn-manaEingewogen")
-    };
+    // const enableDisableButtonSet = {
+    //     zerlegungStart: $("#content-btn-zerlegungStart"),
+    //     zerlegungEnde: $("#content-btn-zerlegungEnde"),
+    //     einwaageStart: $("#content-btn-einwaageBeginn"),
+    //     einwaageEnde: $("#content-btn-einwaageEnde"),
+    //     zpnWagen: $("#content-btn-zpnWagen"),
+    //     klaerStart: $("#content-btn-klaerfallBeginn"),
+    //     klaerEnde: $("#content-btn-klaerfallEnde"),
+    //     mBestellt: $("#content-btn-manaBestellt"),
+    //     mErhalten: $("#content-btn-manaErhalten"),
+    //     mEinwaage: $("#content-btn-manaEinwaage"),
+    //     mEingewogen: $("#content-btn-manaEingewogen")
+    // };
 
-    const footerAnzahlSet = {
-        zerlegungStart: $("#content-footer-counter-zerlegungStart"),
-        zerlegungEnde: $("#content-footer-counter-zerlegungEnde"),
-        einwaageStart: $("#content-footer-counter-einwaageBeginn"),
-        einwaageEnde: $("#content-footer-counter-einwaageEnde"),
-        zpnWagen: $("#content-footer-counter-zpnWagen"),
-        klaerStart: $("#content-footer-counter-klaerfallBeginn"),
-        klaerEnde: $("#content-footer-counter-klaerfallEnde"),
-        mBestellt: $("#content-footer-counter-manaBestellt"),
-        mErhalten: $("#content-footer-counter-manaErhalten"),
-        mEinwaage: $("#content-footer-counter-manaEinwaage"),
-        mEingewogen: $("#content-footer-counter-manaEingewogen")
-    };
+    // const footerAnzahlSet = {
+    //     zerlegungStart: $("#content-footer-counter-zerlegungStart"),
+    //     zerlegungEnde: $("#content-footer-counter-zerlegungEnde"),
+    //     einwaageStart: $("#content-footer-counter-einwaageBeginn"),
+    //     einwaageEnde: $("#content-footer-counter-einwaageEnde"),
+    //     zpnWagen: $("#content-footer-counter-zpnWagen"),
+    //     klaerStart: $("#content-footer-counter-klaerfallBeginn"),
+    //     klaerEnde: $("#content-footer-counter-klaerfallEnde"),
+    //     mBestellt: $("#content-footer-counter-manaBestellt"),
+    //     mErhalten: $("#content-footer-counter-manaErhalten"),
+    //     mEinwaage: $("#content-footer-counter-manaEinwaage"),
+    //     mEingewogen: $("#content-footer-counter-manaEingewogen")
+    // };
 
     function effectOnElement(footerElement, countValue1Buttons, effectColor) {
         footerElement
@@ -424,7 +424,7 @@ function countCheckedButtons() {
     }
 
     function activateButton(startElement, activeElement) {
-        if (startElement.value == "active") {
+        if (startElement.value === "active") {
             $(startElement)
                 .closest(".content-main-row")
                 .find(activeElement)

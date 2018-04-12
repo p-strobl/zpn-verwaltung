@@ -178,23 +178,9 @@ function wrapData() {
             sollDatum = sollDatum.replace(newDatePattern, "$3-$2-$1");
 
             //Fügt mit hilfer eines Constructor's, den Inhalt der gegenwärtig selektierten Zeile, als Array in das "dataPack" hinzu.
-            dataPackEingang.push(
-                new ConstructDataPack(
-                    probenNummer,
-                    sollDatum,
-                    mitExpress,
-                    mitIntern,
-                    mitNickel,
-                    mitLfgb,
-                    mitToys,
-                    mit60g,
-                    mitKlaerfallBack,
-                    mitNickelBack
-                )
-            );
+            dataPackEingang.push(new ConstructDataPack(probenNummer, sollDatum, mitExpress, mitIntern, mitNickel, mitLfgb, mitToys, mit60g, mitKlaerfallBack, mitNickelBack));
             //Übergibt das "dataPack" Array zum Ajax handler
-        })
-    ).done(sendData(dataPackEingang));
+        })).done(sendData(dataPackEingang));
 }
 
 //
