@@ -8,6 +8,7 @@ if (!empty($_POST)){
 
     switch (true){
         case isset($receivedPostData->beurteilungDataSet):
+        $test = $receivedPostData->beurteilungDataSet;
             $receivedPostDataObject = json_decode(json_encode($receivedPostData->beurteilungDataSet, JSON_FORCE_OBJECT));
             break;
     
@@ -54,12 +55,20 @@ if (!empty($_POST)){
                 switch (true) {
                     case isset($receivedPostData->beurteilungDataSet):
                         $sql =
-                        "
-                            INSERT INTO 
-                                tbl_beurteilung( probenNummer, eingangDateTime )
-                            VALUES 
-                                ( :probenNummer, NOW() )
-                        ";
+                            "
+                                INSERT INTO 
+                                    tbl_beurteilung( probenNummer, beurteilungBereitgestelltDateTime, anAbteilung )
+                                VALUES 
+                                    ( :probenNummer, NOW(), :anAbteilung )
+                            ";
+
+                        $pdoStatement = $pdoConnect->prepare( $sql );
+                        $pdoStatement->bindParam( ':probenNummer', $i->probenNummer, PDO::PARAM_STR );
+                        $pdoStatement->bindParam( ':anAbteilung', $i->anAbteilung, PDO::PARAM_STR );
+
+                        $pdoStatement->execute();
+                        $pdoConnect->commit();
+
                         break;
                     case isset($receivedPostData->musterEingangDataSet):
                         // $pdoConnect->beginTransaction();
