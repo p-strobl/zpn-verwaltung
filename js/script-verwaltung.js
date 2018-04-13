@@ -134,21 +134,7 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
 
 //
 //Konstruktor für das Array "dataPack"
-function ConstructDataPack(
-    probenNummer,
-    sollDatum,
-    zerlegungStart,
-    zerlegungEnde,
-    einwaageBeginn,
-    einwaageEnde,
-    klaerfallBeginn,
-    klaerfallEnde,
-    manaBestellt,
-    manaErhalten,
-    manaEinwaage,
-    manaEingewogen,
-    zpnWagen
-) {
+function ConstructDataPack ( probenNummer, sollDatum,  zerlegungStart, zerlegungEnde, einwaageBeginn, einwaageEnde, klaerfallBeginn, klaerfallEnde, manaBestellt, manaErhalten, manaEinwaage, manaEingewogen, zpnWagen) {
     this.probenNummer = probenNummer;
     this.sollDatum = sollDatum;
     this.zerlegungStart = zerlegungStart;
@@ -197,49 +183,22 @@ function wrapData() {
     //Zeit Sting pattern
     const newDatePattern = /(\d{2})\.(\d{2})\.(\d{4})/;
     //Durchläuft jede erstellte Zeile der Tabelle.
-    $.when(
-        $contentMainRow.each(function () {
+    $.when($contentMainRow.each(function () {
             //Speichert den Inhalt der einzelnen Spalten der ausgewählten Zeile in einer Variable ab.
             //Überprüft die Checkboxen und übergibt 0 oder 1 als Wert.
-            const probenNummer = $(this)
-                .find("#text-prbNr")
-                .text();
-            let sollDatum = $(this)
-                .find("#text-sollNr")
-                .text();
-            const zerlegungStart = $(this)
-                .find("#content-btn-zerlegungStart")
-                .attr("value");
-            const zerlegungEnde = $(this)
-                .find("#content-btn-zerlegungEnde")
-                .attr("value");
-            const einwaageBeginn = $(this)
-                .find("#content-btn-einwaageBeginn")
-                .attr("value");
-            const einwaageEnde = $(this)
-                .find("#content-btn-einwaageEnde")
-                .attr("value");
-            const klaerfallBeginn = $(this)
-                .find("#content-btn-klaerfallBeginn")
-                .attr("value");
-            const klaerfallEnde = $(this)
-                .find("#content-btn-klaerfallEnde")
-                .attr("value");
-            const manaBestellt = $(this)
-                .find("#content-btn-manaBestellt")
-                .attr("value");
-            const manaErhalten = $(this)
-                .find("#content-btn-manaErhalten")
-                .attr("value");
-            const manaEinwaage = $(this)
-                .find("#content-btn-manaEinwaage")
-                .attr("value");
-            const manaEingewogen = $(this)
-                .find("#content-btn-manaEingewogen")
-                .attr("value");
-            const zpnWagen = $(this)
-                .find("#content-btn-zpnWagen")
-                .attr("value");
+            const probenNummer = $(this).find("#text-prbNr").text();
+            let sollDatum = $(this).find("#text-sollNr").text();
+            const zerlegungStart = $(this).find("#content-btn-zerlegungStart").attr("value");
+            const zerlegungEnde = $(this).find("#content-btn-zerlegungEnde").attr("value");
+            const einwaageBeginn = $(this).find("#content-btn-einwaageBeginn").attr("value");
+            const einwaageEnde = $(this).find("#content-btn-einwaageEnde").attr("value");
+            const klaerfallBeginn = $(this).find("#content-btn-klaerfallBeginn").attr("value");
+            const klaerfallEnde = $(this).find("#content-btn-klaerfallEnde").attr("value");
+            const manaBestellt = $(this).find("#content-btn-manaBestellt").attr("value");
+            const manaErhalten = $(this).find("#content-btn-manaErhalten").attr("value");
+            const manaEinwaage = $(this).find("#content-btn-manaEinwaage").attr("value");
+            const manaEingewogen = $(this).find("#content-btn-manaEingewogen").attr("value");
+            const zpnWagen = $(this).find("#content-btn-zpnWagen").attr("value");
 
             //Umbau des sollDatum Sting
             sollDatum = sollDatum.replace(newDatePattern, "$3-$2-$1");
