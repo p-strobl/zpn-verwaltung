@@ -291,7 +291,10 @@ function sendUpdateData(dataPack) {
     ajaxRequestUpdate.fail(function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        showFailMessage.failMessage("no-server header-fail-message-content-margin", 8000, headerInput);
+        showFailMessage.failMessage(
+            "no-server header-fail-message-content-margin",
+            8000,
+            headerInput);
 
         backToInput();
     });

@@ -209,7 +209,7 @@ const showFailMessage = {
 
 const hasDisaplayNone = ($wrapContent$wrapFooter, $headerInput) => {
     $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : '';
-}
+};
 
 function stripDataPack(dataPack) {
     Object.entries(dataPack).forEach(([dataPackKey, dataPackValue]) => {
