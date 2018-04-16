@@ -3,7 +3,8 @@ Todo:
     Global:
         ☐ All -> Überall noch Kommentare einfügen! @critical 
         ☐ All -> Rechtschreibprüfung @critical 
-        ☐ All JS -> Funktionen zusammen führen @critical 
+        ☐ All JS -> Funktionen zusammen führen @critical
+        ☐ All JS -> .focus() geht nicht @critical
 
         ☐ HTML -> Bubble Nachricht über Element hover @low
 

@@ -270,10 +270,9 @@ function sendUpdateData(dataPack) {
                 $stickyFooterSuccessWrap
                     .add($stickyFooterFailWrap)
                     .css("display", "");
-
                 globalMainRowCounter.length = 0;
-                backToInput();
             }, delay + 350);
+            backToInput();
         };
 
         if (itemCount >= 1) {
@@ -284,6 +283,7 @@ function sendUpdateData(dataPack) {
                 "sticky-footer-height",
                 2000
             );
+            backToInput();
         }
     });
 
@@ -295,7 +295,6 @@ function sendUpdateData(dataPack) {
             "no-server header-fail-message-content-margin",
             8000,
             headerInput);
-
         backToInput();
     });
 }

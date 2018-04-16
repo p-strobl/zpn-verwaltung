@@ -136,7 +136,7 @@ function wrapData() {
 
         //Fügt mit hilfer eines Constructor's, den Inhalt der gegenwärtig selektierten Zeile, als Array in das "dataPack" hinzu.
         dataPackUpdate.push(new ConstructDataPack(probenNummer, sollDatum, anZPN, anLFGB, anTextilphysik, anAbteilung));
-        console.log(dataPackUpdate);
+        // console.log(dataPackUpdate);
         //Übergibt das "dataPack" Array zum Ajax handler
     })).done(checkForUnchecked(dataPackUpdate, 'header-input-beurteilung-probennummer', 'beurteilung'));
 }
@@ -242,13 +242,13 @@ function sendData(dataPackUpdate) {
             }, delay);
             setTimeout(function () {
                 $wrapEingang.css("visibility", "visible");
+                backToInput();
                 $stickyFooterWrapper.addClass($heightClass);
                 $stickyFooterSuccessWrap
                     .add($stickyFooterFailWrap)
                     .css("display", "");
                 removeListOfDoubleItems();
                 globalMainRowCounter.length = 0;
-                backToInput();
             }, delay + 350);
         };
 
@@ -267,6 +267,7 @@ function sendData(dataPackUpdate) {
                 "sticky-footer-height",
                 2000
             );
+            // backToInput();
         } else if (data.success === true && data.doubleInput.length >= 1) {
             // Alle nicht vorhandenen Datensätze wurden in die Datenbank eingetragen, aber alle doppelt vorhandenen sind in einem Array aufgeführt.
             hideContentFooter();
@@ -282,6 +283,7 @@ function sendData(dataPackUpdate) {
                 "sticky-footer-height",
                 8000
             );
+            // backToInput();
         } else if (data.success === false) {
             //Alle vorhandenen Datensätze sind bereits in der Datenbank eingetragen und wurden zur weiterverarbeitung in ein Array aufgeführt.
             // else if (data.success === false && data.doubleInput.length >= 1)
@@ -319,6 +321,7 @@ function sendData(dataPackUpdate) {
                         "sticky-footer-height",
                         8000
                     );
+                    backToInput();
                     console.log(data);
                     break;
 

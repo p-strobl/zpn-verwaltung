@@ -251,10 +251,13 @@ function checkForUnchecked(dataPack, headerInput, origin) {
 
 //
 //Setzt den cursor nach dem betätigen eines button in das Input Feld zurück.
-function backToInput() {
+function backToInput(origin) {
+    const $headerInputBeurteilung = $('#header-input-beurteilung-probennummer');
     const $headerInputEingang = $("#header-input-eingang");
     const $headerInputVerwaltung = $("#header-input-verwaltung");
-    $headerInputEingang.add($headerInputVerwaltung).focus();
+
+    console.log(origin);
+    $headerInputBeurteilung.add($headerInputEingang).add($headerInputVerwaltung).get(0).focus();
 }
 
 //
@@ -1239,7 +1242,7 @@ function confirmDelete() {
 document.addEventListener('DOMContentLoaded', function () {
     regexInput();
     checkInput();
-    backToInput();
+    // backToInput();
     countCheckedButtons();
     highlightSelectedRow();
     confirmDelete();

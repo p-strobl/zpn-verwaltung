@@ -252,6 +252,7 @@ function sendEingangData(dataPack) {
             const $animationClass = animationClass;
             const $heightClass = heightClass;
             const $wrapEingang = $("#wrap-eingang");
+            const $headerInputZpnEingang = $('#header-input-eingang');
             $wrapEingang.css("visibility", "hidden");
             $stickyFooterWrapper
                 .removeClass($heightClass)
@@ -267,7 +268,7 @@ function sendEingangData(dataPack) {
                     .css("display", "");
                 removeListOfDoubleItems();
                 globalMainRowCounter.length = 0;
-                backToInput();
+                backToInput($headerInputZpnEingang);
             }, delay + 350);
         };
 
@@ -285,6 +286,7 @@ function sendEingangData(dataPack) {
                 "sticky-footer-height",
                 2000
             );
+            backToInput();
         } else if (data.success === true && data.doubleInput.length >= 1) {
             // Alle nicht vorhandenen Datensätze wurden in die Datenbank eingetragen, aber alle doppelt vorhandenen sind in einem Array aufgeführt.
             hideContentFooter();
@@ -300,6 +302,7 @@ function sendEingangData(dataPack) {
                 "sticky-footer-height",
                 8000
             );
+            backToInput();
         } else if (data.success === false) {
             //Alle vorhandenen Datensätze sind bereits in der Datenbank eingetragen und wurden zur weiterverarbeitung in ein Array aufgeführt.
             // else if (data.success === false && data.doubleInput.length >= 1)
