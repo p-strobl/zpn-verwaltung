@@ -178,12 +178,15 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
                 tbl_status.mitKlaerfallBack,
                 tbl_status.mitLfgb,
                 tbl_status.mitNickel,
-                tbl_status.mitToys
+                tbl_status.mitToys,
+                tbl_beurteilung.anAbteilung
             FROM tbl_baserecord
             LEFT OUTER JOIN tbl_einwaage
                 ON tbl_baserecord.probenNummer = tbl_einwaage.probenNummer
             LEFT OUTER JOIN tbl_status
                 ON tbl_baserecord.probenNummer = tbl_status.probenNummer
+            LEFT OUTER JOIN tbl_beurteilung
+                ON tbl_baserecord.probenNummer = tbl_beurteilung.probenNummer
             WHERE tbl_baserecord.probenNummer = :probenNummer
         ";
         $pdoStatement = $pdoConnect->prepare( $sql );

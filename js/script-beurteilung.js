@@ -6,9 +6,9 @@ function appendContentMainRow(probenNummer, abteilung) {
     function setBeurteilungStatusButton(abteilung) {
 
         const contentBtnItems = {
-            ZPN: $('#anZPN'),
-            LFGB: $('#anLFGB'),
-            Textilphysik: $('#anTextilphysik')
+            ZPN: $('#ZPN'),
+            LFGB: $('#LFGB'),
+            Textilphysik: $('#Textilphysik')
         };
 
         function activeButtonStatus(contentBtnID) {
@@ -62,13 +62,13 @@ function appendContentMainRow(probenNummer, abteilung) {
         "<p class='content-main-text' id='text-sollNr' contenteditable='true'>" + inputTextRight + "</p>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'  title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie mit der Zerlegung beginnen möchten.'>" +
-        "<button type='button' class='content-button-check' id='anZPN' value=''>An die ZPN</button>" +
+        "<button type='button' class='content-button-check' id='ZPN' value=''>An die ZPN</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung '  title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der Zerlegung.'>" +
-        "<button type='button' class='content-button-check' id='anLFGB' value=''>An die LFGB</button>" +
+        "<button type='button' class='content-button-check' id='LFGB' value=''>An die LFGB</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'  title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie die Einwaage beginnen möchten.'>" +
-        "<button type='button' class='content-button-check' id='anTextilphysik' value=''>An die Textilphysik</button>" +
+        "<button type='button' class='content-button-check' id='Textilphysik' value=''>An die Textilphysik</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'>" +
         "<div class='content-button-delete-wrap'>" +
@@ -97,34 +97,6 @@ function appendContentMainRow(probenNummer, abteilung) {
     countMainRows.addHighlight('highlight', '#FFB700', 100);
 }
 
-
-//
-//Entfernt in der aus wrapData übertragenes Object die values mit einem "deactive" key
-function checkForUnchecked(dataPackUpdate) {
-    let countActive = 0;
-    const dataPackLength = dataPackUpdate.length;
-
-    console.log(dataPackUpdate);
-
-    $.each(dataPackUpdate, function (packKey, packValue) {
-        $.each(packValue, function (objectKey, objectValue) {
-            if (objectValue.match(/^(active)/)) {
-                packValue.anAbteilung = objectKey.substring(2);
-                countActive++;
-                return false;
-            }
-        });
-    });
-
-    if (countActive === dataPackLength) {
-        sendData(dataPackUpdate);
-        return false;
-    } else if (countActive !== dataPackLength) {
-        showFailMessage.failMessage("fail-input-verwaltung header-fail-message-content-margin", 5000);
-        return false;
-    }
-}
-
 //
 //Konstruktor für das Array "dataPack"
 function ConstructDataPack(
@@ -132,13 +104,15 @@ function ConstructDataPack(
     sollDatum,
     anZPN,
     anLFGB,
-    anTextilphysik
+    anTextilphysik,
+    anAbteilung
 ) {
     this.probenNummer = probenNummer;
     this.sollDatum = sollDatum;
     this.anZPN = anZPN;
     this.anLFGB = anLFGB;
     this.anTextilphysik = anTextilphysik;
+    this.anAbteilung = anAbteilung;
 }
 
 //
@@ -154,28 +128,17 @@ function wrapData() {
         //Speichert den Inhalt der einzelnen Spalten der ausgewählten Zeile in einer Variable ab.
         //Überprüft die Checkboxen und übergibt 0 oder 1 als Wert.
         const probenNummer = $(this).find("#text-prbNr").text();
-        let sollDatum = $(this).find("#text-sollNr").text();
-        const anZPN = $(this).find("#anZPN").attr("value");
-        const anLFGB = $(this).find("#anLFGB").attr("value");
-        const anTextilphysik = $(this).find("#anTextilphysik").attr("value");
+        const sollDatum = $(this).find("#text-sollNr").text().replace(newDatePattern, "$3-$2-$1");
+        const anZPN = $(this).find("#ZPN").attr("value");
+        const anLFGB = $(this).find("#LFGB").attr("value");
+        const anTextilphysik = $(this).find("#Textilphysik").attr("value");
+        const anAbteilung = $(this).find('.content-button-check[value="active"]').attr('id');
 
-        //Umbau des sollDatum Sting
-        sollDatum = sollDatum.replace(newDatePattern, "$3-$2-$1");
         //Fügt mit hilfer eines Constructor's, den Inhalt der gegenwärtig selektierten Zeile, als Array in das "dataPack" hinzu.
-        dataPackUpdate.push(new ConstructDataPack(probenNummer, sollDatum, anZPN, anLFGB, anTextilphysik));
+        dataPackUpdate.push(new ConstructDataPack(probenNummer, sollDatum, anZPN, anLFGB, anTextilphysik, anAbteilung));
         console.log(dataPackUpdate);
         //Übergibt das "dataPack" Array zum Ajax handler
-    })).done(checkForUnchecked(dataPackUpdate));
-}
-
-function stripDataPack(dataPackUpdate) {
-    Object.entries(dataPackUpdate).forEach(([dataPackKey, dataPackValue]) => {
-        Object.entries(dataPackValue).forEach(([itemKey, itemValue]) => {
-            if (itemValue === "preSet" || itemValue === "active" || itemValue === "deactive") {
-                delete dataPackValue[itemKey];
-            }
-        });
-    });
+    })).done(checkForUnchecked(dataPackUpdate, 'header-input-beurteilung-probennummer', 'beurteilung'));
 }
 
 //
@@ -302,7 +265,7 @@ function sendData(dataPackUpdate) {
             $stickyFooterMessageWrap.animateStickyFooterWrapper(
                 "sticky-footer-message-animation",
                 "sticky-footer-height",
-                4000
+                2000
             );
         } else if (data.success === true && data.doubleInput.length >= 1) {
             // Alle nicht vorhandenen Datensätze wurden in die Datenbank eingetragen, aber alle doppelt vorhandenen sind in einem Array aufgeführt.
@@ -327,7 +290,7 @@ function sendData(dataPackUpdate) {
                 case 1049:
                     showFailMessage.failMessage(
                         "no-database header-fail-message-content-margin",
-                        8000
+                        8000, headerInput
                     );
                     console.log(data);
                     backToInput();
@@ -336,7 +299,7 @@ function sendData(dataPackUpdate) {
                 case 2002:
                     showFailMessage.failMessage(
                         "no-server header-fail-message-content-margin",
-                        8000
+                        8000, headerInput
                     );
                     console.log(data);
                     backToInput();
@@ -367,9 +330,7 @@ function sendData(dataPackUpdate) {
     //Ajax Verbindung fehlgeschlagen.
     ajaxInsertDataset.fail(function (jqXHR, textStatus, errorThrown) {
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        showFailMessage.failMessage(
-            "no-server header-fail-message-content-margin",
-            8000
+        showFailMessage.failMessage("no-server header-fail-message-content-margin", 8000, headerInput
         );
         console.log(textStatus, errorThrown);
         backToInput();

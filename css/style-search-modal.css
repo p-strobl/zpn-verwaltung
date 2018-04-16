@@ -118,7 +118,7 @@
 .modal__content__header__wrap {
     grid-row: 1;
     display: grid;
-    margin-top: .4vw;
+    margin: .5vw 0;
 }
 
 .modal__content__header__caption {
@@ -149,7 +149,8 @@
     place-self: center;
     border-radius: .2vw;
     background-color: gainsboro;
-    box-shadow: 0px 0px 12px 1px rgb(0, 0, 0);
+    /* box-shadow: 0px 0px 12px 1px rgb(0, 0, 0); */
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,.5);
 }
 
 .modal__content__main__timing__wrap {
@@ -227,7 +228,7 @@
 }
 
 .modal__content__main__capture-text.beurteilung,
-.modal__content__main__capture-text.zpnEingang {
+.modal__content__main__capture-text.eingang {
     grid-row: 1;
     grid-column: 1/3;
 }

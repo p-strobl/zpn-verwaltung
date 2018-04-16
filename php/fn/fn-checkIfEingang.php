@@ -1,6 +1,6 @@
 <?php
     //Prüft ob ein Datensatz bereits vorhanden ist und wenn nicht, wird der Datensatu nachgetragen ohne Eingangs Zeitpunkt
-function checkIfEingang($pdoConnect, $probenNummer, $sollDatum, $transmitResponse, $pdoObject, $responseData) {
+function checkIfEingang($pdoConnect, $probenNummer, $sollDatum, $pdoObject, $responseData) {
 
     try {
         include_once 'fn-sqlSelectObject.php';
@@ -37,7 +37,6 @@ function checkIfEingang($pdoConnect, $probenNummer, $sollDatum, $transmitRespons
         $pdoException = (array) $pdoException;
         $responseData->success = false;
         $responseData->objectItem = $probenNummer;
-        $responseData->objectTable = $tblName;
         $responseData->failCode = $pdoException['errorInfo'][0];
         $responseData->pdoException = $pdoException['errorInfo'];
         

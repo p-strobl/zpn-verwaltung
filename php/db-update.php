@@ -37,7 +37,7 @@ if (isset($receivedPostData->updateDataSet)) {
             foreach ($updateObject as $key => $value) {
                 if ($value === 'active') {
 
-                    $checkIfEingang = checkIfEingang($pdoConnect, $i->probenNummer, $i->sollDatum, $transmitResponse, $pdoObject, $responseData);
+                    $checkIfEingang = checkIfEingang($pdoConnect, $i->probenNummer, $i->sollDatum, $pdoObject, $responseData);
 
                     switch ($key) {
                         case 'zerlegungStart':

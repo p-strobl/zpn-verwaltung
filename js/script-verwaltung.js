@@ -11,7 +11,7 @@ function getVerwaltungButtonStatus(probenNummer) {
     });
 
     ajaxRequestObject.done(function (data) {
-        console.log(data);
+
         const baseItems = {
             probenNummer: $("#text-prbNr"),
             sollDatum: $("#text-sollNr")
@@ -34,21 +34,45 @@ function getVerwaltungButtonStatus(probenNummer) {
         baseItems.probenNummer.html(data.base.probenNummer);
         baseItems.sollDatum.html(data.base.sollDatum);
 
-        function setButtonStatus(rowItems, itemKey, dataValue) {
+        function setButtonStatus(rowItems, itemKey) {
             const setItem = rowItems[itemKey];
             setItem
                 .prop("disabled", true)
                 .addClass("setButtonStatus")
                 .val("preSet");
+            switch (itemKey) {
+                case 'einwaageEnde':
+                    rowItems.einwaageBeginn.disabled === true ? '' : rowItems.einwaageBeginn.prop('disabled', true).addClass('disableMainRowButton');
+                    break;
+                case 'klaerfallEndeDateTime':
+                    rowItems.klaerfallBeginnDateTime.disabled === true ? '' : rowItems.klaerfallBeginnDateTime.prop('disabled', true).addClass('disableMainRowButton');
+                    break;
+                case 'manaErhaltenDateTime':
+                    rowItems.manaEinwaageDateTime.disabled === true ? '' : rowItems.manaEinwaageDateTime.prop('disabled', true).addClass('disableMainRowButton');
+                    break;
+                case 'manaZpnWagenDateTime':
+                    rowItems.manaEinwaageDateTime.disabled === true ? '' : rowItems.manaEinwaageDateTime.prop('disabled', true).addClass('disableMainRowButton');
+                    rowItems.manaErhaltenDateTime.disabled === true ? '' : rowItems.manaErhaltenDateTime.prop('disabled', true).addClass('disableMainRowButton');
+                    rowItems.manaErhaltenDateTime.disabled === true ? '' : rowItems.manaErhaltenDateTime.prop('disabled', true).addClass('disableMainRowButton');
+                    rowItems.manaGestelltDateTime.disabled === true ? '' : rowItems.manaGestelltDateTime.prop('disabled', true).addClass('disableMainRowButton');
+                    break;
+                case 'zerlegungEnde':
+                    rowItems.zerlegungStart.disabled === true ? '' : rowItems.zerlegungStart.prop('disabled', true).addClass('disableMainRowButton');
+                    break;
+                case 'zpnWagenDateTime':
+                    rowItems.einwaageBeginn.disabled === true ? '' : rowItems.einwaageBeginn.prop('disabled', true).addClass('disableMainRowButton');
+                    rowItems.einwaageEnde.disabled === true ? '' : rowItems.einwaageEnde.prop('disabled', true).addClass('disableMainRowButton');
+                    rowItems.zerlegungStart.disabled === true ? '' : rowItems.zerlegungStart.prop('disabled', true).addClass('disableMainRowButton');
+                    rowItems.zerlegungEnde.disabled === true ? '' : rowItems.zerlegungEnde.prop('disabled', true).addClass('disableMainRowButton');
+                    break;
+            }
         }
 
-        //Prüft ob des den gewünschten Wert gibt, wenn ja setzt den entsprechenden status auf den Button um
-        $.each(data.date, function (dataKey, dataValue) {
-            $.each(rowItems, function (itemKey, itemValue) {
-                itemKey === dataKey ? setButtonStatus(rowItems, itemKey, dataValue) : "";
+        $.each(data.date, function (dataKey) {
+            $.each(rowItems, function (itemKey) {
+                itemKey === dataKey ? setButtonStatus(rowItems, itemKey) : "";
             });
         });
-
     });
 
     ajaxRequestObject.fail(function (jqXHR, textStatus, errorThrown) {
@@ -125,7 +149,7 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
     getVerwaltungButtonStatus(inputTextLeft);
 
     //Zeigt den Tabellen Header, die Tabelle und den sende Button wieder an.
-    $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : '';
+    hasDisaplayNone($wrapContent$wrapFooter, $headerInput);
     ///Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
     $contentHeaderRow.after(contentAppend);
     //Ruft die Funktion "countRows" auf um die Anzahl der vorhandenen Datensätze zu zählen.
@@ -134,7 +158,7 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
 
 //
 //Konstruktor für das Array "dataPack"
-function ConstructDataPack ( probenNummer, sollDatum,  zerlegungStart, zerlegungEnde, einwaageBeginn, einwaageEnde, klaerfallBeginn, klaerfallEnde, manaBestellt, manaErhalten, manaEinwaage, manaEingewogen, zpnWagen) {
+function ConstructDataPack(probenNummer, sollDatum, zerlegungStart, zerlegungEnde, einwaageBeginn, einwaageEnde, klaerfallBeginn, klaerfallEnde, manaBestellt, manaErhalten, manaEinwaage, manaEingewogen, zpnWagen) {
     this.probenNummer = probenNummer;
     this.sollDatum = sollDatum;
     this.zerlegungStart = zerlegungStart;
@@ -151,85 +175,49 @@ function ConstructDataPack ( probenNummer, sollDatum,  zerlegungStart, zerlegung
 }
 
 //
-//Entfernt in der aus wrapData übertragenes Object die values mit einem "deactive" key
-function checkForUnchecked(dataPackUpdate) {
-    let countActive = 0;
-    const dataPackLength = dataPackUpdate.length;
-
-    $.each(dataPackUpdate, function (packKey, packValue) {
-        $.each(packValue, function (objectKey, objectValue) {
-            if (objectValue.match(/^(active)/)) {
-                countActive++;
-                return false;
-            }
-        });
-    });
-
-    if (countActive === dataPackLength) {
-        sendData(dataPackUpdate);
-        return false;
-    } else if (countActive !== dataPackLength) {
-        showFailMessage.failMessage("fail-input-verwaltung header-fail-message-content-margin", 5000);
-        return false;
-    }
-}
-
-//
 //Fügt alle Daten einer Zeile in ein Paket zusammen.
 function wrapData() {
     const $contentMainRow = $(".content-main-row");
     //Leeres Array für den Datentransfer in die Datenbank.
-    const dataPackUpdate = [];
+    const dataPack = [];
     //Zeit Sting pattern
     const newDatePattern = /(\d{2})\.(\d{2})\.(\d{4})/;
     //Durchläuft jede erstellte Zeile der Tabelle.
     $.when($contentMainRow.each(function () {
-            //Speichert den Inhalt der einzelnen Spalten der ausgewählten Zeile in einer Variable ab.
-            //Überprüft die Checkboxen und übergibt 0 oder 1 als Wert.
-            const probenNummer = $(this).find("#text-prbNr").text();
-            let sollDatum = $(this).find("#text-sollNr").text();
-            const zerlegungStart = $(this).find("#content-btn-zerlegungStart").attr("value");
-            const zerlegungEnde = $(this).find("#content-btn-zerlegungEnde").attr("value");
-            const einwaageBeginn = $(this).find("#content-btn-einwaageBeginn").attr("value");
-            const einwaageEnde = $(this).find("#content-btn-einwaageEnde").attr("value");
-            const klaerfallBeginn = $(this).find("#content-btn-klaerfallBeginn").attr("value");
-            const klaerfallEnde = $(this).find("#content-btn-klaerfallEnde").attr("value");
-            const manaBestellt = $(this).find("#content-btn-manaBestellt").attr("value");
-            const manaErhalten = $(this).find("#content-btn-manaErhalten").attr("value");
-            const manaEinwaage = $(this).find("#content-btn-manaEinwaage").attr("value");
-            const manaEingewogen = $(this).find("#content-btn-manaEingewogen").attr("value");
-            const zpnWagen = $(this).find("#content-btn-zpnWagen").attr("value");
+        //Speichert den Inhalt der einzelnen Spalten der ausgewählten Zeile in einer Variable ab.
+        //Überprüft die Checkboxen und übergibt 0 oder 1 als Wert.
+        const probenNummer = $(this).find("#text-prbNr").text();
+        const sollDatum = $(this).find("#text-sollNr").text().replace(newDatePattern, "$3-$2-$1");
+        const zerlegungStart = $(this).find("#content-btn-zerlegungStart").attr("value");
+        const zerlegungEnde = $(this).find("#content-btn-zerlegungEnde").attr("value");
+        const einwaageBeginn = $(this).find("#content-btn-einwaageBeginn").attr("value");
+        const einwaageEnde = $(this).find("#content-btn-einwaageEnde").attr("value");
+        const klaerfallBeginn = $(this).find("#content-btn-klaerfallBeginn").attr("value");
+        const klaerfallEnde = $(this).find("#content-btn-klaerfallEnde").attr("value");
+        const manaBestellt = $(this).find("#content-btn-manaBestellt").attr("value");
+        const manaErhalten = $(this).find("#content-btn-manaErhalten").attr("value");
+        const manaEinwaage = $(this).find("#content-btn-manaEinwaage").attr("value");
+        const manaEingewogen = $(this).find("#content-btn-manaEingewogen").attr("value");
+        const zpnWagen = $(this).find("#content-btn-zpnWagen").attr("value");
 
-            //Umbau des sollDatum Sting
-            sollDatum = sollDatum.replace(newDatePattern, "$3-$2-$1");
-            //Fügt mit hilfer eines Constructor's, den Inhalt der gegenwärtig selektierten Zeile, als Array in das "dataPack" hinzu.
-            dataPackUpdate.push(new ConstructDataPack(probenNummer, sollDatum, zerlegungStart, zerlegungEnde, einwaageBeginn, einwaageEnde, klaerfallBeginn, klaerfallEnde, manaBestellt, manaErhalten, manaEinwaage, manaEingewogen, zpnWagen));
-            //Übergibt das "dataPack" Array zum Ajax handler
-        })
-    ).done(checkForUnchecked(dataPackUpdate));
+        //Fügt mit hilfer eines Constructor's, den Inhalt der gegenwärtig selektierten Zeile, als Array in das "dataPack" hinzu.
+        dataPack.push(new ConstructDataPack(probenNummer, sollDatum, zerlegungStart, zerlegungEnde, einwaageBeginn, einwaageEnde, klaerfallBeginn, klaerfallEnde, manaBestellt, manaErhalten, manaEinwaage, manaEingewogen, zpnWagen));
+        //Übergibt das "dataPack" Array zum Ajax handler
+    })
+    ).done(checkForUnchecked(dataPack, 'header-input-verwaltung', 'verwaltung'));
 }
 
 //
 //Übersendet per Ajax und der POST Methode, dass Objekt "dataPack" an die PHP Datei "db-handling.php".
-function sendData(dataPackUpdate) {
+function sendUpdateData(dataPack) {
 
-    function stripDataPack(dataPackUpdate) {
-        Object.entries(dataPackUpdate).forEach(([dataPackKey, dataPackValue]) => {
-            Object.entries(dataPackValue).forEach(([itemKey, itemValue]) => {
-                if (itemValue === "preSet" || itemValue === "deactive") {
-                    delete dataPackValue[itemKey];
-                }
-            });
-        });
-    }
-
-    stripDataPack(dataPackUpdate);
+    stripDataPack(dataPack);
 
     const ajaxRequestUpdate = $.ajax({
         url: "../php/db-update.php",
         method: "POST",
         data: {
-            updateDataSet: dataPackUpdate
+            updateDataSet: dataPack
         },
         dataType: "json"
     });
@@ -240,9 +228,6 @@ function sendData(dataPackUpdate) {
         const $stickyFooterMessageWrap = $("#sticky-footer-message-wrap");
         const $stickyFooterSuccessWrap = $("#transmission-successful-wrapper");
         const $stickyFooterFailWrap = $("#transmission-fail-wrap");
-        // const $transmissionCounter = $('.present-item-counter');
-        // const $transmissionSuccessCounter = $('#transmission-success-counter');
-        // const $transmissionFailCounter = $('#transmission-fail-counter');
 
         //Funktion zum verstecken des ContentWrap und FooterWrap
         const hideContentFooter = function () {
@@ -297,7 +282,7 @@ function sendData(dataPackUpdate) {
             $stickyFooterMessageWrap.animateStickyFooterWrapper(
                 "sticky-footer-message-animation",
                 "sticky-footer-height",
-                4000
+                2000
             );
         }
     });
@@ -306,7 +291,7 @@ function sendData(dataPackUpdate) {
     ajaxRequestUpdate.fail(function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        showFailMessage.failMessage("no-server header-fail-message-content-margin", 8000);
+        showFailMessage.failMessage("no-server header-fail-message-content-margin", 8000, headerInput);
 
         backToInput();
     });

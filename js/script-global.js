@@ -8,7 +8,7 @@ let globalMainRowCounter = [];
 function regexInput() {
     //noRegEx gibt an welche Zeichen nicht eingegeben werden können.
     const noRegEx = /[^0-9#;.-]/g;
-    const zpnRegEx = /[zpnZPN]/g;
+    const zpnRegEx = /[ZPN]/g;
     const lfgbRegEx = /[LFGB]/g;
     const physikRegEx = /[Textilphysik]/g;
     const $headerInputEingang = $('#header-input-eingang');
@@ -147,29 +147,11 @@ function checkInput() {
                             break;
                         case 'header-input-beurteilung-abteilung':
                             appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value);
-                            // switch (this.value) {
-                            //     case 'zpn':
-                            //     case 'ZPN':
-                            //         appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value);
-                            //         break;
-                            //     case 'LFGB':
-                            //         appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value);
-                            //         break;
-                            //     case 'Textilphysik':
-                            //         appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value);
-                            //         break;
-                            //     default:
-                            // }
-
                             $headerInputBeurteilungProbennummer.add($headerInputBeurteilungAbteilung).val('');
                             $headerInputBeurteilungProbennummer.focus();
                             break;
                         default:
                     }
-                    //Überprüft ob in der Globalen Variable "globalMainRowCounter" bereits ein Datensatz der Variable "splitInputText[0]" beinhält.
-                    // } else if (this.value.match(zpnRegEx) && this.value.length === 3 || this.value.match(lfgbRegEx) && this.value.length === 4 || this.value.match(physikRegEx) && this.value.length === 12 ) {
-                    //     $headerInputBeurteilungProbennummer.add($headerInputBeurteilungAbteilung).val('');
-                    //     appendContentMainRow(inputTextLeft, inputTextRight, this.value)
                 } else {
                     //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
                     $(this).effect('highlight', { color: '#FF3100' }, 200);
@@ -225,6 +207,48 @@ const showFailMessage = {
     }
 };
 
+const hasDisaplayNone = ($wrapContent$wrapFooter, $headerInput) => {
+    $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : '';
+}
+
+function stripDataPack(dataPack) {
+    Object.entries(dataPack).forEach(([dataPackKey, dataPackValue]) => {
+        Object.entries(dataPackValue).forEach(([itemKey, itemValue]) => {
+            if (itemValue === "preSet" || itemValue === "deactive" || itemValue === "-") {
+                delete dataPackValue[itemKey];
+            }
+        });
+    });
+}
+
+//
+//Entfernt in der aus wrapData übertragenes Object die values mit einem "deactive" key
+function checkForUnchecked(dataPack, headerInput, origin) {
+    let countActive = 0;
+    const dataPackLength = dataPack.length;
+
+    $.each(dataPack, function (packKey, packValue) {
+        $.each(packValue, function (objectKey, objectValue) {
+            if (objectValue.match(/^(active)/)) {
+                countActive++;
+                return false;
+            }
+        });
+    });
+
+    if (countActive === dataPackLength && origin === 'beurteilung') {
+        sendData(dataPack);
+        return false;
+    }
+    else if (countActive === dataPackLength && origin === 'verwaltung') {
+        sendUpdateData(dataPack);
+        return false;
+    } else if (countActive !== dataPackLength) {
+        showFailMessage.failMessage("fail-input-noSelection header-fail-message-content-margin", 5000, headerInput);
+        return false;
+    }
+}
+
 //
 //Setzt den cursor nach dem betätigen eines button in das Input Feld zurück.
 function backToInput() {
@@ -250,12 +274,12 @@ const countMainRows = {
 // function setUnsetMainButtons() {
 
 //     let domButtonElementes = {
-//         'anZPN': '',
+//         'ZPN': '',
 //         anLFGB: ''
 //     }
 
 //     const domFooterCounterElementes = {
-//         'anZPN': $('#content-footer-counter-anZPN'),
+//         'ZPN': $('#content-footer-counter-ZPN'),
 //         anLFGB: $('#content-footer-counter-anLFGB')
 //     }
 
@@ -267,8 +291,8 @@ const countMainRows = {
 //             if (clickedButton.value === 'deactive') {
 //                 clickedButton.value = 'active';
 //                 clickedButton.classList.add('checked');
-//                 console.log(document.querySelectorAll('anZPN[value=active]').length);
-//                 let activeButtonLength = document.querySelectorAll('anZPN[value=active]').length;
+//                 console.log(document.querySelectorAll('ZPN[value=active]').length);
+//                 let activeButtonLength = document.querySelectorAll('ZPN[value=active]').length;
 
 //                 Object.entries(domButtonElementes).forEach(([buttonKey, buttonValue]) => {
 //                     console.log(buttonKey);
@@ -295,7 +319,7 @@ const countMainRows = {
 //                 clickedButton.value = 'deactive';
 //                 clickedButton.classList.remove('checked', 'preSet');
 
-//                 let activeButtonLength = document.querySelectorAll('anZPN[value=deactive]').length;
+//                 let activeButtonLength = document.querySelectorAll('ZPN[value=deactive]').length;
 
 //                 Object.entries(domButtonElementes).forEach(([buttonKey, buttonValue]) => {
 //                     console.log(buttonKey);
@@ -307,7 +331,7 @@ const countMainRows = {
 //                         }
 //                     });
 //                 });
-//                 console.log(document.querySelectorAll('anZPN[value=deactive]').length);
+//                 console.log(document.querySelectorAll('ZPN[value=deactive]').length);
 //                 // Object.entries(domButtonElementes).forEach(([buttonKey, buttonValue]) => {
 //                 //     if (clickedButton === buttonKey[buttonValue]) {
 //                 //         console.log(clickedButton.id);
@@ -395,12 +419,7 @@ function countCheckedButtons() {
     }
 
     function enableButton(startElement, enableElement, cssClassName) {
-        if (
-            $(startElement)
-                .closest(".content-main-row")
-                .find(enableElement)
-                .val() === "preSet"
-        ) {
+        if ($(startElement).closest(".content-main-row").find(enableElement).val() === "preSet") {
             return false;
         } else {
             if (startElement.value === "deactive") {
@@ -450,26 +469,26 @@ function countCheckedButtons() {
                     .attr("value", "active")
                     .css("background-color", "#FFB700");
                 switch (this.id) {
-                    case "anZPN":
-                        effectOnElement($footerAnzahlAnZPN, '#anZPN[value="active"]', {
+                    case "ZPN":
+                        effectOnElement($footerAnzahlAnZPN, '#ZPN[value="active"]', {
                             color: "#FFB700"
                         });
-                        disableButton(this, "#anLFGB", "disableMainRowButton");
-                        disableButton(this, "#anTextilphysik", "disableMainRowButton");
+                        disableButton(this, "#LFGB", "disableMainRowButton");
+                        disableButton(this, "#Textilphysik", "disableMainRowButton");
                         break;
-                    case "anLFGB":
-                        effectOnElement($footerAnzahlAnLFGB, '#anLFGB[value="active"]', {
+                    case "LFGB":
+                        effectOnElement($footerAnzahlAnLFGB, '#LFGB[value="active"]', {
                             color: "#FFB700"
                         });
-                        disableButton(this, "#anZPN", "disableMainRowButton");
-                        disableButton(this, "#anTextilphysik", "disableMainRowButton");
+                        disableButton(this, "#ZPN", "disableMainRowButton");
+                        disableButton(this, "#Textilphysik", "disableMainRowButton");
                         break;
-                    case "anTextilphysik":
-                        effectOnElement($footerAnzahlAnTextil, '#anTextilphysik[value="active"]', {
+                    case "Textilphysik":
+                        effectOnElement($footerAnzahlAnTextil, '#Textilphysik[value="active"]', {
                             color: "#FFB700"
                         });
-                        disableButton(this, "#anZPN", "disableMainRowButton");
-                        disableButton(this, "#anLFGB", "disableMainRowButton");
+                        disableButton(this, "#ZPN", "disableMainRowButton");
+                        disableButton(this, "#LFGB", "disableMainRowButton");
                         break;
                     //--------------------------------------------------------------------------------------------------------------------
                     case "content-btn-chkEx":
@@ -705,26 +724,26 @@ function countCheckedButtons() {
                     .attr("value", "deactive")
                     .css("background-color", "#ededed");
                 switch (this.id) {
-                    case "anZPN":
-                        effectOnElement($footerAnzahlAnZPN, '#anZPN[value="active"]', {
+                    case "ZPN":
+                        effectOnElement($footerAnzahlAnZPN, '#ZPN[value="active"]', {
                             color: "#FF3100"
                         });
-                        enableButton(this, "#anLFGB", "disableMainRowButton");
-                        enableButton(this, "#anTextilphysik", "disableMainRowButton");
+                        enableButton(this, "#LFGB", "disableMainRowButton");
+                        enableButton(this, "#Textilphysik", "disableMainRowButton");
                         break;
-                    case "anLFGB":
-                        effectOnElement($footerAnzahlAnLFGB, '#anLFGB[value="active"]', {
+                    case "LFGB":
+                        effectOnElement($footerAnzahlAnLFGB, '#LFGB[value="active"]', {
                             color: "#FF3100"
                         });
-                        enableButton(this, "#anZPN", "disableMainRowButton");
-                        enableButton(this, "#anTextilphysik", "disableMainRowButton");
+                        enableButton(this, "#ZPN", "disableMainRowButton");
+                        enableButton(this, "#Textilphysik", "disableMainRowButton");
                         break;
-                    case "anTextilphysik":
-                        effectOnElement($footerAnzahlAnTextil, '#anTextilphysik[value="active"]', {
+                    case "Textilphysik":
+                        effectOnElement($footerAnzahlAnTextil, '#Textilphysik[value="active"]', {
                             color: "#FF3100"
                         });
-                        enableButton(this, "#anZPN", "disableMainRowButton");
-                        enableButton(this, "#anLFGB", "disableMainRowButton");
+                        enableButton(this, "#ZPN", "disableMainRowButton");
+                        enableButton(this, "#LFGB", "disableMainRowButton");
                         break;
                     //--------------------------------------------------------------------------------------------------------------------
                     case "content-btn-chkEx":
@@ -973,19 +992,19 @@ function countCheckedButtons() {
                         .attr("value", "deactive")
                         .css("background-color", "#ededed");
                     switch (this.id) {
-                        case "anZPN":
-                            effectOnElement($footerAnzahlAnZPN, '#anZPN[value="active"]', {
+                        case "ZPN":
+                            effectOnElement($footerAnzahlAnZPN, '#ZPN[value="active"]', {
                                 color: "#FF3100"
                             });
                             // enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                             break;
-                        case "anLFGB":
-                            effectOnElement($footerAnzahlAnLFGB, '#anLFGB[value="active"]', {
+                        case "LFGB":
+                            effectOnElement($footerAnzahlAnLFGB, '#LFGB[value="active"]', {
                                 color: "#FF3100"
                             });
                             break;
-                        case "anTextilphysik":
-                            effectOnElement($footerAnzahlAnTextil, '#anTextilphysik[value="active"]', {
+                        case "Textilphysik":
+                            effectOnElement($footerAnzahlAnTextil, '#Textilphysik[value="active"]', {
                                 color: "#FF3100"
                             });
                             break;
@@ -1215,6 +1234,7 @@ function confirmDelete() {
             });
     });
 }
+
 
 document.addEventListener('DOMContentLoaded', function () {
     regexInput();

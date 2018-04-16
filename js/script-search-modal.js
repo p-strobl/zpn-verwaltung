@@ -11,10 +11,11 @@ function resetDetails() {
     const modalPromtSlider = $('#modal-footer-promt-slider');
     const modalStatusItems = $('.modal__status');
     const modalFooterInput = $('#modal-footer-input');
+    const modalAnEingang = $('#spanAnEingang');
 
-    modalContentMainPullSqlItem.html('Nicht Vorhanden');
-    modalContentMainPullSqlItemGesamt.html('Nicht zu ermitteln');
-    modalContentCaptionSpan.html('');
+    modalContentMainPullSqlItem.add(modalContentMainPullSqlItemGesamt).html('&#151');
+    // modalContentMainPullSqlItemGesamt.html('&#151');
+    modalContentCaptionSpan.add(modalAnEingang).html('');
     modalContentAppendedSpan.remove();
     modalHeaderInput.add(modalHeaderInput).val('');
     modalPromtSlider.removeClass('transform__modal');
@@ -98,7 +99,7 @@ function searchDataSet(probenNummer) {
         const wrapModalFooter = $('#wrap-modal-footer');
         const modalHeaderInput = $('#modal-header-input');
         const modalFooterSpanWrap = $('#modal-footer-span-wrap');
-        console.log(data);
+        // console.log(data);
         if (Object.keys(data).every((key) => data[key])) {
 
             resetDetails();
@@ -106,11 +107,10 @@ function searchDataSet(probenNummer) {
             const toFillItems = {
                 base: {
                     probenNummer: $('#modal-content-caption-nummber-text'),
-                    sollDatum: $('#modal-content-caption-soll-text'),
-                    // anAbteilung: $('#')
+                    sollDatum: $('#modal-content-caption-soll-text')
                 },
                 date: {
-                    beurteilungBereitDate: $('#pullSql-beurteilung-date'),
+                    beurteilungBereitgestelltDateTime: $('#pullSql-beurteilung-date'),
                     einwaageBeginn: $('#pullSql-einwaage-start-date'),
                     einwaageEnde: $('#pullSql-einwaage-ende-date'),
                     klaerfallBeginnDateTime: $('#pullSql-klaerfall-start-date'),
@@ -162,7 +162,8 @@ function searchDataSet(probenNummer) {
                     mitKlaerfallBack: $('#mitKlaerfallBack'),
                     mitLfgb: $('#mitLfgb'),
                     mitNickel: $('#mitNickel'),
-                    mitToys: $('#mitToys')
+                    mitToys: $('#mitToys'),
+                    anAbteilung: $('#spanAnEingang')
                 },
                 kommentar: {
                     kommentarDate: $('#modal-footer-span-date'),
@@ -197,8 +198,10 @@ function searchDataSet(probenNummer) {
                 $.each(toFillItems.status, (toFillStatusKey, toFillStatusValue) => {
                     if (statusKey === toFillStatusKey) {
                         toFillStatusValue.val(statusValue).addClass('statusButton-preSet');
+                        statusKey === 'anAbteilung' ? toFillStatusValue.html(statusValue) : '';
                         return false;
                     }
+
                 });
             });
             $.each(data.date, (dateKey, dateValue) => {

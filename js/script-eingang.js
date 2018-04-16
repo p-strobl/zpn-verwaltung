@@ -10,7 +10,7 @@ function getEingangButtonStatus(probenNummer) {
         dataType: "json"
     });
 
-    ajaxRequestObject.done(function(data) {
+    ajaxRequestObject.done(function (data) {
         console.log(data);
 
         const rowItems = {
@@ -28,7 +28,7 @@ function getEingangButtonStatus(probenNummer) {
         }
     });
 
-    ajaxRequestObject.fail(function(jqXHR, textStatus, errorThrown) {
+    ajaxRequestObject.fail(function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
         // showFailMessage.failMessage( 'no-server header-fail-message-content-margin', 8000 );
@@ -44,7 +44,7 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
     const $headerInputEingang = $("#header-input-eingang");
     const contentAppend =
         " <section class='content-main-row eingang' id='content-main-row'> " +
-            " <div class='content-main-cell' title='Eingetragene Proben Nummer.'> " +
+        " <div class='content-main-cell' title='Eingetragene Proben Nummer.'> " +
         " <p class='content-main-text' id='text-prbNr'>" +
         inputTextLeft +
         "</p> " +
@@ -94,9 +94,9 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
     //Zeigt den Tabellen Header, die Tabelle und den sende Button wieder an.
     $wrapContent$wrapFooter.hasClass("displayNoneImportant") === true
         ? $wrapContent$wrapFooter
-              .removeClass("displayNoneImportant")
-              .add($headerInputEingang)
-              .removeClass("border-edged")
+            .removeClass("displayNoneImportant")
+            .add($headerInputEingang)
+            .removeClass("border-edged")
         : "";
     ///Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
     $contentHeaderRow.after(contentAppend);
@@ -135,68 +135,45 @@ function ConstructDataPack(
 function wrapData() {
     const $contentMainRow = $(".content-main-row");
     //Leeres Array für den Datentransfer in die Datenbank.
-    const dataPackEingang = [];
+    const dataPack = [];
     //Zeit Sting pattern
     const newDatePattern = /(\d{2})\.(\d{2})\.(\d{4})/;
     //Durchläuft jede erstellte Zeile der Tabelle.
     $.when(
-        $contentMainRow.each(function() {
+        $contentMainRow.each(function () {
             //Speichert den Inhalt der einzelnen Spalten der ausgewählten Zeile in einer Variable ab.
             //Überprüft die Checkboxen und übergibt 0 oder 1 als Wert.
-            const probenNummer = $(this)
-                .find("#text-prbNr")
-                .text();
-            let sollDatum = $(this)
-                .find("#text-sollNr")
-                .text();
-            const mitExpress = $(this)
-                .find("#content-btn-chkEx")
-                .attr("value");
-            const mitIntern = $(this)
-                .find("#content-btn-chkIntern")
-                .attr("value");
-            const mitNickel = $(this)
-                .find("#content-btn-chkNi")
-                .attr("value");
-            const mitLfgb = $(this)
-                .find("#content-btn-chkLF")
-                .attr("value");
-            const mitToys = $(this)
-                .find("#content-btn-chkToy")
-                .attr("value");
-            const mit60g = $(this)
-                .find("#content-btn-chk60g")
-                .attr("value");
-            const mitKlaerfallBack = $(this)
-                .find("#content-btn-chkKlaerBack")
-                .attr("value");
-            const mitNickelBack = $(this)
-                .find("#content-btn-chkNickelBack")
-                .attr("value");
-
-            //Umbau des sollDatum Sting
-            sollDatum = sollDatum.replace(newDatePattern, "$3-$2-$1");
+            const probenNummer = $(this).find("#text-prbNr").text();
+            const sollDatum = $(this).find("#text-sollNr").text().replace(newDatePattern, "$3-$2-$1");
+            const mitExpress = $(this).find("#content-btn-chkEx").attr("value");
+            const mitIntern = $(this).find("#content-btn-chkIntern").attr("value");
+            const mitNickel = $(this).find("#content-btn-chkNi").attr("value");
+            const mitLfgb = $(this).find("#content-btn-chkLF").attr("value");
+            const mitToys = $(this).find("#content-btn-chkToy").attr("value");
+            const mit60g = $(this).find("#content-btn-chk60g").attr("value");
+            const mitKlaerfallBack = $(this).find("#content-btn-chkKlaerBack").attr("value");
+            const mitNickelBack = $(this).find("#content-btn-chkNickelBack").attr("value");
 
             //Fügt mit hilfer eines Constructor's, den Inhalt der gegenwärtig selektierten Zeile, als Array in das "dataPack" hinzu.
-            dataPackEingang.push(new ConstructDataPack(probenNummer, sollDatum, mitExpress, mitIntern, mitNickel, mitLfgb, mitToys, mit60g, mitKlaerfallBack, mitNickelBack));
+            dataPack.push(new ConstructDataPack(probenNummer, sollDatum, mitExpress, mitIntern, mitNickel, mitLfgb, mitToys, mit60g, mitKlaerfallBack, mitNickelBack));
             //Übergibt das "dataPack" Array zum Ajax handler
-        })).done(sendData(dataPackEingang));
+        })).done(sendEingangData(dataPack));
 }
 
 //
 //Übersendet per Ajax und der POST Methode, dass Objekt "dataPack" an die PHP Datei "db-handling.php".
-function sendData(dataPackEingang) {
+function sendEingangData(dataPack) {
     const ajaxRequestEingang = $.ajax({
         url: "../php/db-insert.php",
         method: "POST",
         data: {
-            musterEingangDataSet: dataPackEingang
+            musterEingangDataSet: dataPack
         },
         dataType: "json"
     });
 
     //Ajax Anfrage ist erfolgreich.
-    ajaxRequestEingang.done(function(data) {
+    ajaxRequestEingang.done(function (data) {
         const $stickyFooterMessageWrap = $("#sticky-footer-message-wrap");
         const $stickyFooterSuccessWrap = $("#transmission-successful-wrapper");
         const $stickyFooterFailWrap = $("#transmission-fail-wrap");
@@ -205,14 +182,14 @@ function sendData(dataPackEingang) {
         const $transmissionFailCounter = $("#transmission-fail-counter");
 
         //Funktion zum entfernen der doppelten Datenbank Item Liste.
-        const removeListOfDoubleItems = function() {
-            $(".transmission-doubleInput-data").each(function() {
+        const removeListOfDoubleItems = function () {
+            $(".transmission-doubleInput-data").each(function () {
                 $(this).remove();
             });
         };
 
         //Funktion zum verstecken des ContentWrap und FooterWrap
-        const hideContentFooter = function() {
+        const hideContentFooter = function () {
             const $headerInputEingang = $("#header-input-eingang");
             const $headerInputVerwaltung = $("#header-input-verwaltung");
             const $wrapContent$wrapFooter = $("#wrap-content").add(
@@ -226,7 +203,7 @@ function sendData(dataPackEingang) {
         };
 
         //Funktion zum entfernen der FooterCounter Anzeige inhalte.
-        const emptyMainRowsAndCounter = function() {
+        const emptyMainRowsAndCounter = function () {
             const $contentMainRows = $(".content-main-row");
             const $contentFooterCounter = $(".content-footer-counter");
             $contentMainRows.remove();
@@ -234,7 +211,7 @@ function sendData(dataPackEingang) {
         };
 
         //Funktion um entsprechendes Elemente zu verstecken und die Success und Fail Counter Anzeige zu füllen.
-        const transmissionCounter = function(parameterObject) {
+        const transmissionCounter = function (parameterObject) {
             const $globalCounter = parameterObject.globalCounter;
             const $hideElement = parameterObject.hideElement;
             const $successCount = parameterObject.successCount;
@@ -252,7 +229,7 @@ function sendData(dataPackEingang) {
         };
 
         //Funktion um alle doppelt vorkommenden Datensätze im HMTL anzuzeigen.
-        const listOfDoubleInputItems = function() {
+        const listOfDoubleInputItems = function () {
             const $transmissionDoubleInput = $(
                 "#transmission-double-input-wrap"
             );
@@ -266,7 +243,7 @@ function sendData(dataPackEingang) {
         };
 
         //Funktion zum Hinzufügen und entfernen von Class des Sticky Footer Elements
-        $.fn.animateStickyFooterWrapper = function(
+        $.fn.animateStickyFooterWrapper = function (
             animationClass,
             heightClass,
             delay
@@ -279,10 +256,10 @@ function sendData(dataPackEingang) {
             $stickyFooterWrapper
                 .removeClass($heightClass)
                 .addClass($animationClass);
-            setTimeout(function() {
+            setTimeout(function () {
                 $stickyFooterWrapper.removeClass($animationClass);
             }, delay);
-            setTimeout(function() {
+            setTimeout(function () {
                 $wrapEingang.css("visibility", "visible");
                 $stickyFooterWrapper.addClass($heightClass);
                 $stickyFooterSuccessWrap
@@ -306,7 +283,7 @@ function sendData(dataPackEingang) {
             $stickyFooterMessageWrap.animateStickyFooterWrapper(
                 "sticky-footer-message-animation",
                 "sticky-footer-height",
-                4000
+                2000
             );
         } else if (data.success === true && data.doubleInput.length >= 1) {
             // Alle nicht vorhandenen Datensätze wurden in die Datenbank eingetragen, aber alle doppelt vorhandenen sind in einem Array aufgeführt.
@@ -330,7 +307,7 @@ function sendData(dataPackEingang) {
                 case 1049:
                     showFailMessage.failMessage(
                         "no-database header-fail-message-content-margin",
-                        8000
+                        8000, headerInput
                     );
                     console.log(data);
                     backToInput();
@@ -339,7 +316,7 @@ function sendData(dataPackEingang) {
                 case 2002:
                     showFailMessage.failMessage(
                         "no-server header-fail-message-content-margin",
-                        8000
+                        8000, headerInput
                     );
                     console.log(data);
                     backToInput();
@@ -368,11 +345,11 @@ function sendData(dataPackEingang) {
     });
 
     //Ajax Verbindung fehlgeschlagen.
-    ajaxRequestEingang.fail(function(jqXHR, textStatus, errorThrown) {
+    ajaxRequestEingang.fail(function (jqXHR, textStatus, errorThrown) {
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
         showFailMessage.failMessage(
             "no-server header-fail-message-content-margin",
-            8000
+            8000, headerInput
         );
         console.log(textStatus, errorThrown);
         backToInput();

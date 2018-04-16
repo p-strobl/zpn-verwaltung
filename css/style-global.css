@@ -12,6 +12,7 @@
 body {
     height: 100%;
     width: 100%;
+    overflow: hidden;
     background-color: #0091cd;
 }
 
@@ -163,7 +164,7 @@ img:hover {
 }
 
 .header-fail-message-content-margin {
-    margin: 100px 0;
+    margin: 50px 0;
     font-size: 4vw;
 }
 
@@ -186,8 +187,8 @@ img:hover {
     white-space: pre-wrap;
 }
 
-.fail-input-verwaltung::after {
-    content: "Ups!\A \A Sie habe in einer oder mehreren Zeile/n \A \A keine Auswahl getroffen!";
+.fail-input-noSelection::after {
+    content: "Ups!\A \A Sie habe in einer oder mehreren Zeile/n \A keine Auswahl getroffen!";
     white-space: pre-wrap;
 }
 
@@ -362,6 +363,10 @@ img:hover {
     background-color: #00ff67;
     text-decoration-line: line-through;
 }
+
+/* .setButtonStatusDisable {
+    text-decoration-line: line-through;
+} */
 
 .disableMainRowButton {
     text-decoration: line-through;

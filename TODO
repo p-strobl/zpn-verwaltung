@@ -3,6 +3,7 @@ Todo:
     Global:
         ☐ All -> Überall noch Kommentare einfügen! @critical 
         ☐ All -> Rechtschreibprüfung @critical 
+        ☐ All JS -> Funktionen zusammen führen @critical 
 
         ☐ HTML -> Bubble Nachricht über Element hover @low
 
@@ -43,13 +44,15 @@ Todo:
         ✔ JS -> Disable der Buttons erweitern @done(18-04-04 05:17)
         ✔ JS -> Button Status Funktion umstrukturieren!! @done(18-04-04 13:56)
         ✔ JS -> Umstrukturierung der aktiven Button abfrage!! @high @done(18-04-07 23:33)
-        ☐ JS -> Wenn ein Button mit preSet geholt wurde, den Anfangs-button davon disablen
+        ✔ JS -> Wenn ein Button mit preSet geholt wurde, den Anfangs-button davon disablen @done(18-04-15 23:25)
+
+        ☐ Datenbank -> wenn kein ZPN Mustereingang vorhanden, auch nicht zulassen! @critical 
 
     Beurteilung Seite:
-        ☐ HTML -> Seite erstellen
-        ☐ HTML -> Doppelte Input Abfrage: "Probennummer" und "an Abteilung"
+        ✔ HTML -> Seite erstellen @done(18-04-15 20:47)
+        ✔ HTML -> Doppelte Input Abfrage: "Probennummer" und "an Abteilung" @done(18-04-15 20:47)
 
-        ☐ JS -> Button Status Funktion hinzufügen 
+        ✔ JS -> Button Status Funktion hinzufügen @done(18-04-15 20:47)
 
     Übersicht Seite:
         ☐ HTML -> Seite erstellen

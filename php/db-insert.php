@@ -1,6 +1,7 @@
 <?php
 
 require 'db-connect.php';
+require_once 'fn/fn-sqlSelectObject.php';
 
 if (!empty($_POST)) {
 
@@ -29,27 +30,30 @@ if (!empty($_POST)) {
 
     foreach ($receivedPostDataObject as $i) {
 
+        $pdoConnect = db_connect();
+        $pdoObject = new stdClass();
+        $sqlSelectBaseObject = sqlSelectObjectBase($pdoConnect, $i->probenNummer, $pdoObject);
+
         $yesRegEx = '/\d{2}-\d{6}-\d{2}/';
         $minLength = 12;
 
         if (preg_match($yesRegEx, $i->probenNummer) && strlen($i->probenNummer) === $minLength) {
 
-            $pdoConnect = db_connect();
-
-
             try {
                 $pdoConnect->beginTransaction();
-                $sql =
-                    "
-                    INSERT INTO 
-                        tbl_baserecord( probenNummer, sollDatum )
-                    VALUES 
-                        ( :probenNummer, :sollDatum )
-                ";
-                $pdoStatement = $pdoConnect->prepare($sql);
-                $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
-                $pdoStatement->bindParam(':sollDatum', $i->sollDatum, PDO::PARAM_STR);
-                $pdoStatement->execute();
+                if ($sqlSelectBaseObject->base === false) {
+                    $sql =
+                        "
+                            INSERT INTO 
+                                tbl_baserecord( probenNummer, sollDatum )
+                            VALUES 
+                                ( :probenNummer, :sollDatum )
+                        ";
+                    $pdoStatement = $pdoConnect->prepare($sql);
+                    $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
+                    $pdoStatement->bindParam(':sollDatum', $i->sollDatum, PDO::PARAM_STR);
+                    $pdoStatement->execute();
+                }
 
                 switch (true) {
                     case isset($receivedPostData->beurteilungDataSet):
@@ -60,7 +64,6 @@ if (!empty($_POST)) {
                                 VALUES 
                                     ( :probenNummer, NOW(), :anAbteilung )
                             ";
-
                         $pdoStatement = $pdoConnect->prepare($sql);
                         $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
                         $pdoStatement->bindParam(':anAbteilung', $i->anAbteilung, PDO::PARAM_STR);
@@ -99,6 +102,23 @@ if (!empty($_POST)) {
                         $pdoStatement->bindParam(':mit60g', $i->mit60g, PDO::PARAM_STR);
                         $pdoStatement->bindParam(':mitKlaerfallBack', $i->mitKlaerfallBack, PDO::PARAM_STR);
                         $pdoStatement->execute();
+
+                        $sql =
+                            "
+                                UPDATE 
+                                  tbl_beurteilung, tbl_zpnmustereingang
+                                SET 
+                                  tbl_zpnmustereingang.beurteilungZpnBerechnung = IF( tbl_zpnmustereingang.zpnEingangDateTime IS NOT NULL AND tbl_beurteilung.beurteilungBereitgestelltDateTime IS NOT NULL, TIMEDIFF(tbl_zpnmustereingang.zpnEingangDateTime, tbl_beurteilung.beurteilungBereitgestelltDateTime), NULL )
+                                WHERE
+                                  tbl_beurteilung.probenNummer = :probenNummerBeurteilung
+                                AND
+                                  tbl_zpnmustereingang.probenNummer = :probenNummerZpn
+                            ";
+                        $pdoStatement = $pdoConnect->prepare($sql);
+                        $pdoStatement->bindParam(':probenNummerBeurteilung', $i->probenNummer, PDO::PARAM_STR);
+                        $pdoStatement->bindParam(':probenNummerZpn', $i->probenNummer, PDO::PARAM_STR);
+                        $pdoStatement->execute();
+
                         $pdoConnect->commit();
                         break;
                     default:
