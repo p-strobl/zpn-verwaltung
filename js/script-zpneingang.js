@@ -92,12 +92,7 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
     getEingangButtonStatus(inputTextLeft);
 
     //Zeigt den Tabellen Header, die Tabelle und den sende Button wieder an.
-    $wrapContent$wrapFooter.hasClass("displayNoneImportant") === true
-        ? $wrapContent$wrapFooter
-            .removeClass("displayNoneImportant")
-            .add($headerInputEingang)
-            .removeClass("border-edged")
-        : "";
+    $wrapContent$wrapFooter.hasClass("displayNoneImportant") === true ? $wrapContent$wrapFooter.removeClass("displayNoneImportant").add($headerInputEingang).removeClass("border-edged") : "";
     ///Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
     $contentHeaderRow.after(contentAppend);
     //Ruft die Funktion "countRows" auf um die Anzahl der vorhandenen Datensätze zu zählen.

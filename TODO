@@ -4,7 +4,8 @@ Todo:
         ☐ All -> Überall noch Kommentare einfügen! @critical 
         ☐ All -> Rechtschreibprüfung @critical 
         ☐ All JS -> Funktionen zusammen führen @critical
-        ☐ All JS -> .focus() geht nicht @critical
+        ✔ All JS -> .focus() geht nicht @critical @done(18-04-16 21:26)
+        ☐ All JS -> globalMainRowCounter nach dem löschen eines Eintrags, löscht den falschen! @critical 
 
         ☐ HTML -> Bubble Nachricht über Element hover @low
 
@@ -48,12 +49,14 @@ Todo:
         ✔ JS -> Wenn ein Button mit preSet geholt wurde, den Anfangs-button davon disablen @done(18-04-15 23:25)
 
         ☐ Datenbank -> wenn kein ZPN Mustereingang vorhanden, auch nicht zulassen! @critical 
+        ✔ JS -> Antwort Nochmal den Vorgang überprüfen wenn keinerlei Eingang registriert war @critical @done(18-04-16 21:20)
 
     Beurteilung Seite:
         ✔ HTML -> Seite erstellen @done(18-04-15 20:47)
         ✔ HTML -> Doppelte Input Abfrage: "Probennummer" und "an Abteilung" @done(18-04-15 20:47)
 
         ✔ JS -> Button Status Funktion hinzufügen @done(18-04-15 20:47)
+        ☐ JS -> Falsch Eingabe der Probennummer führt bei korrigierter Doppeleintrag zu zwei nummern! @critical 
 
     Übersicht Seite:
         ☐ HTML -> Seite erstellen

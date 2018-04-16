@@ -142,13 +142,18 @@ function checkInput() {
                                     .effect('highlight', { color: '#FFB700' }, 200);
                                 //in die Globale Variable "globalMainRowCounter" wird der hinzugefügte Datensatz zwischengespeichert.
                                 globalMainRowCounter.push(inputText);
-                                $headerInputBeurteilungAbteilung.focus();
+                                $headerInputBeurteilungProbennummer.attr('disabled', 'disabled');
+                                $headerInputBeurteilungAbteilung.removeAttr('disabled').focus();
                             }
                             break;
                         case 'header-input-beurteilung-abteilung':
                             appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value);
                             $headerInputBeurteilungProbennummer.add($headerInputBeurteilungAbteilung).val('');
-                            $headerInputBeurteilungProbennummer.focus();
+                            $headerInputBeurteilungAbteilung.attr('disabled', 'disabled');
+                            $headerInputBeurteilungProbennummer
+                                .removeAttr('disabled')
+                                .focus();
+                            // $headerInputBeurteilungProbennummer;
                             break;
                         default:
                     }
@@ -216,7 +221,7 @@ const hasDisaplayNone = ($wrapContent$wrapFooter, $headerInput) => {
 function stripDataPack(dataPack) {
     Object.entries(dataPack).forEach(([dataPackKey, dataPackValue]) => {
         Object.entries(dataPackValue).forEach(([itemKey, itemValue]) => {
-            if (itemValue === "preSet" || itemValue === "deactive" || itemValue === "-") {
+            if (itemValue === "preSet" || itemValue === "deactive") {
                 delete dataPackValue[itemKey];
             }
         });
@@ -1164,6 +1169,7 @@ function highlightSelectedRow() {
 //
 //Löscht die gesamte Zeile des ausgewählten Buttons.
 const deleteSelectedRow = function (selectedRow) {
+    console.log(globalMainRowCounter);
     const $wrapContent = $("#wrap-content");
     const $headerInputEingang = $("#header-input-eingang");
     const $wrapContent$wrapFooter = $("#wrap-content").add($("#wrap-footer"));
@@ -1175,15 +1181,11 @@ const deleteSelectedRow = function (selectedRow) {
         "#content-main-row"
     );
     const rowMainCount = $wrapContent.find(".content-main-row").length;
-    const selectedRowPrbNrText = $selectedRowClosestMainRow
-        .children("#text-prbNr")
-        .text();
+    const selectedRowPrbNrText = $selectedRowClosestMainRow.find("#text-prbNr").text();
 
     if (rowMainCount === 1) {
-        globalMainRowCounter.splice(
-            $.inArray(selectedRowPrbNrText, globalMainRowCounter),
-            1
-        );
+        // globalMainRowCounter = globalMainRowCounter.filter(item => item !== selectedRowPrbNrText);
+        globalMainRowCounter.splice($.inArray(selectedRowPrbNrText, globalMainRowCounter), 1);
         countMainRows.addHighlight("highlight", "#FF3100", 100);
         $($contentFooterMainRowSendButton).each(function () {
             $(this)
@@ -1202,10 +1204,8 @@ const deleteSelectedRow = function (selectedRow) {
                 });
         });
     } else if (rowMainCount > 1) {
-        globalMainRowCounter.splice(
-            $.inArray(selectedRowPrbNrText, globalMainRowCounter),
-            1
-        );
+        // globalMainRowCounter = globalMainRowCounter.filter(item => item !== selectedRowPrbNrText);
+        globalMainRowCounter.splice($.inArray(selectedRowPrbNrText, globalMainRowCounter), 1);
         countMainRows.addHighlight("highlight", "#FF3100", 100);
         $selectedRowClosestMainRow
             .fadeOut(300)
@@ -1217,6 +1217,7 @@ const deleteSelectedRow = function (selectedRow) {
                 backToInput();
             });
     }
+    console.log(globalMainRowCounter);
 };
 
 //

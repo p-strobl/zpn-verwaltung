@@ -271,8 +271,9 @@ function sendUpdateData(dataPack) {
                     .add($stickyFooterFailWrap)
                     .css("display", "");
                 globalMainRowCounter.length = 0;
+                backToInput();
             }, delay + 350);
-            backToInput();
+
         };
 
         if (itemCount >= 1) {
@@ -283,7 +284,7 @@ function sendUpdateData(dataPack) {
                 "sticky-footer-height",
                 2000
             );
-            backToInput();
+            // backToInput();
         }
     });
 
@@ -293,8 +294,8 @@ function sendUpdateData(dataPack) {
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
         showFailMessage.failMessage(
             "no-server header-fail-message-content-margin",
-            8000,
-            headerInput);
+            8000
+        );
         backToInput();
     });
 }
