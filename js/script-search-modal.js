@@ -39,7 +39,7 @@ const showCloseModal = (() => {
     const modalFooterContentWrap = $('#modal-footer-content-wrap');
 
     const showModal = (() => {
-        imgSearch.on('click', function (event) {
+        imgSearch.on('click', function () {
             resetDetails();
             wrapModal.addClass('show__modal');
             contentModal.toggleClass('transform__modal');
@@ -374,7 +374,7 @@ const updateKommentar = () => {
     });
 }
 
-$(document).ready(function () {
-    updateStatusButton();
-    updateKommentar();
-});
+// $(document).ready(function () {
+//     updateStatusButton();
+//     updateKommentar();
+// });

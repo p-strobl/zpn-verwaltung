@@ -224,11 +224,7 @@ function sendData(dataPackUpdate) {
         };
 
         //Funktion zum Hinzufügen und entfernen von Class des Sticky Footer Elements
-        $.fn.animateStickyFooterWrapper = function (
-            animationClass,
-            heightClass,
-            delay
-        ) {
+        $.fn.animateStickyFooterWrapper = function (animationClass, heightClass, delay) {
             const $stickyFooterWrapper = $(this);
             const $animationClass = animationClass;
             const $heightClass = heightClass;
@@ -249,6 +245,7 @@ function sendData(dataPackUpdate) {
                     .css("display", "");
                 removeListOfDoubleItems();
                 globalMainRowCounter.length = 0;
+                backToInput();
             }, delay + 350);
         };
 

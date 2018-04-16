@@ -192,6 +192,7 @@ const showFailMessage = {
                         this.$headerFailMessageContent.removeClass(errorClassType);
                     }, 330);
                 }, setTimeoutTimer);
+                backToInput();
                 break;
 
             case "modal-header-input":
@@ -201,6 +202,7 @@ const showFailMessage = {
                     this.$modalFailMessageContent.removeClass(errorClassType);
                     this.$modalFailMessageWrap.removeClass("transform__modal");
                 }, setTimeoutTimer);
+                backToInput();
                 break;
             default:
         }
@@ -249,16 +251,24 @@ function checkForUnchecked(dataPack, headerInput, origin) {
     }
 }
 
-//
-//Setzt den cursor nach dem betätigen eines button in das Input Feld zurück.
-function backToInput(origin) {
+const backToInput = (() => {
     const $headerInputBeurteilung = $('#header-input-beurteilung-probennummer');
     const $headerInputEingang = $("#header-input-eingang");
     const $headerInputVerwaltung = $("#header-input-verwaltung");
-
-    console.log(origin);
-    $headerInputBeurteilung.add($headerInputEingang).add($headerInputVerwaltung).get(0).focus();
-}
+    setTimeout(() => {
+        $headerInputBeurteilung.add($headerInputEingang).add($headerInputVerwaltung).focus();
+    }, 100);
+    return;
+});
+//
+// Setzt den cursor nach dem betätigen eines button in das Input Feld zurück.
+// function backToInput() {
+//     const $headerInputBeurteilung = $('#header-input-beurteilung-probennummer');
+//     const $headerInputEingang = $("#header-input-eingang");
+//     const $headerInputVerwaltung = $("#header-input-verwaltung");
+//
+//     $headerInputBeurteilung.add($headerInputEingang).add($headerInputVerwaltung).get(0).focus();
+// }
 
 //
 // Färbt die Anzeige der Datensatz Menge enstprechend, wenn Hinzugefügt: Grün, wenn entfernt: Rot.
@@ -1249,4 +1259,6 @@ document.addEventListener('DOMContentLoaded', function () {
     // setUnsetMainButtons();
     showCloseModal.showModal();
     showCloseModal.closeModal();
+    updateStatusButton();
+    updateKommentar();
 });

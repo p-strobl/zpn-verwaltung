@@ -243,16 +243,11 @@ function sendEingangData(dataPack) {
         };
 
         //Funktion zum Hinzufügen und entfernen von Class des Sticky Footer Elements
-        $.fn.animateStickyFooterWrapper = function (
-            animationClass,
-            heightClass,
-            delay
-        ) {
+        $.fn.animateStickyFooterWrapper = function (animationClass, heightClass, delay) {
             const $stickyFooterWrapper = $(this);
             const $animationClass = animationClass;
             const $heightClass = heightClass;
             const $wrapEingang = $("#wrap-eingang");
-            const $headerInputZpnEingang = $('#header-input-eingang');
             $wrapEingang.css("visibility", "hidden");
             $stickyFooterWrapper
                 .removeClass($heightClass)
@@ -268,7 +263,7 @@ function sendEingangData(dataPack) {
                     .css("display", "");
                 removeListOfDoubleItems();
                 globalMainRowCounter.length = 0;
-                backToInput($headerInputZpnEingang);
+                backToInput();
             }, delay + 350);
         };
 
