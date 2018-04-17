@@ -141,7 +141,7 @@ function checkInput() {
                                 $headerInputBeurteilungProbennummer
                                     .effect('highlight', { color: '#FFB700' }, 200);
                                 //in die Globale Variable "globalMainRowCounter" wird der hinzugefügte Datensatz zwischengespeichert.
-                                globalMainRowCounter.push(inputText);
+                                globalMainRowCounter.push(inputTextLeft);
                                 $headerInputBeurteilungProbennummer.attr('disabled', 'disabled');
                                 $headerInputBeurteilungAbteilung.removeAttr('disabled').focus();
                             }
@@ -1169,7 +1169,6 @@ function highlightSelectedRow() {
 //
 //Löscht die gesamte Zeile des ausgewählten Buttons.
 const deleteSelectedRow = function (selectedRow) {
-    console.log(globalMainRowCounter);
     const $wrapContent = $("#wrap-content");
     const $headerInputEingang = $("#header-input-eingang");
     const $wrapContent$wrapFooter = $("#wrap-content").add($("#wrap-footer"));
@@ -1184,8 +1183,7 @@ const deleteSelectedRow = function (selectedRow) {
     const selectedRowPrbNrText = $selectedRowClosestMainRow.find("#text-prbNr").text();
 
     if (rowMainCount === 1) {
-        // globalMainRowCounter = globalMainRowCounter.filter(item => item !== selectedRowPrbNrText);
-        globalMainRowCounter.splice($.inArray(selectedRowPrbNrText, globalMainRowCounter), 1);
+        globalMainRowCounter = globalMainRowCounter.filter(item => item !== selectedRowPrbNrText);
         countMainRows.addHighlight("highlight", "#FF3100", 100);
         $($contentFooterMainRowSendButton).each(function () {
             $(this)
@@ -1204,8 +1202,7 @@ const deleteSelectedRow = function (selectedRow) {
                 });
         });
     } else if (rowMainCount > 1) {
-        // globalMainRowCounter = globalMainRowCounter.filter(item => item !== selectedRowPrbNrText);
-        globalMainRowCounter.splice($.inArray(selectedRowPrbNrText, globalMainRowCounter), 1);
+        globalMainRowCounter = globalMainRowCounter.filter(item => item !== selectedRowPrbNrText);
         countMainRows.addHighlight("highlight", "#FF3100", 100);
         $selectedRowClosestMainRow
             .fadeOut(300)
@@ -1217,7 +1214,6 @@ const deleteSelectedRow = function (selectedRow) {
                 backToInput();
             });
     }
-    console.log(globalMainRowCounter);
 };
 
 //

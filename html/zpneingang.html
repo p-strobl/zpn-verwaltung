@@ -22,7 +22,7 @@
                 </div>
             </div>
             <input id="header-input-eingang" class="header-input-eingang border-edged" type="text" spellcheck="false" placeholder="Proben Nummer..."
-                title="Bitte tragen Sie hier eine gültige Proben Nummer ein.">
+                autocomplete="off" title="Bitte tragen Sie hier eine gültige Proben Nummer ein.">
             <div class="header-fail-message-wrap" id="header-fail-message-wrap">
                 <div class="header-fail-message-content" id="header-fail-message-content">
                 </div>
@@ -85,8 +85,8 @@
             </section>
         </main>
         <footer class="wrap-footer displayNoneImportant" id="wrap-footer">
-            <button class="footer-button-send" id="footer-button-send" onclick="wrapData()" title="Diese Schaltfläche betätigen um die aufgeführten Datensatz&#92;sätze zu übertragen.">
-                &#151;&#62; Zur Datenbank hinzufügen &#60;&#151; </button>
+            <button class="footer-button-send" id="footer-button-send" onclick="wrapData()" title="Betätigen Sie diese Schaltfläche, um die aufgeführten Muster in der ZPN aufzunehmen.">
+                &#151;&#62; In der ZPN eingegangen &#60;&#151; </button>
         </footer>
     </div>
     <div class="sticky-footer-message-wrap sticky-footer-height" id="sticky-footer-message-wrap">
@@ -113,6 +113,7 @@
             </div>
         </div>
     </div>
+    <!-- Modal Section -->
     <section id="wrap-modal" class="wrap__modal">
         <div id="content-modal" class="content__modal [ transform__item ]">
             <section class="wrap__modal__header">
@@ -120,7 +121,7 @@
                 <p id="modal-header-close" class="modal__header__close">&times;</p>
                 <div class="modal__header__input__wrap">
                     <input id="modal-header-input" class="modal__header__input" name="modalHeaderInput" type="text" maxlength="12" spellcheck="false"
-                        placeholder="Proben Nummer..." value="16-055555-01">
+                        autocomplete="off" placeholder="Proben Nummer..." value="16-055555-01">
                 </div>
                 <div class="modal__fail__message__wrap [ transform__item ]" id="modal-fail-message-wrap">
                     <div class="modal__fail__message__content" id="modal-fail-message-content">
@@ -280,7 +281,7 @@
                     </div>
                 </div>
             </section>
-
+            <!-- Storno @ Modal -->
             <section id="wrap-modal-storno" class="wrap__modal__storno">
                 <div class="modal__storno__wrap">
                 </div>
