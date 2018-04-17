@@ -1,0 +1,17 @@
+/*Start CSS Reset!*/
+
+@import "cssReset.css";
+/*Ende CSS Reset!*/
+
+/*Start Globales Styling */
+
+* {
+    font-family: "Tahoma", Times New Roman, sans-serif;
+}
+
+body {
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    background-color: #0091cd;
+}

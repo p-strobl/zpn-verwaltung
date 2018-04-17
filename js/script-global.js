@@ -236,7 +236,7 @@ function checkForUnchecked(dataPack, headerInput, origin) {
 
     $.each(dataPack, function (packKey, packValue) {
         $.each(packValue, function (objectKey, objectValue) {
-            if (objectValue.match(/^(active)/)) {
+            if (objectValue === 'active') {
                 countActive++;
                 return false;
             }
