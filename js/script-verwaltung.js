@@ -199,9 +199,6 @@ function wrapData() {
         const manaEinwaage = $(this).find("#content-btn-manaEinwaage").attr("value");
         const manaEingewogen = $(this).find("#content-btn-manaEingewogen").attr("value");
         const zpnWagen = $(this).find("#content-btn-zpnWagen").attr("value");
-
-
-
         //Fügt mit hilfer eines Constructor's, den Inhalt der gegenwärtig selektierten Zeile, als Array in das "dataPack" hinzu.
         dataPack.push(new ConstructDataPack(probenNummer, sollDatum, zerlegungStart, zerlegungEnde, einwaageBeginn, einwaageEnde, klaerfallBeginn, klaerfallEnde, manaBestellt, manaErhalten, manaEinwaage, manaEingewogen, zpnWagen));
         //Übergibt das "dataPack" Array zum Ajax handler
