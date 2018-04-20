@@ -22,13 +22,13 @@
             "port": 9000
         },
     ],
-    // "compounds": [
-    //     {
-    //         "name": "Full-stack",
-    //         "configurations": [
-    //             "Launch Chrome",
-    //             "PHP"
-    //         ]
-    //     }
-    // ]
+    "compounds": [
+        {
+            "name": "Full-stack",
+            "configurations": [
+                "Launch Chrome",
+                "PHP"
+            ]
+        }
+    ]
 }
