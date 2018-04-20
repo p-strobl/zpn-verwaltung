@@ -1,3 +1,0 @@
-wenn button click
-    dann zählen wieviele vorhanden
-    span aktualisieren (farbe)
