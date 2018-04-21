@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../connect/db-connect.php';
+require_once 'db-connect.php';
 
 if ( isset( $_POST['updateModalStatus'] ) ) {
 

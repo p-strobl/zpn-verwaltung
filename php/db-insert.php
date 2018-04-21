@@ -1,6 +1,6 @@
 <?php
 
-require '../../connect/db-connect.php';
+require 'db-connect.php';
 require_once 'fn/fn-sqlSelectObject.php';
 
 if (!empty($_POST)) {

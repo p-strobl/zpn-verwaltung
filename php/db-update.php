@@ -1,6 +1,6 @@
 <?php
 
-require_once '../../connect/db-connect.php';
+require_once 'db-connect.php';
 
 $receivedPostData = json_decode(json_encode($_POST, JSON_FORCE_OBJECT));
 
