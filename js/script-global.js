@@ -1,4 +1,5 @@
 "use strict";
+
 //
 //Globaler zähler
 let globalMainRowCounter = [];
