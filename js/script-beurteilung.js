@@ -163,6 +163,7 @@ function sendData(dataPackUpdate) {
         const $transmissionCounter = $(".present-item-counter");
         const $transmissionSuccessCounter = $("#transmission-success-counter");
         const $transmissionFailCounter = $("#transmission-fail-counter");
+        const headerInput = $('#header-input-beurteilung-abteilung');
 
         //Funktion zum entfernen der doppelten Datenbank Item Liste.
         const removeListOfDoubleItems = function () {
@@ -329,9 +330,9 @@ function sendData(dataPackUpdate) {
 
     //Ajax Verbindung fehlgeschlagen.
     ajaxInsertDataset.fail(function (jqXHR, textStatus, errorThrown) {
+        const headerInput = $('#header-input-beurteilung-abteilung');
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        showFailMessage.failMessage("no-server header-fail-message-content-margin", 8000, headerInput
-        );
+        showFailMessage.failMessage("no-server header-fail-message-content-margin", 8000, headerInput);
         console.log(textStatus, errorThrown);
         backToInput();
     });
