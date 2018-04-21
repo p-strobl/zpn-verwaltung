@@ -1,6 +1,6 @@
 <?php
 
-require_once 'db-connect.php';
+require_once '../../connect/db-connect.php';
 require_once 'fn/fn-sqlSelectObject.php';
 
 $yesRegEx = '/\d{2}-\d{6}-\d{2}/';

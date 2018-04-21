@@ -1,6 +1,7 @@
 <?php
 
-require_once 'db-connect.php';
+require_once '../../connect/db-connect.php';
+
 $receivedItem = (object) $_POST['updateAddKommentar'];
 $yesRegEx = '/\d{2}-\d{6}-\d{2}/';
 $noRegEx = "/('(''|[^'])*')|(;)|(\b(ALTER|CREATE|DELETE|DROP|EXEC(UTE){0,1}|INSERT( +INTO){0,1}|MERGE|SELECT|UPDATE|UNION( +ALL){0,1})\b)/";
