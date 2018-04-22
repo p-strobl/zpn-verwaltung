@@ -1,17 +1,69 @@
-/*Start CSS Reset!*/
-
-@import "cssReset.css";
-/*Ende CSS Reset!*/
-
-/*Start Globales Styling */
-
-* {
-    font-family: "Tahoma", Times New Roman, sans-serif;
+body {
+    display: grid;
 }
 
-body {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-    background-color: #0091cd;
+.wrap-header {
+    box-shadow: 0px 8px 20px 1px rgb(4, 10, 43);
+}
+
+.wrap-livePreview-main-content {
+    display: grid;
+    height: 43vw;
+}
+
+.wrap-livePreview-main {
+    display: grid;
+    grid-template-columns: 25% 10% 65%;
+    place-self: center;
+    height: 80%;
+    width: 90%;
+    -webkit-border-radius: 0.2vw;
+    -moz-border-radius: 0.2vw;
+    border-radius: 0.2vw;
+    background: ghostwhite;
+    box-shadow: 0px 1px 20px 1px rgb(4, 10, 43);
+}
+
+.livePreview-main-span {
+    justify-self: end;
+    align-self: center;
+    font-size: 10vw;
+}
+
+.livePreview-main-caption {
+    align-self: end;
+    padding-bottom: 1.4vw;
+}
+
+.livePreview-main-caption.x {
+    font-size: 3vw;
+}
+
+.livePreview-main-caption.text {
+    font-size: 6vw;
+}
+
+
+
+.wrap-livePreview-main-tiny {
+    display: none;
+}
+
+@media (max-height: 250px) {
+    .wrap-eingang {
+        display: none;
+    }
+
+    .wrap-livePreview-main-tiny {
+
+        display: grid;
+        grid-template-columns: 25% 10% 65%;
+        height: 80%;
+        width: 90%;
+        -webkit-border-radius: 0.2vw;
+        -moz-border-radius: 0.2vw;
+        border-radius: 0.2vw;
+        background: ghostwhite;
+        box-shadow: 0px 1px 20px 1px rgb(4, 10, 43);
+    }
 }

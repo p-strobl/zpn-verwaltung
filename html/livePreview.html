@@ -3,45 +3,55 @@
 
     <head>
         <meta charset="UTF-8">
+        <link rel="stylesheet" type="text/css" href="../css/style-global.css">
         <link rel="stylesheet" type="text/css" href="../css/style-livePreview.css">
+
         <link rel="icon" type="image/x-icon" href="../favicon.ico">
-        <title>Übersicht bereit gestellter Muster</title>
+        <title>&#220;bersicht bereit gestellter Muster</title>
     </head>
 
     <body>
-        <div id="wrap-content-live">
-            <header id="wrap-header-live">
-                <p class="header-live-capture">Muster Übersicht</p>
+        <section class="wrap-eingang">
+
+            <header class="wrap-header">
+                <section class="header-caption-eingang">
+                    <a class="header-a-button-home" href="../index.html">
+                        <img class="img-home" src="../css/icons/HermesLogo.png" title="Zurück zum Hauptmenü.">
+                    </a>
+                    <p class="header-caption">Muster Anzahl &#220;bersicht</p>
+                </section>
             </header>
-            <main id="wrap-main-live">
-                <section id="wrap-content-lfgb">
-                    <div id="content-lfgb-toFillSpan">
-
-                    </div>
-                    <div id="content-lfgb-caption">
-
-                    </div>
+            <main class="wrap-livePreview-main-content">
+                <section class="wrap-livePreview-main">
+                    <span class="livePreview-main-span">0</span>
+                    <p class="livePreview-main-caption / x /">x</p>
+                    <p class="livePreview-main-caption / text /">für die Textilphysik</p>
                 </section>
-                <section id="wrap-content-textilphysik">
-                        <div id="content-textilphysik-toFillSpan">
 
-                    </div>
-                    <div id="content-textilphysik-caption">
-                        
-                    </div>
+                <section class="wrap-livePreview-main">
+                    <span class="livePreview-main-span">15</span>
+                    <p class="livePreview-main-caption / x /">x</p>
+                    <p class="livePreview-main-caption / text /">für die LFGB</p>
                 </section>
-                <section id="wrap-content-zpn">
-                    <div id="content-zpn-toFillSpan">
 
-                    </div>
-                    <div id="content-zpn-caption">
-                        
-                    </div>
+                <section class="wrap-livePreview-main">
+                    <span class="livePreview-main-span">7</span>
+                    <p class="livePreview-main-caption / x /">x</p>
+                    <p class="livePreview-main-caption / text /">für die ZPN</p>
                 </section>
             </main>
-        </div>
-        <script type="text/javascript" src="lib/jquery-3.2.1.js"></script>
-        <script type="text/javascript" src="lib/jquery-ui.js"></script>
+
+        </section>
+
+        <section class="wrap-livePreview-main-tiny">
+            <span class="livePreview-main-span">7</span>
+            <p class="livePreview-main-caption / x /">x</p>
+            <p class="livePreview-main-caption / text /">für die ZPN</p>
+        </section>
+
+        <script type="text/javascript" src="../lib/jquery-3.2.1.js"></script>
+        <script type="text/javascript" src="../lib/jquery-ui.js"></script>
+        <script type="text/javascript" src="../js/script-livePreview.js"></script>
     </body>
 
 </html>
