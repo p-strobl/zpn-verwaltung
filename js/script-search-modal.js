@@ -245,7 +245,7 @@ function searchDataSet(probenNummer) {
             showFailMessage.failMessage('fail-input-no-dataset', 3000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
 
-        } else if (data[0].failCode === 2002) {
+        } else if (data.failCode === 2002) {
             showFailMessage.failMessage('fail-connect', 8000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
         }

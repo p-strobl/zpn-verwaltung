@@ -163,7 +163,7 @@ function sendData(dataPackUpdate) {
         const $transmissionCounter = $(".present-item-counter");
         const $transmissionSuccessCounter = $("#transmission-success-counter");
         const $transmissionFailCounter = $("#transmission-fail-counter");
-        const headerInput = $('#header-input-beurteilung-abteilung');
+        const headerInput = $('#header-input-beurteilung-probennummer');
 
         //Funktion zum entfernen der doppelten Datenbank Item Liste.
         const removeListOfDoubleItems = function () {
@@ -290,7 +290,7 @@ function sendData(dataPackUpdate) {
                 case 1049:
                     showFailMessage.failMessage(
                         "no-database header-fail-message-content-margin",
-                        8000, headerInput
+                        8000, headerInput.attr('id')
                     );
                     console.log(data);
                     backToInput();
@@ -299,7 +299,7 @@ function sendData(dataPackUpdate) {
                 case 2002:
                     showFailMessage.failMessage(
                         "no-server header-fail-message-content-margin",
-                        8000, headerInput
+                        8000, headerInput.attr('id')
                     );
                     console.log(data);
                     backToInput();
@@ -332,7 +332,7 @@ function sendData(dataPackUpdate) {
     ajaxInsertDataset.fail(function (jqXHR, textStatus, errorThrown) {
         const headerInput = $('#header-input-beurteilung-abteilung');
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        showFailMessage.failMessage("no-server header-fail-message-content-margin", 8000, headerInput);
+        showFailMessage.failMessage("no-server header-fail-message-content-margin", 8000, headerInput.attr('id'));
         console.log(textStatus, errorThrown);
         backToInput();
     });

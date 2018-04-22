@@ -19,6 +19,7 @@ if (isset($_POST) && preg_match($yesRegEx, array_values($_POST)[0]) && strlen(ar
             break;
         case 'requestDataSetDate':
             $sqlSelectObject = sqlSelectObjectDate($pdoConnect, array_values($_POST)[0], $pdoObject);
+            $sqlSelectObject = sqlSelectObjectStatus($pdoConnect, array_values($_POST)[0], $pdoObject);
             break;
 
         default:

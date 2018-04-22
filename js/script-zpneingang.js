@@ -11,20 +11,47 @@ function getEingangButtonStatus(probenNummer) {
     });
 
     ajaxRequestObject.done(function (data) {
-        console.log(data);
+        const headerInput = $('#header-input-eingang');
+        const nickelRueckgabeDate = $('#content-btn-chkNickelBack');
+        const mitNickel = $('#content-btn-chkNi');
 
-        const rowItems = {
-            nickelRueckgabeDate: $("#content-btn-chkNickelBack"),
-            mitNickel: $("#content-btn-chkNi")
-        };
+        const setProp = (element) => {
+            element
+                .prop("disabled", true)
+                .addClass("setButtonStatus")
+                .val("preSet");
+        }
+
         //Prüft ob des den gewünschten Wert gibt, wenn ja setzt den entsprechenden Button um
-        if (data.date.hasOwnProperty("nickelRueckgabeDate")) {
-            Object.values(rowItems).forEach(objValue => {
-                objValue
-                    .prop("disabled", true)
-                    .addClass("setButtonStatus")
-                    .val("preSet");
-            });
+        if ('date' in data && data.date.hasOwnProperty("nickelRueckgabeDateTime")) {
+            setProp(nickelRueckgabeDate);
+        }
+        if ('status' in data && data.status.hasOwnProperty('mitNickel')) {
+            setProp(mitNickel);
+        }
+        if ('success' in data && data.success === false) {
+            //Alle vorhandenen Datensätze sind bereits in der Datenbank eingetragen und wurden zur weiterverarbeitung in ein Array aufgeführt.
+            switch (data.failCode) {
+                case 1049:
+                    showFailMessage.failMessage(
+                        "no-database header-fail-message-content-margin",
+                        8000, headerInput.attr('id')
+                    );
+                    console.log(data);
+                    backToInput();
+                    break;
+
+                case 2002:
+                    showFailMessage.failMessage(
+                        "no-server header-fail-message-content-margin",
+                        8000, headerInput.attr('id')
+                    );
+                    console.log(data);
+                    backToInput();
+                    break;
+
+                default:
+            }
         }
     });
 
@@ -175,6 +202,7 @@ function sendEingangData(dataPack) {
         const $transmissionCounter = $(".present-item-counter");
         const $transmissionSuccessCounter = $("#transmission-success-counter");
         const $transmissionFailCounter = $("#transmission-fail-counter");
+        const headerInput = $('#header-input-eingang');
 
         //Funktion zum entfernen der doppelten Datenbank Item Liste.
         const removeListOfDoubleItems = function () {
@@ -300,7 +328,7 @@ function sendEingangData(dataPack) {
                 case 1049:
                     showFailMessage.failMessage(
                         "no-database header-fail-message-content-margin",
-                        8000, headerInput
+                        8000, headerInput.attr('id')
                     );
                     console.log(data);
                     backToInput();
@@ -309,7 +337,7 @@ function sendEingangData(dataPack) {
                 case 2002:
                     showFailMessage.failMessage(
                         "no-server header-fail-message-content-margin",
-                        8000, headerInput
+                        8000, headerInput.attr('id')
                     );
                     console.log(data);
                     backToInput();
@@ -340,9 +368,10 @@ function sendEingangData(dataPack) {
     //Ajax Verbindung fehlgeschlagen.
     ajaxRequestEingang.fail(function (jqXHR, textStatus, errorThrown) {
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
+        const headerInput = $('#header-input-eingang');
         showFailMessage.failMessage(
             "no-server header-fail-message-content-margin",
-            8000, headerInput
+            8000, headerInput.attr('id')
         );
         console.log(textStatus, errorThrown);
         backToInput();

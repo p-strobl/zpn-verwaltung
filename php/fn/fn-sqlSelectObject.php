@@ -45,6 +45,44 @@ function sqlSelectObjectBase($pdoConnect, $probenNummer, $pdoObject) {
     }
 }
 
+function sqlSelectObjectStatus($pdoConnect, $probenNummer, $pdoObject) {
+    try {
+        $pdoConnect->beginTransaction();
+        $sql =
+        "
+            SELECT
+                tbl_status.mit60g,
+                tbl_status.mitExpress,
+                tbl_status.mitIntern,
+                tbl_status.mitKlaerfallBack,
+                tbl_status.mitLfgb,
+                tbl_status.mitNickel,
+                tbl_status.mitToys,
+                tbl_beurteilung.anAbteilung
+            FROM tbl_baserecord
+            LEFT OUTER JOIN tbl_einwaage
+                ON tbl_baserecord.probenNummer = tbl_einwaage.probenNummer
+            LEFT OUTER JOIN tbl_status
+                ON tbl_baserecord.probenNummer = tbl_status.probenNummer
+            LEFT OUTER JOIN tbl_beurteilung
+                ON tbl_baserecord.probenNummer = tbl_beurteilung.probenNummer
+            WHERE tbl_baserecord.probenNummer = :probenNummer
+        ";
+        $pdoStatement = $pdoConnect->prepare( $sql );
+        $pdoStatement->bindParam( ':probenNummer', $probenNummer, PDO::PARAM_STR );
+        $pdoStatement->execute();
+        $pdoObject->status = $pdoStatement->fetch( PDO::FETCH_OBJ );
+
+        $pdoConnect->commit();
+
+        $pdoObject = removeUnset($pdoObject);
+        return $pdoObject;
+    }
+    catch (PDOException $pdoException) {
+        $pdoConnect->rollBack();
+    }
+}
+
 function sqlSelectObjectDate($pdoConnect, $probenNummer, $pdoObject) {
     try {
         $pdoObject = sqlSelectObjectBase($pdoConnect, $probenNummer, $pdoObject);

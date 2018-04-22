@@ -3,7 +3,7 @@
 function db_connect()
 {
     // Database connection data.
-    $host       = 'localhost';
+    $host       = 'local';
     $database   = 'zpn-verwaltung';
     $username   = 'root';
     $password   = '';
@@ -35,11 +35,12 @@ function db_connect()
     // Database connection failed.
     catch( PDOException $pdoException )
     {
+        $responseData['success'] = false;
         $responseData['failCode'] = $pdoException->getCode();
         $responseData['objectText'] = 'DB Connection failed';
         $responseData['pdoException'] = $pdoException;
-        $pdoConnect = array($responseData);
+//        $pdoConnect = array($responseData);
         // mail( "adm1n.zpn.verwaltung@gmail.com", "Datenbank Fehler!", json_encode($responseData) );
-        die( json_encode( $pdoConnect) );
+        die( json_encode( $responseData) );
     }
 }
