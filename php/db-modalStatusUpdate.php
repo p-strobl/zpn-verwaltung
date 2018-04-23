@@ -1,6 +1,6 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/db-connect.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/php/db-connect.php');
 
 if ( isset( $_POST['updateModalStatus'] ) ) {
 

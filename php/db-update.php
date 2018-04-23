@@ -1,6 +1,6 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] . '/php/db-connect.php');
+require_once($_SERVER["DOCUMENT_ROOT"] . '/php/db-connect.php');
 
 $receivedPostData = json_decode(json_encode($_POST, JSON_FORCE_OBJECT));
 
@@ -28,8 +28,8 @@ if (isset($receivedPostData->updateDataSet)) {
 
         if (preg_match($yesRegEx, $updateObject->probenNummer)) {
             // set_include_path( 'php/' );
-            include_once($_SERVER['DOCUMENT_ROOT'] . 'fn/fn-checkIfEingang.php' );
-            include_once($_SERVER['DOCUMENT_ROOT'] . 'fn/fn-setDateTime.php' );
+            include_once($_SERVER["DOCUMENT_ROOT"] . '/fn/fn-checkIfEingang.php' );
+            include_once($_SERVER["DOCUMENT_ROOT"] . '/fn/fn-setDateTime.php' );
 
             $transmitResponse['itemCount']++;
 
