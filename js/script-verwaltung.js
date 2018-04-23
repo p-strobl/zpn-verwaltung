@@ -278,7 +278,7 @@ function sendUpdateData(dataPack) {
             $stickyFooterMessageWrap.animateStickyFooterWrapper(
                 "sticky-footer-message-animation",
                 "sticky-footer-height",
-                2000
+                1500
             );
         }
     });

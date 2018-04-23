@@ -112,7 +112,7 @@ function checkInput() {
                                 $headerInputEingang
                                     .add($headerInputVerwaltung)
                                     .val('');
-                                showFailMessage.failMessage('double-input', 2000, this.id);
+                                showFailMessage.failMessage('double-input', 1500, this.id);
                             } else {
                                 //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
                                 $headerInputEingang
@@ -137,7 +137,7 @@ function checkInput() {
                                 $headerInputBeurteilungProbennummer.effect('highlight', { color: '#FF3100' }, 200).val('');
                                 //Ja es ist bereits ein Datensatz vorhanden, es wird eine Fehler Meldung angezeigt.
                                 //Blendet für 3,5 sek. eine "Fehlgeschlagen, Doppelter Eintrag" auskunft ein.
-                                showFailMessage.failMessage('double-input', 2000, this.id);
+                                showFailMessage.failMessage('double-input', 1500, this.id);
                             } else {
                                 $headerInputBeurteilungProbennummer
                                     .effect('highlight', { color: '#FFB700' }, 200);
@@ -251,7 +251,7 @@ function checkForUnchecked(dataPack, headerInput, origin) {
         sendUpdateData(dataPack);
         return false;
     } else if (countActive !== dataPackLength) {
-        showFailMessage.failMessage("fail-input-noSelection header-fail-message-content-margin", 5000, headerInput);
+        showFailMessage.failMessage("fail-input-noSelection header-fail-message-content-margin", 3000, headerInput);
         return false;
     }
 }

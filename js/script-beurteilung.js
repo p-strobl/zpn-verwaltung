@@ -260,7 +260,7 @@ function sendData(dataPackUpdate) {
             $stickyFooterMessageWrap.animateStickyFooterWrapper(
                 "sticky-footer-message-animation",
                 "sticky-footer-height",
-                2000
+                1500
             );
         } else if (data.success === true && data.doubleInput.length >= 1) {
             // Alle nicht vorhandenen Datensätze wurden in die Datenbank eingetragen, aber alle doppelt vorhandenen sind in einem Array aufgeführt.
@@ -275,7 +275,7 @@ function sendData(dataPackUpdate) {
             $stickyFooterMessageWrap.animateStickyFooterWrapper(
                 "sticky-footer-message-animation",
                 "sticky-footer-height",
-                5000
+                3000
             );
         } else if (data.success === false) {
             //Alle vorhandenen Datensätze sind bereits in der Datenbank eingetragen und wurden zur weiterverarbeitung in ein Array aufgeführt.
@@ -284,7 +284,7 @@ function sendData(dataPackUpdate) {
                 case 1049:
                     showFailMessage.failMessage(
                         "no-database header-fail-message-content-margin",
-                        5000, headerInput.attr('id')
+                        3000, headerInput.attr('id')
                     );
                     console.log(data);
                     backToInput();
@@ -293,7 +293,7 @@ function sendData(dataPackUpdate) {
                 case 2002:
                     showFailMessage.failMessage(
                         "no-server header-fail-message-content-margin",
-                        5000, headerInput.attr('id')
+                        3000, headerInput.attr('id')
                     );
                     console.log(data);
                     backToInput();
@@ -311,7 +311,7 @@ function sendData(dataPackUpdate) {
                     $stickyFooterMessageWrap.animateStickyFooterWrapper(
                         "sticky-footer-message-animation",
                         "sticky-footer-height",
-                        5000
+                        3000
                     );
                     backToInput();
                     console.log(data);
@@ -326,7 +326,7 @@ function sendData(dataPackUpdate) {
     ajaxInsertDataset.fail(function (jqXHR, textStatus, errorThrown) {
         const headerInput = $('#header-input-beurteilung-abteilung');
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        showFailMessage.failMessage("no-server header-fail-message-content-margin", 5000, headerInput.attr('id'));
+        showFailMessage.failMessage("no-server header-fail-message-content-margin", 3000, headerInput.attr('id'));
         console.log(textStatus, errorThrown);
         backToInput();
     });

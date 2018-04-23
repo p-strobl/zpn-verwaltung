@@ -239,11 +239,11 @@ function searchDataSet(probenNummer) {
             showCloseModal.backToModalInput;
 
         } else if (Object.keys(data).every((key) => !data[key])) {
-            showFailMessage.failMessage('fail-input-no-dataset', 2000, modalHeaderInput.attr('id'));
+            showFailMessage.failMessage('fail-input-no-dataset', 1500, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
 
         } else if (data.failCode === 2002) {
-            showFailMessage.failMessage('fail-connect', 5000, modalHeaderInput.attr('id'));
+            showFailMessage.failMessage('fail-connect', 3000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
         }
     });
@@ -252,7 +252,7 @@ function searchDataSet(probenNummer) {
         console.log(textStatus, errorThrown);
         const modalHeaderInput = $('#modal-header-input');
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        showFailMessage.failMessage('fail-connect', 5000, modalHeaderInput.attr('id'));
+        showFailMessage.failMessage('fail-connect', 3000, modalHeaderInput.attr('id'));
         showCloseModal.backToModalInput;
     });
 }
@@ -299,7 +299,7 @@ const updateStatusButton = () => {
         ajaxRequestStatusButton.fail((jqXHR, textStatus, errorThrown) => {
             const modalHeaderInput = $('#modal-header-input');
             //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-            showFailMessage.failMessage('fail-connect', 5000, modalHeaderInput.attr('id'));
+            showFailMessage.failMessage('fail-connect', 3000, modalHeaderInput.attr('id'));
             console.log(textStatus, errorThrown);
         });
     });
@@ -357,14 +357,14 @@ const updateKommentar = () => {
                 const modalHeaderInput = $('#modal-header-input');
                 modalPromtSlider.removeClass('transform__modal');
                 modalKommentarInput.val('');
-                showFailMessage.failMessage('fail-forbidden', 5000, modalHeaderInput.attr('id'));
+                showFailMessage.failMessage('fail-forbidden', 3000, modalHeaderInput.attr('id'));
             }
         });
 
         ajaxRequestAddKommentar.fail((jqXHR, textStatus, errorThrown) => {
             const modalHeaderInput = $('#modal-header-input');
             //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-            showFailMessage.failMessage('fail-connect', 5000, modalHeaderInput.attr('id'));
+            showFailMessage.failMessage('fail-connect', 3000, modalHeaderInput.attr('id'));
             console.log(textStatus, errorThrown);
         });
     });
