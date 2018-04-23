@@ -1,6 +1,6 @@
 <?php
 
-$path_dbConnect = $_SERVER['DOCUMENT_ROOT'] . '/php/db-connect.php';
+$path_dbConnect = '/php/db-connect.php';
 require_once($path_dbConnect);
 
 if ( isset( $_POST['updateModalStatus'] ) ) {

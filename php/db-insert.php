@@ -1,9 +1,9 @@
 <?php
 
-$path_dbConnect = $_SERVER['DOCUMENT_ROOT'] . '/php/db-connect.php';
+$path_dbConnect = '/php/db-connect.php';
 require_once($path_dbConnect);
 
-$path_fnSqlSelectObject = $_SERVER['DOCUMENT_ROOT'] . '/php/fn/fn-sqlSelectObject.php';
+$path_fnSqlSelectObject = '/php/fn/fn-sqlSelectObject.php';
 require_once($path_fnSqlSelectObject);
 
 if (!empty($_POST)) {

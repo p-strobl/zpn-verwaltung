@@ -1,6 +1,6 @@
 <?php
 
-$path_dbConnect = $_SERVER['DOCUMENT_ROOT'] . '/php/db-connect.php';
+$path_dbConnect = '/php/db-connect.php';
 require_once($path_dbConnect);
 
 $receivedPostData = json_decode(json_encode($_POST, JSON_FORCE_OBJECT));
@@ -29,9 +29,9 @@ if (isset($receivedPostData->updateDataSet)) {
 
         if (preg_match($yesRegEx, $updateObject->probenNummer)) {
             // set_include_path( 'php/' );
-            $path_fnCheckIfEingang = $_SERVER['DOCUMENT_ROOT'] . '/php/fn/fn-checkIfEingang.php';
+            $path_fnCheckIfEingang = '/php/fn/fn-checkIfEingang.php';
             require_once($path_fnCheckIfEingang);
-            $path_fnSetDateTime = $_SERVER['DOCUMENT_ROOT'] . '/php/fn/fn-setDateTime.php';
+            $path_fnSetDateTime = '/php/fn/fn-setDateTime.php';
             require_once($path_fnSetDateTime);
 
             $transmitResponse['itemCount']++;
