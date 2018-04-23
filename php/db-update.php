@@ -1,6 +1,6 @@
 <?php
 
-require_once 'db-connect.php';
+require_once($_SERVER['DOCUMENT_ROOT'] .  'db-connect.php');
 
 $receivedPostData = json_decode(json_encode($_POST, JSON_FORCE_OBJECT));
 
@@ -27,9 +27,9 @@ if (isset($receivedPostData->updateDataSet)) {
         $pdoConnect = db_connect();
 
         if (preg_match($yesRegEx, $updateObject->probenNummer)) {
-            set_include_path( 'php/' );
-            include_once( 'fn/fn-checkIfEingang.php' );
-            include_once( 'fn/fn-setDateTime.php' );
+            // set_include_path( 'php/' );
+            include_once($_SERVER['DOCUMENT_ROOT'] . 'fn/fn-checkIfEingang.php' );
+            include_once($_SERVER['DOCUMENT_ROOT'] . 'fn/fn-setDateTime.php' );
 
             $transmitResponse['itemCount']++;
 

@@ -1,7 +1,7 @@
 <?php
 
-require 'db-connect.php';
-require_once 'fn/fn-sqlSelectObject.php';
+require($_SERVER['DOCUMENT_ROOT'] .  'db-connect.php');
+require_once($_SERVER['DOCUMENT_ROOT'] .  'fn/fn-sqlSelectObject.php');
 
 if (!empty($_POST)) {
 
