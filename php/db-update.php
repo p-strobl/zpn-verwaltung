@@ -7,9 +7,7 @@ $receivedPostData = json_decode(json_encode($_POST, JSON_FORCE_OBJECT));
 
 if (isset($receivedPostData->updateDataSet)) {
     $receivedItem = $receivedPostData->updateDataSet;
-    // $receivedItem = $_POST['updateDataSet'];
     $transmitResponse = new stdClass;
-    // $transmitResponse->itemCount = 0;
     $transmitResponse = [
         'itemCount' => '',
     ];
@@ -28,7 +26,6 @@ if (isset($receivedPostData->updateDataSet)) {
         $pdoConnect = db_connect();
 
         if (preg_match($yesRegEx, $updateObject->probenNummer)) {
-            // set_include_path( 'php/' );
             $path_fnCheckIfEingang = 'fn/fn-checkIfEingang.php';
             require_once($path_fnCheckIfEingang);
             $path_fnSetDateTime = 'fn/fn-setDateTime.php';

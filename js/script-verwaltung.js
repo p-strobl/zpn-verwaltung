@@ -289,7 +289,8 @@ function sendUpdateData(dataPack) {
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
         showFailMessage.failMessage(
             "no-server header-fail-message-content-margin",
-            8000
+            8000,
+            headerInput.attr('id')
         );
         backToInput();
     });

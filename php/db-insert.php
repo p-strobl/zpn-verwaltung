@@ -9,7 +9,6 @@ require_once($path_fnSqlSelectObject);
 if (!empty($_POST)) {
 
     $receivedPostData = json_decode(json_encode($_POST, JSON_FORCE_OBJECT));
-//    $receivedPostDataObject = json_decode(json_encode($receivedPostData[0], JSON_FORCE_OBJECT));
     switch (true) {
         case isset($receivedPostData->beurteilungDataSet):
             $receivedPostDataObject = json_decode(json_encode($receivedPostData->beurteilungDataSet, JSON_FORCE_OBJECT));

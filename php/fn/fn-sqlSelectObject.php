@@ -12,8 +12,6 @@ function removeUnset($pdoObject) {
             if (count( (array) $pdoObjectValue) === 0) {
                 unset($pdoObject->{$pdoObjectkey});
             }
-        // }else if ($pdoObject->$pdoObjectkey === false) {
-        //     unset($pdoObject->{$pdoObjectkey});
         }
     }
     return $pdoObject;
