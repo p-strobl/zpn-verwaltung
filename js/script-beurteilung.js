@@ -83,8 +83,6 @@ function appendContentMainRow(probenNummer, abteilung) {
         "</div>" +
         "</section>";
 
-
-
     //Zeigt den Tabellen Header, die Tabelle und den sende Button wieder an.
     $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : '';
     //Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
@@ -136,7 +134,6 @@ function wrapData() {
 
         //Fügt mit hilfer eines Constructor's, den Inhalt der gegenwärtig selektierten Zeile, als Array in das "dataPack" hinzu.
         dataPackUpdate.push(new ConstructDataPack(probenNummer, sollDatum, anZPN, anLFGB, anTextilphysik, anAbteilung));
-        // console.log(dataPackUpdate);
         //Übergibt das "dataPack" Array zum Ajax handler
     })).done(checkForUnchecked(dataPackUpdate, 'header-input-beurteilung-probennummer', 'beurteilung'));
 }
@@ -263,9 +260,8 @@ function sendData(dataPackUpdate) {
             $stickyFooterMessageWrap.animateStickyFooterWrapper(
                 "sticky-footer-message-animation",
                 "sticky-footer-height",
-                2000
+                1500
             );
-            // backToInput();
         } else if (data.success === true && data.doubleInput.length >= 1) {
             // Alle nicht vorhandenen Datensätze wurden in die Datenbank eingetragen, aber alle doppelt vorhandenen sind in einem Array aufgeführt.
             hideContentFooter();
@@ -279,18 +275,16 @@ function sendData(dataPackUpdate) {
             $stickyFooterMessageWrap.animateStickyFooterWrapper(
                 "sticky-footer-message-animation",
                 "sticky-footer-height",
-                8000
+                3000
             );
-            // backToInput();
         } else if (data.success === false) {
             //Alle vorhandenen Datensätze sind bereits in der Datenbank eingetragen und wurden zur weiterverarbeitung in ein Array aufgeführt.
-            // else if (data.success === false && data.doubleInput.length >= 1)
             /** @namespace data.failCode **/
             switch (data.failCode) {
                 case 1049:
                     showFailMessage.failMessage(
                         "no-database header-fail-message-content-margin",
-                        8000, headerInput.attr('id')
+                        3000, headerInput.attr('id')
                     );
                     console.log(data);
                     backToInput();
@@ -299,7 +293,7 @@ function sendData(dataPackUpdate) {
                 case 2002:
                     showFailMessage.failMessage(
                         "no-server header-fail-message-content-margin",
-                        8000, headerInput.attr('id')
+                        3000, headerInput.attr('id')
                     );
                     console.log(data);
                     backToInput();
@@ -317,7 +311,7 @@ function sendData(dataPackUpdate) {
                     $stickyFooterMessageWrap.animateStickyFooterWrapper(
                         "sticky-footer-message-animation",
                         "sticky-footer-height",
-                        8000
+                        3000
                     );
                     backToInput();
                     console.log(data);
@@ -332,7 +326,7 @@ function sendData(dataPackUpdate) {
     ajaxInsertDataset.fail(function (jqXHR, textStatus, errorThrown) {
         const headerInput = $('#header-input-beurteilung-abteilung');
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        showFailMessage.failMessage("no-server header-fail-message-content-margin", 8000, headerInput.attr('id'));
+        showFailMessage.failMessage("no-server header-fail-message-content-margin", 3000, headerInput.attr('id'));
         console.log(textStatus, errorThrown);
         backToInput();
     });

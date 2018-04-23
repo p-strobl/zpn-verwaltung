@@ -1,7 +1,10 @@
 <?php
 
-require_once 'db-connect.php';
-require_once 'fn/fn-sqlSelectObject.php';
+$path_dbConnect = 'db-connect.php';
+require_once($path_dbConnect);
+
+$path_fnSqlSelectObject = 'fn/fn-sqlSelectObject.php';
+require_once($path_fnSqlSelectObject);
 
 $yesRegEx = '/\d{2}-\d{6}-\d{2}/';
 $test = key($_POST);

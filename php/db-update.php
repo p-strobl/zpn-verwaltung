@@ -1,14 +1,13 @@
 <?php
 
-require_once 'db-connect.php';
+$path_dbConnect = 'db-connect.php';
+require_once($path_dbConnect);
 
 $receivedPostData = json_decode(json_encode($_POST, JSON_FORCE_OBJECT));
 
 if (isset($receivedPostData->updateDataSet)) {
     $receivedItem = $receivedPostData->updateDataSet;
-    // $receivedItem = $_POST['updateDataSet'];
     $transmitResponse = new stdClass;
-    // $transmitResponse->itemCount = 0;
     $transmitResponse = [
         'itemCount' => '',
     ];
@@ -27,9 +26,10 @@ if (isset($receivedPostData->updateDataSet)) {
         $pdoConnect = db_connect();
 
         if (preg_match($yesRegEx, $updateObject->probenNummer)) {
-            set_include_path( 'php/' );
-            include_once( 'fn/fn-checkIfEingang.php' );
-            include_once( 'fn/fn-setDateTime.php' );
+            $path_fnCheckIfEingang = 'fn/fn-checkIfEingang.php';
+            require_once($path_fnCheckIfEingang);
+            $path_fnSetDateTime = 'fn/fn-setDateTime.php';
+            require_once($path_fnSetDateTime);
 
             $transmitResponse['itemCount']++;
 

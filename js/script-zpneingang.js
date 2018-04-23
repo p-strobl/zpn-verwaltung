@@ -35,7 +35,7 @@ function getEingangButtonStatus(probenNummer) {
                 case 1049:
                     showFailMessage.failMessage(
                         "no-database header-fail-message-content-margin",
-                        8000, headerInput.attr('id')
+                        3000, headerInput.attr('id')
                     );
                     console.log(data);
                     backToInput();
@@ -44,7 +44,7 @@ function getEingangButtonStatus(probenNummer) {
                 case 2002:
                     showFailMessage.failMessage(
                         "no-server header-fail-message-content-margin",
-                        8000, headerInput.attr('id')
+                        3000, headerInput.attr('id')
                     );
                     console.log(data);
                     backToInput();
@@ -57,8 +57,6 @@ function getEingangButtonStatus(probenNummer) {
 
     ajaxRequestObject.fail(function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
-        //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        // showFailMessage.failMessage( 'no-server header-fail-message-content-margin', 8000 );
         backToInput();
     });
 }
@@ -125,7 +123,7 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
     //Ruft die Funktion "countRows" auf um die Anzahl der vorhandenen Datensätze zu zählen.
     countMainRows.addHighlight("highlight", "#FFB700", 100);
 }
-// content-button-delete
+
 //
 //Konstruktor für das Array "dataPack"
 function ConstructDataPack(
@@ -302,7 +300,7 @@ function sendEingangData(dataPack) {
             $stickyFooterMessageWrap.animateStickyFooterWrapper(
                 "sticky-footer-message-animation",
                 "sticky-footer-height",
-                2000
+                1500
             );
             backToInput();
         } else if (data.success === true && data.doubleInput.length >= 1) {
@@ -318,7 +316,7 @@ function sendEingangData(dataPack) {
             $stickyFooterMessageWrap.animateStickyFooterWrapper(
                 "sticky-footer-message-animation",
                 "sticky-footer-height",
-                8000
+                3000
             );
             backToInput();
         } else if (data.success === false) {
@@ -328,7 +326,7 @@ function sendEingangData(dataPack) {
                 case 1049:
                     showFailMessage.failMessage(
                         "no-database header-fail-message-content-margin",
-                        8000, headerInput.attr('id')
+                        3000, headerInput.attr('id')
                     );
                     console.log(data);
                     backToInput();
@@ -355,7 +353,7 @@ function sendEingangData(dataPack) {
                     $stickyFooterMessageWrap.animateStickyFooterWrapper(
                         "sticky-footer-message-animation",
                         "sticky-footer-height",
-                        8000
+                        3000
                     );
                     console.log(data);
                     break;
@@ -371,7 +369,7 @@ function sendEingangData(dataPack) {
         const headerInput = $('#header-input-eingang');
         showFailMessage.failMessage(
             "no-server header-fail-message-content-margin",
-            8000, headerInput.attr('id')
+            3000, headerInput.attr('id')
         );
         console.log(textStatus, errorThrown);
         backToInput();

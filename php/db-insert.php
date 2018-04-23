@@ -1,12 +1,14 @@
 <?php
 
-require 'db-connect.php';
-require_once 'fn/fn-sqlSelectObject.php';
+$path_dbConnect = 'db-connect.php';
+require_once($path_dbConnect);
+
+$path_fnSqlSelectObject = 'fn/fn-sqlSelectObject.php';
+require_once($path_fnSqlSelectObject);
 
 if (!empty($_POST)) {
 
     $receivedPostData = json_decode(json_encode($_POST, JSON_FORCE_OBJECT));
-//    $receivedPostDataObject = json_decode(json_encode($receivedPostData[0], JSON_FORCE_OBJECT));
     switch (true) {
         case isset($receivedPostData->beurteilungDataSet):
             $receivedPostDataObject = json_decode(json_encode($receivedPostData->beurteilungDataSet, JSON_FORCE_OBJECT));
@@ -75,9 +77,9 @@ if (!empty($_POST)) {
 
                         break;
                     case isset($receivedPostData->musterEingangDataSet):
-                        switch (true) {
+                        switch ('active') {
                             case $receivedPostData->musterEingangDataSet->{0}->mitNickelBack:
-                                if (!isset($sqlSelectDateObject->date->nickelRueckgabeDateTime)) {
+                                if ($receivedPostData->musterEingangDataSet->{0}->mitNickelBack === 'active' && !isset($sqlSelectDateObject->date->nickelRueckgabeDateTime)) {
                                     $sql =
                                         "
                                             INSERT INTO 
