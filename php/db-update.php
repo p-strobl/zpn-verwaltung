@@ -1,6 +1,6 @@
 <?php
 
-$path_dbConnect = '/php/db-connect.php';
+$path_dbConnect = 'db-connect.php';
 require_once($path_dbConnect);
 
 $receivedPostData = json_decode(json_encode($_POST, JSON_FORCE_OBJECT));

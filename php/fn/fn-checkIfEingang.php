@@ -3,7 +3,7 @@
 function checkIfEingang($pdoConnect, $probenNummer, $sollDatum, $pdoObject, $responseData) {
 
     try {
-        $path_fnSqlSelectObject = '/php/fn/fn-sqlSelectObject.php';
+        $path_fnSqlSelectObject = 'fn/fn-sqlSelectObject.php';
         require_once($path_fnSqlSelectObject);
 
         $sqlSelectObject = sqlSelectObjectBase($pdoConnect, $probenNummer, $pdoObject);
