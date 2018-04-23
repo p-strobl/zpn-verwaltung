@@ -98,7 +98,6 @@ function searchDataSet(probenNummer) {
         const wrapModalFooter = $('#wrap-modal-footer');
         const modalHeaderInput = $('#modal-header-input');
         const modalFooterSpanWrap = $('#modal-footer-span-wrap');
-        // console.log(data);
         if (Object.keys(data).every((key) => data[key])) {
 
             resetDetails();
@@ -119,7 +118,6 @@ function searchDataSet(probenNummer) {
                     manaGestelltDateTime: $('#pullSql-mBestellt-start-date'),
                     manaZpnWagenDateTime: $('#pullSql-mWagen-ende-date'),
                     nickelRueckgabeDateTime: $('#modal-pullSql-nickelBack-date'),
-                    // stornoDate: $('#'),
                     zerlegungEnde: $('#pullSql-zerlegung-ende-date'),
                     zerlegungStart: $('#pullSql-zerlegung-start-date'),
                     zpnEingangDateTime: $('#modal-pullSql-zpnEingang-date'),
@@ -137,7 +135,6 @@ function searchDataSet(probenNummer) {
                     manaGestelltTime: $('#pullSql-mBestellt-start-time'),
                     manaZpnWagenTime: $('#pullSql-mWagen-ende-time'),
                     nickelRueckgabeTime: $('#modal-pullSql-nickelBack-time'),
-                    // stornoTime: $('#'),
                     zerlegungStartTime: $('#pullSql-zerlegung-start-time'),
                     zerlegungEndeTime: $('#pullSql-zerlegung-ende-time'),
                     zpnMusterEingangTime: $('#modal-pullSql-zpnEingang-time'),
@@ -242,11 +239,11 @@ function searchDataSet(probenNummer) {
             showCloseModal.backToModalInput;
 
         } else if (Object.keys(data).every((key) => !data[key])) {
-            showFailMessage.failMessage('fail-input-no-dataset', 3000, modalHeaderInput.attr('id'));
+            showFailMessage.failMessage('fail-input-no-dataset', 2000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
 
         } else if (data.failCode === 2002) {
-            showFailMessage.failMessage('fail-connect', 8000, modalHeaderInput.attr('id'));
+            showFailMessage.failMessage('fail-connect', 5000, modalHeaderInput.attr('id'));
             showCloseModal.backToModalInput;
         }
     });
@@ -255,7 +252,7 @@ function searchDataSet(probenNummer) {
         console.log(textStatus, errorThrown);
         const modalHeaderInput = $('#modal-header-input');
         //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        showFailMessage.failMessage('fail-connect', 8000, modalHeaderInput.attr('id'));
+        showFailMessage.failMessage('fail-connect', 5000, modalHeaderInput.attr('id'));
         showCloseModal.backToModalInput;
     });
 }
@@ -302,7 +299,7 @@ const updateStatusButton = () => {
         ajaxRequestStatusButton.fail((jqXHR, textStatus, errorThrown) => {
             const modalHeaderInput = $('#modal-header-input');
             //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-            showFailMessage.failMessage('fail-connect', 8000, modalHeaderInput.attr('id'));
+            showFailMessage.failMessage('fail-connect', 5000, modalHeaderInput.attr('id'));
             console.log(textStatus, errorThrown);
         });
     });
@@ -360,20 +357,15 @@ const updateKommentar = () => {
                 const modalHeaderInput = $('#modal-header-input');
                 modalPromtSlider.removeClass('transform__modal');
                 modalKommentarInput.val('');
-                showFailMessage.failMessage('fail-forbidden', 8000, modalHeaderInput.attr('id'));
+                showFailMessage.failMessage('fail-forbidden', 5000, modalHeaderInput.attr('id'));
             }
         });
 
         ajaxRequestAddKommentar.fail((jqXHR, textStatus, errorThrown) => {
             const modalHeaderInput = $('#modal-header-input');
             //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-            showFailMessage.failMessage('fail-connect', 8000, modalHeaderInput.attr('id'));
+            showFailMessage.failMessage('fail-connect', 5000, modalHeaderInput.attr('id'));
             console.log(textStatus, errorThrown);
         });
     });
 }
-
-// $(document).ready(function () {
-//     updateStatusButton();
-//     updateKommentar();
-// });

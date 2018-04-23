@@ -133,7 +133,7 @@ function checkInput() {
                             searchDataSet(inputTextLeft);
                             break;
                         case 'header-input-beurteilung-probennummer':
-                            if ($.inArray($headerInputBeurteilungProbennummer.val(), globalMainRowCounter) > -1) {
+                            if ($.inArray(inputTextLeft, globalMainRowCounter) > -1) {
                                 $headerInputBeurteilungProbennummer.effect('highlight', { color: '#FF3100' }, 200).val('');
                                 //Ja es ist bereits ein Datensatz vorhanden, es wird eine Fehler Meldung angezeigt.
                                 //Blendet für 3,5 sek. eine "Fehlgeschlagen, Doppelter Eintrag" auskunft ein.
@@ -154,7 +154,6 @@ function checkInput() {
                             $headerInputBeurteilungProbennummer
                                 .removeAttr('disabled')
                                 .focus();
-                            // $headerInputBeurteilungProbennummer;
                             break;
                         default:
                     }
@@ -266,15 +265,7 @@ const backToInput = (() => {
     }, 100);
     return;
 });
-//
-// Setzt den cursor nach dem betätigen eines button in das Input Feld zurück.
-// function backToInput() {
-//     const $headerInputBeurteilung = $('#header-input-beurteilung-probennummer');
-//     const $headerInputEingang = $("#header-input-eingang");
-//     const $headerInputVerwaltung = $("#header-input-verwaltung");
-//
-//     $headerInputBeurteilung.add($headerInputEingang).add($headerInputVerwaltung).get(0).focus();
-// }
+
 
 //
 // Färbt die Anzeige der Datensatz Menge enstprechend, wenn Hinzugefügt: Grün, wenn entfernt: Rot.
@@ -290,91 +281,10 @@ const countMainRows = {
     }
 };
 
-// function setUnsetMainButtons() {
-
-//     let domButtonElementes = {
-//         'ZPN': '',
-//         anLFGB: ''
-//     }
-
-//     const domFooterCounterElementes = {
-//         'ZPN': $('#content-footer-counter-ZPN'),
-//         anLFGB: $('#content-footer-counter-anLFGB')
-//     }
-
-//     document.addEventListener('click', () => {
-//         if (event.target.classList.contains('content-button-check')) {
-
-//             let clickedButton = event.target;
-
-//             if (clickedButton.value === 'deactive') {
-//                 clickedButton.value = 'active';
-//                 clickedButton.classList.add('checked');
-//                 console.log(document.querySelectorAll('ZPN[value=active]').length);
-//                 let activeButtonLength = document.querySelectorAll('ZPN[value=active]').length;
-
-//                 Object.entries(domButtonElementes).forEach(([buttonKey, buttonValue]) => {
-//                     console.log(buttonKey);
-//                     console.log(buttonValue);
-//                     Object.entries(domFooterCounterElementes).forEach(([footerKey, footerValue]) => {
-//                         console.log(footerValue.innerHTML);
-//                         if (buttonKey === footerKey) {
-//                             footerValue.innerHTML = activeButtonLength;
-//                         }
-//                     });
-//                 });
-//                 // Object.entries(domButtonElementes).forEach(([buttonKey, buttonValue]) => {
-//                 //     if (clickedButton === buttonKey[buttonValue]) {
-//                 //         console.log(clickedButton.id);
-//                 //     }
-//                 //     console.log(buttonKey);
-//                 //     console.log(buttonValue);
-//                 //     Object.entries(domFooterCounterElementes).forEach(([footerKey, footerValue]) => {
-//                 //         console.log(footerKey);
-//                 //         console.log(footerValue);
-//                 //     });
-//                 // });
-//             } else {
-//                 clickedButton.value = 'deactive';
-//                 clickedButton.classList.remove('checked', 'preSet');
-
-//                 let activeButtonLength = document.querySelectorAll('ZPN[value=deactive]').length;
-
-//                 Object.entries(domButtonElementes).forEach(([buttonKey, buttonValue]) => {
-//                     console.log(buttonKey);
-//                     console.log(buttonValue);
-//                     Object.entries(domFooterCounterElementes).forEach(([footerKey, footerValue]) => {
-//                         console.log(footerValue.innerHTML);
-//                         if (buttonKey === footerKey) {
-//                             footerValue.innerHTML = activeButtonLength;
-//                         }
-//                     });
-//                 });
-//                 console.log(document.querySelectorAll('ZPN[value=deactive]').length);
-//                 // Object.entries(domButtonElementes).forEach(([buttonKey, buttonValue]) => {
-//                 //     if (clickedButton === buttonKey[buttonValue]) {
-//                 //         console.log(clickedButton.id);
-//                 //     }
-//                 //     console.log(buttonKey);
-//                 //     console.log(buttonValue);
-//                 //     Object.entries(domFooterCounterElementes).forEach(([footerKey, footerValue]) => {
-//                 //         console.log(footerKey);
-//                 //         console.log(footerValue);
-//                 //     });
-//                 // });
-//             }
-//         } else {
-//             return;
-//         }
-//     }, false);
-// }
-
 //
 //Ermittelt welcher Auswahl-Button gedrückt wurde, und addiert oder subtrahiert die entsprechende Anzeige.
 function countCheckedButtons() {
     const $wrapContent = $("#wrap-content");
-    // const $contentButtonCheck = $(".content-button-check");
-    // const $contentFooterCounter = $(".content-footer-counter");
 
     const $footerAnzahlAnZPN = $('#content-footer-counter-anZPN');
     const $footerAnzahlAnLFGB = $('#content-footer-counter-anLFGB');
@@ -387,7 +297,6 @@ function countCheckedButtons() {
     const $footerAnzahlToys = $("#content-footer-counter-toys");
     const $footerAnzahl60g = $("#content-footer-counter-60g");
     const $footerAnzahlKlaerfall = $("#content-footer-counter-klaerfallBack");
-    // const $footerAnzahlNickelBack = $( '#content-footer-counter-nickelBack' );
 
     const $footerAnzahlZerlegungStart = $("#content-footer-counter-zerlegungStart");
     const $footerAnzahlZerlegungEnde = $("#content-footer-counter-zerlegungEnde");
@@ -401,34 +310,6 @@ function countCheckedButtons() {
     const $footerAnzahlManaEinwaage = $("#content-footer-counter-manaEinwaage");
     const $footerAnzahlManaEingewogen = $("#content-footer-counter-manaEingewogen");
     const $footerAnzahlZpnWagen = $("#content-footer-counter-zpnWagen");
-
-    // const enableDisableButtonSet = {
-    //     zerlegungStart: $("#content-btn-zerlegungStart"),
-    //     zerlegungEnde: $("#content-btn-zerlegungEnde"),
-    //     einwaageStart: $("#content-btn-einwaageBeginn"),
-    //     einwaageEnde: $("#content-btn-einwaageEnde"),
-    //     zpnWagen: $("#content-btn-zpnWagen"),
-    //     klaerStart: $("#content-btn-klaerfallBeginn"),
-    //     klaerEnde: $("#content-btn-klaerfallEnde"),
-    //     mBestellt: $("#content-btn-manaBestellt"),
-    //     mErhalten: $("#content-btn-manaErhalten"),
-    //     mEinwaage: $("#content-btn-manaEinwaage"),
-    //     mEingewogen: $("#content-btn-manaEingewogen")
-    // };
-
-    // const footerAnzahlSet = {
-    //     zerlegungStart: $("#content-footer-counter-zerlegungStart"),
-    //     zerlegungEnde: $("#content-footer-counter-zerlegungEnde"),
-    //     einwaageStart: $("#content-footer-counter-einwaageBeginn"),
-    //     einwaageEnde: $("#content-footer-counter-einwaageEnde"),
-    //     zpnWagen: $("#content-footer-counter-zpnWagen"),
-    //     klaerStart: $("#content-footer-counter-klaerfallBeginn"),
-    //     klaerEnde: $("#content-footer-counter-klaerfallEnde"),
-    //     mBestellt: $("#content-footer-counter-manaBestellt"),
-    //     mErhalten: $("#content-footer-counter-manaErhalten"),
-    //     mEinwaage: $("#content-footer-counter-manaEinwaage"),
-    //     mEingewogen: $("#content-footer-counter-manaEingewogen")
-    // };
 
     function effectOnElement(footerElement, countValue1Buttons, effectColor) {
         footerElement
@@ -616,11 +497,7 @@ function countCheckedButtons() {
                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
-                    // case 'content-btn-nickelBack':
-                    //     effectOnElement($footerAnzahlNickelBack, '#content-btn-nickelBack[value="active"]', {
-                    //         color: '#FFB700'
-                    //     });
-                    //     break;
+
                     case "content-btn-klaerfallBeginn":
                         effectOnElement($footerAnzahlKlaerfallBeginn, '#content-btn-klaerfallBeginn[value="active"]', {
                             color: "#FFB700"
@@ -872,11 +749,7 @@ function countCheckedButtons() {
                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
                         break;
-                    // case 'content-btn-nickelBack':
-                    //     effectOnElement($footerAnzahlNickelBack, '#content-btn-nickelBack[value="active"]', {
-                    //         color: '#FF3100'
-                    //     });
-                    //     break;
+
                     case "content-btn-klaerfallBeginn":
                         effectOnElement($footerAnzahlKlaerfallBeginn, '#content-btn-klaerfallBeginn[value="active"]', {
                             color: "#FF3100"
@@ -996,6 +869,7 @@ function countCheckedButtons() {
                 break;
             default:
         }
+        backToInput();
     });
 
     //Nach auslösen des Confirm Button wird die im Footer Anzahl angezeigten Zahlen angepasst.
@@ -1015,7 +889,6 @@ function countCheckedButtons() {
                             effectOnElement($footerAnzahlAnZPN, '#ZPN[value="active"]', {
                                 color: "#FF3100"
                             });
-                            // enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
                             break;
                         case "LFGB":
                             effectOnElement($footerAnzahlAnLFGB, '#LFGB[value="active"]', {
@@ -1136,6 +1009,7 @@ function countCheckedButtons() {
             }
         });
     });
+    backToInput();
 }
 
 //
@@ -1250,11 +1124,9 @@ function confirmDelete() {
 document.addEventListener('DOMContentLoaded', function () {
     regexInput();
     checkInput();
-    // backToInput();
     countCheckedButtons();
     highlightSelectedRow();
     confirmDelete();
-    // setUnsetMainButtons();
     showCloseModal.showModal();
     showCloseModal.closeModal();
     updateStatusButton();

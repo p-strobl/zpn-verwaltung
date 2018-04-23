@@ -77,8 +77,6 @@ function getVerwaltungButtonStatus(probenNummer) {
 
     ajaxRequestObject.fail(function (jqXHR, textStatus, errorThrown) {
         console.log(textStatus, errorThrown);
-        //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-        // showFailMessage.failMessage( 'no-server header-fail-message-content-margin', 8000 );
         backToInput();
     });
 }
@@ -222,7 +220,6 @@ function sendUpdateData(dataPack) {
     });
     //Ajax Anfrage ist erfolgreich.
     ajaxRequestUpdate.done(function (data) {
-        // console.log(data);
         const itemCount = data["itemCount"];
         const $stickyFooterMessageWrap = $("#sticky-footer-message-wrap");
         const $stickyFooterSuccessWrap = $("#transmission-successful-wrapper");
@@ -283,7 +280,6 @@ function sendUpdateData(dataPack) {
                 "sticky-footer-height",
                 2000
             );
-            // backToInput();
         }
     });
 

@@ -12,7 +12,7 @@
 body {
     height: 100%;
     width: 100%;
-    overflow: hidden;
+    /* overflow: hidden; */
     background-color: #0091cd;
 }
 
@@ -573,3 +573,21 @@ img:hover {
 }
 
 /*Ende Highlight Rows*/
+
+/* Start Body Scroll Bar */
+
+html::-webkit-scrollbar-thumb {
+    border-radius: .2vw;
+    background-color: rgba(255, 183, 0, .5);
+}
+
+html::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(255, 183, 0, 1);
+}
+
+html::-webkit-scrollbar-track {
+    border-radius: .2vw;
+    background-color: rgba(220, 220, 220, .6);
+}
+
+/* Ende Bodey Scroll Bar */
