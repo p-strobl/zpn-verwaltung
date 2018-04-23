@@ -1,6 +1,6 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] .  'db-connect.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/php/db-connect.php');
 
 $receivedItem = (object) $_POST['updateAddKommentar'];
 $yesRegEx = '/\d{2}-\d{6}-\d{2}/';

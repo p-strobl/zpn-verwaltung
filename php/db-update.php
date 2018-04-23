@@ -1,6 +1,6 @@
 <?php
 
-require_once($_SERVER['DOCUMENT_ROOT'] .  'db-connect.php');
+require_once($_SERVER['DOCUMENT_ROOT'] . '/php/db-connect.php');
 
 $receivedPostData = json_decode(json_encode($_POST, JSON_FORCE_OBJECT));
 
