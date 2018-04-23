@@ -2,9 +2,12 @@
     //Trät die Endzeit des jeweiligen Datensatz in die Datenbank als DateTime ein
     function setDateTime($pdoConnect, $probenNummer, $tblName, $beginDateTime, $endDateTime, $berechnungDateTime, $checkIfEingang, $transmitResponse, $pdoObject, $switch) {
 
-        require_once($_SERVER["DOCUMENT_ROOT"] . '/php/fn/fn-startTrue_endTrue.php');
-        require_once($_SERVER["DOCUMENT_ROOT"] . '/php/fn/fn-startFalse_endTrue.php');
-        require_once($_SERVER["DOCUMENT_ROOT"] . '/php/fn/fn-startFalse.php');
+        $path_fnStartTrue_endTrue = $_SERVER['DOCUMENT_ROOT'] . '/php/fn/fn-startTrue_endTrue.php';
+        require_once($path_fnStartTrue_endTrue);
+        $path_fnStartFalse_endTrue = $_SERVER['DOCUMENT_ROOT'] . '/php/fn/fn-startFalse_endTrue.php';
+        require_once($path_fnStartFalse_endTrue);
+        $path_fnStartFalse = $_SERVER['DOCUMENT_ROOT'] . '/php/fn/fn-startFalse.php';
+        require_once($path_fnStartFalse);
 
         try {
             if ($checkIfEingang !== false) {
