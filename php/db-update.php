@@ -29,9 +29,9 @@ if (isset($receivedPostData->updateDataSet)) {
 
         if (preg_match($yesRegEx, $updateObject->probenNummer)) {
             // set_include_path( 'php/' );
-            $path_fnCheckIfEingang = '/php/fn/fn-checkIfEingang.php';
+            $path_fnCheckIfEingang = 'fn/fn-checkIfEingang.php';
             require_once($path_fnCheckIfEingang);
-            $path_fnSetDateTime = '/php/fn/fn-setDateTime.php';
+            $path_fnSetDateTime = 'fn/fn-setDateTime.php';
             require_once($path_fnSetDateTime);
 
             $transmitResponse['itemCount']++;
