@@ -28,8 +28,8 @@ if (isset($receivedPostData->updateDataSet)) {
 
         if (preg_match($yesRegEx, $updateObject->probenNummer)) {
             // set_include_path( 'php/' );
-            include_once($_SERVER["DOCUMENT_ROOT"] . '/fn/fn-checkIfEingang.php' );
-            include_once($_SERVER["DOCUMENT_ROOT"] . '/fn/fn-setDateTime.php' );
+            include_once($_SERVER["DOCUMENT_ROOT"] . '/php/fn/fn-checkIfEingang.php' );
+            include_once($_SERVER["DOCUMENT_ROOT"] . '/php/fn/fn-setDateTime.php' );
 
             $transmitResponse['itemCount']++;
 
