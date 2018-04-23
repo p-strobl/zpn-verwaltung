@@ -3,7 +3,7 @@
 function db_connect()
 {
     // Database connection data.
-    $host       = 'local';
+    $host       = 'localhost';
     $database   = 'zpn-verwaltung';
     $username   = 'root';
     $password   = '';

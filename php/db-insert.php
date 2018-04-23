@@ -78,9 +78,9 @@ if (!empty($_POST)) {
 
                         break;
                     case isset($receivedPostData->musterEingangDataSet):
-                        switch (true) {
+                        switch ('active') {
                             case $receivedPostData->musterEingangDataSet->{0}->mitNickelBack:
-                                if (!isset($sqlSelectDateObject->date->nickelRueckgabeDateTime)) {
+                                if ($receivedPostData->musterEingangDataSet->{0}->mitNickelBack === 'active' && !isset($sqlSelectDateObject->date->nickelRueckgabeDateTime)) {
                                     $sql =
                                         "
                                             INSERT INTO 
