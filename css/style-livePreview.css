@@ -1,17 +1,159 @@
-/*Start CSS Reset!*/
-
-@import "cssReset.css";
-/*Ende CSS Reset!*/
-
-/*Start Globales Styling */
-
-* {
-    font-family: "Tahoma", Times New Roman, sans-serif;
-}
 
 body {
+    text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.wrap__preview__content {
+    display: grid;
+    height: 96vh;
+    width: 97vw;
+    grid-template-rows: 20% 80%;
+    margin: .8vw auto;
+    border-radius: .2vw;
+    /* box-shadow: 1px 2px 20px 2px rgba(4, 10, 43, .5); */
+}
+
+.wrap__header__preview__content {
+    box-shadow: 1px 2px 20px 2px rgba(4, 10, 43, .5);
+}
+
+.preview__header__content {
+    display: grid;
+    /* place-content: center; */
+    grid-template-columns: 10% 80% 10%;
     height: 100%;
     width: 100%;
+    /* padding: 0.7vw 0; */
+    border-radius: 0.2vw;
+    /* font-size: 5vw; */
+    /* text-align: center; */
+    /* text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5); */
+    background-color: gainsboro;
+}
+
+.preview__header__caption {
+    display: grid;
+    place-content: center;
+    grid-column: 2;
+    width: 100%;
+    height: 100%;
+    /* text-align: center; */
+}
+
+.wrap__main__preview__content {
+    display: grid;
+}
+
+.wrap__main__preview__items {
+    display: grid;
+    grid-template-columns: 25% 10% 65%;
+    align-content: center;
+    place-self: center;
+    align-items: center;
+    height: 80%;
+    width: 90%;
+    -webkit-border-radius: 0.2vw;
+    -moz-border-radius: 0.2vw;
+    border-radius: 0.2vw;
+    background: ghostwhite;
+    box-shadow: 0px 1px 20px 1px rgb(4, 10, 43);
     overflow: hidden;
-    background-color: #0091cd;
+}
+
+.wrap__main__preview__items.hidden {
+    display: none;
+}
+
+.main__preview__span {
+    display: grid;
+    align-content: center;
+    justify-content: end;
+    font-size: 8vw;
+    width: 100%;
+    height: 100%;
+}
+
+.main__preview__caption {
+    /* align-self: end; */
+}
+
+.main__preview__caption.x {
+    padding-left: .2vw;
+    font-size: 3vw;
+}
+
+.main__preview__caption.text {
+    font-size: 6vw;
+}
+
+@media (max-height: 400px) {
+    .wrap__header__preview__content, .wrap__main__preview__items.show {
+        display: none;
+    }
+
+    .wrap__main__preview__items.hidden {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        height: 90vh;
+        background-color: ghostwhite;
+    }
+
+    .wrap__panel {
+        display: grid;
+        height: 90vh;
+    }
+
+    .wrap__panel.left {
+        grid-column: 1;
+    }
+
+    .wrap__panel.right {
+        grid-column: 2;
+    }
+
+    .panel__content {
+        display: grid;
+        align-items: center;
+        grid-template-columns: 20% 10% 70%;
+    }
+
+    .panel__content.left {
+        padding: 1.5vw 0 1.5vw 0;
+    }
+
+    .panel__content.right {
+        grid-template-columns: 15% 8% auto;
+    }
+
+    .leftPanel__content__span {
+        font-size: 60vh;
+        justify-self: end;
+    }
+
+    .leftPanel__content__caption.x {
+        font-size: 3.5vw;
+        text-align: center;
+    }
+
+    .leftPanel__content__caption.text {
+        display: grid;
+        border-right: 2px solid #0091cd;
+        height: 100%;
+        font-size: 5vw;
+        align-content: center;
+    }
+
+    .rightPanel__content__span {
+        justify-self: end;
+        font-size: 22vh;
+    }
+
+    .rightPanel__content__caption.x {
+        font-size: 10vh;
+        padding-left: 2vh;
+    }
+
+    .rightPanel__content__caption.text {
+        font-size: 13.3vh;
+    }
 }

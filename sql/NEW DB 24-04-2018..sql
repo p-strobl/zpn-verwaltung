@@ -29,7 +29,7 @@ CREATE TABLE IF NOT EXISTS `tbl_baserecord` (
 CREATE TABLE IF NOT EXISTS `tbl_beurteilung` (
   `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
   `beurteilungBereitgestelltDateTime` datetime DEFAULT NULL,
-  `anAbteilung` tinytext COLLATE utf8_unicode_ci,
+  `anAbteilung` tinytext COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`probenNummer`),
   KEY `probenNummerFK` (`probenNummer`),
   CONSTRAINT `fk_baserecord_beurteilung` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_baserecord` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -69,7 +69,18 @@ CREATE TABLE IF NOT EXISTS `tbl_kommentar` (
   PRIMARY KEY (`autoID`),
   KEY `probenNummerFK` (`probenNummer`),
   CONSTRAINT `fk_baserecord_kommentar` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_baserecord` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Daten Export vom Benutzer nicht ausgewählt
+-- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_lfgbmustereingang
+CREATE TABLE IF NOT EXISTS `tbl_lfgbmustereingang` (
+  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `lfgbEingangDateTime` datetime DEFAULT NULL,
+  `beurteilungLfgbBerechnung` time DEFAULT NULL,
+  PRIMARY KEY (`probenNummer`),
+  KEY `probenNummerFK` (`probenNummer`),
+  CONSTRAINT `tbl_lfgbmustereingang` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_baserecord` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_mana
@@ -123,6 +134,17 @@ CREATE TABLE IF NOT EXISTS `tbl_storno` (
   KEY `probenNummerFK` (`probenNummer`),
   CONSTRAINT `fk_baserecord_storno` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_baserecord` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+-- Daten Export vom Benutzer nicht ausgewählt
+-- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_textilmustereingang
+CREATE TABLE IF NOT EXISTS `tbl_textilmustereingang` (
+  `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
+  `textilEingangDateTime` datetime DEFAULT NULL,
+  `beurteilungTextilBerechnung` time DEFAULT NULL,
+  PRIMARY KEY (`probenNummer`),
+  KEY `probenNummerFK` (`probenNummer`),
+  CONSTRAINT `tbl_textilmustereingang` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_baserecord` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci ROW_FORMAT=COMPACT;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_zerlegung
