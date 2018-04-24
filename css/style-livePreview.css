@@ -18,9 +18,10 @@
     place-content: center;
     grid-template-columns: 10% 80% 10%;
     height: 100%;
+    width: 100%;
     /* padding: 0.7vw 0; */
     border-radius: 0.2vw;
-    font-size: 5vw;
+    /* font-size: 5vw; */
     text-align: center;
     text-shadow: 2px 2px 10px rgba(0, 0, 0, 0.5);
     background-color: gainsboro;

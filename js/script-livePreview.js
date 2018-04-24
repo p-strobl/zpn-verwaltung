@@ -15,17 +15,21 @@
 //
 // document.addEventListener('DOMContentLoaded', checkWindowHeight, false);
 
-window.addEventListener('load', function () {
 
-    function updatePreview() {
-        const ajaxRequestObject = $.ajax({
-            url: '../php/db-requestObject.php',
-            method: 'POST',
-            data: {
-                requestDataSetComplete:
-            },
-            dataType: 'json'
-        });
-    }
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    jQuery('#ft-preview-header-caption').fitText();
+
+    // function updatePreview() {
+    //     const ajaxRequestObject = $.ajax({
+    //         url: '../php/db-requestObject.php',
+    //         method: 'POST',
+    //         data: {
+    //             requestDataSetComplete: test
+    //         },
+    //         dataType: 'json'
+    //     });
+    // }
 
 });
