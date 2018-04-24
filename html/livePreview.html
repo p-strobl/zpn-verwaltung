@@ -2,47 +2,77 @@
 <html lang="de">
 
 <head>
-    <meta charset="UTF-8">
-    <!--<meta http-equiv="refresh" content="10" />-->
+    <meta http-equiv="refresh" content="300" />
+    <link rel="stylesheet" type="text/css" href="../css/style-global.css">
     <link rel="stylesheet" type="text/css" href="../css/style-livePreview.css">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
-    <title>Übersicht bereit gestellter Muster</title>
+    <title>&#220;bersicht bereit gestellter Muster</title>
 </head>
 
 <body>
-    <div id="wrap-content-live">
-        <header id="wrap-header-live">
-            <p class="header-live-capture">Muster Übersicht</p>
+    <div class="wrap__preview__content">
+        <header class="wrap__header__preview__content">
+            <section class="preview__header__content">
+                <a class="header-a-button-home" href="../index.html">
+                    <img class="img-home" src="../css/icons/HermesLogo.png" title="Zurück zum Hauptmenü.">
+                </a>
+                <p class="preview__header__caption" id="ft-preview-header-caption">Muster Anzahl &#220;bersicht</p>
+            </section>
         </header>
-        <main id="wrap-main-live">
-            <section id="wrap-content-lfgb">
-                <div id="content-lfgb-toFillSpan">
-
-                </div>
-                <div id="content-lfgb-caption">
-
-                </div>
+        <main class="wrap__main__preview__content">
+            <section class="wrap__main__preview__items / show /">
+                <span class="main__preview__span" id="daily-Textil">0</span>
+                <p class="main__preview__caption / x /">x</p>
+                <p class="main__preview__caption / text /">f&#252;r die Textilphysik</p>
             </section>
-            <section id="wrap-content-textilphysik">
-                <div id="content-textilphysik-toFillSpan">
 
-                </div>
-                <div id="content-textilphysik-caption">
-
-                </div>
+            <section class="wrap__main__preview__items / show /">
+                <span class="main__preview__span" id="daily-lfgb">0</span>
+                <p class="main__preview__caption / x /">x</p>
+                <p class="main__preview__caption / text /">f&#252;r die LFGB</p>
             </section>
-            <section id="wrap-content-zpn">
-                <div id="content-zpn-toFillSpan">
 
-                </div>
-                <div id="content-zpn-caption">
+            <section class="wrap__main__preview__items / show /">
+                <span class="main__preview__span daily-zpn" id="daily-zpn">0</span>
+                <p class="main__preview__caption / x /">x</p>
+                <p class="main__preview__caption / text /">f&#252;r die ZPN</p>
+            </section>
 
+            <section class="wrap__main__preview__items / hidden /">
+
+                <div class="wrap__panel / left /">
+                    <div class="panel__content left">
+                        <span class="leftPanel__content__span daily-zpn" id="panel-zpn">0</span>
+                        <p class="leftPanel__content__caption / x /">x</p>
+                        <p class="leftPanel__content__caption / text /">f&#252;r die ZPN</p>
+                    </div>
                 </div>
+                <div class="wrap__panel / right /">
+                    <div class="panel__content right">
+                        <span class="rightPanel__content__span" id="panel-zpnMusterEingang">0</span>
+                        <p class="rightPanel__content__caption / x /">x</p>
+                        <p class="rightPanel__content__caption / text /">ZPN Mustereingang</p>
+                    </div>
+                    <div class="panel__content right">
+                        <span class="rightPanel__content__span" id="panel-zpnKlaerfall">0</span>
+                        <p class="rightPanel__content__caption / x /">x</p>
+                        <p class="rightPanel__content__caption / text /">ZPN Kl&#228;rf&#228;lle</p>
+                    </div>
+                    <div class="panel__content right">
+                        <span class="rightPanel__content__span" id="panel-zpnWagen">0</span>
+                        <p class="rightPanel__content__caption / x /">x</p>
+                        <p class="rightPanel__content__caption / text /">ZPN Wagen</p>
+                    </div>
+                </div>
+
             </section>
         </main>
     </div>
+
     <script type="text/javascript" src="../lib/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="../lib/jquery-ui.js"></script>
+    <script type="text/javascript" src="../lib/jquery-fittext.js"></script>
+    <script type="text/javascript" src="../js/script-livePreview.js"></script>
 </body>
 
 </html>
