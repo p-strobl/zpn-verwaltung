@@ -92,12 +92,13 @@ body {
         grid-template-columns: repeat(2, 1fr);
         height: 100vh;
         width: 100vw;
+        border-radius: 0;
         background-color: ghostwhite;
     }
 
     .wrap__panel {
         display: grid;
-        height: 90vh;
+        height: 100vh;
     }
 
     .wrap__panel.left {
@@ -152,5 +153,31 @@ body {
 
     .rightPanel__content__caption.text {
         font-size: 13.3vh;
+    }
+}
+
+@media (max-height: 170px) {
+    .wrap__panel.right {
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+    }
+
+    .panel__content.left {
+        padding: 0;
+    }
+
+    .leftPanel__content__span, .leftPanel__content__caption {
+        height: 100vh;
+        display: grid;
+        align-content: center;
+    }
+
+    .leftPanel__content__span {
+        display: grid;
+        align-content: center;
+    }
+
+    .leftPanel__content__caption.text {
+        font-size: 25vh;
     }
 }
