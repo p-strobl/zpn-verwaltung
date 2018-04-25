@@ -174,7 +174,14 @@ body {
 
     .leftPanel__content__span {
         display: grid;
-        align-content: center;
+        justify-content: end;
+        width: 100%;
+        font-size: 90vh;
+    }
+
+    .leftPanel__content__caption.x {
+        padding-left: .5vw;
+        font-size: 25vh;
     }
 
     .leftPanel__content__caption.text {
