@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const toFillPreviewItems = {
                 lfgbAnzahl: $('#daily-lfgb'),
                 textilAnzahl: $('#daily-Textil'),
-                zpnAnzahl: $('#daily-zpn'),
+                zpnAnzahl: $('.itemZPN'),
                 zpnPanelAnzahl: $('#panel-zpn'),
                 zpnKlaerfaelle: $('#panel-zpnKlaerfall'),
                 zpnMustereingang: $('#panel-zpnMusterEingang'),
@@ -25,8 +25,7 @@ document.addEventListener('DOMContentLoaded', function () {
             //Fügt nach dem Page reload die gespeicherten Werte in die entsprechenden html Elemente ein
             $('#daily-lfgb').html(localStorage.getItem('lfgbAnzahl'));
             $('#daily-Textil').html(localStorage.getItem('textilAnzahl'));
-            $('#daily-zpn').html(localStorage.getItem('zpnAnzahl'));
-            $('#panel-zpn').html(localStorage.getItem('zpnPanelAnzahl'));
+            $('#daily-zpn').add($('#panel-zpn')).html(localStorage.getItem('zpnAnzahl'));
             $('#panel-zpnKlaerfall').html(localStorage.getItem('zpnKlaerfaelle'));
             $('#panel-zpnMusterEingang').html(localStorage.getItem('zpnMustereingang'));
             $('#panel-zpnWagen').html(localStorage.getItem('zpnWagen'));
@@ -38,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 Object.entries(toFillPreviewItems).forEach(([toFillKey, toFillValue]) => {
                     if (receivedKey === toFillKey && receivedValue != localStorage.getItem(toFillKey)) {
                         toFillValue.html(receivedValue);
-                        // toFillValue.parent().css({ 'backgroundColor': '#FFB700' });
+                        toFillValue.parent().css({ 'backgroundColor': '#ffb700' })
                     }
                 });
             });
@@ -55,7 +54,6 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem("lfgbAnzahl", $('#daily-lfgb').html());
         localStorage.setItem("textilAnzahl", $('#daily-Textil').html());
         localStorage.setItem("zpnAnzahl", $('#daily-zpn').html());
-        localStorage.setItem("zpnPanelAnzahl", $('#panel-zpn').html());
         localStorage.setItem("zpnKlaerfaelle", $('#panel-zpnKlaerfall').html());
         localStorage.setItem("zpnMustereingang", $('#panel-zpnMusterEingang').html());
         localStorage.setItem("zpnWagen", $('#panel-zpnWagen').html());
