@@ -25,9 +25,10 @@ document.addEventListener('DOMContentLoaded', function () {
             $('#daily-lfgb').html(localStorage.getItem('lfgbAnzahl'));
             $('#daily-Textil').html(localStorage.getItem('textilAnzahl'));
             $('#daily-zpn').html(localStorage.getItem('zpnAnzahl'));
+            $('#panel-zpn').html(localStorage.getItem('zpnAnzahl'));
             $('#panel-zpnKlaerfall').html(localStorage.getItem('zpnKlaerfaelle'));
             $('#panel-zpnMusterEingang').html(localStorage.getItem('zpnMustereingang'));
-            $('#zpnWagen').html(localStorage.getItem('zpnWagen'));
+            $('#panel-zpnWagen').html(localStorage.getItem('zpnWagen'));
 
             //
             //Fügt die aus dem Ajax call erhaltenen Werte, wenn nicht schon im localStorage identisch in die entpsprechenden html Elemente ein
@@ -35,11 +36,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 Object.entries(toFillPreviewItems).forEach(([toFillKey, toFillValue]) => {
                     if (receivedKey === toFillKey && receivedValue != localStorage.getItem(toFillKey)) {
                         toFillValue.html(receivedValue);
-                        toFillValue.parent().effect('highlight', { color: '#FFB700' }, 200);;
+                        toFillValue.parent().effect('highlight', { color: '#FFB700' }, 200);
                     }
                 });
             });
-
         });
 
         ajaxRequestPreview.fail((jqXHR, textStatus, errorThrown) => {
