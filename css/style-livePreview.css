@@ -81,10 +81,17 @@ body {
         display: none;
     }
 
+    .wrap__preview__content {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+    }
+
     .wrap__main__preview__items.hidden {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        height: 90vh;
+        height: 100vh;
+        width: 100vw;
         background-color: ghostwhite;
     }
 

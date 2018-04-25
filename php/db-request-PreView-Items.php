@@ -68,6 +68,24 @@ function getPreviewItems() {
             (
                 SELECT COUNT(*)
                 FROM
+                    tbl_beurteilung
+                WHERE
+                    DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) <= DATE(NOW())
+                AND
+                    tbl_beurteilung.anAbteilung = "ZPN"
+            )
+            -
+            (
+                SELECT COUNT(*)
+                FROM
+                    tbl_zpnmustereingang, tbl_beurteilung
+                WHERE
+                    tbl_zpnmustereingang.probenNummer = tbl_beurteilung.probenNummer
+            )
+                AS zpnPanelAnzahl,
+            (
+                SELECT COUNT(*)
+                FROM
                     tbl_zpnmustereingang
                 WHERE
                     DATE(tbl_zpnmustereingang.zpnEingangDateTime) = DATE(NOW())

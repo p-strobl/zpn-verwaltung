@@ -14,7 +14,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const toFillPreviewItems = {
                 lfgbAnzahl: $('#daily-lfgb'),
                 textilAnzahl: $('#daily-Textil'),
-                zpnAnzahl: $('.daily-zpn'),
+                zpnAnzahl: $('#daily-zpn'),
+                zpnPanelAnzahl: $('#panel-zpn'),
                 zpnKlaerfaelle: $('#panel-zpnKlaerfall'),
                 zpnMustereingang: $('#panel-zpnMusterEingang'),
                 zpnWagen: $('#panel-zpnWagen')
@@ -25,18 +26,19 @@ document.addEventListener('DOMContentLoaded', function () {
             $('#daily-lfgb').html(localStorage.getItem('lfgbAnzahl'));
             $('#daily-Textil').html(localStorage.getItem('textilAnzahl'));
             $('#daily-zpn').html(localStorage.getItem('zpnAnzahl'));
-            $('#panel-zpn').html(localStorage.getItem('zpnAnzahl'));
+            $('#panel-zpn').html(localStorage.getItem('zpnPanelAnzahl'));
             $('#panel-zpnKlaerfall').html(localStorage.getItem('zpnKlaerfaelle'));
             $('#panel-zpnMusterEingang').html(localStorage.getItem('zpnMustereingang'));
             $('#panel-zpnWagen').html(localStorage.getItem('zpnWagen'));
 
             //
             //Fügt die aus dem Ajax call erhaltenen Werte, wenn nicht schon im localStorage identisch in die entpsprechenden html Elemente ein
+            //&& receivedValue != localStorage.getItem(toFillKey)
             Object.entries(receivedPreviewItems).forEach(([receivedKey, receivedValue]) => {
                 Object.entries(toFillPreviewItems).forEach(([toFillKey, toFillValue]) => {
                     if (receivedKey === toFillKey && receivedValue != localStorage.getItem(toFillKey)) {
                         toFillValue.html(receivedValue);
-                        toFillValue.parent().effect('highlight', { color: '#FFB700' }, 200);
+                        // toFillValue.parent().effect('highlight', { color: '#FFB700' }, 200);
                     }
                 });
             });
@@ -53,6 +55,7 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.setItem("lfgbAnzahl", $('#daily-lfgb').html());
         localStorage.setItem("textilAnzahl", $('#daily-Textil').html());
         localStorage.setItem("zpnAnzahl", $('#daily-zpn').html());
+        localStorage.setItem("zpnPanelAnzahl", $('#panel-zpn').html());
         localStorage.setItem("zpnKlaerfaelle", $('#panel-zpnKlaerfall').html());
         localStorage.setItem("zpnMustereingang", $('#panel-zpnMusterEingang').html());
         localStorage.setItem("zpnWagen", $('#panel-zpnWagen').html());
