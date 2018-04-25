@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 Object.entries(toFillPreviewItems).forEach(([toFillKey, toFillValue]) => {
                     if (receivedKey === toFillKey && receivedValue != localStorage.getItem(toFillKey)) {
                         toFillValue.html(receivedValue);
-                        toFillValue.parent().css({ 'backgroundColor': '#FFB700' });
+                        // toFillValue.parent().css({ 'backgroundColor': '#FFB700' });
                     }
                 });
             });
