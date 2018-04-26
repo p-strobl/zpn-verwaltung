@@ -88,7 +88,7 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
     const $headerInput = $("#header-input-verwaltung");
     const contentAppend =
         " <section class='content-main-row verwaltung' id='content-main-row'> " +
-        " <div class='content-main-cell' title='Eingetragene Proben Nummer.'> " +
+        " <div class='content-main-cell' title='Eingetragene Probennummer.'> " +
         " <p class='content-main-text' id='text-prbNr'>" +
         inputTextLeft +
         "</p> " +

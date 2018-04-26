@@ -55,7 +55,7 @@ function appendContentMainRow(probenNummer, abteilung) {
     const $headerInput = $("#header-input-beurteilung-abteilung");
     const contentAppend =
         "<section class='content-main-row beurteilung' id='content-main-row'>" +
-        "<div class='content-main-cell' title='Eingetragene Proben Nummer.'>" +
+        "<div class='content-main-cell' title='Eingetragene Probennummer.'>" +
         "<p class='content-main-text' id='text-prbNr'>" + inputTextLeft + "</p>" +
         "</div>" +
         "<div class='content-main-cell beurteilung' title='Solldatum zum Muster.'>" +

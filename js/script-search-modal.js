@@ -345,7 +345,7 @@ const updateKommentar = () => {
                     ' <div class="modal__footer__append__span__wrap"> ' +
                     '     <span class="modal__append__span / text"> ' + data.kommentarText + ' ' +
                     '         <span class="modal__append__span / dateTime">' + data.kommentarDate + '</span> ' +
-                    '         <span class="modal__append__span / dateTime">' + data.kommentarTime + " Uhr" + ' Uhr</span> ' +
+                    '         <span class="modal__append__span / dateTime">' + data.kommentarTime + ' Uhr</span> ' +
                     '     </span> ' +
                     ' </div> '
                 );
