@@ -147,7 +147,11 @@ body {
             }
 
                 .wrap__panel.left {
-                    grid-template-rows: 75% auto;
+                    grid-template-rows: 85% auto;
+                    height: 90%;
+                    width: 90%;
+                    place-self: center;
+                    border-radius: .2vw;
                 }
 
                     .leftPanel__content {
@@ -164,13 +168,18 @@ body {
                     }
 
                 .wrap__panel.right {
-                    height: 97vh;
+                    height: 90%;
+                    width: 90%;
+                    place-self: center;
                 }
 
                     .right__panel__content {
                         display: grid;
                         grid-template-rows: repeat(3,1fr);
                         grid-template-columns: 18% 5% auto;
+                        border-radius: .2vw;
+                        height: 90%;
+                        align-self: center;
                     }
 
                         .rightPanel__content {
@@ -201,6 +210,9 @@ body {
 
     .wrap__panel.left {
         grid-template-rows: auto;
+        /* margin: 20px; */
+        height: 85vh;
+        align-self: center;
     }
 
     .leftPanel__content.caption {
@@ -208,13 +220,20 @@ body {
     }
 
     .wrap__panel.right {
-        height: 70vh;
+        height: 85vh;
+        width: 100%;
         align-self: center;
         grid-template-areas: "eingang . .";
+        grid-template-columns: repeat(3, 1fr);
     }
 
         .right__panel__content {
             justify-content: center;
+            grid-template-columns: auto;
+            grid-template-rows: 70% 30%;
+            width: 90%;
+            height: 100%;
+            justify-self: center;
         }
 
         .right__panel__content.eingang {
@@ -222,15 +241,18 @@ body {
         }
 
         .rightPanel__content.caption.x {
-            visibility: hidden;
+            display: none;
         }
 
         .rightPanel__content.span {
-            font-size: 50vh;
+            grid-row: 1;
+            justify-self: center;
+            font-size: 60vh;
         }
 
         .rightPanel__content.caption.text {
-            font-size: 20vh;
+            grid-row: 2;
+            font-size: 18vh;
         }
 }
 
@@ -245,10 +267,11 @@ body {
     }
 
     .rightPanel__content.caption.x {
-        visibility: hidden;
+        display: none;
     }
 
     .rightPanel__content.caption.text {
-        font-size: 27vh;
+        font-size: 26vh;
+        padding-bottom: 10px;
     }
 }

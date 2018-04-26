@@ -23,12 +23,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
             //
             //Fügt nach dem Page reload die gespeicherten Werte in die entsprechenden html Elemente ein
-            $('#daily-lfgb').html(localStorage.getItem('lfgbAnzahl'));
-            $('#daily-Textil').html(localStorage.getItem('textilAnzahl'));
-            $('#daily-zpn').add($('#panel-zpn')).html(localStorage.getItem('zpnAnzahl'));
-            $('#panel-zpnKlaerfall').html(localStorage.getItem('zpnKlaerfaelle'));
-            $('#panel-zpnMusterEingang').html(localStorage.getItem('zpnMustereingang'));
-            $('#panel-zpnWagen').html(localStorage.getItem('zpnWagen'));
+            localStorage.getItem('lfgbAnzahl') == 0 ? $('#daily-lfgb').html(0) : $('#daily-lfgb').html(localStorage.getItem('lfgbAnzahl'));
+            localStorage.getItem('textilAnzahl') == 0 ? $('#daily-Textil').html(0) : $('#daily-Textil').html(localStorage.getItem('textilAnzahl'));
+            localStorage.getItem('zpnAnzahl') == 0 ? $('#daily-zpn').add($('#panel-zpn')).html(0) : $('#daily-zpn').add($('#panel-zpn')).html(localStorage.getItem('zpnAnzahl'));
+            localStorage.getItem('zpnKlaerfaelle') == 0 ? $('#panel-zpnKlaerfall').html(0) : $('#panel-zpnKlaerfall').html(localStorage.getItem('zpnKlaerfaelle'));
+            localStorage.getItem('zpnMustereingang') == 0 ? $('#panel-zpnMusterEingang').html(0) : $('#panel-zpnMusterEingang').html(localStorage.getItem('zpnMustereingang'));
+            localStorage.getItem('zpnWagen') == 0 ? $('#panel-zpnWagen').html(0) : $('#panel-zpnWagen').html(localStorage.getItem('zpnWagen'));
 
             //
             //Fügt die aus dem Ajax call erhaltenen Werte, wenn nicht schon im localStorage identisch in die entpsprechenden html Elemente ein
