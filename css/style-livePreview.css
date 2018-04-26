@@ -196,7 +196,7 @@ body {
 @media (max-height: 250px) {
 
     .wrap__footer__panel__items {
-        grid-template-columns: 20% .1% auto;
+        grid-template-columns: 15% .1% auto;
     }
 
     .wrap__panel.left {
