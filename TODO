@@ -56,6 +56,8 @@ Todo:
         ✘ Datenbank -> wenn kein ZPN Mustereingang vorhanden, auch nicht zulassen! @critical @cancelled(18-04-17 00:36)
         ✔ JS -> Antwort Nochmal den Vorgang überprüfen wenn keinerlei Eingang registriert war @critical @done(18-04-16 21:20)
 
+        ☐ JS -> Langes Etikett scan wird mit falscher Probennummer wiedergegeben
+
     Beurteilung Seite:
         ✔ HTML -> Seite erstellen @done(18-04-15 20:47)
         ✔ HTML -> Doppelte Input Abfrage: "Probennummer" und "an Abteilung" @done(18-04-15 20:47)
