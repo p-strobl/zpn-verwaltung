@@ -52,11 +52,10 @@ Todo:
         ✔ JS -> Button Status Funktion umstrukturieren!! @done(18-04-04 13:56)
         ✔ JS -> Umstrukturierung der aktiven Button abfrage!! @high @done(18-04-07 23:33)
         ✔ JS -> Wenn ein Button mit preSet geholt wurde, den Anfangs-button davon disablen @done(18-04-15 23:25)
+        ✔ JS -> Antwort Nochmal den Vorgang überprüfen wenn keinerlei Eingang registriert war @critical @done(18-04-16 21:20)
+        ☐ JS -> Langes Etikett scan wird mit falscher Probennummer wiedergegeben
 
         ✘ Datenbank -> wenn kein ZPN Mustereingang vorhanden, auch nicht zulassen! @critical @cancelled(18-04-17 00:36)
-        ✔ JS -> Antwort Nochmal den Vorgang überprüfen wenn keinerlei Eingang registriert war @critical @done(18-04-16 21:20)
-
-        ☐ JS -> Langes Etikett scan wird mit falscher Probennummer wiedergegeben
 
     Beurteilung Seite:
         ✔ HTML -> Seite erstellen @done(18-04-15 20:47)
@@ -68,11 +67,12 @@ Todo:
     Übersicht Seite:
         ✔ HTML -> Seite erstellen @done(18-04-24 23:13)
 
+        ✔ CSS -> Media Query umd dynamisch die Anzeige als dünnes Fenster anzuzeigen @done(18-04-24 23:13)
+        ☐ CSS -> Hauptmenü Button scale effect.
+
         ✔ JS -> Dynamische Anzeige der bereit leigenden Muster @done(18-04-24 23:13)
         ✔ JS -> Dynamische Anzeige für eingereichte Klärfälle @done(18-04-24 23:13)
         ☐ JS -> Nullstellung des HTML überarbeiten @low 
-
-        ✔ CSS -> Media Query umd dynamisch die Anzeige als dünnes Fenster anzuzeigen @done(18-04-24 23:13)
 
     Datenbank:
         ✔ Datenbank -> SQL Abfrage in Date und Time splitten @done(18-03-27 08:28)
