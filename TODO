@@ -39,11 +39,15 @@ Todo:
 
         ✔ JS -> Keine Verbindung zum Server meldung abfangen @done(18-04-22 03:32)
 
-    Eingang Seite:
+    ZPN Eingang Seite:
         ✔ JS -> Auch für den ZPN Muster Eingang eine status Abfrage der Button's @low @done(18-04-04 16:27)
         ✘ JS -> Eingang Input Soll Datum Abfragen @high @cancelled(18-04-08 02:09)
+        ☐ JS -> Doppelter scan für schnellere zusatz Auswahl
 
     Verwaltung Seite:
+
+        Verwaltung modal:
+            ☐ HTML -> Model für einfachere vorbereitung Auswahl
 
         ✔ JS -> ZPN Wagen doppelter Eintrag @done(18-03-12 20:02)
         ✔ JS -> Disable Buttons aufhebung @done(18-03-12 21:27)

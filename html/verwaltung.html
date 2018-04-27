@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="../css/style-global.css">
+    <link rel="stylesheet" type="text/css" href="../css/style-search-modal.css">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <title>Muster Verwaltung</title>
 </head>
@@ -17,6 +18,9 @@
                     <img class="img-home" src="../css/icons/HermesLogo.png" title="Zur&#x00FC;ck zum Hauptmen&#x00FC;.">
                 </a>
                 <p class="header-caption">ZPN Muster Verwaltung</p>
+                <div class="header-search-button-wrap">
+                    <img id="img-search" class="img-search" src="../css/icons/searchIcon.png">
+                </div>
             </div>
             <input class="header-input-eingang border-edged" id="header-input-verwaltung" type="text" value="" spellcheck="false" autocomplete="off"
                 maxlength="12" placeholder="Probennummer..." title="Bitte tragen Sie hier eine g&#x00FC;ltige Probennummer ein.">
@@ -133,6 +137,88 @@
             </section>
         </div>
     </div>
+       <!-- Modal Section -->
+       <section id="wrap-modal" class="wrap__modal">
+        <div id="content-modal" class="content__modal [ transform__item ]">
+            <section class="wrap__modal__header">
+                <p class="modal__header__capture">Muster Verwaltung</p>
+                <p id="modal-header-close" class="modal__header__close">&times;</p>
+                <div class="modal__header__input__wrap">
+                    <input id="modal-header-input" class="modal__header__input" name="modalHeaderInput" type="text" maxlength="12" spellcheck="false"
+                        autocomplete="off" placeholder="Probennummer..." value="">
+                </div>
+                <div class="modal__fail__message__wrap [ transform__item ]" id="modal-fail-message-wrap">
+                    <div class="modal__fail__message__content" id="modal-fail-message-content">
+                    </div>
+                </div>
+            </section>
+            <section id="wrap-modal-content" class="wrap__modal__content [ transform__item ]">
+                <section class="modal__content__header__wrap">
+                    <div class="modal__content__header__caption / probennummer">
+                        <span id="modal-content-caption-nummber-text" class="modal__content__caption__span"></span>
+                    </div>
+                    <div class="modal__content__header__caption / solldatum">
+                        <span id="modal-content-caption-soll-text" class="modal__content__caption__span"></span>
+                    </div>
+                </section>
+
+
+                <section class="modal__content__main__wrap / verwaltung /">
+                    <div class="modal__content__main__item / verwaltung">
+                        <div class="modal__content__main__timing__wrap / status">
+                            <button id="mit60g" class="modal__status / verwaltung" value="deactive">Mit 60g</button>
+                            <button id="mitExpress" class="modal__status / verwaltung" value="deactive">Express</button>
+                            <button id="mitNickel" class="modal__status / verwaltung" value="deactive">Mit Nickel</button>
+                            <button id="mitLfgb" class="modal__status / verwaltung" value="deactive">Aus der LFGB</button>
+                            <button id="mitKlaerfallBack" class="modal__status / verwaltung" value="deactive">Kl&#228;rfall gekl&#228;rt</button>
+                            <button id="mitToys" class="modal__status / verwaltung" value="deactive">Aus Team Toy&#39;s</button>
+                            <button id="mitIntern" class="modal__status / verwaltung" value="deactive">Intern vorziehen</button>
+                        </div>
+                    </div>
+                    <div class="modal__content__main__item / verwaltung bearbeitung /">
+                        <button class="modal__vorbereitung"></button>
+                        <button class="modal__vorbereitung"></button>
+                        <button class="modal__vorbereitung"></button>
+                        <button class="modal__vorbereitung"></button>
+                        <button class="modal__vorbereitung"></button>
+
+                    </div>
+                    <div class="modal__content__main__item / verwaltung / zusatz /">
+                        <button class="modal__zusatz"></button>
+                        <button class="modal__zusatz"></button>
+                        <button class="modal__zusatz"></button>
+                        <button class="modal__zusatz"></button>
+                        <button class="modal__zusatz"></button>
+                        <button class="modal__zusatz"></button>
+                    </div>
+                </section>
+            </section>
+
+
+            <section id="wrap-modal-footer" class="wrap__modal__footer [ transform__item ]">
+                <div id="modal-footer-content-wrap" class="modal__footer__content__wrap">
+                    <div id="modal-footer-span-wrap" class="modal__footer__span__wrap">
+                    </div>
+                </div>
+                <div id="modal-footer-inputPromt-wrap" class="modal__footer__inputPromt__wrap">
+                    <div id="modal-footer-promt-slider" class="modal__footer__promt__slider__wrap [ transform__item ]">
+                        <div class="modal__footer__promt__wrap">
+                            <button id="modal-promt-confirm" class="modal__footer__promt__button / confirmPromt" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um dem Datensatz diesen Kommentar hinzuzuf&#x00FC;gen.">Ja, Kommentar hinzuf&#x00FC;gen</button>
+                            <button id="modal-promt-cancel" class="modal__footer__promt__button / cancelPromt" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn Sie dem Datensatz doch keinen Kommentat hinzuf&#x00FC;gen wollen.">Nein, Kommentar nicht hinzuf&#x00FC;gen</button>
+                        </div>
+                    </div>
+                    <div class="modal__footer__input__wrap">
+                        <input id="modal-footer-input" class="modal__footer__input" spellcheck="true" placeholder="Kommentar Text..." title="Hier k&#x00F6;nnen Sie einen Kommentar zu diesem Datensatz hinterlegen.">
+                    </div>
+                </div>
+            </section>
+            <!-- Storno @ Modal -->
+            <section id="wrap-modal-storno" class="wrap__modal__storno">
+                <div class="modal__storno__wrap">
+                </div>
+            </section>
+        </div>
+    </section>
     <script type="text/javascript" src="../lib/jquery-3.2.1.js"></script>
     <script type="text/javascript" src="../lib/jquery-ui.js"></script>
     <script type="text/javascript" src="../js/script-verwaltung.js"></script>

@@ -141,6 +141,12 @@
     grid-template-columns: repeat(4, 1fr);
 }
 
+.modal__content__main__wrap.verwaltung {
+    grid-row: 2;
+    display: grid;
+    grid-template-columns: repeat(3, 30% 40% 30%);
+}
+
 .modal__content__main__item {
     display: grid;
     height: 45vh;
@@ -175,6 +181,16 @@
 
 .modal__content__main__item.gesamt {
     grid-template-rows: repeat(9, 1fr);
+}
+
+/* Verwaltung */
+
+.modal__content__main__item.verwaltung {
+    width: 94%;
+}
+
+.modal__content__main__item.verwaltung.bearbeitung {
+    height: 50vh;
 }
 
 .modal__content__main__timing__wrap.item-1 {
@@ -219,6 +235,14 @@
 .modal__status.button__set {
     background-color: #FFB700;
 }
+
+/* Verwaltung */
+
+.modal__status.verwaltung {
+    font-size: 1vw;
+}
+
+/* Verwaltung */
 
 .modal__content__main__capture-text {
     grid-column: 1/3;
