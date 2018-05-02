@@ -26,47 +26,13 @@ function getVerwaltungButtonStatus(probenNummer) {
             manaErhaltenDateTime: $("#content-btn-manaErhalten"),
             manaGestelltDateTime: $("#content-btn-manaBestellt"),
             manaZpnWagenDateTime: $("#content-btn-manaEingewogen"),
-            zerlegungStart: $("#content-btn-zerlegungStart"),
+            zerlegungStart: $("#content-btn-zerlegungStart").add('#zerlegungStart'),
             zerlegungEnde: $("#content-btn-zerlegungEnde"),
             zpnWagenDateTime: $("#content-btn-zpnWagen")
         };
 
         baseItems.probenNummer.html(data.base.probenNummer);
         baseItems.sollDatum.html(data.base.sollDatum);
-
-        function setButtonStatus(rowItems, itemKey) {
-            const setItem = rowItems[itemKey];
-            setItem
-                .prop("disabled", true)
-                .addClass("setButtonStatus")
-                .val("preSet");
-            switch (itemKey) {
-                case 'einwaageEnde':
-                    rowItems.einwaageBeginn.disabled === true ? '' : rowItems.einwaageBeginn.prop('disabled', true).addClass('disableMainRowButton');
-                    break;
-                case 'klaerfallEndeDateTime':
-                    rowItems.klaerfallBeginnDateTime.disabled === true ? '' : rowItems.klaerfallBeginnDateTime.prop('disabled', true).addClass('disableMainRowButton');
-                    break;
-                case 'manaErhaltenDateTime':
-                    rowItems.manaEinwaageDateTime.disabled === true ? '' : rowItems.manaEinwaageDateTime.prop('disabled', true).addClass('disableMainRowButton');
-                    break;
-                case 'manaZpnWagenDateTime':
-                    rowItems.manaEinwaageDateTime.disabled === true ? '' : rowItems.manaEinwaageDateTime.prop('disabled', true).addClass('disableMainRowButton');
-                    rowItems.manaErhaltenDateTime.disabled === true ? '' : rowItems.manaErhaltenDateTime.prop('disabled', true).addClass('disableMainRowButton');
-                    rowItems.manaErhaltenDateTime.disabled === true ? '' : rowItems.manaErhaltenDateTime.prop('disabled', true).addClass('disableMainRowButton');
-                    rowItems.manaGestelltDateTime.disabled === true ? '' : rowItems.manaGestelltDateTime.prop('disabled', true).addClass('disableMainRowButton');
-                    break;
-                case 'zerlegungEnde':
-                    rowItems.zerlegungStart.disabled === true ? '' : rowItems.zerlegungStart.prop('disabled', true).addClass('disableMainRowButton');
-                    break;
-                case 'zpnWagenDateTime':
-                    rowItems.einwaageBeginn.disabled === true ? '' : rowItems.einwaageBeginn.prop('disabled', true).addClass('disableMainRowButton');
-                    rowItems.einwaageEnde.disabled === true ? '' : rowItems.einwaageEnde.prop('disabled', true).addClass('disableMainRowButton');
-                    rowItems.zerlegungStart.disabled === true ? '' : rowItems.zerlegungStart.prop('disabled', true).addClass('disableMainRowButton');
-                    rowItems.zerlegungEnde.disabled === true ? '' : rowItems.zerlegungEnde.prop('disabled', true).addClass('disableMainRowButton');
-                    break;
-            }
-        }
 
         $.each(data.date, function (dataKey) {
             $.each(rowItems, function (itemKey) {
@@ -99,37 +65,37 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
         "</p> " +
         "</div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie mit der Zerlegung beginnen möchten.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-zerlegungStart' value='deactive'>Zerlegung<br />Start</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-zerlegungStart' name='anzahlZerlegungStart' value='deactive'>Zerlegung<br />Start</button> " +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der Zerlegung.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-zerlegungEnde' value='deactive'>Zerlegung<br />Ende</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-zerlegungEnde' name='anzahlZerlegungEnde' value='deactive'>Zerlegung<br />Ende</button> " +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie die Einwaage beginnen möchten.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-einwaageBeginn' value='deactive'>Einwaage<br />Start</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-einwaageBeginn' name='anzahlEinwaageStart' value='deactive'>Einwaage<br />Start</button> " +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der Einwaage.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-einwaageEnde' value='deactive'>Einwaage<br />Ende</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-einwaageEnde' name='anzahlEinwaageEnde' value='deactive'>Einwaage<br />Ende</button> " +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn Sie die Einwaage&#47;n&#10;auf dem ZPN Wagen bereit gestellt habe&#47;n.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-zpnWagen' value='deactive'>ZPN<br />Wagen</button>" +
+        " <button type='button' class='content-button-check' id='content-btn-zpnWagen' name='anzahlZpnWagen' value='deactive'>ZPN<br />Wagen</button>" +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn Sie einen Kl&#228;rfall beginnen möchten.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-klaerfallBeginn' value='deactive'>Kl&#228;rfall<br />Beginn</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-klaerfallBeginn' name='anzahlKlaerfallStart' value='deactive'>Kl&#228;rfall<br />Beginn</button> " +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn eine Kl&#228;rfall beendet wurde.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-klaerfallEnde' value='deactive'>Kl&#228;rfall<br />Ende</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-klaerfallEnde' name='anzahlKlaerfallEnde' value='deactive'>Kl&#228;rfall<br />Ende</button> " +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn Sie eine MaNa bestellt haben.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-manaBestellt' value='deactive'>MaNa<br />Bestellt</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-manaBestellt' name='anzahlManaBestellt' value='deactive'>MaNa<br />Bestellt</button> " +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn Sie das MaNa Material erhalten haben.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-manaErhalten' value='deactive'>MaNa<br />Erhalten</button>" +
+        " <button type='button' class='content-button-check' id='content-btn-manaErhalten' name='anzahlManaErhalten' value='deactive'>MaNa<br />Erhalten</button>" +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn Sie die MaNa Einwaage beginnen möchten.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-manaEinwaage' value='deactive'>MaNa<br />Einwaage</button>" +
+        " <button type='button' class='content-button-check' id='content-btn-manaEinwaage' name='anzahlManaEinwaage' value='deactive'>MaNa<br />Einwaage</button>" +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der MaNa Einwaage.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-manaEingewogen' value='deactive'>MaNa<br />Eingewogen</button>" +
+        " <button type='button' class='content-button-check' id='content-btn-manaEingewogen' name='anzahlManaZpnWagen' value='deactive'>MaNa<br />Eingewogen</button>" +
         " </div> " +
         " <div class='content-main-cell verwaltung'> " +
         " <div class='content-button-delete-wrap'> " +
@@ -150,8 +116,11 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
     hasDisaplayNone($wrapContent$wrapFooter, $headerInput);
     ///Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
     $contentHeaderRow.after(contentAppend);
+
     //Ruft die Funktion "countRows" auf um die Anzahl der vorhandenen Datensätze zu zählen.
     countMainRows.addHighlight('highlight', '#FFB700', 100);
+
+    footerGlobalCounter();
 }
 
 //

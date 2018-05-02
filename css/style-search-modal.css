@@ -5,8 +5,6 @@
     top: -100%;
     left: 0;
     z-index: 10;
-    /* transform-origin: top; */
-    /* transition: all .4s; */
     display: grid;
 }
 
@@ -17,18 +15,13 @@
 
 .content__modal {
     display: grid;
-    grid-template-rows: 15% 60% 25%;
+    grid-template-rows: 15% 65% 20%;
     width: 80vw;
     height: 97vh;
     background-color: #0091CD;
-    /* position: absolute; */
-    /* top: 50%; */
-    /* left: 50%; */
     transform-origin: top;
-    /* transform: translate(-50%, -50%); */
     border-radius: .2vw;
     box-shadow: 0px 0px 20px 5px rgba(0, 0, 0,.5);
-    /* transition: all .4s; */
     place-self: center;
 }
 
@@ -109,10 +102,6 @@
     transform-origin: top;
 }
 
-.transform__modal__content {
-    /* transform-origin: top; */
-}
-
 /*Modal Content Header*/
 
 .modal__content__header__wrap {
@@ -155,7 +144,6 @@
     place-self: center;
     border-radius: .2vw;
     background-color: gainsboro;
-    /* box-shadow: 0px 0px 12px 1px rgba(0, 0, 0,.5); */
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,.5);
 }
 
@@ -183,14 +171,23 @@
     grid-template-rows: repeat(9, 1fr);
 }
 
-/* Verwaltung */
+/* Verwaltung.html */
 
 .modal__content__main__item.verwaltung {
     width: 94%;
 }
 
 .modal__content__main__item.verwaltung.bearbeitung {
+    grid-template-columns: 1fr 1fr;
     height: 50vh;
+}
+
+.modal__content__main__item.verwaltung.vorbereitung {
+
+}
+
+.modal__content__main__item.verwaltung.zusatz {
+
 }
 
 .modal__content__main__timing__wrap.item-1 {
@@ -218,7 +215,7 @@
     border: 1px solid #0091CD;
     border-radius: .2vw;
     background-color: transparent;
-    color: #0091CD;
+    /* color: #0091CD; */
     text-align: left;
     padding-left: 2vw;
 }
@@ -239,7 +236,31 @@
 /* Verwaltung */
 
 .modal__status.verwaltung {
-    font-size: 1vw;
+    height: 90%;
+    font-size: 1.3vw;
+    text-align: center;
+    padding: 0;
+}
+
+.modal__status.verwaltung.status {
+    /* padding-left: 4vw; */
+    
+}
+
+.modal__status.verwaltung.vorbereitung {
+    width: 96%;
+    font-size: 2.2vw;
+
+}
+
+    .modal__status.verwaltung.vorbereitung.zpnWagen {
+        grid-column: 1/3;
+        font-size: 2.5vw;
+        width: 98%;
+    }
+
+.modal__status.verwaltung.zusatz {
+
 }
 
 /* Verwaltung */
@@ -348,7 +369,6 @@
     border-top: 1px dashed gainsboro;
     width: 90%;
     justify-self: center;
-    /* text-align: center; */
 }
 
 .modal__append__span.text {
@@ -364,12 +384,8 @@
 /* Modal appended Element Scrollbar */
 
 #modal-footer-span-wrap::-webkit-scrollbar {
-    width: .2vw;
+    width: .5vw;
 }
-
-/* #modal-footer-content-wrap::-webkit-scrollbar-button {} */
-
-/* #modal-footer-content-wrap::-webkit-scrollbar-corner {} */
 
 #modal-footer-span-wrap::-webkit-scrollbar-thumb {
     border-radius: .2vw;
@@ -392,10 +408,8 @@
 .transform__item {
     transform: scaleY(0);
     transition: transform .3s ease;
-    overflow-y: hidden;
 }
 
 .transform__item.transform__modal {
     transform: scaleY(1);
-    overflow-y: visible;
 }

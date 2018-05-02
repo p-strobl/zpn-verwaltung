@@ -21,8 +21,10 @@
                     <img id="img-search" class="img-search" src="../css/icons/searchIcon.png">
                 </div>
             </div>
-            <input id="header-input-eingang" class="header-input-eingang border-edged" type="text" spellcheck="false" placeholder="Probennummer..."
+            <input id="header-input-eingang" class="header-input-eingang" type="text" spellcheck="false" placeholder="Probennummer..."
                 autocomplete="off" title="Bitte tragen Sie hier eine g&#x00FC;ltige Probennummer ein.">
+            <input id="header-input-eingang-zusatz" class="header-input-eingang zusatz border-edged" type="text" spellcheck="false" placeholder="Probenzusatz..."
+                autocomplete="off" title="Bitte tragen Sie hier ein, welchen Zusatzstatus diese Proben hat." disabled="disabled">
             <div class="header-fail-message-wrap" id="header-fail-message-wrap">
                 <div class="header-fail-message-content" id="header-fail-message-content">
                 </div>
@@ -43,41 +45,41 @@
                 <div class="content-header-cell">Entfernen</div>
             </section>
             <section class="content-footer-count-row eingang" id="content-footer-count-row">
-                <div class="content-footer-count-input eingang probenSoll" title="Anzahl der eingetragenen Muster.">Muster Anzahl
+                <div class="content-footer-count-input eingang probenSoll" name="anzahlMuster" title="Anzahl der eingetragenen Muster.">Muster Anzahl
                     <br/>
                     <span class="content-footer-counter" id="content-footer-counter-muster">0</span> x
                 </div>
                 <div class="content-footer-count-input eingang sollDatum">
                 </div>
-                <div class="content-footer-count-input eingang express" title="Anzahl der aufgef&#252;hrten Express Muster.">Express
+                <div class="content-footer-count-input eingang express" name="anzahlExpress" title="Anzahl der aufgef&#252;hrten Express Muster.">Express
                     <br/>
                     <span class="content-footer-counter" id="content-footer-counter-express">0</span> x
                 </div>
-                <div class="content-footer-count-input eingang iVorziehen" title="Anzahl der aufgef&#x00FC;hrten Intern Vorziehen Muster.">Intern Vorziehen
+                <div class="content-footer-count-input eingang iVorziehen" name="anzahlIntern" title="Anzahl der aufgef&#x00FC;hrten Intern Vorziehen Muster.">Intern Vorziehen
                     <br/>
                     <span class="content-footer-counter" id="content-footer-counter-intern">0</span> x
                 </div>
-                <div class="content-footer-count-input eingang nickel" title="Anzahl der aufgef&#x00FC;hrten Nickel Muster.">Nickel
+                <div class="content-footer-count-input eingang nickel" name="anzahlMitNickel" title="Anzahl der aufgef&#x00FC;hrten Nickel Muster.">Nickel
                     <br/>
                     <span class="content-footer-counter" id="content-footer-counter-nickel">0</span> x
                 </div>
-                <div class="content-footer-count-input eingang lfgb" title="Anzahl der Muster die aus der LFGB zur&#x00FC;ck gekommen sind.">Aus der LFGB
+                <div class="content-footer-count-input eingang lfgb" name="anzahlLfgb" title="Anzahl der Muster die aus der LFGB zur&#x00FC;ck gekommen sind.">Aus der LFGB
                     <br/>
                     <span class="content-footer-counter" id="content-footer-counter-LFGB">0</span> x
                 </div>
-                <div class="content-footer-count-input eingang toys" title="Anzahl der Mister die vom Team Toy&#39;s gekommen sind.">Toys
+                <div class="content-footer-count-input eingang toys" name="anzahlToys" title="Anzahl der Mister die vom Team Toy&#39;s gekommen sind.">Toys
                     <br/>
                     <span class="content-footer-counter" id="content-footer-counter-toys">0</span> x
                 </div>
-                <div class="content-footer-count-input eingang g60" title="Anzahl der Muster bei den 60g f&#x00FC;r die LFGB vorbereitet werden m&#x00FC;ssen.">Mit 60g
+                <div class="content-footer-count-input eingang g60" name="anzahl60g" title="Anzahl der Muster bei den 60g f&#x00FC;r die LFGB vorbereitet werden m&#x00FC;ssen.">Mit 60g
                     <br/>
                     <span class="content-footer-counter" id="content-footer-counter-60g">0</span> x
                 </div>
-                <div class="content-footer-count-input eingang geklaert" title="Anzahl der Kl&#x00E4;rf&#x00E4;lle die gekl&#x00E4;rt wurden.">Kl&#228;rfall gekl&#228;rt
+                <div class="content-footer-count-input eingang geklaert" name="anzahlKlaerfall" title="Anzahl der Kl&#x00E4;rf&#x00E4;lle die gekl&#x00E4;rt wurden.">Kl&#228;rfall gekl&#228;rt
                     <br/>
                     <span class="content-footer-counter" id="content-footer-counter-klaerfallBack">0</span> x
                 </div>
-                <div class="content-footer-count-input eingang geklaert" title="Anzahl der Nickel R&#x00FC;ckgaben.">Nickel R&#x00FC;ckgabe
+                <div class="content-footer-count-input eingang geklaert" name="anzahlNickelBack" title="Anzahl der Nickel R&#x00FC;ckgaben.">Nickel R&#x00FC;ckgabe
                     <br/>
                     <span class="content-footer-counter" id="content-footer-counter-nickelBack">0</span> x
                 </div>
@@ -146,7 +148,7 @@
                         </div>
                         <div class="modal__content__main__timing__wrap / item-1">
                             <p class="modal__content__main__capture-text / eingang">
-                                <span id="spanAnEingang"></span> Muster Eingang</p>
+                                <!-- <span id="spanAnEingang"></span> -->ZPN Muster Eingang</p>
                             <span id="modal-pullSql-zpnEingang-date" class="modal__content__main__pullSql__item / eingang"></span>
                             <span id="modal-pullSql-zpnEingang-time" class="modal__content__main__pullSql__item / eingang"></span>
                         </div>

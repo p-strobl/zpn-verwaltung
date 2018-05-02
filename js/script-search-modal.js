@@ -1,4 +1,4 @@
-'use strict'
+'use strict';
 
 //Leert alle Zeit Angaben der Verwaltungs Anzeige
 function resetDetails() {
@@ -21,7 +21,8 @@ function resetDetails() {
     modalStatusItems.each(function () {
         $(this)
             .val('deactive')
-            .removeClass('statusButton-preSet');
+            .removeClass('statusButton-preSet disableMainRowButton setButtonStatus')
+            .prop('disabled', false);
     });
 }
 
@@ -159,14 +160,40 @@ function searchDataSet(probenNummer) {
                     mitLfgb: $('#mitLfgb'),
                     mitNickel: $('#mitNickel'),
                     mitToys: $('#mitToys'),
-                    anAbteilung: $('#spanAnEingang')
+                    anAbteilung: $('#spanAnEingang'),
                 },
                 kommentar: {
                     kommentarDate: $('#modal-footer-span-date'),
                     kommentarText: $('#modal-footer-span-text'),
                     kommentarTime: $('#modal-footer-span-time')
+                },
+                verwaltungItems: {
+                    klaerfallBeginnDateTime: $('#klaerfallBeginn'),
+                    klaerfallEndeDateTime: $('#klaerfallEnde'),
+                    manaGestelltDateTime: $('#manaBestellt'),
+                    manaErhaltenDateTime: $('#manaErhalten'),
+                    manaEinwaageDateTime: $('#manaEinwaage'),
+                    manaZpnWagenDateTime: $('#manaEingewogen'),
+                    zerlegungStart: $('#zerlegungStart'),
+                    zerlegungEnde: $('#zerlegungEnde'),
+                    einwaageBeginn: $('#einwaageStart'),
+                    einwaageEnde: $('#einwaageEnde'),
+                    zpnWagenDateTime: $('#zpnWagen'),
                 }
-            }
+            };
+            const modalVerwaltungItems = {
+                einwaageBeginn: $("#einwaageStart"),
+                einwaageEnde: $("#einwaageEnde"),
+                klaerfallBeginnDateTime: $("#klaerfallBeginn"),
+                klaerfallEndeDateTime: $("#klaerfallEnde"),
+                manaEinwaageDateTime: $("#manaEinwaage"),
+                manaErhaltenDateTime: $("#manaErhalten"),
+                manaGestelltDateTime: $("#manaBestellt"),
+                manaZpnWagenDateTime: $("#manaEingewogen"),
+                zerlegungStart: $('#zerlegungStart'),
+                zerlegungEnde: $("#zerlegungEnde"),
+                zpnWagenDateTime: $("#zpnWagen")
+            };
 
             // Befüllt das Kommentarfeld
             function setKommentar(kommentarItem) {
@@ -197,13 +224,21 @@ function searchDataSet(probenNummer) {
                         statusKey === 'anAbteilung' ? toFillStatusValue.html(statusValue) : '';
                         return false;
                     }
-
                 });
             });
             $.each(data.date, (dateKey, dateValue) => {
                 $.each(toFillItems.date, (toFillDateKey, toFillDateValue) => {
                     if (dateKey === toFillDateKey) {
                         toFillDateValue.html(dateValue);
+                        return false;
+                    }
+                });
+                $.each(toFillItems.verwaltungItems, (toFillverwaltungItemsKey, toFillverwaltungItemsValue) => {
+                    if (dateKey === toFillverwaltungItemsKey) {
+                        toFillverwaltungItemsValue.val(dateValue).addClass('disableMainRowButton setButtonStatus').prop('disabled', true);
+                        $.each(modalVerwaltungItems, function (itemKey) {
+                            itemKey === dateKey ? setButtonStatus(modalVerwaltungItems, itemKey) : "";
+                        });
                         return false;
                     }
                 });
@@ -264,11 +299,39 @@ const updateStatusButton = () => {
 
     modalStatusButton.on('click', function () {
         const probenNummer = $('#modal-content-caption-nummber-text').html();
+        const sollDatum = $('#modal-content-caption-soll-text').html();
+        let setButton = $(this);
         let statusButtonID = $(this).attr('id');
         let statusButtonValue = $(this).attr('value');
 
+        const modalVerwaltungStatus = {
+            mit60g: $('#mit60g'),
+            mitExpress: $('#mitExpress'),
+            mitIntern: $('#mitIntern'),
+            mitKlaerfallBack: $('#mitKlaerfallBack'),
+            mitLfgb: $('#mitLfgb'),
+            mitNickel: $('#mitNickel'),
+            mitToys: $('#mitToys'),
+            anAbteilung: $('#spanAnEingang')
+        };
+
+        const modalVerwaltungVorbereitung = {
+            zerlegungStart: $('#zerlegungStart').attr('value'),
+            zerlegungEnde: $('#zerlegungEnde').attr('value'),
+            einwaageStart: $('#einwaageStart').attr('value'),
+            einwaageEnde: $('#einwaageEnde').attr('value'),
+            zpnWagen: $('#zpnWagen').attr('value'),
+            klaerfallBeginn: $('#klaerfallBeginn').attr('value'),
+            klaerfallEnde: $('#klaerfallEnde').attr('value'),
+            manaBestellt: $('#manaBestellt').attr('value'),
+            manaErhalten: $('#manaErhalten').attr('value'),
+            manaEinwaage: $('#manaEinwaage').attr('value'),
+            manaEingewogen: $('#manaEingewogen').attr('value')
+        };
+
         let sendData = {
             probenNummer: probenNummer,
+            sollDatum: sollDatum,
             statusButtonID: statusButtonID,
             statusButtonValue: statusButtonValue
         }
@@ -279,29 +342,80 @@ const updateStatusButton = () => {
             sendData.statusButtonValue = 'active'
         }
 
-        const ajaxRequestStatusButton = $.ajax({
-            url: '../php/db-modalStatusUpdate.php',
-            method: 'POST',
-            data: {
-                updateModalStatus: sendData
-            },
-            dataType: 'json'
-        });
+        if (sendData.statusButtonID in modalVerwaltungStatus) {
+            const ajaxRequestStatusButton = $.ajax({
+                url: '../php/db-modalStatusUpdate.php',
+                method: 'POST',
+                data: {
+                    updateModalStatus: sendData
+                },
+                dataType: 'json'
+            });
 
-        ajaxRequestStatusButton.done((data) => {
-            if (data.success === true && data.successItem === probenNummer) {
-                this.id = data.statusButtonID;
-                this.value = data.statusButtonValue;
-                $(this).toggleClass('statusButton-preSet');
-            }
-        });
+            ajaxRequestStatusButton.done((data) => {
+                if (data.success === true && data.successItem === probenNummer) {
+                    this.id = data.statusButtonID;
+                    this.value = data.statusButtonValue;
+                    $(this).toggleClass('statusButton-preSet');
+                }
+            });
 
-        ajaxRequestStatusButton.fail((jqXHR, textStatus, errorThrown) => {
-            const modalHeaderInput = $('#modal-header-input');
-            //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
-            showFailMessage.failMessage('fail-connect', 3000, modalHeaderInput.attr('id'));
-            console.log(textStatus, errorThrown);
-        });
+            ajaxRequestStatusButton.fail((jqXHR, textStatus, errorThrown) => {
+                const modalHeaderInput = $('#modal-header-input');
+                //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
+                showFailMessage.failMessage('fail-connect', 3000, modalHeaderInput.attr('id'));
+                console.log(textStatus, errorThrown);
+            });
+        }
+
+        if (sendData.statusButtonID in modalVerwaltungVorbereitung) {
+
+            statusButtonValue === 'deactive' ? statusButtonValue = 'active' : statusButtonValue = 'deactive';
+
+            sendData[statusButtonID] = statusButtonValue;
+
+            const sendPack = []
+            sendPack.push(sendData);
+
+            const ajaxRequestUpdate = $.ajax({
+                url: "../php/db-update.php",
+                method: "POST",
+                data: {
+                    updateDataSet: sendPack
+                },
+                dataType: "json"
+            });
+
+            ajaxRequestUpdate.done(function (data) {
+
+                const modalVerwaltungItems = {
+                    einwaageBeginn: $("#einwaageStart"),
+                    einwaageEnde: $("#einwaageEnde"),
+                    klaerfallBeginnDateTime: $("#klaerfallBeginn"),
+                    klaerfallEndeDateTime: $("#klaerfallEnde"),
+                    manaEinwaageDateTime: $("#manaEinwaage"),
+                    manaErhaltenDateTime: $("#manaErhalten"),
+                    manaGestelltDateTime: $("#manaBestellt"),
+                    manaZpnWagenDateTime: $("#manaEingewogen"),
+                    zerlegungStart: $('#zerlegungStart'),
+                    zerlegungEnde: $("#zerlegungEnde"),
+                    zpnWagenDateTime: $("#zpnWagen")
+                };
+
+                setButton.prop('disabled', true).addClass('disableMainRowButton setButtonStatus');
+                statusButtonValue = 'active';
+                Object.entries(modalVerwaltungItems).forEach(([itemKey, itemValue]) => {
+                    itemValue.attr('id') === statusButtonID ? setButtonStatus(modalVerwaltungItems, itemKey) : "";
+                });
+            });
+
+            ajaxRequestUpdate.fail(function (jqXHR, textStatus, errorThrown) {
+                const modalHeaderInput = $('#modal-header-input');
+                //Blendet für 6 sek. eine "Verbindung Fehlgeschlagen" auskunft ein.
+                showFailMessage.failMessage('fail-connect', 3000, modalHeaderInput.attr('id'));
+                console.log(textStatus, errorThrown);
+            });
+        }
     });
 }
 

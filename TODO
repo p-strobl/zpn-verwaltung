@@ -6,13 +6,16 @@ Todo:
         ☐ All JS -> Funktionen zusammen führen @critical
         ✔ All JS -> .focus() geht nicht @critical @done(18-04-16 21:26)
         ✔ All JS -> globalMainRowCounter nach dem löschen eines Eintrags, löscht den falschen! @critical @done(18-04-17 00:34)
+        ✔ All JS -> Fehlabfang bei 2. Eingabe, wird nicht angezeigt. @done(18-05-01 01:55)
+        ✘ All JS -> Effect on Parent bei der Beurteilung und ZPN Eingang neu Eintrag von Zeilen @cancelled(18-05-01 02:02) | Unötig
 
         ✔ Fehler Meldung keine Server Verbindung! @critical @done(18-04-22 03:32)
 
         ☐ HTML -> Bubble Nachricht über Element hover @low
-        ☐ HTML -> Hübschere Scrollbar @low 
+        ✔ HTML -> Hübschere Scrollbar @low @done(18-05-01 00:50)
 
         ☐ All CSS -> Font size unit anpassen! @low
+        ✔ All CSS -> Alle Klickbaren Icons sollen einen Scale effekt bekommen. @done(18-04-30 23:52)
 
         ✔ PHP/DATENBANK/JS -> Neues Object Abfrage und verarbeitung @done(18-04-03 20:53)
 
@@ -39,15 +42,14 @@ Todo:
 
         ✔ JS -> Keine Verbindung zum Server meldung abfangen @done(18-04-22 03:32)
 
+        ☐ Datenbank -> Muster zuerst bei der LFGB dann in die ZPN daten speichern.@high 
+
     ZPN Eingang Seite:
         ✔ JS -> Auch für den ZPN Muster Eingang eine status Abfrage der Button's @low @done(18-04-04 16:27)
         ✘ JS -> Eingang Input Soll Datum Abfragen @high @cancelled(18-04-08 02:09)
-        ☐ JS -> Doppelter scan für schnellere zusatz Auswahl
+        ✔ JS -> Doppelter scan für schnellere zusatz Auswahl @done(18-04-30 23:49)
 
     Verwaltung Seite:
-
-        Verwaltung modal:
-            ☐ HTML -> Model für einfachere vorbereitung Auswahl
 
         ✔ JS -> ZPN Wagen doppelter Eintrag @done(18-03-12 20:02)
         ✔ JS -> Disable Buttons aufhebung @done(18-03-12 21:27)
@@ -57,10 +59,12 @@ Todo:
         ✔ JS -> Umstrukturierung der aktiven Button abfrage!! @high @done(18-04-07 23:33)
         ✔ JS -> Wenn ein Button mit preSet geholt wurde, den Anfangs-button davon disablen @done(18-04-15 23:25)
         ✔ JS -> Antwort Nochmal den Vorgang überprüfen wenn keinerlei Eingang registriert war @critical @done(18-04-16 21:20)
-        ☐ JS -> Langes Etikett scan wird mit falscher Probennummer wiedergegeben
+        ✘ JS -> Langes Etikett scan wird mit falscher Probennummer wiedergegeben @cancelled(18-05-01 00:57) | Nicht reproduzierbar, im betrieb beobachten
 
         ✘ Datenbank -> wenn kein ZPN Mustereingang vorhanden, auch nicht zulassen! @critical @cancelled(18-04-17 00:36)
 
+        Verwaltung Modal:
+            ✔ HTML -> Model für einfachere vorbereitung Auswahl @done(18-04-30 23:49)
     Beurteilung Seite:
         ✔ HTML -> Seite erstellen @done(18-04-15 20:47)
         ✔ HTML -> Doppelte Input Abfrage: "Probennummer" und "an Abteilung" @done(18-04-15 20:47)
@@ -68,15 +72,21 @@ Todo:
         ✔ JS -> Button Status Funktion hinzufügen @done(18-04-15 20:47)
         ✔ JS -> Falsch Eingabe der Probennummer führt bei korrigierter Doppeleintrag zu zwei nummern! @critical @done(18-04-17 00:35)
 
+    LFGB Seite:
+        ☐ HTML -> Seite erstellen
+
+    Textilphysik Seite:
+        ☐ HTML -> Seite erstellen
+
     Übersicht Seite:
         ✔ HTML -> Seite erstellen @done(18-04-24 23:13)
 
         ✔ CSS -> Media Query umd dynamisch die Anzeige als dünnes Fenster anzuzeigen @done(18-04-24 23:13)
-        ☐ CSS -> Hauptmenü Button scale effect.
+        ✔ CSS -> Hauptmenü Button scale effect. @done(18-05-01 00:56)
 
         ✔ JS -> Dynamische Anzeige der bereit leigenden Muster @done(18-04-24 23:13)
         ✔ JS -> Dynamische Anzeige für eingereichte Klärfälle @done(18-04-24 23:13)
-        ☐ JS -> Nullstellung des HTML überarbeiten @low 
+        ✘ JS -> Nullstellung des HTML überarbeiten @low @cancelled(18-04-30 23:49) | Siehe Global
 
     Datenbank:
         ✔ Datenbank -> SQL Abfrage in Date und Time splitten @done(18-03-27 08:28)
@@ -87,7 +97,7 @@ Todo:
         ✔ Datenbank -> Primary Key auf die Beurteiler Probennummer setzten und sicherstellen das die Fremdschlüssel gehen @critical @done(18-04-07 23:33)
 
         ✔ PHP -> Seitige Antworten verbessern @done(18-03-19 02:15)
-        ☐ PHP -> Aus der LFGB im ZPN Eingang gibt einen doppelten Datensatz Hinweis zurück! @critical 
+        ✘ PHP -> Aus der LFGB im ZPN Eingang gibt einen doppelten Datensatz Hinweis zurück! @critical @cancelled(18-05-01 00:54) | Nicht reproduzierbar, weierhin im Auge behalten!
 
     ERROR:
         ✔ Datenbank -> StartFalse Eintrag anschauen, geht nicht ohne vorherigem Mustereingang!@critical @done(18-04-12 07:11)

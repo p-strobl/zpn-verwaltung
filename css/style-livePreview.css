@@ -16,6 +16,17 @@ body {
     background-color: #0091cd;
 }
 
+img {
+    -webkit-transition: scale 1s ease-in;
+    -moz-transition: scale 1s ease-in;
+    -o-transition: scale 1s ease-in;
+    transition: scale 1s ease-in;
+}
+
+img:hover {
+    transform: scale(1.2);
+}
+
 .wrap__preview__content {
     height: 100%;
     width: 100%;

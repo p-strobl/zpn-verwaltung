@@ -31,22 +31,11 @@ function appendContentMainRow(probenNummer, abteilung) {
         });
     }
 
-    function addFooterCounter(abteilung) {
-
-        const footerCounter = {
-            ZPN: $('#content-footer-counter-anZPN'),
-            LFGB: $('#content-footer-counter-anLFGB'),
-            Textilphysik: $('#content-footer-counter-anTextilphysik')
-        };
-
-        function addCounter(footerCounterID) {
-            footerCounterID.text(Number(footerCounterID.text()) + 1);
-        }
-
-        Object.entries(footerCounter).forEach(([fcKey, fcValue]) => {
-            fcKey === abteilung ? addCounter(fcValue) : '';
-        });
-    }
+    const footerCounter = {
+        ZPN: $('#content-footer-counter-anZPN'),
+        LFGB: $('#content-footer-counter-anLFGB'),
+        Textilphysik: $('#content-footer-counter-anTextilphysik')
+    };
 
     const inputTextLeft = leftSplit(probenNummer, 12);
     const inputTextRight = rightSplit(probenNummer, 10);
@@ -62,13 +51,13 @@ function appendContentMainRow(probenNummer, abteilung) {
         "<p class='content-main-text' id='text-sollNr' contenteditable='true'>" + inputTextRight + "</p>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'  title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie mit der Zerlegung beginnen möchten.'>" +
-        "<button type='button' class='content-button-check' id='ZPN' value=''>An die ZPN</button>" +
+        "<button type='button' class='content-button-check' id='ZPN' name='anzahlZpn' value=''>An die ZPN</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung '  title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der Zerlegung.'>" +
-        "<button type='button' class='content-button-check' id='LFGB' value=''>An die LFGB</button>" +
+        "<button type='button' class='content-button-check' id='LFGB' name='anzahlLfgb' value=''>An die LFGB</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'  title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie die Einwaage beginnen möchten.'>" +
-        "<button type='button' class='content-button-check' id='Textilphysik' value=''>An die Textilphysik</button>" +
+        "<button type='button' class='content-button-check' id='Textilphysik' name='anzahlTextil' value=''>An die Textilphysik</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'>" +
         "<div class='content-button-delete-wrap'>" +
@@ -90,9 +79,11 @@ function appendContentMainRow(probenNummer, abteilung) {
     //Setzt den entsprechenden Button im HTML auf aktiv
     setBeurteilungStatusButton(abteilung);
     //Addiert dem Footer Counter an entsprechender Stellt hoch
-    addFooterCounter(abteilung);
+    addFooterCounter(abteilung, footerCounter);
     //Ruft die Funktion "countRows" auf um die Anzahl der vorhandenen Datensätze zu zählen.
     countMainRows.addHighlight('highlight', '#FFB700', 100);
+
+    footerGlobalCounter();
 }
 
 //

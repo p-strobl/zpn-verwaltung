@@ -61,9 +61,48 @@ function getEingangButtonStatus(probenNummer) {
     });
 }
 
+//Setzt den entsprechenden status auf den Button um
+function setEingangButtonZusatz(abteilung) {
+
+    const contentBtnItems = {
+        Express: $('#content-btn-chkEx'),
+        Intern: $('#content-btn-chkIntern'),
+        mitNickel: $('#content-btn-chkNi'),
+        LFGB: $('#content-btn-chkLF'),
+        Toys: $('#content-btn-chkToy'),
+        mit60g: $('#content-btn-chk60g'),
+        backKlaerfall: $('#content-btn-chkKlaerBack'),
+        backNickel: $('#content-btn-chkNickelBack')
+    };
+
+    function activeButtonStatus(contentBtnID) {
+        contentBtnID
+            .prop('disabled', false)
+            .addClass('preSet')
+            .removeClass('disableMainRowButton')
+            .val('active');
+    }
+
+    Object.entries(contentBtnItems).forEach(([contentBtnKey, contentBtnValue]) => {
+        contentBtnKey === abteilung ? activeButtonStatus(contentBtnValue) : '';
+    });
+}
+
 //
 //Fügt einen Neuen Datensatz in das HTML ein.
-function appendContentMainRow(inputTextLeft, inputTextRight) {
+function appendContentMainRow(inputTextLeft, inputTextRight, inputZusatz) {
+
+    const footerCounter = {
+        Express: $('#content-footer-counter-express'),
+        Intern: $('#content-footer-counter-intern'),
+        mitNickel: $('#content-footer-counter-nickel'),
+        LFGB: $('#content-footer-counter-LFGB'),
+        Toys: $('#content-footer-counter-toys'),
+        mit60g: $('#content-footer-counter-60g'),
+        backKlaerfall: $('#content-footer-counter-klaerfallBack'),
+        backNickel: $('#content-footer-counter-nickelBack')
+    };
+
     const $contentHeaderRow = $("#content-header-row");
     const $wrapContent$wrapFooter = $("#wrap-content").add($("#wrap-footer"));
     const $headerInputEingang = $("#header-input-eingang");
@@ -80,28 +119,28 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
         "</p> " +
         "</div> " +
         " <div class='content-main-cell' title='Bet&#228;tigen Sie diese Schaltfl&#228;che um diesen Datensatz als &#34;Express&#34; zu markieren.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-chkEx' value='deactive'>Express</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-chkEx' name='anzahlExpress' value='deactive'>Express</button> " +
         " </div> " +
         " <div class='content-main-cell' title='Bet&#228;tigen Sie diese Schaltfl&#228;che um diesen Datensatz als &#34;Intern Vorziehen&#34; zu markieren.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-chkIntern' value='deactive'>Vorziehen</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-chkIntern' name='anzahlIntern' value='deactive'>Vorziehen</button> " +
         " </div> " +
         " <div class='content-main-cell' title='Bet&#228;tigen Sie diese Schaltfl&#228;che um diesen Datensatz als &#34;mit Nickel&#34; zu markieren.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-chkNi' value='deactive'>Mit Nickel</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-chkNi' name='anzahlMitNickel' value='deactive'>Mit Nickel</button> " +
         " </div> " +
         " <div class='content-main-cell' title='Bet&#228;tigen Sie diese Schaltfl&#228;che um diesen Datensatz als &#34;aus der LFGB&#34; zu markieren.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-chkLF' value='deactive'>LFGB</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-chkLF' name='anzahlLfgb' value='deactive'>LFGB</button> " +
         " </div> " +
         " <div class='content-main-cell' title='Bet&#228;tigen Sie diese Schaltfl&#228;che um diesen Datensatz als &#34;aus Team Toy&#39;s&#34; zu markieren.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-chkToy' value='deactive'>Toys</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-chkToy' name='anzahlToys' value='deactive'>Toys</button> " +
         " </div> " +
         " <div class='content-main-cell' title='Bet&#228;tigen Sie diese Schaltfl&#228;che um diesen Datensatz als &#34;mit 60g&#34; zu markieren.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-chk60g' value='deactive'>Mit 60 g</button> " +
+        " <button type='button' class='content-button-check' id='content-btn-chk60g' name='anzahl60g' value='deactive'>Mit 60 g</button> " +
         " </div> " +
         " <div class='content-main-cell' title='Bet&#228;tigen Sie diese Schaltfl&#228;che um diesen Datensatz als &#34;gekl&#228;rten Kl&#228;rfall&#34; zu markieren.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-chkKlaerBack' value='deactive'>Kl&#228;rfall gekl&#228;rt</button>" +
+        " <button type='button' class='content-button-check' id='content-btn-chkKlaerBack' name='anzahlKlaerfall' value='deactive'>Kl&#228;rfall gekl&#228;rt</button>" +
         " </div> " +
         " <div class='content-main-cell' title='Bet&#228;tigen Sie diese Schaltfl&#228;che um diesen Datensatz als &#34;Nickel R&#252;ckgabe&#34; zu markieren.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-chkNickelBack' value='deactive'>Nickel R&#252;ckgabe</button>" +
+        " <button type='button' class='content-button-check' id='content-btn-chkNickelBack' name='anzahlNickelBack' value='deactive'>Nickel R&#252;ckgabe</button>" +
         " </div> " +
         " <div class='content-main-cell'> " +
         " <button type='button' class='content-button-delete' id='content-main-row-delete-button' title='Bet&#228;tigen Sie diese Schaltfl&#228;che um den entfernen Dialog zu starten und zu beenden.'>Entfernen</button> " +
@@ -118,10 +157,17 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
 
     //Zeigt den Tabellen Header, die Tabelle und den sende Button wieder an.
     $wrapContent$wrapFooter.hasClass("displayNoneImportant") === true ? $wrapContent$wrapFooter.removeClass("displayNoneImportant").add($headerInputEingang).removeClass("border-edged") : "";
-    ///Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
+    //Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
     $contentHeaderRow.after(contentAppend);
+
+    setEingangButtonZusatz(inputZusatz);
+
+    addFooterCounter(inputZusatz, footerCounter);
+
     //Ruft die Funktion "countRows" auf um die Anzahl der vorhandenen Datensätze zu zählen.
     countMainRows.addHighlight("highlight", "#FFB700", 100);
+
+    footerGlobalCounter();
 }
 
 //

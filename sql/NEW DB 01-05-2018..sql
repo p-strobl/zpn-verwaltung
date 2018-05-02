@@ -69,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `tbl_kommentar` (
   PRIMARY KEY (`autoID`),
   KEY `probenNummerFK` (`probenNummer`),
   CONSTRAINT `fk_baserecord_kommentar` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_baserecord` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- Daten Export vom Benutzer nicht ausgewählt
 -- Exportiere Struktur von Tabelle zpn-verwaltung.tbl_lfgbmustereingang
@@ -163,7 +163,9 @@ CREATE TABLE IF NOT EXISTS `tbl_zerlegung` (
 CREATE TABLE IF NOT EXISTS `tbl_zpnmustereingang` (
   `probenNummer` char(12) COLLATE utf8_unicode_ci NOT NULL,
   `zpnEingangDateTime` datetime DEFAULT NULL,
+  `ausderLfgbDateTime` datetime DEFAULT NULL,
   `beurteilungZpnBerechnung` time DEFAULT NULL,
+  `lfgbZpnBerechnung` time DEFAULT NULL,
   PRIMARY KEY (`probenNummer`),
   KEY `probenNummerFK` (`probenNummer`),
   CONSTRAINT `fk_baserecord_zpnmustereingang` FOREIGN KEY (`probenNummer`) REFERENCES `tbl_baserecord` (`probenNummer`) ON DELETE CASCADE ON UPDATE CASCADE

@@ -32,7 +32,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
             //
             //Fügt die aus dem Ajax call erhaltenen Werte, wenn nicht schon im localStorage identisch in die entpsprechenden html Elemente ein
-            //&& receivedValue != localStorage.getItem(toFillKey)
             Object.entries(receivedPreviewItems).forEach(([receivedKey, receivedValue]) => {
                 Object.entries(toFillPreviewItems).forEach(([toFillKey, toFillValue]) => {
                     if (receivedKey === toFillKey && receivedValue != localStorage.getItem(toFillKey)) {
