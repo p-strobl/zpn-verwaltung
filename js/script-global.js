@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 //
 //Globaler zähler
@@ -37,6 +37,7 @@ function regexInput() {
         });
 }
 
+//
 //Splittet dein eingegebenen String
 function leftSplit(str, chr) {
     if (str.length > 12) {
@@ -48,6 +49,8 @@ function leftSplit(str, chr) {
         return str;
     }
 }
+
+//
 //Splittet dein eingegebenen String
 function rightSplit(str, chr) {
     const yesRegEx = /\d{2}.\d{2}.\d{4}/;
@@ -250,10 +253,14 @@ const showFailMessage = {
     }
 };
 
+//
+//
 const hasDisaplayNone = ($wrapContent$wrapFooter, $headerInput) => {
     $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : '';
 };
 
+//
+//
 function stripDataPack(dataPack) {
     Object.entries(dataPack).forEach(([dataPackKey, dataPackValue]) => {
         Object.entries(dataPackValue).forEach(([itemKey, itemValue]) => {
@@ -264,6 +271,8 @@ function stripDataPack(dataPack) {
     });
 }
 
+//
+//
 function setButtonStatus(rowItems, itemKey) {
     const setItem = rowItems[itemKey];
     setItem
@@ -325,6 +334,8 @@ function checkForUnchecked(dataPack, headerInput, origin) {
     }
 }
 
+//
+// Bringt den Cursor wieder in das selektierte Eingabefeld.
 const backToInput = (() => {
     const $headerInputBeurteilung = $('#header-input-beurteilung-probennummer');
     const $headerInputEingang = $("#header-input-eingang");
@@ -334,7 +345,6 @@ const backToInput = (() => {
     }, 100);
     return;
 });
-
 
 //
 // Färbt die Anzeige der Datensatz Menge enstprechend, wenn Hinzugefügt: Grün, wenn entfernt: Rot.
@@ -350,6 +360,8 @@ const countMainRows = {
     }
 };
 
+//
+// Addiert den Footer counter
 function addFooterCounter(abteilung, footerCounter) {
 
     function addCounter(footerCounterID) {
@@ -361,10 +373,27 @@ function addFooterCounter(abteilung, footerCounter) {
     });
 }
 
-function removeFooterCounter(activeButton) {
+//
+// Subtrahiert den Footer counter
+function removeFooterCounter(clickedButton) {
 
+    const footerCountRow = $('#content-footer-count-row');
+    const activeButton = clickedButton.closest('#content-main-row').find($('[value=active]'));
+
+    function subtractCounter(parentValue) {
+        let parentSpan = $(parentValue).find('span');
+        parentSpan.text(Number(parentSpan.text()) - 1);
+        $(parentValue).effect("highlight", { color: "#FF3100" }, 200);
+    }
+
+    Object.entries(activeButton).forEach(([activeButtonKey, activeButtonValue]) => {
+        let eachFooterCounterParent = footerCountRow.find($('[name=' + $(activeButtonValue).prop('name') + ']'));
+        $(activeButtonValue).attr('name') === $(eachFooterCounterParent).attr('name') ? subtractCounter(eachFooterCounterParent) : '';
+    });
 }
 
+//
+// Sperrt entsprechend nach Auswahl, die andern Buttons
 function blockButtons(clickedButton) {
     const siblingButtons = clickedButton.parent().siblings().children();
     const blockButtons = {
@@ -402,6 +431,8 @@ function blockButtons(clickedButton) {
     }
 }
 
+//
+// 
 function footerGlobalCounter() {
     let contentMainRow = $('#content-main-row');
     let contentFooterCountRow = $('#content-footer-count-row');
@@ -429,739 +460,6 @@ function footerGlobalCounter() {
         }
     });
 };
-
-
-
-
-//Ermittelt welcher Auswahl-Button gedrückt wurde, und addiert oder subtrahiert die entsprechende Anzeige.
-// function countCheckedButtons() {
-//     const $wrapContent = $("#wrap-content");
-
-//     const $footerAnzahlAnZPN = $('#content-footer-counter-anZPN');
-//     const $footerAnzahlAnLFGB = $('#content-footer-counter-anLFGB');
-//     const $footerAnzahlAnTextil = $('#content-footer-counter-anTextilphysik');
-
-//     const $footerAnzahlExpress = $("#content-footer-counter-express");
-//     const $footerAnzahlIntern = $("#content-footer-counter-intern");
-//     const $footerAnzahlNickel = $("#content-footer-counter-nickel");
-//     const $footerAnzahlLFGB = $("#content-footer-counter-LFGB");
-//     const $footerAnzahlToys = $("#content-footer-counter-toys");
-//     const $footerAnzahl60g = $("#content-footer-counter-60g");
-//     const $footerAnzahlKlaerfall = $("#content-footer-counter-klaerfallBack");
-
-//     const $footerAnzahlZerlegungStart = $("#content-footer-counter-zerlegungStart");
-//     const $footerAnzahlZerlegungEnde = $("#content-footer-counter-zerlegungEnde");
-//     const $footerAnzahlEinwaageBeginn = $("#content-footer-counter-einwaageBeginn");
-//     const $footerAnzahlEinwaageEnde = $("#content-footer-counter-einwaageEnde");
-//     const $footerAnzahlNickelBack = $("#content-footer-counter-nickelBack");
-//     const $footerAnzahlKlaerfallBeginn = $("#content-footer-counter-klaerfallBeginn");
-//     const $footerAnzahlKlaerfallEnde = $("#content-footer-counter-klaerfallEnde");
-//     const $footerAnzahlManaBestellt = $("#content-footer-counter-manaBestellt");
-//     const $footerAnzahlManaErhalten = $("#content-footer-counter-manaErhalten");
-//     const $footerAnzahlManaEinwaage = $("#content-footer-counter-manaEinwaage");
-//     const $footerAnzahlManaEingewogen = $("#content-footer-counter-manaEingewogen");
-//     const $footerAnzahlZpnWagen = $("#content-footer-counter-zpnWagen");
-
-//     function effectOnElement(footerElement, countValue1Buttons, effectColor) {
-//         footerElement
-//             .html($(countValue1Buttons).length)
-//             .parent()
-//             .effect("highlight", effectColor, 200);
-//     }
-
-//     function enableButton(startElement, enableElement, cssClassName) {
-//         if ($(startElement).closest(".content-main-row").find(enableElement).val() === "preSet") {
-//             return false;
-//         } else {
-//             if (startElement.value === "deactive") {
-//                 $(startElement)
-//                     .closest(".content-main-row")
-//                     .find(enableElement)
-//                     .removeClass(cssClassName)
-//                     .attr("disabled", false);
-//             }
-//         }
-//     }
-
-//     function disableButton(startElement, disableElement, cssClassName) {
-//         if (startElement.value === "active") {
-//             $(startElement)
-//                 .closest(".content-main-row")
-//                 .find(disableElement)
-//                 .addClass(cssClassName)
-//                 .attr("disabled", true);
-//         }
-//     }
-
-//     function activateButton(startElement, activeElement) {
-//         if (startElement.value === "active") {
-//             $(startElement)
-//                 .closest(".content-main-row")
-//                 .find(activeElement)
-//                 .css("background-color", "#FFB700")
-//                 .val("active");
-//         }
-//     }
-
-//     function deactiveButton(startElement, deactiveElement) {
-//         if (startElement.value === "deactive") {
-//             $(startElement)
-//                 .closest(".content-main-row")
-//                 .find(deactiveElement)
-//                 .css("background-color", "#ededed")
-//                 .val("deactive");
-//         }
-//     }
-
-//     $wrapContent.on("click", ".content-button-check", function () {
-//         switch (this.value) {
-//             case "deactive":
-//                 $(this)
-//                     .attr("value", "active")
-//                     .css("background-color", "#FFB700");
-//                 switch (this.id) {
-//                     case "ZPN":
-//                         effectOnElement($footerAnzahlAnZPN, '#ZPN[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#LFGB", "disableMainRowButton");
-//                         disableButton(this, "#Textilphysik", "disableMainRowButton");
-//                         break;
-//                     case "LFGB":
-//                         effectOnElement($footerAnzahlAnLFGB, '#LFGB[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#ZPN", "disableMainRowButton");
-//                         disableButton(this, "#Textilphysik", "disableMainRowButton");
-//                         break;
-//                     case "Textilphysik":
-//                         effectOnElement($footerAnzahlAnTextil, '#Textilphysik[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#ZPN", "disableMainRowButton");
-//                         disableButton(this, "#LFGB", "disableMainRowButton");
-//                         break;
-//                     //--------------------------------------------------------------------------------------------------------------------
-//                     case "content-btn-chkEx":
-//                         effectOnElement($footerAnzahlExpress, '#content-btn-chkEx[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         break;
-//                     case "content-btn-chkIntern":
-//                         effectOnElement($footerAnzahlIntern, '#content-btn-chkIntern[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         break;
-//                     case "content-btn-chkNi":
-//                         effectOnElement($footerAnzahlNickel, '#content-btn-chkNi[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-chkNickelBack", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-chkLF":
-//                         effectOnElement($footerAnzahlLFGB, '#content-btn-chkLF[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         break;
-//                     case "content-btn-chkToy":
-//                         effectOnElement($footerAnzahlToys, '#content-btn-chkToy[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         break;
-//                     case "content-btn-chk60g":
-//                         effectOnElement($footerAnzahl60g, '#content-btn-chk60g[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         break;
-//                     case "content-btn-chkKlaerBack":
-//                         effectOnElement($footerAnzahlKlaerfall, '#content-btn-chkKlaerBack[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         break;
-//                     case "content-btn-chkNickelBack":
-//                         effectOnElement($footerAnzahlNickelBack, '#content-btn-chkNickelBack[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-chkNi", "disableMainRowButton");
-//                         break;
-//                     //--------------------------------------------------------------------------------------------------------------------
-//                     case "content-btn-zerlegungStart":
-//                         effectOnElement($footerAnzahlZerlegungStart, '#content-btn-zerlegungStart[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-
-//                     case "content-btn-zerlegungEnde":
-//                         effectOnElement($footerAnzahlZerlegungEnde, '#content-btn-zerlegungEnde[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-
-//                     case "content-btn-einwaageBeginn":
-//                         effectOnElement($footerAnzahlEinwaageBeginn, '#content-btn-einwaageBeginn[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-einwaageEnde":
-//                         effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-
-//                         disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-
-//                     case "content-btn-klaerfallBeginn":
-//                         effectOnElement($footerAnzahlKlaerfallBeginn, '#content-btn-klaerfallBeginn[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-
-//                         disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-klaerfallEnde":
-//                         effectOnElement($footerAnzahlKlaerfallEnde, '#content-btn-klaerfallEnde[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-
-//                         disableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-manaBestellt":
-//                         effectOnElement($footerAnzahlManaBestellt, '#content-btn-manaBestellt[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-
-//                         disableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-manaErhalten":
-//                         effectOnElement($footerAnzahlManaErhalten, '#content-btn-manaErhalten[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-
-//                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-manaEinwaage":
-//                         effectOnElement($footerAnzahlManaEinwaage, '#content-btn-manaEinwaage[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-
-//                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-manaEingewogen":
-//                         effectOnElement($footerAnzahlManaEingewogen, '#content-btn-manaEingewogen[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-
-//                         disableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-zpnWagen":
-//                         disableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         disableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         activateButton(this, "#content-btn-einwaageEnde");
-//                         effectOnElement($footerAnzahlZpnWagen, '#content-btn-zpnWagen[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', {
-//                             color: "#FFB700"
-//                         });
-//                         break;
-//                     default:
-//                 }
-//                 break;
-//             case "active":
-//                 $(this)
-//                     .attr("value", "deactive")
-//                     .css("background-color", "#ededed");
-//                 switch (this.id) {
-//                     case "ZPN":
-//                         effectOnElement($footerAnzahlAnZPN, '#ZPN[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#LFGB", "disableMainRowButton");
-//                         enableButton(this, "#Textilphysik", "disableMainRowButton");
-//                         break;
-//                     case "LFGB":
-//                         effectOnElement($footerAnzahlAnLFGB, '#LFGB[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#ZPN", "disableMainRowButton");
-//                         enableButton(this, "#Textilphysik", "disableMainRowButton");
-//                         break;
-//                     case "Textilphysik":
-//                         effectOnElement($footerAnzahlAnTextil, '#Textilphysik[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#ZPN", "disableMainRowButton");
-//                         enableButton(this, "#LFGB", "disableMainRowButton");
-//                         break;
-//                     //--------------------------------------------------------------------------------------------------------------------
-//                     case "content-btn-chkEx":
-//                         effectOnElement($footerAnzahlExpress, '#content-btn-chkEx[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         break;
-//                     case "content-btn-chkIntern":
-//                         effectOnElement($footerAnzahlIntern, '#content-btn-chkIntern[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         break;
-//                     case "content-btn-chkNi":
-//                         effectOnElement($footerAnzahlNickel, '#content-btn-chkNi[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#content-btn-chkNickelBack", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-chkLF":
-//                         effectOnElement($footerAnzahlLFGB, '#content-btn-chkLF[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         break;
-//                     case "content-btn-chkToy":
-//                         effectOnElement($footerAnzahlToys, '#content-btn-chkToy[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         break;
-//                     case "content-btn-chk60g":
-//                         effectOnElement($footerAnzahl60g, '#content-btn-chk60g[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         break;
-//                     case "content-btn-chkKlaerBack":
-//                         effectOnElement($footerAnzahlKlaerfall, '#content-btn-chkKlaerBack[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         break;
-//                     case "content-btn-chkNickelBack":
-//                         effectOnElement($footerAnzahlNickelBack, '#content-btn-chkNickelBack[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#content-btn-chkNi", "disableMainRowButton");
-//                         break;
-//                     //--------------------------------------------------------------------------------------------------------------------
-//                     case "content-btn-zerlegungStart":
-//                         effectOnElement($footerAnzahlZerlegungStart, '#content-btn-zerlegungStart[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-
-//                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-zerlegungEnde":
-//                         effectOnElement($footerAnzahlZerlegungEnde, '#content-btn-zerlegungEnde[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-
-//                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-einwaageBeginn":
-//                         effectOnElement($footerAnzahlEinwaageBeginn, '#content-btn-einwaageBeginn[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-
-//                         enableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-einwaageEnde":
-//                         effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-
-//                         enableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-
-//                     case "content-btn-klaerfallBeginn":
-//                         effectOnElement($footerAnzahlKlaerfallBeginn, '#content-btn-klaerfallBeginn[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-
-//                         enableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-klaerfallEnde":
-//                         effectOnElement($footerAnzahlKlaerfallEnde, '#content-btn-klaerfallEnde[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-
-//                         enableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-manaBestellt":
-//                         effectOnElement($footerAnzahlManaBestellt, '#content-btn-manaBestellt[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-
-//                         enableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-manaErhalten":
-//                         effectOnElement($footerAnzahlManaErhalten, '#content-btn-manaErhalten[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-
-//                         enableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-manaEinwaage":
-//                         effectOnElement($footerAnzahlManaEinwaage, '#content-btn-manaEinwaage[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-
-//                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-manaEingewogen":
-//                         effectOnElement($footerAnzahlManaEingewogen, '#content-btn-manaEingewogen[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-
-//                         enableButton(this, "#content-btn-zpnWagen", "disableMainRowButton");
-//                         break;
-//                     case "content-btn-zpnWagen":
-//                         enableButton(this, "#content-btn-zerlegungStart", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-zerlegungEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-einwaageBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallBeginn", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-klaerfallEnde", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaBestellt", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaErhalten", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEinwaage", "disableMainRowButton");
-//                         enableButton(this, "#content-btn-manaEingewogen", "disableMainRowButton");
-//                         deactiveButton(this, "#content-btn-einwaageEnde");
-//                         effectOnElement($footerAnzahlZpnWagen, '#content-btn-zpnWagen[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', {
-//                             color: "#FF3100"
-//                         });
-//                         break;
-//                     default:
-//                 }
-//                 break;
-//             default:
-//         }
-//         backToInput();
-//     });
-
-//     //Nach auslösen des Confirm Button wird die im Footer Anzahl angezeigten Zahlen angepasst.
-//     $wrapContent.on("click", "#hidden-row-confirm-button", function () {
-//         const selectedRowCheckedButtons = $(this)
-//             .closest("#content-main-row")
-//             .find(".content-button-check");
-
-//         $.each(selectedRowCheckedButtons, function () {
-//             switch (this.value) {
-//                 case "active":
-//                     $(this)
-//                         .attr("value", "deactive")
-//                         .css("background-color", "#ededed");
-//                     switch (this.id) {
-//                         case "ZPN":
-//                             effectOnElement($footerAnzahlAnZPN, '#ZPN[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "LFGB":
-//                             effectOnElement($footerAnzahlAnLFGB, '#LFGB[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "Textilphysik":
-//                             effectOnElement($footerAnzahlAnTextil, '#Textilphysik[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         //--------------------------------------------------------------------------------------------------------------------
-//                         case "content-btn-chkEx":
-//                             effectOnElement($footerAnzahlExpress, '#content-btn-chkEx[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-chkIntern":
-//                             effectOnElement($footerAnzahlIntern, '#content-btn-chkIntern[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-chkNi":
-//                             effectOnElement($footerAnzahlNickel, '#content-btn-chkNi[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-chkLF":
-//                             effectOnElement($footerAnzahlLFGB, '#content-btn-chkLF[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-chkToy":
-//                             effectOnElement($footerAnzahlToys, '#content-btn-chkToy[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-chk60g":
-//                             effectOnElement($footerAnzahl60g, '#content-btn-chk60g[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-chkKlaerBack":
-//                             effectOnElement($footerAnzahlKlaerfall, '#content-btn-chkKlaerBack[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-chkNickelBack":
-//                             effectOnElement($footerAnzahlNickelBack, '#content-btn-chkNickelBack[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         //--------------------------------------------------------------------------------------------------------------------
-//                         case "content-btn-zerlegungStart":
-//                             effectOnElement($footerAnzahlZerlegungStart, '#content-btn-zerlegungStart[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-zerlegungEnde":
-//                             effectOnElement($footerAnzahlZerlegungEnde, '#content-btn-zerlegungEnde[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-einwaageBeginn":
-//                             effectOnElement($footerAnzahlEinwaageBeginn, '#content-btn-einwaageBeginn[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-einwaageEnde":
-//                             effectOnElement($footerAnzahlEinwaageEnde, '#content-btn-einwaageEnde[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-nickelBack":
-//                             effectOnElement($footerAnzahlNickelBack, '#content-btn-nickelBack[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-klaerfallBeginn":
-//                             effectOnElement($footerAnzahlKlaerfallBeginn, '#content-btn-klaerfallBeginn[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-klaerfallEnde":
-//                             effectOnElement($footerAnzahlKlaerfallEnde, '#content-btn-klaerfallEnde[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-manaBestellt":
-//                             effectOnElement($footerAnzahlManaBestellt, '#content-btn-manaBestellt[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-manaErhalten":
-//                             effectOnElement($footerAnzahlManaErhalten, '#content-btn-manaErhalten[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-manaEinwaage":
-//                             effectOnElement($footerAnzahlManaEinwaage, '#content-btn-manaEinwaage[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-manaEingewogen":
-//                             effectOnElement($footerAnzahlManaEingewogen, '#content-btn-manaEingewogen[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         case "content-btn-zpnWagen":
-//                             effectOnElement($footerAnzahlZpnWagen, '#content-btn-zpnWagen[value="active"]', {
-//                                 color: "#FF3100"
-//                             });
-//                             break;
-//                         default:
-//                     }
-//                     break;
-//                 default:
-//             }
-//         });
-//     });
-//     backToInput();
-// }
 
 //
 //Während dem "hover" über dem Löschen button, wird die gesamte Zeile entprechend eingefärbt.
@@ -1243,7 +541,7 @@ const deleteSelectedRow = function (selectedRow) {
 };
 
 //
-// //Mit einem Slide Effekt wird die bestätigung der löschung des Selektierten Datensatz abgefragt.
+// Mit einem Slide Effekt wird die bestätigung der löschung des Selektierten Datensatz abgefragt.
 function confirmDelete() {
     const $wrapContent = $("#wrap-content");
     $wrapContent.on("click", "#content-main-row-delete-button", function () {
@@ -1257,8 +555,7 @@ function confirmDelete() {
                     .on("click", "#hidden-row-confirm-button", function () {
                         //$(this) = Clicked(#hidden-row-confirm-button)
                         deleteSelectedRow($(this));
-                        console.log($(this).parents('#content-main-row').find('button[value="active"]'));
-                        removeFooterCounter($(this).parents('#content-main-row').find('button[value="active"]'));
+                        removeFooterCounter($(this));
                     });
                 $(this)
                     .children("#wrap-hidden-row")
@@ -1273,16 +570,15 @@ function confirmDelete() {
     });
 }
 
-
+//
+// Document load handler
 document.addEventListener('DOMContentLoaded', function () {
     regexInput();
     checkInput();
-    // countCheckedButtons();
     highlightSelectedRow();
     confirmDelete();
     showCloseModal.showModal();
     showCloseModal.closeModal();
     updateStatusButton();
     updateKommentar();
-    // footerCounter();
 });

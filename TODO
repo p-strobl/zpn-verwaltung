@@ -4,6 +4,7 @@ Todo:
         ☐ All -> Überall noch Kommentare korrigieren oder einfügen! @critical 
         ☐ All -> Rechtschreibprüfung @critical 
         ☐ All JS -> Funktionen zusammen führen @critical
+            ☐ Counter Funktion, kann noch mehr zusammen geführt werden.
         ✔ All JS -> .focus() geht nicht @critical @done(18-04-16 21:26)
         ✔ All JS -> globalMainRowCounter nach dem löschen eines Eintrags, löscht den falschen! @critical @done(18-04-17 00:34)
         ✔ All JS -> Fehlabfang bei 2. Eingabe, wird nicht angezeigt. @done(18-05-01 01:55)
@@ -79,6 +80,8 @@ Todo:
         ☐ HTML -> Seite erstellen
 
     Übersicht Seite:
+        ☐ All -> Minus eintrag verhindern.
+
         ✔ HTML -> Seite erstellen @done(18-04-24 23:13)
 
         ✔ CSS -> Media Query umd dynamisch die Anzeige als dünnes Fenster anzuzeigen @done(18-04-24 23:13)

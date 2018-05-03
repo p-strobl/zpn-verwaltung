@@ -42,6 +42,26 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
+
+        //
+        //Fügt die aus dem Ajax call erhaltenen Werte, wenn nicht schon im localStorage identisch in die entpsprechenden html Elemente ein
+        // Object.entries(receivedPreviewItems).forEach(([receivedKey, receivedValue]) => {
+        //     receivedValue < 0 ? receivedValue = 0 : '';
+        //     Object.entries(toFillPreviewItems).forEach(([toFillKey, toFillValue]) => {
+        //         if (receivedKey === toFillKey && receivedValue != localStorage.getItem(toFillKey)) {
+        //             toFillValue.html(receivedValue);
+        //             if (receivedValue > localStorage.getItem(toFillKey)) {
+        //                 toFillValue.html(receivedValue);
+        //                 toFillValue.parent().css({ 'backgroundColor': '#ffb700' })
+        //             } else {
+        //                 toFillValue.html(receivedValue);
+        //                 toFillValue.parent().css({ 'backgroundColor': '#ff3300' })
+        //             }
+        //         }
+        //     });
+        // });
+
+
         ajaxRequestPreview.fail((jqXHR, textStatus, errorThrown) => {
             console.log(textStatus, errorThrown);
         });
