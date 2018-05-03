@@ -49,6 +49,7 @@ Todo:
         ✔ JS -> Auch für den ZPN Muster Eingang eine status Abfrage der Button's @low @done(18-04-04 16:27)
         ✘ JS -> Eingang Input Soll Datum Abfragen @high @cancelled(18-04-08 02:09)
         ✔ JS -> Doppelter scan für schnellere zusatz Auswahl @done(18-04-30 23:49)
+        ☐ JS -> Doppelter scan sperren entsperren anschauen
 
     Verwaltung Seite:
 
