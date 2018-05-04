@@ -114,9 +114,9 @@ if (!empty($_POST)) {
                                     $sql =
                                         "
                                             INSERT INTO 
-                                                tbl_zpnmustereingang( probenNummer,zpnEingangDateTime, ausderLfgbDateTime )
+                                                tbl_zpnmustereingang( probenNummer, zpnEingangDateTime, ausderLfgbDateTime )
                                             VALUES 
-                                                ( :probenNummer,NOW(), NOW() )
+                                                ( :probenNummer, NOW(), NOW() )
                                         ";
                                     $pdoStatement = $pdoConnect->prepare($sql);
                                     $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
@@ -129,7 +129,7 @@ if (!empty($_POST)) {
                                             SET
                                                 tbl_zpnmustereingang.lfgbZpnBerechnung = IF( tbl_zpnmustereingang.zpnEingangDateTime IS NOT NULL AND tbl_lfgbmustereingang.lfgbEingangDateTime IS NOT NULL, TIMEDIFF( tbl_lfgbmustereingang.lfgbEingangDateTime, tbl_zpnmustereingang.zpnEingangDateTime ), NULL )
                                             WHERE
-                                            tbl_lfgbmustereingang.probenNummer = :probenNummer
+                                                tbl_lfgbmustereingang.probenNummer = :probenNummer
                                             AND
                                                 tbl_zpnmustereingang.probenNummer = :probenNummerZpn
                                         ";

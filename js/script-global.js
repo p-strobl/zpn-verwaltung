@@ -181,6 +181,7 @@ function checkInput() {
                             appendContentMainRow(inputTextLeft, inputTextRight, this.value);
                             $headerInputEingangZusatz
                                 .effect('highlight', { color: '#FFB700' }, 200)
+                                .attr('disabled', 'disabled')
                                 .val('');
                             $headerInputEingang
                                 .val('')
@@ -393,6 +394,36 @@ function removeFooterCounter(clickedButton) {
 }
 
 //
+// 
+function footerGlobalCounter() {
+    let contentMainRow = $('#content-main-row');
+    let contentFooterCountRow = $('#content-footer-count-row');
+    let buttonZpnEingang = $('.content-button-check');
+    let footerParentSpanZpnEingang = $('.content-footer-count-input');
+    let footerSpanZpnEingang = $('.content-footer-counter');
+
+    contentMainRow.on('click', '.content-button-check', function () {
+        let matchedFooterParent = $(contentFooterCountRow).find($("[name=" + $(this).prop('name') + "]"));
+        let matchedFooterSpan = $(matchedFooterParent).find('span');
+        if ($(this).val() === 'active') {
+            $(this)
+                .removeClass('preSet')
+                .val('deactive');
+            matchedFooterSpan.text(Number(matchedFooterSpan.text()) - 1);
+            matchedFooterParent.effect("highlight", { color: "#FF3100" }, 200);
+            blockButtons($(this));
+        } else {
+            $(this)
+                .addClass('preSet')
+                .val('active');
+            matchedFooterSpan.text(Number(matchedFooterSpan.text()) + 1);
+            matchedFooterParent.effect("highlight", { color: "#FFB700" }, 200);
+            blockButtons($(this));
+        }
+    });
+};
+
+//
 // Sperrt entsprechend nach Auswahl, die andern Buttons
 function blockButtons(clickedButton) {
     const siblingButtons = clickedButton.parent().siblings().children();
@@ -430,36 +461,6 @@ function blockButtons(clickedButton) {
         default:
     }
 }
-
-//
-// 
-function footerGlobalCounter() {
-    let contentMainRow = $('#content-main-row');
-    let contentFooterCountRow = $('#content-footer-count-row');
-    let buttonZpnEingang = $('.content-button-check');
-    let footerParentSpanZpnEingang = $('.content-footer-count-input');
-    let footerSpanZpnEingang = $('.content-footer-counter');
-
-    contentMainRow.on('click', '.content-button-check', function () {
-        let matchedFooterParent = $(contentFooterCountRow).find($("[name=" + $(this).prop('name') + "]"));
-        let matchedFooterSpan = $(matchedFooterParent).find('span');
-        if ($(this).val() === 'active') {
-            $(this)
-                .removeClass('preSet')
-                .val('deactive');
-            matchedFooterSpan.text(Number(matchedFooterSpan.text()) - 1);
-            matchedFooterParent.effect("highlight", { color: "#FF3100" }, 200);
-            blockButtons($(this));
-        } else {
-            $(this)
-                .addClass('preSet')
-                .val('active');
-            matchedFooterSpan.text(Number(matchedFooterSpan.text()) + 1);
-            matchedFooterParent.effect("highlight", { color: "#FFB700" }, 200);
-            blockButtons($(this));
-        }
-    });
-};
 
 //
 //Während dem "hover" über dem Löschen button, wird die gesamte Zeile entprechend eingefärbt.

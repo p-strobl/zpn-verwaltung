@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function appendContentMainRow(probenNummer, abteilung) {
 

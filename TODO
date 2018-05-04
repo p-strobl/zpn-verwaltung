@@ -43,13 +43,11 @@ Todo:
 
         ✔ JS -> Keine Verbindung zum Server meldung abfangen @done(18-04-22 03:32)
 
-        ☐ Datenbank -> Muster zuerst bei der LFGB dann in die ZPN daten speichern.@high 
-
     ZPN Eingang Seite:
         ✔ JS -> Auch für den ZPN Muster Eingang eine status Abfrage der Button's @low @done(18-04-04 16:27)
         ✘ JS -> Eingang Input Soll Datum Abfragen @high @cancelled(18-04-08 02:09)
         ✔ JS -> Doppelter scan für schnellere zusatz Auswahl @done(18-04-30 23:49)
-        ☐ JS -> Doppelter scan sperren entsperren anschauen
+        ✔ JS -> Doppelter scan sperren entsperren anschauen @done(18-05-04 00:44)
 
     Verwaltung Seite:
 
@@ -91,6 +89,8 @@ Todo:
         ✔ JS -> Dynamische Anzeige der bereit leigenden Muster @done(18-04-24 23:13)
         ✔ JS -> Dynamische Anzeige für eingereichte Klärfälle @done(18-04-24 23:13)
         ✘ JS -> Nullstellung des HTML überarbeiten @low @cancelled(18-04-30 23:49) | Siehe Global
+
+        ☐ Datenbank -> Muster zuerst bei der LFGB dann in die ZPN erzeugt eine minus Anzeige in der Übersicht.@critical 
 
     Datenbank:
         ✔ Datenbank -> SQL Abfrage in Date und Time splitten @done(18-03-27 08:28)
