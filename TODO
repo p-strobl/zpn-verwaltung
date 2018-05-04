@@ -65,6 +65,8 @@ Todo:
 
         Verwaltung Modal:
             ✔ HTML -> Model für einfachere vorbereitung Auswahl @done(18-04-30 23:49)
+            ☐ JS -> Abfrage nach nicht vorhandenen Datensatz unterbinden.
+            
     Beurteilung Seite:
         ✔ HTML -> Seite erstellen @done(18-04-15 20:47)
         ✔ HTML -> Doppelte Input Abfrage: "Probennummer" und "an Abteilung" @done(18-04-15 20:47)
