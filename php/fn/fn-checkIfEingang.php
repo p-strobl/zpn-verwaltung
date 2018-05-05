@@ -43,7 +43,7 @@ function checkIfEingang($pdoConnect, $probenNummer, $sollDatum, $pdoObject, $res
         
         $pdoConnect->rollBack();
         return $responseData;
-        // mail( "adm1n.zpn.verwaltung@gmail.com", "Datenbank Fehler!", json_encode($responseData) );
+        mail( "adm1n.zpn.verwaltung@gmail.com", "Datenbank Fehler!", json_encode($responseData) );
     }
     return $responseData;
 }

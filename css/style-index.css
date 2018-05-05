@@ -53,7 +53,6 @@ button::-moz-focus-inner {
     background-color: gainsboro;
     border-radius: .2vw;
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,.5);
-    /* box-shadow: 0px 2px 20px 1px rgba(4, 10, 43, 1); */
 }
 
 .wrap-index-header-content {
@@ -138,13 +137,12 @@ button::-moz-focus-inner {
 }
 
 .main-button {
-    height: 18vh;
-    width: 45vw;
-    font-size: 4vw;
+    height: 14vh;
+    width: 50vw;
+    font-size: 3vw;
     background-color: ghostwhite;
     border-radius: .2vw;
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,.5);
-    /* box-shadow: 0px 0px 20px 0px rgba(0, 90, 102, .5); */
 }
 
 .main-button:hover {
@@ -153,13 +151,4 @@ button::-moz-focus-inner {
     transition: all 0.2s ease;
 }
 
-.eingang,
-.verwaltung {}
-
 /* Ende Main index */
-
-/* Start Footer index */
-
-.wrap-index-footer {}
-
-/* Ende Footer index */

@@ -13,7 +13,6 @@ function resetDetails() {
     const modalAnEingang = $('#spanAnEingang');
 
     modalContentMainPullSqlItem.add(modalContentMainPullSqlItemGesamt).html('&#151');
-    // modalContentMainPullSqlItemGesamt.html('&#151');
     modalContentCaptionSpan.add(modalAnEingang).html('');
     modalContentAppendedSpan.remove();
     modalHeaderInput.add(modalHeaderInput).val('');
@@ -43,6 +42,7 @@ const showCloseModal = (() => {
             resetDetails();
             wrapModal.addClass('show__modal');
             contentModal.toggleClass('transform__modal');
+            
             backToModalInput();
         });
     });
@@ -66,6 +66,7 @@ const showCloseModal = (() => {
             setTimeout(() => {
                 wrapModal.removeClass('show__modal');
             }, 300);
+
             backToInput();
         });
     });
@@ -99,16 +100,17 @@ function searchDataSet(probenNummer) {
         const wrapModalFooter = $('#wrap-modal-footer');
         const modalHeaderInput = $('#modal-header-input');
         const modalFooterSpanWrap = $('#modal-footer-span-wrap');
+
         if (Object.keys(data).every((key) => data[key])) {
-
             resetDetails();
-
             const toFillItems = {
                 base: {
                     probenNummer: $('#modal-content-caption-nummber-text'),
                     sollDatum: $('#modal-content-caption-soll-text')
                 },
                 date: {
+                    anLfgbAbteilungEingangDate: $('#modal-pullSql-abteilungEingang-date'),
+                    anTextilAbteilungEingangDate: $('#modal-pullSql-abteilungEingang-date'),
                     beurteilungBereitgestelltDateTime: $('#pullSql-beurteilung-date'),
                     einwaageBeginn: $('#pullSql-einwaage-start-date'),
                     einwaageEnde: $('#pullSql-einwaage-ende-date'),
@@ -125,6 +127,8 @@ function searchDataSet(probenNummer) {
                     zpnWagenDateTime: $('#pullSql-zpnWagen-date')
                 },
                 time: {
+                    anLfgbAbteilungEingangTime: $('#modal-pullSql-abteilungEingang-time'),
+                    anTextilAbteilungEingangTime: $('#modal-pullSql-abteilungEingang-time'),
                     beurteilungBereitTime: $('#pullSql-beurteilung-time'),
                     eingangTime: $('#modal-pullSql-zpnEingang-time'),
                     einwaageBeginnTime: $('#pullSql-einwaage-start-time'),
@@ -142,8 +146,11 @@ function searchDataSet(probenNummer) {
                     zpnWagenTime: $('#pullSql-zpnWagen-time')
                 },
                 berechnung: {
-                    berechnungDateTimeZpnwagen: $('#pullSql-gesamt-zpnDauer'),
+                    anLfgbAbteilungBerechnung: $('#pullSql-gesamt-beurteilung'),
+                    anTextilAbteilungBerechnung: $('#pullSql-gesamt-beurteilung'),
                     beurteilungZpnBerechnung: $('#pullSql-gesamt-beurteilung'),
+                    beurteilungAbteilungBerechnung: $('#pullSql-gesamt-anAbteilung'),
+                    berechnungDateTimeZpnwagen: $('#pullSql-gesamt-zpnDauer'),
                     einwaageBerechnung: $('#pullSql-gesamt-einwaage'),
                     klaerfallBerechnung: $('#pullSql-gesamt-klaerfall'),
                     manaBerechnungDateTimeAnfrage: $('#pullSql-gesamt-mBestellung'),
@@ -160,7 +167,7 @@ function searchDataSet(probenNummer) {
                     mitLfgb: $('#mitLfgb'),
                     mitNickel: $('#mitNickel'),
                     mitToys: $('#mitToys'),
-                    anAbteilung: $('#spanAnEingang'),
+                    anAbteilung: $('.spanAnEingang'),
                 },
                 kommentar: {
                     kommentarDate: $('#modal-footer-span-date'),
@@ -266,6 +273,7 @@ function searchDataSet(probenNummer) {
             document.getElementById('modal-footer-span-wrap').childElementCount >= 4 ? modalFooterSpanWrap.css('overflow-y', 'scroll') : modalFooterSpanWrap.css('overflow-y', '');
 
             wrapModalContent.hasClass('transform__modal') === true ? wrapModalContent.add(wrapModalFooter).removeClass('transform__modal') : '';
+
             setTimeout(() => {
                 modalHeaderInput.val('');
                 wrapModalContent.add(wrapModalFooter).addClass('transform__modal');

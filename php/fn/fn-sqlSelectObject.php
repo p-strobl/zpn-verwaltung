@@ -5,7 +5,7 @@ function removeUnset($pdoObject) {
     foreach ($pdoObject as $pdoObjectkey => $pdoObjectValue) {
         if ($pdoObject->base !== false) {
             foreach ($pdoObjectValue as $itemKey => $itemValue) {
-                if ($itemValue === null || $itemValue === 'deactive' || $itemValue === '00.00.0000') {
+                if ($itemValue === null || $itemValue === 'deactive' || $itemValue === '00.00.0000' || $itemValue === '') {
                     unset($pdoObjectValue->{$itemKey});
                 }
             }
@@ -85,10 +85,11 @@ function sqlSelectObjectDate($pdoConnect, $probenNummer, $pdoObject) {
     try {
         $pdoObject = sqlSelectObjectBase($pdoConnect, $probenNummer, $pdoObject);
         $pdoConnect->beginTransaction();
-        //SQL Date Abfrage
         $sql =
         "
             SELECT
+                IF(tbl_lfgbmustereingang.lfgbEingangDateTime IS NOT NULL, DATE_FORMAT(tbl_lfgbmustereingang.lfgbEingangDateTime, '%d.%m.%Y'), '') AS anLfgbAbteilungEingangDate,
+                IF(tbl_textilmustereingang.textilEingangDateTime IS NOT NULL, DATE_FORMAT(tbl_textilmustereingang.textilEingangDateTime, '%d.%m.%Y'), '')  AS anTextilAbteilungEingangDate,
                 DATE_FORMAT(tbl_beurteilung.beurteilungBereitgestelltDateTime, '%d.%m.%Y') AS beurteilungBereitgestelltDateTime, 
                 DATE_FORMAT(tbl_einwaage.einwaageBeginn, '%d.%m.%Y') AS einwaageBeginn, 
                 DATE_FORMAT(tbl_einwaage.einwaageEnde, '%d.%m.%Y') AS einwaageEnde, 
@@ -105,6 +106,10 @@ function sqlSelectObjectDate($pdoConnect, $probenNummer, $pdoObject) {
                 DATE_FORMAT(tbl_zerlegung.zerlegungStart, '%d.%m.%Y' ) AS zerlegungStart,
                 DATE_FORMAT(tbl_zerlegung.zerlegungEnde, '%d.%m.%Y' ) AS zerlegungEnde
             FROM tbl_baserecord 
+            LEFT OUTER JOIN tbl_lfgbmustereingang
+                ON tbl_baserecord.probenNummer = tbl_lfgbmustereingang.probenNummer
+            LEFT OUTER JOIN tbl_textilmustereingang
+                ON tbl_baserecord.probenNummer = tbl_textilmustereingang.probenNummer
             LEFT OUTER JOIN tbl_beurteilung
                 ON tbl_baserecord.probenNummer = tbl_beurteilung.probenNummer
             LEFT OUTER JOIN tbl_klaerfall
@@ -141,11 +146,12 @@ function sqlSelectObjectDate($pdoConnect, $probenNummer, $pdoObject) {
 
 function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
     try {
-        //SQL Time Abfrage
         $pdoConnect->beginTransaction();
         $sql =
         "
             SELECT
+                IF(tbl_lfgbmustereingang.lfgbEingangDateTime IS NOT NULL, TIME(tbl_lfgbmustereingang.lfgbEingangDateTime), '') AS anLfgbAbteilungEingangTime,
+                IF(tbl_textilmustereingang.textilEingangDateTime IS NOT NULL, TIME(tbl_textilmustereingang.textilEingangDateTime), '')  AS anTextilAbteilungEingangTime,
                 TIME(tbl_beurteilung.beurteilungBereitgestelltDateTime) AS beurteilungBereitTime,
                 TIME(tbl_klaerfall.klaerfallBeginnDateTime) AS klaerfallBeginnTime,
                 TIME(tbl_klaerfall.klaerfallEndeDateTime) AS klaerfallEndeTime,
@@ -162,6 +168,10 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
                 TIME(tbl_zpnmustereingang.zpnEingangDateTime) AS zpnMusterEingangTime,
                 TIME(tbl_zpnwagen.zpnWagenDateTime) AS zpnWagenTime
             FROM tbl_baserecord
+            LEFT OUTER JOIN tbl_lfgbmustereingang
+                ON tbl_baserecord.probenNummer = tbl_lfgbmustereingang.probenNummer
+            LEFT OUTER JOIN tbl_textilmustereingang
+                ON tbl_baserecord.probenNummer = tbl_textilmustereingang.probenNummer
             LEFT OUTER JOIN tbl_beurteilung
                 ON tbl_baserecord.probenNummer = tbl_beurteilung.probenNummer
             LEFT OUTER JOIN tbl_klaerfall
@@ -187,7 +197,6 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
         $pdoStatement->execute();
         $pdoConnect->commit();
         $pdoObject->time = $pdoStatement->fetch( PDO::FETCH_OBJ );
-        //SQL Kommentar Abfrage
         $pdoConnect->beginTransaction();
         $sql =
         "
@@ -203,7 +212,6 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
         $pdoStatement->execute();
         $pdoConnect->commit();
         $pdoObject->kommentar = (object) $pdoStatement->fetchAll();
-        //SQL Status Abfrage
         $pdoConnect->beginTransaction();
         $sql =
         "
@@ -235,6 +243,8 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
         $sql =
         "
             SELECT
+                IF(tbl_lfgbmustereingang.beurteilungLfgbBerechnung IS NOT NULL, tbl_lfgbmustereingang.beurteilungLfgbBerechnung, '') AS anLfgbAbteilungBerechnung,
+                IF(tbl_textilmustereingang.beurteilungTextilBerechnung IS NOT NULL, tbl_textilmustereingang.beurteilungTextilBerechnung, '') AS anTextilAbteilungBerechnung,
                 tbl_klaerfall.klaerfallBerechnung,
                 tbl_mana.manaBerechnungDateTimeAnfrage,
                 tbl_mana.manaBerechnungDateTimeEinwaage,
@@ -243,8 +253,13 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
                 tbl_einwaage.einwaageBerechnung,
                 tbl_zerlegung.zerlegungBerechnung,
                 tbl_zpnmustereingang.beurteilungZpnBerechnung,
+                IF(tbl_zpnmustereingang.lfgbZpnBerechnung IS NOT NULL, tbl_zpnmustereingang.lfgbZpnBerechnung, '') AS beurteilungAbteilungBerechnung,
                 tbl_zpnwagen.berechnungDateTimeZpnwagen
             FROM tbl_baserecord
+            LEFT OUTER JOIN tbl_lfgbmustereingang
+                ON tbl_baserecord.probenNummer = tbl_lfgbmustereingang.probenNummer
+            LEFT OUTER JOIN tbl_textilmustereingang
+                ON tbl_baserecord.probenNummer = tbl_textilmustereingang.probenNummer
             LEFT OUTER JOIN tbl_klaerfall
                 ON tbl_baserecord.probenNummer = tbl_klaerfall.probenNummer
             LEFT OUTER JOIN tbl_mana
@@ -279,4 +294,3 @@ function sqlSelectObjectComplete($pdoConnect, $probenNummer, $pdoObject) {
         $pdoConnect->rollBack();
     }
 }
-

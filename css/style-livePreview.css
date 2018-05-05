@@ -67,7 +67,6 @@ img:hover {
             place-self: center;
         }
 
-
     .preview__header__caption {
         height: 100%;
         width: 100%;
@@ -221,7 +220,6 @@ img:hover {
 
     .wrap__panel.left {
         grid-template-rows: auto;
-        /* margin: 20px; */
         height: 85vh;
         align-self: center;
     }

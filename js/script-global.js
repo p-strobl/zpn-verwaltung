@@ -12,6 +12,7 @@ function regexInput() {
     const oneOfRegEx = /[ZPN]|[LFGB]|[Textilphysik]|[Standard]|[Express]|[Intern]|[mitNickel]|[Toys]|[mit60g]|[backKlaerfall]|[backNickel]/g;
     const $modalHeaderInput = $('#modal-header-input');
     const $headerInputEingang = $('#header-input-eingang');
+    const $headerInputLfgbTextil = $('#header-input-lfgbTextil');
     const $headerInputVerwaltung = $('#header-input-verwaltung');
     const $headerInputBeurteilungProbennummer = $('#header-input-beurteilung-probennummer');
     const $headerInputBeurteilungAbteilung = $('#header-input-beurteilung-abteilung');
@@ -19,6 +20,7 @@ function regexInput() {
 
     $headerInputEingang
         .add($modalHeaderInput)
+        .add($headerInputLfgbTextil)
         .add($headerInputVerwaltung)
         .add($headerInputBeurteilungProbennummer)
         .on('keyup', function () {
@@ -64,6 +66,7 @@ function checkInput() {
     const $headerInputEingang = $("#header-input-eingang");
     const $headerInputEingangZusatz = $('#header-input-eingang-zusatz');
     const $headerInputVerwaltung = $("#header-input-verwaltung");
+    const $headerInputLfgbTextil = $('#header-input-lfgbTextil');
     const $headerInputBeurteilungProbennummer = $('#header-input-beurteilung-probennummer');
     const $headerInputBeurteilungAbteilung = $('#header-input-beurteilung-abteilung');
     const $modalHeaderInput = $("#modal-header-input");
@@ -73,11 +76,13 @@ function checkInput() {
     $headerInputEingang
         .add($headerInputVerwaltung)
         .add($headerInputBeurteilungProbennummer)
+        .add($headerInputLfgbTextil)
         .focus();
 
     //Enter Taste in der Inputbox wird betätigt.
     $headerInputEingang
         .add($headerInputVerwaltung)
+        .add($headerInputLfgbTextil)
         .add($headerInputBeurteilungProbennummer)
         .add($modalHeaderInput)
         .on("keyup", function (pressedKey) {
@@ -124,6 +129,26 @@ function checkInput() {
                                     .val('');
                             }
                             break;
+                        case 'header-input-lfgbTextil':
+                            if ($.inArray(inputTextLeft, globalMainRowCounter) > -1) {
+                                //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
+                                $headerInputLfgbTextil.effect('highlight', { color: '#FF3100' }, 200);
+                                //Ja es ist bereits ein Datensatz vorhanden, es wird eine Fehler Meldung angezeigt.
+                                //Blendet für 3,5 sek. eine "Fehlgeschlagen, Doppelter Eintrag" auskunft ein.
+                                $headerInputLfgbTextil.val('');
+                                showFailMessage.failMessage('double-input', 1500, this.id);
+                            } else {
+                                //Nach der Enter Eingabe, blinkt das Input Feld kurz auf.
+                                $headerInputLfgbTextil.effect('highlight', { color: '#FFB700' }, 200);
+                                //in die Globale Variable "globalMainRowCounter" wird der hinzugefügte Datensatz zwischengespeichert.
+                                globalMainRowCounter.push(inputTextLeft);
+                                //Nein, es ist noch kein Datensatz vorhanden, eine neue Zeile mit dem Datensatz wird erstellt.
+                                //Ruft die Funktion "appendContentMainRow" auf um dem Inhalt der Variablen "inputText" als Tabelle in das DOM zu übertragen.
+                                appendLfgbTextilContentMainRow(inputTextLeft, inputTextRight);
+                                //Leert das eingabe Feld nach einem Fehlerhaften Eintrag
+                                $headerInputLfgbTextil.val('');
+                            }
+                            break;
                         case 'header-input-eingang':
                             if ($.inArray(inputTextLeft, globalMainRowCounter) > -1) {
                                 $headerInputEingang.effect('highlight', { color: '#FF3100' }, 200);
@@ -162,7 +187,7 @@ function checkInput() {
                     //Leert das eingabe Feld nach einem Fehlerhaften Eintrag
                     $(this).val('');
                     //Zeigt dem Benutzer eine kurze(2s) Fehler Nachricht an, via CSS "content".
-                    showFailMessage.failMessage('fail-input-not-a-nummber', 2500, this.id);
+                    showFailMessage.failMessage('fail-input-not-a-number', 2500, this.id);
                 }
             }
         });
@@ -224,6 +249,7 @@ const showFailMessage = {
         switch (thisObject) {
             case "header-input-eingang":
             case "header-input-verwaltung":
+            case "header-input-lfgbTextil":
             case "header-input-beurteilung-probennummer":
             case "header-input-beurteilung-abteilung":
             case "header-input-eingang-zusatz":
@@ -341,8 +367,9 @@ const backToInput = (() => {
     const $headerInputBeurteilung = $('#header-input-beurteilung-probennummer');
     const $headerInputEingang = $("#header-input-eingang");
     const $headerInputVerwaltung = $("#header-input-verwaltung");
+    const $headerInputLfgbTextil = $('#header-input-lfgbTextil');
     setTimeout(() => {
-        $headerInputBeurteilung.add($headerInputEingang).add($headerInputVerwaltung).focus();
+        $headerInputBeurteilung.add($headerInputEingang).add($headerInputVerwaltung).add($headerInputLfgbTextil).focus();
     }, 100);
     return;
 });

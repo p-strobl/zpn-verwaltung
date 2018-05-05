@@ -17,6 +17,10 @@ if (!empty($_POST)) {
         case isset($receivedPostData->musterEingangDataSet):
             $receivedPostDataObject = json_decode(json_encode($receivedPostData->musterEingangDataSet, JSON_FORCE_OBJECT));
             break;
+
+        case isset($receivedPostData->lfgbTextilEingangDataPack):
+            $receivedPostDataObject = json_decode(json_encode($receivedPostData->lfgbTextilEingangDataPack, JSON_FORCE_OBJECT));
+            break;
         default:
     }
 
@@ -27,7 +31,8 @@ if (!empty($_POST)) {
         'objectText' => '',
         'doubleInput' => $errorArray = array(),
         'successInput' => $successArray = array(),
-        'failCode' => ''
+        'failCode' => '',
+        'itemCount' => ''
     );
 
     foreach ($receivedPostDataObject as $i) {
@@ -75,7 +80,7 @@ if (!empty($_POST)) {
                         $pdoStatement->execute();
                         $pdoConnect->commit();
 
-                        break;
+                    break;
                     case isset($receivedPostData->musterEingangDataSet):
                         switch ('active') {
                             case $receivedPostData->musterEingangDataSet->{0}->mitNickelBack:
@@ -125,17 +130,21 @@ if (!empty($_POST)) {
                                     $sql =
                                         "
                                             UPDATE 
-                                                tbl_zpnmustereingang, tbl_lfgbmustereingang
+                                                tbl_zpnmustereingang, tbl_lfgbmustereingang, tbl_beurteilung
                                             SET
-                                                tbl_zpnmustereingang.lfgbZpnBerechnung = IF( tbl_zpnmustereingang.zpnEingangDateTime IS NOT NULL AND tbl_lfgbmustereingang.lfgbEingangDateTime IS NOT NULL, TIMEDIFF( tbl_lfgbmustereingang.lfgbEingangDateTime, tbl_zpnmustereingang.zpnEingangDateTime ), NULL )
+                                                tbl_zpnmustereingang.lfgbZpnBerechnung = IF( tbl_zpnmustereingang.zpnEingangDateTime IS NOT NULL AND tbl_lfgbmustereingang.lfgbEingangDateTime IS NOT NULL, TIMEDIFF( tbl_zpnmustereingang.zpnEingangDateTime, tbl_lfgbmustereingang.lfgbEingangDateTime ), NULL ),
+                                                tbl_zpnmustereingang.beurteilungZpnBerechnung = IF( tbl_zpnmustereingang.zpnEingangDateTime IS NOT NULL AND tbl_beurteilung.beurteilungBereitgestelltDateTime  IS NOT NULL, TIMEDIFF( tbl_zpnmustereingang.zpnEingangDateTime, tbl_beurteilung.beurteilungBereitgestelltDateTime ), NULL)
                                             WHERE
                                                 tbl_lfgbmustereingang.probenNummer = :probenNummer
                                             AND
                                                 tbl_zpnmustereingang.probenNummer = :probenNummerZpn
+                                            AND
+                                                tbl_beurteilung.probenNummer = :probenNummerBeurteilung
                                         ";
                                     $pdoStatement = $pdoConnect->prepare($sql);
                                     $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
                                     $pdoStatement->bindParam(':probenNummerZpn', $i->probenNummer, PDO::PARAM_STR);
+                                    $pdoStatement->bindParam(':probenNummerBeurteilung', $i->probenNummer, PDO::PARAM_STR);
                                     $pdoStatement->execute();
 
                                     $sql =
@@ -208,18 +217,76 @@ if (!empty($_POST)) {
                                 $pdoConnect->commit();
                         }
                         break;
+                        case isset($receivedPostData->lfgbTextilEingangDataPack):
+                            if ($sqlSelectStatusObject->status->anAbteilung === 'LFGB') {
+                                $sql =
+                                "
+                                    INSERT INTO 
+                                        tbl_lfgbmustereingang( probenNummer, lfgbEingangDateTime )
+                                    VALUES 
+                                        ( :probenNummer, NOW() )
+                                ";
+                                $pdoStatement = $pdoConnect->prepare($sql);
+                                $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
+                                $pdoStatement->execute();
+                                $sql =
+                                "
+                                    UPDATE 
+                                        tbl_beurteilung, tbl_lfgbmustereingang
+                                    SET 
+                                        tbl_lfgbmustereingang.beurteilungLfgbBerechnung = IF( tbl_lfgbmustereingang.lfgbEingangDateTime IS NOT NULL AND tbl_beurteilung.beurteilungBereitgestelltDateTime IS NOT NULL, TIMEDIFF(tbl_lfgbmustereingang.lfgbEingangDateTime, tbl_beurteilung.beurteilungBereitgestelltDateTime), NULL )
+                                    WHERE
+                                        tbl_beurteilung.probenNummer = :probenNummerBeurteilung
+                                    AND
+                                        tbl_lfgbmustereingang.probenNummer = :probenNummer
+                                ";
+                                $pdoStatement = $pdoConnect->prepare($sql);
+                                $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
+                                $pdoStatement->bindParam(':probenNummerBeurteilung', $i->probenNummer, PDO::PARAM_STR);
+                                $pdoStatement->execute();
+                            } else if ($sqlSelectStatusObject->status->anAbteilung === 'Textilphysik') {
+                                $sql =
+                                "
+                                    INSERT INTO 
+                                        tbl_textilmustereingang( probenNummer, textilEingangDateTime )
+                                    VALUES 
+                                        ( :probenNummer, NOW() )
+                                ";
+                                $pdoStatement = $pdoConnect->prepare($sql);
+                                $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
+                                $pdoStatement->execute();
+                                $sql =
+                                "
+                                    UPDATE 
+                                        tbl_beurteilung, tbl_textilmustereingang
+                                    SET 
+                                        tbl_textilmustereingang.beurteilungTextilBerechnung = IF( tbl_textilmustereingang.textilEingangDateTime IS NOT NULL AND tbl_beurteilung.beurteilungBereitgestelltDateTime IS NOT NULL, TIMEDIFF(tbl_textilmustereingang.textilEingangDateTime, tbl_beurteilung.beurteilungBereitgestelltDateTime), NULL )
+                                    WHERE
+                                        tbl_beurteilung.probenNummer = :probenNummerBeurteilung
+                                    AND
+                                        tbl_textilmustereingang.probenNummer = :probenNummer
+                                ";
+                                $pdoStatement = $pdoConnect->prepare($sql);
+                                $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
+                                $pdoStatement->bindParam(':probenNummerBeurteilung', $i->probenNummer, PDO::PARAM_STR);
+                                $pdoStatement->execute();
+                            }
+                        $pdoConnect->commit();
+
+                    break;
                     default:
                 }
                 array_push($successArray, $i->probenNummer);
                 $responseData['successInput'] = $successArray;
                 $responseData['success'] = true;
+                $responseData['itemCount'] ++;
             } catch (PDOException $pdoException) {
                 $pdoConnect->rollBack();
                 preg_match('/\d{2}-\d{6}-\d{2}/', $pdoException->errorInfo[2], $errorItem);
                 array_push($errorArray, $errorItem);
                 $responseData['doubleInput'] = $errorArray;
                 $responseData['failCode'] = $pdoException->getCode();
-                // mail( "adm1n.zpn.verwaltung@gmail.com", "Datenbank Fehler!", json_encode($responseData) );
+                mail( "adm1n.zpn.verwaltung@gmail.com", "Datenbank Fehler!", json_encode($responseData) );
             }
         }
     }

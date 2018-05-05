@@ -25,32 +25,27 @@
                             $responseData['objectItem'] = $probenNummer;
                             $responseData['objectTable'] = $tblName;
                             $responseData['objectText'] = $beginDateTime . ' Start bereits vorhanden';
-                            // array_push( $transmitResponse, $responseData );
                         }
                         elseif (!isset($sqlSelectObject->date->{$beginDateTime}) && isset($sqlSelectObject->date->{$endDateTime})) {
                             $responseData['success'] = false;
                             $responseData['objectItem'] = $probenNummer;
                             $responseData['objectTable'] = $tblName;
                             $responseData['objectText'] = $beginDateTime . ' Ende bereits vorhanden';
-                            // array_push( $transmitResponse, $responseData );
                         }
                     break;
 
                     case 'ende':
                         if (isset($sqlSelectObject->date->{$beginDateTime}) && !isset($sqlSelectObject->date->{$endDateTime})) {
                             $responseData = startTrue_endTrue ( $pdoConnect, $probenNummer, $tblName, $beginDateTime, $endDateTime, $berechnungDateTime, $checkIfEingang, $transmitResponse );
-                            // array_push( $transmitResponse, $responseData );
                         }
                         elseif (!isset($sqlSelectObject->date->{$beginDateTime}) && !isset($sqlSelectObject->date->{$endDateTime})) {
                             $responseData = startFalse_endTrue ( $pdoConnect, $probenNummer, $tblName, $beginDateTime, $endDateTime, $berechnungDateTime, $checkIfEingang, $transmitResponse );
-                            // array_push( $transmitResponse, $responseData );
                         }
                         elseif (isset($sqlSelectObject->date->{$endDateTime})) {
                             $responseData['success'] = false;
                             $responseData['objectItem'] = $probenNummer;
                             $responseData['objectTable'] = $tblName;
                             $responseData['objectText'] = $endDateTime . ' Ende bereits vorhanden';
-                            // array_push( $transmitResponse, $responseData );
                         }
                     break;
 
@@ -65,7 +60,7 @@
             $responseData['objectTable'] = $tblName;
             $responseData['failCode'] = $pdoException['errorInfo'][0];
             $responseData['pdoException'] = $pdoException['errorInfo'];
-            // mail( "adm1n.zpn.verwaltung@gmail.com", "Datenbank Fehler!", json_encode($responseData) );
+            mail( "adm1n.zpn.verwaltung@gmail.com", "Datenbank Fehler!", json_encode($responseData) );
         }
         return $responseData;
     }

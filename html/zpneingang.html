@@ -18,13 +18,14 @@
                 </a>
                 <p class="header-caption">ZPN Muster Eingang</p>
                 <div class="header-search-button-wrap">
-                    <img id="img-search" class="img-search" src="../css/icons/searchIcon.png">
+                    <img id="img-search" class="img-search" src="../css/icons/searchIcon.png" title="&#220;bersicht einzelner Datans&#228;tze.">
                 </div>
             </div>
             <input id="header-input-eingang" class="header-input-eingang" type="text" spellcheck="false" placeholder="Probennummer..."
                 autocomplete="off" title="Bitte tragen Sie hier eine g&#x00FC;ltige Probennummer ein.">
             <input id="header-input-eingang-zusatz" class="header-input-eingang zusatz border-edged" type="text" spellcheck="false" placeholder="...Probenzusatz..."
-                autocomplete="off" title="Bitte tragen Sie hier ein, welchen Zusatzstatus diese Proben hat. M&#x00F6;gliche eint&#x00E4;ge sind: Standard &#x007C; Express &#x007C; Intern &#x007C; mitNickel &#x007C; Toys &#x007C; mit60g &#x007C; backKlaefall &#x007C; backNickel. Oder scannen Sie einen entspechenden Qr-Code." disabled="disabled">
+                autocomplete="off" title="Bitte tragen Sie hier ein, welchen Zusatzstatus diese Proben hat. M&#x00F6;gliche eint&#x00E4;ge sind: Standard &#x007C; Express &#x007C; Intern &#x007C; mitNickel &#x007C; Toys &#x007C; mit60g &#x007C; backKlaefall &#x007C; backNickel. Oder scannen Sie einen entspechenden Qr-Code."
+                disabled="disabled">
             <div class="header-fail-message-wrap" id="header-fail-message-wrap">
                 <div class="header-fail-message-content" id="header-fail-message-content">
                 </div>
@@ -87,7 +88,7 @@
             </section>
         </main>
         <footer class="wrap-footer displayNoneImportant" id="wrap-footer">
-            <button class="footer-button-send" id="footer-button-send" onclick="wrapData()" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um die aufgef&#x00FC;hrten Muster in der ZPN aufzunehmen.">
+            <button class="footer-button-send" id="footer-button-send" onclick="wrapData()" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um die aufgef&#x00FC;hrten Muster in den ZPN Eingang einzutragen.">
                 &#151;&#62; In der ZPN eingegangen &#60;&#151; </button>
         </footer>
     </div>
@@ -120,9 +121,9 @@
         <div id="content-modal" class="content__modal [ transform__item ]">
             <section class="wrap__modal__header">
                 <p class="modal__header__capture">Muster Verlauf</p>
-                <p id="modal-header-close" class="modal__header__close">&times;</p>
+                <p id="modal-header-close" class="modal__header__close" title="&#220;bersicht schlie&#223;en">&times;</p>
                 <div class="modal__header__input__wrap">
-                    <input id="modal-header-input" class="modal__header__input" name="modalHeaderInput" type="text" maxlength="12" spellcheck="false"
+                    <input id="modal-header-input" class="modal__header__input" name="modalHeaderInput" type="text" maxlength="12" spellcheck="false" title="Bitte tragen Sie hier eine g&#x00FC;ltige Probennummer ein."
                         autocomplete="off" placeholder="Probennummer..." value="">
                 </div>
                 <div class="modal__fail__message__wrap [ transform__item ]" id="modal-fail-message-wrap">
@@ -133,133 +134,143 @@
             <section id="wrap-modal-content" class="wrap__modal__content [ transform__item ]">
                 <section class="modal__content__header__wrap">
                     <div class="modal__content__header__caption / probennummer">
-                        <span id="modal-content-caption-nummber-text" class="modal__content__caption__span"></span>
+                        <span id="modal-content-caption-nummber-text" class="modal__content__caption__span"  title="Probennummer"></span>
                     </div>
                     <div class="modal__content__header__caption / solldatum">
-                        <span id="modal-content-caption-soll-text" class="modal__content__caption__span"></span>
+                        <span id="modal-content-caption-soll-text" class="modal__content__caption__span"  title="Soll Datum"></span>
                     </div>
                 </section>
                 <section class="modal__content__main__wrap">
                     <div class="modal__content__main__item / eingang">
-                        <div class="modal__content__main__timing__wrap / item-1">
+                        <div class="modal__content__main__timing__wrap / item-1" title="&#220;bersicht Uhrzeit&#47;Datum ">
                             <p class="modal__content__main__capture-text / beurteilung">Beurteilung Ausgang</p>
-                            <span id="pullSql-beurteilung-date" class="modal__content__main__pullSql__item / eingang"></span>
                             <span id="pullSql-beurteilung-time" class="modal__content__main__pullSql__item / eingang"></span>
+                            <span id="pullSql-beurteilung-date" class="modal__content__main__pullSql__item / eingang"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / item-1">
+                        <div class="modal__content__main__timing__wrap / item-1" title="&#220;bersicht Uhrzeit&#47;Datum ">
                             <p class="modal__content__main__capture-text / eingang">
-                                <!-- <span id="spanAnEingang"></span> -->ZPN Muster Eingang</p>
-                            <span id="modal-pullSql-zpnEingang-date" class="modal__content__main__pullSql__item / eingang"></span>
-                            <span id="modal-pullSql-zpnEingang-time" class="modal__content__main__pullSql__item / eingang"></span>
+                                <span class="spanAnEingang"></span> Muster Eingang</p>
+                            <span id="modal-pullSql-abteilungEingang-time" class="modal__content__main__pullSql__item / eingang"></span>
+                            <span id="modal-pullSql-abteilungEingang-date" class="modal__content__main__pullSql__item / eingang"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / item-1">
+                        <div class="modal__content__main__timing__wrap / item-1" title="&#220;bersicht Uhrzeit&#47;Datum ">
+                            <p class="modal__content__main__capture-text / eingang">ZPN Muster Eingang</p>
+                            <span id="modal-pullSql-zpnEingang-time" class="modal__content__main__pullSql__item / eingang"></span>
+                            <span id="modal-pullSql-zpnEingang-date" class="modal__content__main__pullSql__item / eingang"></span>
+                        </div>
+                        <div class="modal__content__main__timing__wrap / item-1" title="&#220;bersicht Uhrzeit&#47;Datum ">
                             <p class="modal__content__main__capture-text / nickelRueckgabe">Nickel R&#x00FC;ckgabe</p>
-                            <span id="modal-pullSql-nickelBack-date" class="modal__content__main__pullSql__item / eingang"></span>
                             <span id="modal-pullSql-nickelBack-time" class="modal__content__main__pullSql__item / eingang"></span>
+                            <span id="modal-pullSql-nickelBack-date" class="modal__content__main__pullSql__item / eingang"></span>
                         </div>
                         <div class="modal__content__main__timing__wrap / status">
-                            <button id="mit60g" class="modal__status / 60g" value="deactive">Mit 60g</button>
-                            <button id="mitExpress" class="modal__status / express" value="deactive">Express</button>
-                            <button id="mitNickel" class="modal__status / mitNickel" value="deactive">Mit Nickel</button>
-                            <button id="mitLfgb" class="modal__status / lfgb" value="deactive">Aus der LFGB</button>
-                            <button id="mitKlaerfallBack" class="modal__status / skDone" value="deactive">Kl&#228;rfall gekl&#228;rt</button>
-                            <button id="mitToys" class="modal__status / toys" value="deactive">Aus Team Toy&#39;s</button>
-                            <button id="mitIntern" class="modal__status / internVorziehen" value="deactive">Intern vorziehen</button>
+                            <button id="mit60g" class="modal__status / 60g" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Mit 60g</button>
+                            <button id="mitExpress" class="modal__status / express" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Express</button>
+                            <button id="mitNickel" class="modal__status / mitNickel" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Mit Nickel</button>
+                            <button id="mitLfgb" class="modal__status / lfgb" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Aus der LFGB</button>
+                            <button id="mitKlaerfallBack" class="modal__status / skDone" value="deactive" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Kl&#228;rfall gekl&#228;rt</button>
+                            <button id="mitToys" class="modal__status / toys" value="deactive" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Aus Team Toy&#39;s</button>
+                            <button id="mitIntern" class="modal__status / internVorziehen" value="deactive" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Intern vorziehen</button>
                         </div>
                     </div>
                     <div class="modal__content__main__item / vorbereitung">
-                        <div class="modal__content__main__timing__wrap / item-2-3">
+                        <div class="modal__content__main__timing__wrap / item-2-3" title="&#220;bersicht Uhrzeit&#47;Datum Vorzerlegung Start">
                             <p class="modal__content__main__capture-text / zerlegung">Vorzerlegung Start</p>
-                            <span id="pullSql-zerlegung-start-date" class="modal__content__main__pullSql__item / zerlegung"></span>
                             <span id="pullSql-zerlegung-start-time" class="modal__content__main__pullSql__item / zerlegung"></span>
+                            <span id="pullSql-zerlegung-start-date" class="modal__content__main__pullSql__item / zerlegung"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / item-2-3">
+                        <div class="modal__content__main__timing__wrap / item-2-3" title="&#220;bersicht Uhrzeit&#47;Datum Vorzerlegung Ende">
                             <p class="modal__content__main__capture-text / zerlegung">Vorzerlegung Ende</p>
-                            <span id="pullSql-zerlegung-ende-date" class="modal__content__main__pullSql__item / zerlegung"></span>
                             <span id="pullSql-zerlegung-ende-time" class="modal__content__main__pullSql__item / zerlegung"></span>
+                            <span id="pullSql-zerlegung-ende-date" class="modal__content__main__pullSql__item / zerlegung"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / item-2-3">
+                        <div class="modal__content__main__timing__wrap / item-2-3" title="&#220;bersicht Uhrzeit&#47;Datum Einwaage Start">
                             <p class="modal__content__main__capture-text / einwaage">Einwaage Start</p>
-                            <span id="pullSql-einwaage-start-date" class="modal__content__main__pullSql__item / einwaage"></span>
                             <span id="pullSql-einwaage-start-time" class="modal__content__main__pullSql__item / einwaage"></span>
+                            <span id="pullSql-einwaage-start-date" class="modal__content__main__pullSql__item / einwaage"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / item-2-3">
+                        <div class="modal__content__main__timing__wrap / item-2-3" title="&#220;bersicht Uhrzeit&#47;Datum Einwaage Ende">
                             <p class="modal__content__main__capture-text / einwaage">Einwaage Ende</p>
-                            <span id="pullSql-einwaage-ende-date" class="modal__content__main__pullSql__item / einwaage"></span>
                             <span id="pullSql-einwaage-ende-time" class="modal__content__main__pullSql__item / einwaage"></span>
+                            <span id="pullSql-einwaage-ende-date" class="modal__content__main__pullSql__item / einwaage"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / item-2-3">
+                        <div class="modal__content__main__timing__wrap / item-2-3" title="&#220;bersicht Uhrzeit&#47;Datum ZPN Wagen">
                             <p class="modal__content__main__capture-text / zpnWagen">ZPN Wagen</p>
-                            <span id="pullSql-zpnWagen-date" class="modal__content__main__pullSql__item / zpnWagen"></span>
                             <span id="pullSql-zpnWagen-time" class="modal__content__main__pullSql__item / zpnWagen"></span>
+                            <span id="pullSql-zpnWagen-date" class="modal__content__main__pullSql__item / zpnWagen"></span>
                         </div>
                     </div>
                     <div class="modal__content__main__item / vorfall">
-                        <div class="modal__content__main__timing__wrap / item-2-3">
+                        <div class="modal__content__main__timing__wrap / item-2-3" title="&#220;bersicht Uhrzeit&#47;Datum Kl&#228;rfall Start">
                             <p class="modal__content__main__capture-text / vorfall">Kl&#228;rfall Start</p>
-                            <span id="pullSql-klaerfall-start-date" class="modal__content__main__pullSql__item / klaerfall"></span>
                             <span id="pullSql-klaerfall-start-time" class="modal__content__main__pullSql__item / klaerfall"></span>
+                            <span id="pullSql-klaerfall-start-date" class="modal__content__main__pullSql__item / klaerfall"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / item-2-3">
+                        <div class="modal__content__main__timing__wrap / item-2-3" title="&#220;bersicht Uhrzeit&#47;Datum Kl&#228;rfall Ende">
                             <p class="modal__content__main__capture-text / vorfall">Kl&#228;rfall Ende</p>
-                            <span id="pullSql-klaerfall-ende-date" class="modal__content__main__pullSql__item / klaerfall"></span>
                             <span id="pullSql-klaerfall-ende-time" class="modal__content__main__pullSql__item / klaerfall"></span>
+                            <span id="pullSql-klaerfall-ende-date" class="modal__content__main__pullSql__item / klaerfall"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / item-2-3">
-                            <p class="modal__content__main__capture-text / vorfall">MaNa bestellt</p>
-                            <span id="pullSql-mBestellt-start-date" class="modal__content__main__pullSql__item / mBestellt"></span>
+                        <div class="modal__content__main__timing__wrap / item-2-3" title="&#220;bersicht Uhrzeit&#47;Datum MaNa gestellt">
+                            <p class="modal__content__main__capture-text / vorfall">MaNa gestellt</p>
                             <span id="pullSql-mBestellt-start-time" class="modal__content__main__pullSql__item / mBestellt"></span>
+                            <span id="pullSql-mBestellt-start-date" class="modal__content__main__pullSql__item / mBestellt"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / item-2-3">
+                        <div class="modal__content__main__timing__wrap / item-2-3" title="&#220;bersicht Uhrzeit&#47;Datum MaNa erhalten">
                             <p class="modal__content__main__capture-text / vorfall">MaNa erhalten</p>
-                            <span id="pullSql-mErhalten-ende-date" class="modal__content__main__pullSql__item / mErhalten"></span>
                             <span id="pullSql-mErhalten-ende-time" class="modal__content__main__pullSql__item / mErhalten"></span>
+                            <span id="pullSql-mErhalten-ende-date" class="modal__content__main__pullSql__item / mErhalten"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / item-2-3">
+                        <div class="modal__content__main__timing__wrap / item-2-3" title="&#220;bersicht Uhrzeit&#47;Datum MaNa Einwaage Start">
                             <p class="modal__content__main__capture-text / vorfall">MaNa Einwaage Start</p>
-                            <span id="pullSql-mEinwaage-ende-date" class="modal__content__main__pullSql__item / mEinwaage"></span>
                             <span id="pullSql-mEinwaage-ende-time" class="modal__content__main__pullSql__item / mEinwaage"></span>
+                            <span id="pullSql-mEinwaage-ende-date" class="modal__content__main__pullSql__item / mEinwaage"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / item-2-3">
+                        <div class="modal__content__main__timing__wrap / item-2-3" title="&#220;bersicht Uhrzeit&#47;Datum MaNa ZPN Wagen">
                             <p class="modal__content__main__capture-text / vorfall">MaNa ZPN Wagen</p>
-                            <span id="pullSql-mWagen-ende-date" class="modal__content__main__pullSql__item / mWagen"></span>
                             <span id="pullSql-mWagen-ende-time" class="modal__content__main__pullSql__item / mWagen"></span>
+                            <span id="pullSql-mWagen-ende-date" class="modal__content__main__pullSql__item / mWagen"></span>
                         </div>
                     </div>
                     <div class="modal__content__main__item / gesamt">
-                        <div class="modal__content__main__timing__wrap / gesamt">
-                            <p class="modal__content__main__capture-text / gesamt">Liegezeit Beurteiler Kiste</p>
+                        <div class="modal__content__main__timing__wrap / gesamt" title="&#220;bersicht Gesamtdauer Beurteiler Kiste Liegezeit">
+                            <p class="modal__content__main__capture-text / gesamt">Beurteiler Kiste Liegezeit</p>
                             <span id="pullSql-gesamt-beurteilung" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / gesamt">
+                        <div class="modal__content__main__timing__wrap / gesamt" title="&#220;bersicht Gesamtdauer in Abteilung Liegezeit">
+                            <p class="modal__content__main__capture-text / gesamt">
+                                <span class="spanAnEingang"></span> Liegezeit</p>
+                            <span id="pullSql-gesamt-anAbteilung" class="modal__content__main__pullSql__item / gesamt"></span>
+                        </div>
+                        <div class="modal__content__main__timing__wrap / gesamt" title="&#220;bersicht Gesamtdauer Zerlegung">
                             <p class="modal__content__main__capture-text / gesamt">Gesamtzeit Zerlegung</p>
                             <span id="pullSql-gesamt-zerlegung" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / gesamt">
+                        <div class="modal__content__main__timing__wrap / gesamt" title="&#220;bersicht Gesamtdauer Einwaage">
                             <p class="modal__content__main__capture-text / gesamt">Gesamtzeit Einwaage</p>
                             <span id="pullSql-gesamt-einwaage" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / gesamt">
+                        <div class="modal__content__main__timing__wrap / gesamt" title="&#220;bersicht Gesamtdauer in der ZPN">
                             <p class="modal__content__main__capture-text / gesamt">Liegezeit ZPN</p>
                             <span id="pullSql-gesamt-zpnDauer" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / gesamt">
+                        <div class="modal__content__main__timing__wrap / gesamt" title="&#220;bersicht Gesamtdauer Kl&#228;rfall">
                             <p class="modal__content__main__capture-text / gesamt">Gesamtzeit Kl&#228;rfall</p>
                             <span id="pullSql-gesamt-klaerfall" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / gesamt">
+                        <div class="modal__content__main__timing__wrap / gesamt" title="&#220;bersicht Gesamtdauer bei Team Nickel">
                             <p class="modal__content__main__capture-text / gesamt">Muster bei Nickel</p>
                             <span id="pullSql-gesamt-nickelDauer" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / gesamt">
+                        <div class="modal__content__main__timing__wrap / gesamt" title="&#220;bersicht Gesamtdauer der MaNa Bestellung">
                             <p class="modal__content__main__capture-text / gesamt">Gesamtzeit MaNa Bestellung</p>
                             <span id="pullSql-gesamt-mBestellung" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / gesamt">
+                        <div class="modal__content__main__timing__wrap / gesamt" title="&#220;bersicht Gesamtdauer bis zur MaNa Einwaage">
                             <p class="modal__content__main__capture-text / gesamt">Gesamtzeit MaNa Einwaage</p>
                             <span id="pullSql-gesamt-mEinwaage" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
-                        <div class="modal__content__main__timing__wrap / gesamt">
+                        <div class="modal__content__main__timing__wrap / gesamt" title="&#220;bersicht Gesamtdauer MaNa Bearbeitung">
                             <p class="modal__content__main__capture-text / gesamt lastChild-no-border">Gesamtzeit MaNa</p>
                             <span id="pullSql-gesamt-mGesamt" class="modal__content__main__pullSql__item / gesamt"></span>
                         </div>
@@ -279,7 +290,7 @@
                         </div>
                     </div>
                     <div class="modal__footer__input__wrap">
-                        <input id="modal-footer-input" class="modal__footer__input" spellcheck="true" placeholder="Kommentar Text..." title="Hier k&#x00F6;nnen Sie einen Kommentar zu diesem Datensatz hinterlegen.">
+                        <input id="modal-footer-input" class="modal__footer__input" spellcheck="true" placeholder="Kommentar Text..." title="In dieses Feld, k&#246;nnen Sie den Text für einen Kommentar eingeben. Best&#228;tigen Sie bitte mit der Enter Taste.">
                     </div>
                 </div>
             </section>

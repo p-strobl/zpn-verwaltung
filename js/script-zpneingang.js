@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function getEingangButtonStatus(probenNummer) {
     const ajaxRequestObject = $.ajax({

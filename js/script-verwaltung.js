@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 function getVerwaltungButtonStatus(probenNummer) {
     const ajaxRequestObject = $.ajax({
@@ -264,4 +264,3 @@ function sendUpdateData(dataPack) {
         backToInput();
     });
 }
-

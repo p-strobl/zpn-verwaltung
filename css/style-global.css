@@ -69,10 +69,6 @@ button::-moz-focus-inner {
     width: 100%;
 }
 
-/* .wrap-header.beurteilung {
-    grid-template-rows: repeat(4, auto);
-} */
-
 .header-a-button-home {
     display: grid;
     justify-content: center;
@@ -133,7 +129,6 @@ img:hover {
     border-bottom: solid 2px #9a9a9a;
     font-size: 2vw;
     text-align: center;
-    /* box-shadow: 0px 0px 20px 0px rgba(0,0,0,.5); */
     box-shadow: 0px 0px 3px 0px rgba(0, 0, 0,.5);
     background-color: ghostwhite;
 }
@@ -159,7 +154,6 @@ img:hover {
     overflow: hidden;
     transition: max-height 0.3s;
     box-shadow: 0px 0px 20px 0px rgba(0,0,0,.5);
-    /* box-shadow: 0px 1px 5px 0px rgba(0, 0, 0,.5); */
     background: #ff3100;
 }
 
@@ -192,7 +186,7 @@ img:hover {
     white-space: pre-wrap;
 }
 
-.fail-input-not-a-nummber::after {
+.fail-input-not-a-number::after {
     content: "Die Eingabe entspricht keiner Probennummer!";
     white-space: pre-wrap;
 }
@@ -267,6 +261,13 @@ img:hover {
 .content-footer-count-row.beurteilung {
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+}
+
+.content-header-row.lfgbTextil,
+.content-main-row.lfgbTextil,
+.content-footer-count-row.lfgbTextil {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 }
 
 .content-footer-count-row.verwaltung {
@@ -378,10 +379,6 @@ img:hover {
     background-color: #ffb700;
     text-decoration-line: line-through;
 }
-
-/* .setButtonStatusDisable {
-    text-decoration-line: line-through;
-} */
 
 .disableMainRowButton {
     text-decoration: line-through;
@@ -612,4 +609,4 @@ body::-webkit-scrollbar-track {
     background-color: rgba(220, 220, 220, .6);
 }
 
-/* Ende Bodey Scroll Bar */
+/* Ende Body Scroll Bar */

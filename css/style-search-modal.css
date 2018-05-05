@@ -156,7 +156,7 @@
 }
 
 .modal__content__main__item.eingang {
-    grid-template-rows: repeat(3, 1fr) auto;
+    grid-template-rows: repeat(4, 1fr) auto;
 }
 
 .modal__content__main__item.vorbereitung {
@@ -168,7 +168,7 @@
 }
 
 .modal__content__main__item.gesamt {
-    grid-template-rows: repeat(9, 1fr);
+    grid-template-rows: repeat(10, 1fr);
 }
 
 /* Verwaltung.html */
@@ -180,14 +180,6 @@
 .modal__content__main__item.verwaltung.bearbeitung {
     grid-template-columns: 1fr 1fr;
     height: 50vh;
-}
-
-.modal__content__main__item.verwaltung.vorbereitung {
-
-}
-
-.modal__content__main__item.verwaltung.zusatz {
-
 }
 
 .modal__content__main__timing__wrap.item-1 {
@@ -215,7 +207,6 @@
     border: 1px solid #0091CD;
     border-radius: .2vw;
     background-color: transparent;
-    /* color: #0091CD; */
     text-align: left;
     padding-left: 2vw;
 }
@@ -242,15 +233,9 @@
     padding: 0;
 }
 
-.modal__status.verwaltung.status {
-    /* padding-left: 4vw; */
-    
-}
-
 .modal__status.verwaltung.vorbereitung {
     width: 96%;
     font-size: 2.2vw;
-
 }
 
     .modal__status.verwaltung.vorbereitung.zpnWagen {
@@ -258,10 +243,6 @@
         font-size: 2.5vw;
         width: 98%;
     }
-
-.modal__status.verwaltung.zusatz {
-
-}
 
 /* Verwaltung */
 
@@ -276,10 +257,15 @@
 .modal__content__main__capture-text.eingang {
     grid-row: 1;
     grid-column: 1/3;
+    font-size: 1vw;
+}
+
+.modal__content__main__capture-text.nickelRueckgabe {
+    font-size: 1vw;
 }
 
 .modal__content__main__capture-text.gesamt {
-    font-size: 1vw;
+    font-size: .8vw;
     align-self: start;
 }
 
@@ -287,14 +273,14 @@
     width: 100%;
     padding-bottom: .1vw;
     color: #0091CD;
-    font-size: 1vw;
+    font-size: .8vw;
     text-align: center;
     border-bottom: 1px solid #0091CD;
 }
 
 .modal__content__main__pullSql__item.gesamt {
     grid-column: 1/3;
-    font-size: .8vw;
+    font-size: .75vw;
 }
 
 /* Modal Footer Kommentar */
@@ -400,8 +386,6 @@
     border-radius: .2vw;
     background-color: rgba(220, 220, 220, .6);
 }
-
-/* #modal-footer-content-wrap::-webkit-scrollbar-track-piece {} */
 
 /* Transform up and down */
 

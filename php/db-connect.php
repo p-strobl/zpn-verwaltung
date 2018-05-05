@@ -39,8 +39,7 @@ function db_connect()
         $responseData['failCode'] = $pdoException->getCode();
         $responseData['objectText'] = 'DB Connection failed';
         $responseData['pdoException'] = $pdoException;
-//        $pdoConnect = array($responseData);
-        // mail( "adm1n.zpn.verwaltung@gmail.com", "Datenbank Fehler!", json_encode($responseData) );
+        mail( "adm1n.zpn.verwaltung@gmail.com", "Datenbank Fehler!", json_encode($responseData) );
         die( json_encode( $responseData) );
     }
 }

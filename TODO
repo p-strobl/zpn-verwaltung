@@ -65,7 +65,7 @@ Todo:
 
         Verwaltung Modal:
             ✔ HTML -> Model für einfachere vorbereitung Auswahl @done(18-04-30 23:49)
-            ☐ JS -> Abfrage nach nicht vorhandenen Datensatz unterbinden.
+            ✘ JS -> Abfrage nach nicht vorhandenen Datensatz unterbinden. @cancelled(18-05-04 23:50)
             
     Beurteilung Seite:
         ✔ HTML -> Seite erstellen @done(18-04-15 20:47)
@@ -75,13 +75,13 @@ Todo:
         ✔ JS -> Falsch Eingabe der Probennummer führt bei korrigierter Doppeleintrag zu zwei nummern! @critical @done(18-04-17 00:35)
 
     LFGB Seite:
-        ☐ HTML -> Seite erstellen
+        ✔ HTML -> Seite erstellen @done(18-05-05 13:16)
 
     Textilphysik Seite:
-        ☐ HTML -> Seite erstellen
+        ✔ HTML -> Seite erstellen @done(18-05-05 13:16)
 
     Übersicht Seite:
-        ☐ All -> Minus eintrag verhindern.
+        ✔ All -> Minus eintrag verhindern. @done(18-05-05 13:16)
 
         ✔ HTML -> Seite erstellen @done(18-04-24 23:13)
 
@@ -92,7 +92,7 @@ Todo:
         ✔ JS -> Dynamische Anzeige für eingereichte Klärfälle @done(18-04-24 23:13)
         ✘ JS -> Nullstellung des HTML überarbeiten @low @cancelled(18-04-30 23:49) | Siehe Global
 
-        ☐ Datenbank -> Muster zuerst bei der LFGB dann in die ZPN erzeugt eine minus Anzeige in der Übersicht.@critical 
+        ✔ Datenbank -> Muster zuerst bei der LFGB dann in die ZPN erzeugt eine minus Anzeige in der Übersicht.@critical @done(18-05-05 13:16)
 
     Datenbank:
         ✔ Datenbank -> SQL Abfrage in Date und Time splitten @done(18-03-27 08:28)

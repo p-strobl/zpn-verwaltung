@@ -6,7 +6,7 @@
     <link rel="stylesheet" type="text/css" href="../css/style-search-modal.css">
     <link rel="stylesheet" type="text/css" href="../css/style-global.css">
     <link rel="icon" type="image/x-icon" href="../favicon.ico">
-    <title>Muster Verwaltung</title>
+    <title>ZPN Muster Verwaltung</title>
 </head>
 
 <body>
@@ -19,7 +19,7 @@
                 </a>
                 <p class="header-caption">ZPN Muster Verwaltung</p>
                 <div class="header-search-button-wrap">
-                    <img id="img-search" class="img-search" src="../css/icons/ClipBoard.png" title="Bet&#228;tigen Sie diese Schaltfl&#228;che um einen gew&#252;nschten Datensatz einzeln zu bearbeiten.">
+                    <img id="img-search" class="img-search" src="../css/icons/ClipBoard.png" title="Bet&#228;tigen Sie diese Schaltfl&#228;che um Datens&#228;tze einzeln zu bearbeiten.">
                 </div>
             </div>
             <input class="header-input-eingang border-edged" id="header-input-verwaltung" type="text" value="" spellcheck="false" autocomplete="off"
@@ -29,9 +29,7 @@
                 </div>
             </div>
         </header>
-
         <main class="wrap-content displayNoneImportant" id="wrap-content">
-
             <section class="content-header-row verwaltung" id="content-header-row">
                 <div class="content-header-cell verwaltung">Proben Nr.</div>
                 <div class="content-header-cell verwaltung">Soll</div>
@@ -59,7 +57,6 @@
                     <br />Eingewogen</div>
                 <div class="content-header-cell verwaltung">Entfernen</div>
             </section>
-
             <section class="content-footer-count-row verwaltung" id="content-footer-count-row">
                 <div class="content-footer-count-input verwaltung probenSoll" title="Anzahl der eingetragenen Muster.">Muster Anzahl
                     <br />
@@ -124,7 +121,6 @@
                 </div>
                 <div class="content-footer-count-input verwaltung delete"></div>
             </section>
-
         </main>
         <footer class="wrap-footer displayNoneImportant" id="wrap-footer">
             <button class="footer-button-send" id="footer-button-send" onclick="wrapData()" title="Aktualisieren Sie den&#92;die eingef&#x00FC;gten Datensatz&#92;Datens&#x00E4;tze.">&#151;&#62; Datensatz&#92;s&auml;tze aktualisieren &#60;&#151; </button>
@@ -141,10 +137,10 @@
     <section id="wrap-modal" class="wrap__modal">
         <div id="content-modal" class="content__modal [ transform__item ]">
             <section class="wrap__modal__header">
-                <p class="modal__header__capture">Muster Verwaltung</p>
-                <p id="modal-header-close" class="modal__header__close">&times;</p>
+                <p class="modal__header__capture">ZPN Muster Verwaltung</p>
+                <p id="modal-header-close" class="modal__header__close" title="Einzel Verwaltung schlie&#223;en">&times;</p>
                 <div class="modal__header__input__wrap">
-                    <input id="modal-header-input" class="modal__header__input" name="modalHeaderInput" type="text" maxlength="12" spellcheck="false"
+                    <input id="modal-header-input" class="modal__header__input" name="modalHeaderInput" type="text" maxlength="12" spellcheck="false" title="Bitte tragen Sie hier eine g&#x00FC;ltige und bestehende Probennummer ein."
                         autocomplete="off" placeholder="Probennummer..." value="">
                 </div>
                 <div class="modal__fail__message__wrap [ transform__item ]" id="modal-fail-message-wrap">
@@ -155,42 +151,39 @@
             <section id="wrap-modal-content" class="wrap__modal__content [ transform__item ]">
                 <section class="modal__content__header__wrap">
                     <div class="modal__content__header__caption / probennummer">
-                        <span id="modal-content-caption-nummber-text" class="modal__content__caption__span"></span>
+                        <span id="modal-content-caption-nummber-text" class="modal__content__caption__span" title="Probennummer"></span>
                     </div>
                     <div class="modal__content__header__caption / solldatum">
-                        <span id="modal-content-caption-soll-text" class="modal__content__caption__span"></span>
+                        <span id="modal-content-caption-soll-text" class="modal__content__caption__span" title="Soll Datum"></span>
                     </div>
                 </section>
                 <section class="modal__content__main__wrap / verwaltung /">
                     <div class="modal__content__main__item / verwaltung">
-                        <button id="mit60g" class="modal__status / verwaltung / status" value="deactive">Mit 60g</button>
-                        <button id="mitExpress" class="modal__status / verwaltung / status" value="deactive">Express</button>
-                        <button id="mitNickel" class="modal__status / verwaltung / status" value="deactive">Mit Nickel</button>
-                        <button id="mitLfgb" class="modal__status / verwaltung / status" value="deactive">Aus der LFGB</button>
-                        <button id="mitKlaerfallBack" class="modal__status / verwaltung / status" value="deactive">Kl&#228;rfall gekl&#228;rt</button>
-                        <button id="mitToys" class="modal__status / verwaltung / status" value="deactive">Aus Team Toy&#39;s</button>
-                        <button id="mitIntern" class="modal__status / verwaltung / status" value="deactive">Intern vorziehen</button>
+                        <button id="mit60g" class="modal__status / verwaltung / status" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Mit 60g</button>
+                        <button id="mitExpress" class="modal__status / verwaltung / status" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Express</button>
+                        <button id="mitNickel" class="modal__status / verwaltung / status" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Mit Nickel</button>
+                        <button id="mitLfgb" class="modal__status / verwaltung / status" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Aus der LFGB</button>
+                        <button id="mitKlaerfallBack" class="modal__status / verwaltung / status" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Kl&#228;rfall gekl&#228;rt</button>
+                        <button id="mitToys" class="modal__status / verwaltung / status" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Aus Team Toy&#39;s</button>
+                        <button id="mitIntern" class="modal__status / verwaltung / status" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um den entsprechenden Status zu aktivieren oder deaktivieren.">Intern vorziehen</button>
                     </div>
                     <div class="modal__content__main__item / verwaltung bearbeitung /">
-                        <button id="zerlegungStart" class="modal__status / verwaltung / vorbereitung" value="deactive">Zerlegung Start</button>
-                        <button id="zerlegungEnde" class="modal__status / verwaltung / vorbereitung" value="deactive">Zerlegung Ende</button>
-                        <button id="einwaageStart" class="modal__status / verwaltung / vorbereitung" value="deactive">Einwaage Start</button>
-                        <button id="einwaageEnde" class="modal__status / verwaltung / vorbereitung" value="deactive">Einwaage Ende</button>
-                        <button id="zpnWagen" class="modal__status / verwaltung / vorbereitung / zpnWagen" value="deactive">ZPN Wagen</button>
-
+                        <button id="zerlegungStart" class="modal__status / verwaltung / vorbereitung" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn die Zerlegung begonnen wird.">Zerlegung Start</button>
+                        <button id="zerlegungEnde" class="modal__status / verwaltung / vorbereitung" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn die Zerlegung beendet wird.">Zerlegung Ende</button>
+                        <button id="einwaageStart" class="modal__status / verwaltung / vorbereitung" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn die Einwaage begonnen wird.">Einwaage Start</button>
+                        <button id="einwaageEnde" class="modal__status / verwaltung / vorbereitung" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn die Einwaage beendet wird.">Einwaage Ende</button>
+                        <button id="zpnWagen" class="modal__status / verwaltung / vorbereitung / zpnWagen" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn die das Muster auf den ZPN Wagen gestellt wird.">ZPN Wagen</button>
                     </div>
                     <div class="modal__content__main__item / verwaltung / zusatz /">
-                        <button id="klaerfallBeginn" class="modal__status / verwaltung / zusatz" value="deactive">Kl&#228;rfall Start</button>
-                        <button id="klaerfallEnde" class="modal__status / verwaltung / zusatz" value="deactive">Kl&#228;rfall Ende</button>
-                        <button id="manaBestellt" class="modal__status / verwaltung / zusatz" value="deactive">MaNa Bestellt</button>
-                        <button id="manaErhalten" class="modal__status / verwaltung / zusatz" value="deactive">MaNa Erhalten</button>
-                        <button id="manaEinwaage" class="modal__status / verwaltung / zusatz" value="deactive">MaNa Einwaage</button>
-                        <button id="manaEingewogen" class="modal__status / verwaltung / zusatz" value="deactive">MaNa Eingewogen</button>
+                        <button id="klaerfallBeginn" class="modal__status / verwaltung / zusatz" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um einen Kl&#228;rfall zu beginnen.">Kl&#228;rfall Start</button>
+                        <button id="klaerfallEnde" class="modal__status / verwaltung / zusatz" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um einen Kl&#228;rfall zu beenden.">Kl&#228;rfall Ende</button>
+                        <button id="manaBestellt" class="modal__status / verwaltung / zusatz" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn Sie eine MaNa gestellt haben.">MaNa Bestellt</button>
+                        <button id="manaErhalten" class="modal__status / verwaltung / zusatz" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn Sie die MaNa erhalten haben.">MaNa Erhalten</button>
+                        <button id="manaEinwaage" class="modal__status / verwaltung / zusatz" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn Sie die MaNa eingewogen haben.">MaNa Einwaage</button>
+                        <button id="manaEingewogen" class="modal__status / verwaltung / zusatz" value="deactive" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn Sie die MaNa auf dem ZPN Wagen bereit gestellt haben.">MaNa Eingewogen</button>
                     </div>
                 </section>
             </section>
-
-
             <section id="wrap-modal-footer" class="wrap__modal__footer [ transform__item ]">
                 <div id="modal-footer-content-wrap" class="modal__footer__content__wrap">
                     <div id="modal-footer-span-wrap" class="modal__footer__span__wrap">
@@ -199,12 +192,12 @@
                 <div id="modal-footer-inputPromt-wrap" class="modal__footer__inputPromt__wrap">
                     <div id="modal-footer-promt-slider" class="modal__footer__promt__slider__wrap [ transform__item ]">
                         <div class="modal__footer__promt__wrap">
-                            <button id="modal-promt-confirm" class="modal__footer__promt__button / confirmPromt" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um dem Datensatz diesen Kommentar hinzuzuf&#x00FC;gen.">Ja, Kommentar hinzuf&#x00FC;gen</button>
-                            <button id="modal-promt-cancel" class="modal__footer__promt__button / cancelPromt" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn Sie dem Datensatz doch keinen Kommentat hinzuf&#x00FC;gen wollen.">Nein, Kommentar nicht hinzuf&#x00FC;gen</button>
+                            <button id="modal-promt-confirm" class="modal__footer__promt__button / confirmPromt" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, um dem aufgerufenen Datensatz diesen Kommentar hinzuzuf&#x00FC;gen.">Ja, Kommentar hinzuf&#x00FC;gen</button>
+                            <button id="modal-promt-cancel" class="modal__footer__promt__button / cancelPromt" title="Bet&#x00E4;tigen Sie diese Schaltfl&#x00E4;che, wenn Sie dem aufgerufenen Datensatz doch keinen Kommentat hinzuf&#x00FC;gen wollen.">Nein, Kommentar nicht hinzuf&#x00FC;gen</button>
                         </div>
                     </div>
                     <div class="modal__footer__input__wrap">
-                        <input id="modal-footer-input" class="modal__footer__input" spellcheck="true" placeholder="Kommentar Text..." title="Hier k&#x00F6;nnen Sie einen Kommentar zu diesem Datensatz hinterlegen.">
+                        <input id="modal-footer-input" class="modal__footer__input" spellcheck="true" placeholder="Kommentar Text..." title="In dieses Feld, k&#246;nnen Sie den Text für einen Kommentar eingeben. Best&#228;tigen Sie bitte mit der Enter Taste.">
                     </div>
                 </div>
             </section>

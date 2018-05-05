@@ -48,7 +48,7 @@ if ( isset( $_POST['updateModalStatus'] ) ) {
             $responseData->failItem = $receivedItem->probenNummer;
             $responseData->failCode = $pdoException->getCode();
             $responseData->pdoException = $pdoException;
-            // mail( "adm1n.zpn.verwaltung@gmail.com", "Datenbank Fehler!", json_encode($responseData) );
+            mail( "adm1n.zpn.verwaltung@gmail.com", "Datenbank Fehler!", json_encode($responseData) );
         }
         echo json_encode( $responseData );
         $pdoConnect = null;
