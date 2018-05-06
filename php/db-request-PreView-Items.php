@@ -1,5 +1,8 @@
 <?php
 
+header('Content-Type: text/event-stream');
+header('Cache-Control: no-cache');
+
 function getPreviewItems() {
     $path_dbConnect = 'db-connect.php';
     require_once($path_dbConnect);
@@ -101,17 +104,17 @@ function getPreviewItems() {
 
         $pdoStatement = $pdoConnect->prepare($sql);
         $pdoStatement->execute();
-        $pdoFetchedObject = $pdoStatement->fetch(PDO::FETCH_OBJ);
+        // $pdoFetchedObject = $pdoStatement->fetch(PDO::FETCH_OBJ);
+        $pdoFetchedObject = json_encode($pdoStatement->fetch());
         $pdoConnect->commit();
     }
     catch (PDOException $pdoException) {
         $pdoConnect->rollBack();
     }
-    echo json_encode($pdoFetchedObject);
+    // echo json_encode($pdoFetchedObject);
+    echo "data: {$pdoFetchedObject}\n\n";
+    flush();
+    sleep(10);
 }
 
 getPreviewItems();
-
-
-
-
