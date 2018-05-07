@@ -214,6 +214,10 @@ img:hover {
 
 @media (max-height: 250px) {
 
+    .wrap__main__preview__content {
+        display: none;
+    }
+
     .wrap__footer__panel__items {
         grid-template-columns: 15% .1% auto;
     }
