@@ -32,13 +32,6 @@ function getPreviewItems() {
                     tbl_zpnmustereingang.probenNummer = tbl_beurteilung.probenNummer
             )
             +
-            (
-                SELECT COUNT(*)
-                FROM
-                    tbl_zpnmustereingang, tbl_lfgbmustereingang
-                WHERE
-                    tbl_zpnmustereingang.probenNummer = tbl_lfgbmustereingang.probenNummer
-            )
                 AS zpnAnzahl,
             (
                 SELECT COUNT(*)
@@ -118,3 +111,11 @@ function getPreviewItems() {
 }
 
 getPreviewItems();
+
+// (
+//     SELECT COUNT(*)
+//     FROM
+//         tbl_zpnmustereingang, tbl_lfgbmustereingang
+//     WHERE
+//         tbl_zpnmustereingang.probenNummer = tbl_lfgbmustereingang.probenNummer
+// )
