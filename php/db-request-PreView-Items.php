@@ -19,7 +19,7 @@ function getPreviewItems() {
                 FROM
                     tbl_beurteilung
                 WHERE
-                    DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) <= DATE(NOW())
+                    DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) = DATE(NOW())
                 AND
                     tbl_beurteilung.anAbteilung = "ZPN"
             )
@@ -45,7 +45,7 @@ function getPreviewItems() {
                 FROM
                     tbl_beurteilung
                 WHERE
-                    DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) <= DATE(NOW())
+                    DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) = DATE(NOW())
                 AND
                     tbl_beurteilung.anAbteilung = "LFGB"
             )
@@ -63,7 +63,7 @@ function getPreviewItems() {
                 FROM
                     tbl_beurteilung
                 WHERE
-                    DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) <= DATE(NOW())
+                    DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) = DATE(NOW())
                 AND
                     tbl_beurteilung.anAbteilung = "Textilphysik"
             )
