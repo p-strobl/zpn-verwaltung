@@ -92,10 +92,10 @@ function appendContentMainRow(inputTextLeft, inputTextRight) {
         " <button type='button' class='content-button-check' id='content-btn-manaErhalten' name='anzahlManaErhalten' value='deactive'>MaNa<br />Erhalten</button>" +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn Sie die MaNa Einwaage beginnen möchten.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-manaEinwaage' name='anzahlManaEinwaage' value='deactive'>MaNa<br />Einwaage</button>" +
+        " <button type='button' class='content-button-check' id='content-btn-manaEinwaage' name='anzahlManaEinwaage' value='deactive'>MaNa<br />Einwaage Start</button>" +
         " </div> " +
         " <div class='content-main-cell verwaltung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der MaNa Einwaage.'> " +
-        " <button type='button' class='content-button-check' id='content-btn-manaEingewogen' name='anzahlManaZpnWagen' value='deactive'>MaNa<br />Eingewogen</button>" +
+        " <button type='button' class='content-button-check' id='content-btn-manaEingewogen' name='anzahlManaZpnWagen' value='deactive'>MaNa<br />ZPN Wagen</button>" +
         " </div> " +
         " <div class='content-main-cell verwaltung'> " +
         " <div class='content-button-delete-wrap'> " +

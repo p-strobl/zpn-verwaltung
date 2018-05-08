@@ -367,7 +367,6 @@ function sendEingangData(dataPack) {
             backToInput();
         } else if (data.success === false) {
             //Alle vorhandenen Datensätze sind bereits in der Datenbank eingetragen und wurden zur weiterverarbeitung in ein Array aufgeführt.
-            // else if (data.success === false && data.doubleInput.length >= 1)
             switch (data.failCode) {
                 case 1049:
                     showFailMessage.failMessage(

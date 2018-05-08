@@ -2,7 +2,7 @@
 Todo:
     Global:
         ☐ All -> Überall noch Kommentare korrigieren oder einfügen! @critical 
-        ☐ All -> Rechtschreibprüfung @critical 
+        ✔ All -> Rechtschreibprüfung @critical @done(18-05-08 23:57)
         ☐ All JS -> Funktionen zusammen führen @critical
             ☐ Counter Funktion, kann noch mehr zusammen geführt werden.
         ✔ All JS -> .focus() geht nicht @critical @done(18-04-16 21:26)
@@ -12,7 +12,7 @@ Todo:
 
         ✔ Fehler Meldung keine Server Verbindung! @critical @done(18-04-22 03:32)
 
-        ☐ HTML -> Bubble Nachricht über Element hover @low
+        ✔ HTML -> Bubble Nachricht über Element hover @low @done(18-05-08 23:57)
         ✔ HTML -> Hübschere Scrollbar @low @done(18-05-01 00:50)
 
         ☐ All CSS -> Font size unit anpassen! @low

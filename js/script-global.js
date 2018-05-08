@@ -542,12 +542,8 @@ const deleteSelectedRow = function (selectedRow) {
                 .fadeOut(300)
                 .promise()
                 .done(function () {
-                    this.css({
-                        display: ""
-                    });
-                    $(selectedRow)
-                        .closest("#content-main-row")
-                        .remove();
+                    this.css({ display: "" });
+                    $(selectedRow).closest("#content-main-row").remove();
                     $wrapContent$wrapFooter.addClass("displayNoneImportant");
                     $headerInputEingang.addClass("border-edged");
                     backToInput();
@@ -560,9 +556,7 @@ const deleteSelectedRow = function (selectedRow) {
             .fadeOut(300)
             .promise()
             .done(function () {
-                $(selectedRow)
-                    .closest("#content-main-row")
-                    .remove();
+                $(selectedRow).closest("#content-main-row").remove();
                 backToInput();
             });
     }

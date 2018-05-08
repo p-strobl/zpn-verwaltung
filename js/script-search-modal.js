@@ -42,7 +42,7 @@ const showCloseModal = (() => {
             resetDetails();
             wrapModal.addClass('show__modal');
             contentModal.toggleClass('transform__modal');
-            
+
             backToModalInput();
         });
     });
