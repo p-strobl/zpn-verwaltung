@@ -104,6 +104,7 @@ Todo:
 
         ✔ PHP -> Seitige Antworten verbessern @done(18-03-19 02:15)
         ✘ PHP -> Aus der LFGB im ZPN Eingang gibt einen doppelten Datensatz Hinweis zurück! @critical @cancelled(18-05-01 00:54) | Nicht reproduzierbar, weierhin im Auge behalten!
+        ☐ PHP -> Klärfall zurück um ZPN Mustereingang richtig handeln @critical 
 
     ERROR:
         ✔ Datenbank -> StartFalse Eintrag anschauen, geht nicht ohne vorherigem Mustereingang!@critical @done(18-04-12 07:11)
