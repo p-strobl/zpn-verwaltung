@@ -168,7 +168,36 @@ if (!empty($_POST)) {
                                 }
                             break;
                             case $receivedPostData->musterEingangDataSet->{0}->mitKlaerfallBack:
-                                $test = "Hello";
+
+                                $sql =
+                                "
+                                    INSERT INTO 
+                                        tbl_klaerfall( probenNummer, klaerfallEndeDateTime )
+                                    VALUES 
+                                        ( :probenNummer, NOW() )
+                                    ON DUPLICATE KEY UPDATE
+                                        tbl_klaerfall.klaerfallEndeDateTime = NOW()
+                                ";
+                                $pdoStatement = $pdoConnect->prepare($sql);
+                                $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
+                                $pdoStatement->execute();
+
+                                $sql =
+                                "
+                                    UPDATE 
+                                        tbl_zpnmustereingang, tbl_klaerfall
+                                    SET
+                                        tbl_klaerfall.klaerfallBerechnung = IF( tbl_klaerfall.klaerfallBeginnDateTime IS NOT NULL AND tbl_klaerfall.klaerfallEndeDateTime IS NOT NULL, TIMEDIFF( tbl_klaerfall.klaerfallEndeDateTime, tbl_klaerfall.klaerfallBeginnDateTime ), NULL )
+                                    WHERE
+                                        tbl_klaerfall.probenNummer = :probenNummer
+                                    AND
+                                        tbl_zpnmustereingang.probenNummer = :probenNummerZpn
+                                ";
+                                $pdoStatement = $pdoConnect->prepare($sql);
+                                $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
+                                $pdoStatement->bindParam(':probenNummerZpn', $i->probenNummer, PDO::PARAM_STR);
+                                $pdoStatement->execute();
+                                $pdoConnect->commit();
                             break;
 
                             default:
