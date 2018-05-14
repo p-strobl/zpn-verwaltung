@@ -44,10 +44,16 @@ Todo:
         ✔ JS -> Keine Verbindung zum Server meldung abfangen @done(18-04-22 03:32)
 
     ZPN Eingang Seite:
+        ☐ HTML -> MaNa erhalten Schaltfläche einfügen
+
         ✔ JS -> Auch für den ZPN Muster Eingang eine status Abfrage der Button's @low @done(18-04-04 16:27)
         ✘ JS -> Eingang Input Soll Datum Abfragen @high @cancelled(18-04-08 02:09)
         ✔ JS -> Doppelter scan für schnellere zusatz Auswahl @done(18-04-30 23:49)
         ✔ JS -> Doppelter scan sperren entsperren anschauen @done(18-05-04 00:44)
+        ✔ JS -> Standard Muster können auch mit einem doppelten scan der Probennummer eingetragen werden @done(18-05-14 21:39)
+        ☐ JS -> MaNa erhalten Schaltfläche funktionstüchtig machen.
+
+        ☐ PHP -> MaNa erhalten logik erstellen.
 
     Verwaltung Seite:
 
@@ -70,9 +76,13 @@ Todo:
     Beurteilung Seite:
         ✔ HTML -> Seite erstellen @done(18-04-15 20:47)
         ✔ HTML -> Doppelte Input Abfrage: "Probennummer" und "an Abteilung" @done(18-04-15 20:47)
+        ☐ HTML -> Klärfall bereit gestellt Schaltfläche hinzufügen.
 
         ✔ JS -> Button Status Funktion hinzufügen @done(18-04-15 20:47)
         ✔ JS -> Falsch Eingabe der Probennummer führt bei korrigierter Doppeleintrag zu zwei nummern! @critical @done(18-04-17 00:35)
+        ☐ JS -> Klärfall bereit gestellt Schaltfläche funktionstüchtig machen.
+
+        ☐ PHP -> Klärfall bereit gestellt logik erstellen.
 
     LFGB Seite:
         ✔ HTML -> Seite erstellen @done(18-05-05 13:16)
@@ -84,6 +94,7 @@ Todo:
         ✔ All -> Minus eintrag verhindern. @done(18-05-05 13:16)
 
         ✔ HTML -> Seite erstellen @done(18-04-24 23:13)
+        ☐ HTML -> Klärfall erledigt Anzeige
 
         ✔ CSS -> Media Query umd dynamisch die Anzeige als dünnes Fenster anzuzeigen @done(18-04-24 23:13)
         ✔ CSS -> Hauptmenü Button scale effect. @done(18-05-01 00:56)
@@ -91,8 +102,11 @@ Todo:
         ✔ JS -> Dynamische Anzeige der bereit leigenden Muster @done(18-04-24 23:13)
         ✔ JS -> Dynamische Anzeige für eingereichte Klärfälle @done(18-04-24 23:13)
         ✘ JS -> Nullstellung des HTML überarbeiten @low @cancelled(18-04-30 23:49) | Siehe Global
+        ☐ JS -> Klärfall Zählung
 
         ✔ Datenbank -> Muster zuerst bei der LFGB dann in die ZPN erzeugt eine minus Anzeige in der Übersicht.@critical @done(18-05-05 13:16)
+        ☐ Datenbank -> Klärfall erledigt abfrage hinzufügen.
+
 
     Datenbank:
         ✔ Datenbank -> SQL Abfrage in Date und Time splitten @done(18-03-27 08:28)

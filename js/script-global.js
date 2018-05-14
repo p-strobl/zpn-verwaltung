@@ -198,7 +198,7 @@ function checkInput() {
             let inputText = $(this).val();
 
             if (pressedKey.keyCode === 13 && this.value !== '') {
-                if (inputText.match(oneOfRegEx)) {
+                if (inputText.match(oneOfRegEx) || inputText === inputText) {
                     switch (this.id) {
                         case 'header-input-eingang-zusatz':
                             let inputTextLeft = leftSplit($headerInputEingang.val(), 12);
