@@ -167,8 +167,7 @@ if (!empty($_POST)) {
                                     $pdoConnect->commit();
                                 }
                             break;
-                            case $receivedPostData->musterEingangDataSet->{0}->mitKlaerfallBack:
-
+                            case $i->mitKlaerfallBack:
                                 $sql =
                                 "
                                     INSERT INTO 
