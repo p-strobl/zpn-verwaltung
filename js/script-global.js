@@ -29,14 +29,14 @@ function regexInput() {
                 $(this).val(this.value.replace(noRegEx, ""));
             }
         });
-    $headerInputBeurteilungAbteilung
-        .add($headerInputZpnEingangZusatz)
-        .on('keyup', function (keypressed) {
-            if (this.value.match(oneOfRegEx) || keypressed.keyCode === 13) {
-            } else {
-                $(this).val(this.value.replace(this.value, ""));
-            }
-        });
+    // $headerInputBeurteilungAbteilung
+    //     .add($headerInputZpnEingangZusatz)
+    //     .on('keyup', function (keypressed) {
+    //         if (this.value.match(oneOfRegEx) || keypressed.keyCode === 13) {
+    //         } else {
+    //             $(this).val(this.value.replace(this.value, ""));
+    //         }
+    //     });
 }
 
 //
@@ -198,7 +198,7 @@ function checkInput() {
             let inputText = $(this).val();
 
             if (pressedKey.keyCode === 13 && this.value !== '') {
-                if (inputText.match(oneOfRegEx) || inputText === inputText) {
+                if (inputText.match(oneOfRegEx) || inputText === $headerInputEingang.val()) {
                     switch (this.id) {
                         case 'header-input-eingang-zusatz':
                             let inputTextLeft = leftSplit($headerInputEingang.val(), 12);
