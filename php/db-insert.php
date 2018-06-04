@@ -83,8 +83,8 @@ if (!empty($_POST)) {
                     break;
                     case isset($receivedPostData->musterEingangDataSet):
                         switch ('active') {
-                            case $receivedPostData->musterEingangDataSet->{0}->mitNickelBack:
-                                if ($receivedPostData->musterEingangDataSet->{0}->mitNickelBack === 'active' && !isset($sqlSelectDateObject->date->nickelRueckgabeDateTime)) {
+                            case $i->mitNickelBack:
+                                if ($i->mitNickelBack === 'active' && !isset($sqlSelectDateObject->date->nickelRueckgabeDateTime)) {
                                     $sql =
                                         "
                                             INSERT INTO 
@@ -114,8 +114,8 @@ if (!empty($_POST)) {
                                     $pdoConnect->commit();
                                 }
                             break;
-                            case $receivedPostData->musterEingangDataSet->{0}->mitLfgb:
-                                if ($receivedPostData->musterEingangDataSet->{0}->mitLfgb === 'active' && isset($sqlSelectDateObject->status->anAbteilung) && !isset($sqlSelectDateObject->status->mitLfgb)) {
+                            case $i->{0}->mitLfgb:
+                                if ($i->{0}->mitLfgb === 'active' && isset($sqlSelectDateObject->status->anAbteilung) && !isset($sqlSelectDateObject->status->mitLfgb)) {
                                     $sql =
                                         "
                                             INSERT INTO 
