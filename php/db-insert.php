@@ -114,8 +114,39 @@ if (!empty($_POST)) {
                                     $pdoConnect->commit();
                                 }
                             break;
-                            case $i->{0}->mitLfgb:
-                                if ($i->{0}->mitLfgb === 'active' && isset($sqlSelectDateObject->status->anAbteilung) && !isset($sqlSelectDateObject->status->mitLfgb)) {
+                            case $i->mitLfgb:
+                                if ($i->mitLfgb === 'active' && !isset($sqlSelectDateObject->status->anAbteilung) && !isset($sqlSelectDateObject->status->mitLfgb)) {
+                                    $sql =
+                                        "
+                                            INSERT INTO 
+                                                tbl_zpnmustereingang( probenNummer, zpnEingangDateTime, ausderLfgbDateTime )
+                                            VALUES 
+                                                ( :probenNummer, NOW(), NOW() )
+                                        ";
+                                    $pdoStatement = $pdoConnect->prepare($sql);
+                                    $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
+                                    $pdoStatement->execute();
+
+                                    $sql =
+                                    "
+                                        INSERT INTO 
+                                            tbl_status( probenNummer, mitExpress, mitIntern, mitNickel, mitLfgb, mitToys, mit60g, mitKlaerfallBack )
+                                        VALUES 
+                                            ( :probenNummer, :mitExpress, :mitIntern, :mitNickel, :mitLfgb, :mitToys, :mit60g, :mitKlaerfallBack )
+                                    ";
+                                    $pdoStatement = $pdoConnect->prepare($sql);
+                                    $pdoStatement->bindParam(':probenNummer', $i->probenNummer, PDO::PARAM_STR);
+                                    $pdoStatement->bindParam(':mitExpress', $i->mitExpress, PDO::PARAM_STR);
+                                    $pdoStatement->bindParam(':mitIntern', $i->mitIntern, PDO::PARAM_STR);
+                                    $pdoStatement->bindParam(':mitNickel', $i->mitNickel, PDO::PARAM_STR);
+                                    $pdoStatement->bindParam(':mitLfgb', $i->mitLfgb, PDO::PARAM_STR);
+                                    $pdoStatement->bindParam(':mitToys', $i->mitToys, PDO::PARAM_STR);
+                                    $pdoStatement->bindParam(':mit60g', $i->mit60g, PDO::PARAM_STR);
+                                    $pdoStatement->bindParam(':mitKlaerfallBack', $i->mitKlaerfallBack, PDO::PARAM_STR);
+                                    $pdoStatement->execute();
+                                    $pdoConnect->commit();
+                                }
+                                if ($i->mitLfgb === 'active' && isset($sqlSelectDateObject->status->anAbteilung) && !isset($sqlSelectDateObject->status->mitLfgb)) {
                                     $sql =
                                         "
                                             INSERT INTO 
