@@ -114,7 +114,7 @@ function getPreviewItems() {
     // echo json_encode($pdoFetchedObject);
     echo "data: {$pdoFetchedObject}\n\n";
     flush();
-    sleep(10);
+    sleep(5);
 }
 
 getPreviewItems();

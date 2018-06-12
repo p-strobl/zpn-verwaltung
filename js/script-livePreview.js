@@ -2,14 +2,13 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
-    var sse = new EventSource('../php/db-request-PreView-Items.php');
+    var serverSideEvent = new EventSource('../php/db-request-PreView-Items.php');
 
     function updatePreview(receivedPreviewItems) {
         const toFillPreviewItems = {
             lfgbAnzahl: $('#daily-lfgb'),
             textilAnzahl: $('#daily-Textil'),
-            zpnAnzahl: $('#daily-zpn'),
-            zpnPanelAnzahl: $('#panel-zpn'),
+            zpnAnzahl: $('#daily-zpn').add($('#panel-zpn')),
             zpnKlaerfaelle: $('#panel-zpnKlaerfall'),
             zpnMustereingang: $('#panel-zpnMusterEingang'),
             zpnWagen: $('#panel-zpnWagen')
@@ -32,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    sse.onmessage = function (message) {
+    serverSideEvent.onmessage = function (message) {
         updatePreview(JSON.parse(message.data));
     };
 
