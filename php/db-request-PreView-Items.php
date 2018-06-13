@@ -31,7 +31,7 @@ function getPreviewItems() {
                 WHERE
                     tbl_zpnmustereingang.probenNummer = tbl_beurteilung.probenNummer
                 AND
-                    DATE(tbl_zpnmustereingang.probenNummer) = DATE(NOW())
+                    DATE(tbl_zpnmustereingang.zpnEingangDateTime) = DATE(NOW())
             )
             +
             (
