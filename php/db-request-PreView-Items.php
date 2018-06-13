@@ -30,6 +30,8 @@ function getPreviewItems() {
                     tbl_zpnmustereingang, tbl_beurteilung
                 WHERE
                     tbl_zpnmustereingang.probenNummer = tbl_beurteilung.probenNummer
+                AND
+                    DATE(tbl_zpnmustereingang.probenNummer) = DATE(NOW())
             )
             +
             (
