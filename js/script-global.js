@@ -61,6 +61,20 @@ function rightSplit(str, chr) {
 }
 
 //
+//Kopiert den Input String in die Zwischenablage
+function copyToClipboard(copyText) {
+    let inputText = document.createElement('input');
+    inputText.value = copyText.substring(0, 9) + '%';
+    inputText.setAttribute('readonly', '');
+    inputText.style.position = 'absolute';
+    inputText.style.left = '-9999px';
+    document.body.appendChild(inputText);
+    inputText.select();
+    let outputText = document.execCommand('copy');
+    document.body.removeChild(inputText);
+}
+
+//
 //Überwacht die Inputbox und stellt sicher das nur erlaubte Zeichenfolgen angenommen werden.
 function checkInput() {
     const $headerInputEingang = $("#header-input-eingang");
@@ -177,6 +191,7 @@ function checkInput() {
                             }
                             break;
                         case 'modal-header-input':
+                            copyToClipboard(inputTextLeft);
                             searchDataSet(inputTextLeft);
                             break;
                         default:
