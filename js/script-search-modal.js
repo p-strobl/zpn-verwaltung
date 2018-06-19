@@ -326,7 +326,7 @@ const updateStatusButton = () => {
         const modalVerwaltungVorbereitung = {
             zerlegungStart: $('#zerlegungStart').attr('value'),
             zerlegungEnde: $('#zerlegungEnde').attr('value'),
-            einwaageStart: $('#einwaageStart').attr('value'),
+            einwaageBeginn: $('#einwaageStart').attr('value'),
             einwaageEnde: $('#einwaageEnde').attr('value'),
             zpnWagen: $('#zpnWagen').attr('value'),
             klaerfallBeginn: $('#klaerfallBeginn').attr('value'),
