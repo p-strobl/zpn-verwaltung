@@ -322,6 +322,9 @@ function setButtonStatus(rowItems, itemKey) {
         .addClass("setButtonStatus")
         .val("preSet");
     switch (itemKey) {
+        case 'einwaageBeginn':
+            rowItems.einwaageBeginn.prop('disabled', true).addClass('disableMainRowButton');
+            break;
         case 'einwaageEnde':
             rowItems.einwaageBeginn.disabled === true ? '' : rowItems.einwaageBeginn.prop('disabled', true).addClass('disableMainRowButton');
             break;

@@ -183,13 +183,13 @@ function searchDataSet(probenNummer) {
                     manaZpnWagenDateTime: $('#manaEingewogen'),
                     zerlegungStart: $('#zerlegungStart'),
                     zerlegungEnde: $('#zerlegungEnde'),
-                    einwaageBeginn: $('#einwaageStart'),
+                    einwaageBeginn: $('#einwaageBeginn'),
                     einwaageEnde: $('#einwaageEnde'),
                     zpnWagenDateTime: $('#zpnWagen'),
                 }
             };
             const modalVerwaltungItems = {
-                einwaageBeginn: $("#einwaageStart"),
+                einwaageBeginn: $("#einwaageBeginn"),
                 einwaageEnde: $("#einwaageEnde"),
                 klaerfallBeginnDateTime: $("#klaerfallBeginn"),
                 klaerfallEndeDateTime: $("#klaerfallEnde"),
