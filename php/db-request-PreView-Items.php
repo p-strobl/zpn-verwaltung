@@ -13,95 +13,87 @@ function getPreviewItems() {
 
         $sql =
         '
-            SELECT
-            (
-                SELECT COUNT(*)
-                FROM
-                    tbl_beurteilung
-                WHERE
-                    DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) = DATE(NOW())
-                AND
-                    tbl_beurteilung.anAbteilung = "ZPN"
-            )
-            -
-            (
-                SELECT COUNT(*)
-                FROM
-                    tbl_zpnmustereingang, tbl_beurteilung
-                WHERE
-                    tbl_zpnmustereingang.probenNummer = tbl_beurteilung.probenNummer
-                AND
-                    DATE(tbl_zpnmustereingang.zpnEingangDateTime) = DATE(NOW())
-            )
-            +
-            (
-                SELECT COUNT(*)
-                FROM
-                    tbl_zpnmustereingang, tbl_lfgbmustereingang
-                WHERE
-                    tbl_zpnmustereingang.probenNummer = tbl_lfgbmustereingang.probenNummer
-            )
-                AS zpnAnzahl,
-            (
-                SELECT COUNT(*)
-                FROM
-                    tbl_beurteilung
-                WHERE
-                    DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) = DATE(NOW())
-                AND
-                    tbl_beurteilung.anAbteilung = "LFGB"
-            )
-            -
-            (
-                SELECT COUNT(*)
-                FROM
-                    tbl_lfgbmustereingang, tbl_beurteilung
+        SELECT
+        (
+            SELECT COUNT(*)
+            FROM
+                tbl_beurteilung
             WHERE
-                tbl_lfgbmustereingang.probenNummer = tbl_beurteilung.probenNummer
-            )
-                AS lfgbAnzahl,
-            (
-                SELECT COUNT(*)
-                FROM
-                    tbl_beurteilung
-                WHERE
-                    DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) = DATE(NOW())
-                AND
-                    tbl_beurteilung.anAbteilung = "Textilphysik"
-            )
-            -
-            (
-                SELECT COUNT(*)
-                FROM
-                    tbl_textilmustereingang, tbl_beurteilung
-                WHERE
-                    tbl_textilmustereingang.probenNummer = tbl_beurteilung.probenNummer
-            )
-                AS textilAnzahl,
-            (
-                SELECT COUNT(*)
-                FROM
-                    tbl_zpnmustereingang
-                WHERE
-                    DATE(tbl_zpnmustereingang.zpnEingangDateTime) = DATE(NOW())
-            )
-                AS zpnMustereingang,
-            (
-                SELECT COUNT(*)
-                FROM
-                    tbl_klaerfall
-                WHERE
-                    DATE(tbl_klaerfall.klaerfallBeginnDateTime) = DATE(NOW())
-            )
-                AS zpnKlaerfaelle,
-            (
-                SELECT COUNT(*)
-                FROM
-                    tbl_zpnwagen
-                WHERE
-                DATE(tbl_zpnwagen.zpnWagenDateTime) = DATE(NOW())
-            )
-            AS zpnWagen
+                DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) = DATE(NOW())
+            AND
+                tbl_beurteilung.anAbteilung = "ZPN"
+        )
+        -
+        (
+            SELECT COUNT(*)
+            FROM
+                tbl_zpnmustereingang, tbl_beurteilung
+            WHERE
+                tbl_zpnmustereingang.probenNummer = tbl_beurteilung.probenNummer
+            AND
+                DATE(tbl_zpnmustereingang.zpnEingangDateTime) = DATE(NOW())
+        )
+            AS zpnAnzahl,
+        (
+            SELECT COUNT(*)
+            FROM
+                tbl_beurteilung
+            WHERE
+                DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) = DATE(NOW())
+            AND
+                tbl_beurteilung.anAbteilung = "LFGB"
+        )
+        -
+        (
+            SELECT COUNT(*)
+            FROM
+                tbl_lfgbmustereingang, tbl_beurteilung
+        WHERE
+            tbl_lfgbmustereingang.probenNummer = tbl_beurteilung.probenNummer
+        )
+            AS lfgbAnzahl,
+        (
+            SELECT COUNT(*)
+            FROM
+                tbl_beurteilung
+            WHERE
+                DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) = DATE(NOW())
+            AND
+                tbl_beurteilung.anAbteilung = "Textilphysik"
+        )
+        -
+        (
+            SELECT COUNT(*)
+            FROM
+                tbl_textilmustereingang, tbl_beurteilung
+            WHERE
+                tbl_textilmustereingang.probenNummer = tbl_beurteilung.probenNummer
+        )
+            AS textilAnzahl,
+        (
+            SELECT COUNT(*)
+            FROM
+                tbl_zpnmustereingang
+            WHERE
+                DATE(tbl_zpnmustereingang.zpnEingangDateTime) = DATE(NOW())
+        )
+            AS zpnMustereingang,
+        (
+            SELECT COUNT(*)
+            FROM
+                tbl_klaerfall
+            WHERE
+                DATE(tbl_klaerfall.klaerfallBeginnDateTime) = DATE(NOW())
+        )
+            AS zpnKlaerfaelle,
+        (
+            SELECT COUNT(*)
+            FROM
+                tbl_zpnwagen
+            WHERE
+            DATE(tbl_zpnwagen.zpnWagenDateTime) = DATE(NOW())
+        )
+        AS zpnWagen
         ';
 
         $pdoStatement = $pdoConnect->prepare($sql);
