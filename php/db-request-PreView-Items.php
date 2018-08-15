@@ -50,6 +50,8 @@ function getPreviewItems() {
                 tbl_lfgbmustereingang, tbl_beurteilung
         WHERE
             tbl_lfgbmustereingang.probenNummer = tbl_beurteilung.probenNummer
+        AND
+            DATE(tbl_lfgbmustereingang.lfgbEingangDateTime) = DATE(NOW())
         )
             AS lfgbAnzahl,
         (
@@ -68,6 +70,8 @@ function getPreviewItems() {
                 tbl_textilmustereingang, tbl_beurteilung
             WHERE
                 tbl_textilmustereingang.probenNummer = tbl_beurteilung.probenNummer
+            AND 
+                DATE(tbl_textilmustereingang.textilEingangDateTime) = DATE(NOW())
         )
             AS textilAnzahl,
         (
