@@ -15,25 +15,45 @@ function getPreviewItems() {
         '
         SELECT
         (
-            SELECT COUNT(*)
-            FROM
-                tbl_beurteilung
-            WHERE
-                DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) = DATE(NOW())
-            AND
-                tbl_beurteilung.anAbteilung = "ZPN"
-        )
-        -
+          SELECT COUNT(*)
+          FROM
+              tbl_beurteilung
+          WHERE
+              DATE(tbl_beurteilung.beurteilungBereitgestelltDateTime) = DATE(NOW())
+          AND
+              tbl_beurteilung.anAbteilung = "ZPN"
+      )
+      -
+      (
+          SELECT COUNT(*)
+          FROM
+              tbl_zpnmustereingang, tbl_beurteilung
+          WHERE
+              tbl_zpnmustereingang.probenNummer = tbl_beurteilung.probenNummer
+          AND
+              DATE(tbl_zpnmustereingang.zpnEingangDateTime) = DATE(NOW())
+      )
+      -
+       (
+          SELECT COUNT(*)
+          FROM
+              tbl_zpnmustereingang, tbl_lfgbmustereingang
+          WHERE
+              tbl_zpnmustereingang.probenNummer = tbl_lfgbmustereingang.probenNummer
+              AND
+              DATE(tbl_zpnmustereingang.zpnEingangDateTime) = DATE(NOW())
+      )
+      +
         (
-            SELECT COUNT(*)
-            FROM
-                tbl_zpnmustereingang, tbl_beurteilung
-            WHERE
-                tbl_zpnmustereingang.probenNummer = tbl_beurteilung.probenNummer
-            AND
-                DATE(tbl_zpnmustereingang.zpnEingangDateTime) = DATE(NOW())
-        )
-            AS zpnAnzahl,
+          SELECT COUNT(*)
+          FROM
+              tbl_zpnmustereingang, tbl_lfgbmustereingang
+          WHERE
+              tbl_zpnmustereingang.probenNummer = tbl_lfgbmustereingang.probenNummer
+              AND
+              DATE(tbl_zpnmustereingang.zpnEingangDateTime) = DATE(NOW())
+          )
+          AS zpnAnzahl,
         (
             SELECT COUNT(*)
             FROM
