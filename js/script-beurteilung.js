@@ -8,7 +8,8 @@ function appendContentMainRow(probenNummer, abteilung) {
         const contentBtnItems = {
             ZPN: $('#ZPN'),
             LFGB: $('#LFGB'),
-            Textilphysik: $('#Textilphysik')
+            Textilphysik: $('#Textilphysik'),
+            RoHS: $('#RoHS')
         };
 
         function activeButtonStatus(contentBtnID) {
@@ -17,24 +18,25 @@ function appendContentMainRow(probenNummer, abteilung) {
                 .addClass('preSet')
                 .removeClass('disableMainRowButton')
                 .val('active');
-        }
+        };
 
         function deactiveButtonStatus(contentBtnID) {
             contentBtnID
                 .prop('disabled', true)
                 .addClass('disableMainRowButton')
                 .val('deactive');
-        }
+        };
 
         Object.entries(contentBtnItems).forEach(([contentBtnKey, contentBtnValue]) => {
             contentBtnKey === abteilung ? activeButtonStatus(contentBtnValue) : deactiveButtonStatus(contentBtnValue);
         });
-    }
+    };
 
     const footerCounter = {
         ZPN: $('#content-footer-counter-anZPN'),
         LFGB: $('#content-footer-counter-anLFGB'),
-        Textilphysik: $('#content-footer-counter-anTextilphysik')
+        Textilphysik: $('#content-footer-counter-anTextilphysik'),
+        RoHS: $('#content-footer-counter-anRoHS')
     };
 
     const inputTextLeft = leftSplit(probenNummer, 12);
@@ -50,14 +52,17 @@ function appendContentMainRow(probenNummer, abteilung) {
         "<div class='content-main-cell beurteilung' title='Solldatum zum Muster.'>" +
         "<p class='content-main-text' id='text-sollNr' contenteditable='true'>" + inputTextRight + "</p>" +
         "</div>" +
-        "<div class='content-main-cell beurteilung'  title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie mit der Zerlegung beginnen möchten.'>" +
+        "<div class='content-main-cell beurteilung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn das Muster an die ZPN gehen soll.'>" +
         "<button type='button' class='content-button-check' id='ZPN' name='anzahlZpn' value=''>An die ZPN</button>" +
         "</div>" +
-        "<div class='content-main-cell beurteilung '  title='Bet&#228;tigen Sie diese Schaltfl&#228;che nach beendigung der Zerlegung.'>" +
+        "<div class='content-main-cell beurteilung ' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn das Muster an die LFGB gehen soll.'>" +
         "<button type='button' class='content-button-check' id='LFGB' name='anzahlLfgb' value=''>An die LFGB</button>" +
         "</div>" +
-        "<div class='content-main-cell beurteilung'  title='Bet&#228;tigen Sie diese Schaltfl&#228;che bevor Sie die Einwaage beginnen möchten.'>" +
+        "<div class='content-main-cell beurteilung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn das Muster an die Textilphysik gehen soll.'>" +
         "<button type='button' class='content-button-check' id='Textilphysik' name='anzahlTextil' value=''>An die Textilphysik</button>" +
+        "</div>" +
+        "<div class='content-main-cell beurteilung' title='Bet&#228;tigen Sie diese Schaltfl&#228;che wenn das Muster an die RoHS gehen soll.'>" +
+        "<button type='button' class='content-button-check' id='RoHS' name='anzahlRoHS' value=''>An die RoHS</button>" +
         "</div>" +
         "<div class='content-main-cell beurteilung'>" +
         "<div class='content-button-delete-wrap'>" +
@@ -72,6 +77,10 @@ function appendContentMainRow(probenNummer, abteilung) {
         "</div>" +
         "</section>";
 
+    if (abteilung === probenNummer) {
+        abteilung = "ZPN";
+    };
+
     //Zeigt den Tabellen Header, die Tabelle und den sende Button wieder an.
     $wrapContent$wrapFooter.hasClass('displayNoneImportant') === true ? $wrapContent$wrapFooter.removeClass('displayNoneImportant').add($headerInput).removeClass('border-edged') : '';
     //Fügt dem HTML Element mit der ID "#wrap-content" eine Zeile mit dem Inhalt von "inputText" und dazugehörigen Checkboxen hinzu.
@@ -84,7 +93,7 @@ function appendContentMainRow(probenNummer, abteilung) {
     countMainRows.addHighlight('highlight', '#FFB700', 100);
 
     footerGlobalCounter();
-}
+};
 
 //
 //Konstruktor für das Array "dataPack"
@@ -102,7 +111,7 @@ function ConstructDataPack(
     this.anLFGB = anLFGB;
     this.anTextilphysik = anTextilphysik;
     this.anAbteilung = anAbteilung;
-}
+};
 
 //
 //Fügt alle Daten einer Zeile in ein Paket zusammen.
@@ -127,7 +136,7 @@ function wrapData() {
         dataPackUpdate.push(new ConstructDataPack(probenNummer, sollDatum, anZPN, anLFGB, anTextilphysik, anAbteilung));
         //Übergibt das "dataPack" Array zum Ajax handler
     })).done(checkForUnchecked(dataPackUpdate, 'header-input-beurteilung-probennummer', 'beurteilung'));
-}
+};
 
 //
 //Übersendet per Ajax und der POST Methode, dass Objekt "dataPack" an die PHP Datei "db-handling.php".
@@ -197,7 +206,7 @@ function sendData(dataPackUpdate) {
                 default:
                     $hideElement.css("display", "none");
                     break;
-            }
+            };
         };
 
         //Funktion um alle doppelt vorkommenden Datensätze im HMTL anzuzeigen.
@@ -209,7 +218,7 @@ function sendData(dataPackUpdate) {
             for (const doubleInputItem of data.doubleInput) {
                 const appendDoubleInput = " <div class='transmission-doubleInput-data'>" + doubleInputItem + "</div> ";
                 $transmissionDoubleInput.append(appendDoubleInput);
-            }
+            };
         };
 
         //Funktion zum Hinzufügen und entfernen von Class des Sticky Footer Elements
@@ -309,8 +318,8 @@ function sendData(dataPackUpdate) {
                     break;
 
                 default:
-            }
-        }
+            };
+        };
     });
 
     //Ajax Verbindung fehlgeschlagen.
@@ -321,4 +330,4 @@ function sendData(dataPackUpdate) {
         console.log(textStatus, errorThrown);
         backToInput();
     });
-}
+};

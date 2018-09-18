@@ -260,7 +260,7 @@ img:hover {
 .content-main-row.beurteilung,
 .content-footer-count-row.beurteilung {
     display: grid;
-    grid-template-columns: repeat(6, 1fr);
+    grid-template-columns: repeat(7, 1fr);
 }
 
 .content-header-row.lfgbTextil,

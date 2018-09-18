@@ -209,11 +209,11 @@ function checkInput() {
     $headerInputBeurteilungAbteilung
         .add($headerInputEingangZusatz)
         .on("keyup", function (pressedKey) {
-            const oneOfRegEx = /((ZPN)|(LFGB)|(Textilphysik)|(Standard)|(Express)|(Intern)|(mitNickel)|(Toys)|(mit60g)|(backKlaerfall)|(backNickel))/g;
+            const oneOfRegEx = /((ZPN)|(LFGB)|(Textilphysik)|(RoHS)|(Standard)|(Express)|(Intern)|(mitNickel)|(Toys)|(mit60g)|(backKlaerfall)|(backNickel))/g;
             let inputText = $(this).val();
 
             if (pressedKey.keyCode === 13 && this.value !== '') {
-                if (inputText.match(oneOfRegEx) || inputText === $headerInputEingang.val()) {
+                if (inputText.match(oneOfRegEx) || inputText === $headerInputEingang.val() || inputText === inputText) {
                     switch (this.id) {
                         case 'header-input-eingang-zusatz':
                             let inputTextLeft = leftSplit($headerInputEingang.val(), 12);
@@ -229,6 +229,9 @@ function checkInput() {
                                 .focus();
                             break;
                         case 'header-input-beurteilung-abteilung':
+                            if (inputText === inputText) {
+
+                            }
                             appendContentMainRow($headerInputBeurteilungProbennummer.val(), this.value);
                             $headerInputBeurteilungProbennummer.add($headerInputBeurteilungAbteilung).val('');
                             $headerInputBeurteilungAbteilung.attr('disabled', 'disabled');
@@ -486,7 +489,8 @@ function blockButtons(clickedButton) {
         'content-btn-manaEingewogen': $('#content-btn-manaEingewogen'),
         'ZPN': $('#ZPN'),
         'LFGB': $('#LFGB'),
-        'Textilphysik': $('#Textilphysik')
+        'Textilphysik': $('#Textilphysik'),
+        'RoHS': $('#RoHS')
     };
     switch (clickedButton.val()) {
         case 'active':
